@@ -7,6 +7,7 @@
     "build": "ng build",
     "build:ssr": "ng build --prod && ng run angular-checklist:server -- --output-hashing=false",
     "prerender": "npm run build:ssr && ts-node prerender.ts",
+    "serve:ssr": "npm run prerender && http-server dist/browser",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -37,6 +38,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "http-server": "^0.11.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
