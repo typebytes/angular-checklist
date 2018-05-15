@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:client-and-server": "ng build --prod && ng run angular-checklist:server -- --output-hashing=false",
-    "prerender": "npm run build:client-and-server && ts-node prerender.ts",
+    "build:ssr": "ng build --prod && ng run angular-checklist:server -- --output-hashing=false",
+    "prerender": "npm run build:ssr && ts-node prerender.ts",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -32,6 +32,7 @@
     "@angular/cli": "~6.0.1",
     "@angular/compiler-cli": "^6.0.0",
     "@angular/language-service": "^6.0.0",
+    "@nguniversal/module-map-ngfactory-loader": "^6.0.0",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
