@@ -1,0 +1,47 @@
+@import '../../../scss/variables';
+@import '../../../scss/utils';
+@import '~@angular/material/theming';
+
+:host {
+  display: block;
+  padding: 30px;
+}
+
+.breadcrumb {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  color: #bfbfbf;
+  align-items: center;
+  padding: 10px 5px;
+  min-height: 25px;
+  font-size: 1.3rem;
+  border-bottom: 1px solid gainsboro;
+
+  mat-icon {
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+    color: gainsboro;
+  }
+
+  .breadcrumb-item-separator {
+    display: flex;
+  }
+
+  .breadcrumb-item {
+    transition: color 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+
+    &:last-of-type {
+      @include truncate();
+    }
+
+    &:not(:last-of-type) {
+      cursor: pointer;
+    }
+
+    &.active {
+      color: mat-color($accent);
+    }
+  }
+}

@@ -1,3 +1,39 @@
-<p>
-  checklist works!
-</p>
+<mat-toolbar>
+  <button class="menu-button" mat-icon-button (click)="sideNav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div>LOGO</div>
+  <button mat-raised-button color="primary">ABOUT</button>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav mode="side" #sideNav opened>
+    <section>
+      <a class="sidenav-link" routerLink="favorites" routerLinkActive="active">
+        <mat-icon>favorite</mat-icon>
+        <span [matBadge]="favoritesCount$ | async" [matBadgeHidden]="!(favoritesCount$ | async)" matBadgeColor="accent" matBadgeOverlap="false">Favorites</span>
+      </a>
+    </section>
+    <section>
+      <h4>CATEGORIES</h4>
+      <div class="category-list">
+        <nav class="category" *ngFor="let category of categories$ | async; trackBy: trackBySlug">
+          <a class="category-header" #rla="routerLinkActive" routerLinkActive="active" [routerLink]="category.slug">
+            <app-checklist-score-chart [class.primary]="rla.isActive" [score]="category.score"></app-checklist-score-chart>
+            {{ category.title }}
+          </a>
+          <div class="list-wrapper" [@bodyExpansion]="rla.isActive" *ngIf="rla.isActive">
+            <ul class="category-item-list">
+              <li class="category-item" *ngFor="let item of category.items">
+                <a routerLinkActive="active" [routerLink]="[category.slug, item.id]">{{ item.title }}</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,93 @@
+{
+  "categories": {
+    "architecture": {
+      "title": "Architecture",
+      "summary": "This category summarizes best practices regarding architecture.",
+      "slug": "architecture",
+      "items": [
+        "Z1xqb2O",
+        "Z24l73x"
+      ]
+    },
+    "performance": {
+      "title": "Performance",
+      "summary": "This category contains a list of practices which will help us boost the performance of our Angular applications. It covers different topics - from server-side pre-rendering and bundling of our applications, to runtime performance and optimization of the change detection performed by the framework.",
+      "slug": "performance",
+      "items": [
+        "Z8rHxb",
+        "AvD9O"
+      ]
+    },
+    "rxjs": {
+      "title": "RxJS",
+      "summary": "This category summarizes best practices regarding RxJS.",
+      "slug": "rxjs",
+      "items": [
+        "bkHEY",
+        "ZzpwmT",
+        "ZHuJoA",
+        "ZBbo7y"
+      ]
+    }
+  },
+  "items": {
+    "Z1xqb2O": {
+      "id": "Z1xqb2O",
+      "slug": "folder-structure",
+      "title": "Folder Structure",
+      "content": "<h3>Folder Structure</h3>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">const</span> foo = <span class=\"hljs-function\">(<span class=\"hljs-params\">bar: <span class=\"hljs-built_in\">string</span></span>) =&gt;</span> {\n  <span class=\"hljs-keyword\">return</span> bar;\n};\n</code></pre>\n"
+    },
+    "Z24l73x": {
+      "id": "Z24l73x",
+      "slug": "smart-and-dumb-components",
+      "title": "Smart and Dumb Components",
+      "content": "<h3>Smart and Dumb Components</h3>\n"
+    },
+    "Z8rHxb": {
+      "id": "Z8rHxb",
+      "slug": "bundling",
+      "title": "Bundling",
+      "source": "https://github.com/mgechev/angular-performance-checklist",
+      "author": {
+        "name": "Minko Gechev",
+        "url": "https://twitter.com/mgechev"
+      },
+      "content": "<h3>Bundling</h3>\n<p>Bundling is a standard practice aiming to reduce the number of requests that the browser needs to perform in order to deliver the application requested by the user. In essence, the bundler receives as an input a list of entry points and produces one or more bundles. This way, the browser can get the entire application by performing only a few requests, instead of requesting each individual resource separately.</p>\n<p>As your application grows bundling everything into a single large bundle would again be counter productive. Explore Code Splitting techniques using Webpack.</p>\n<p><strong>Additional http requests will not be a concern with HTTP/2 because of the server push feature.</strong></p>\n<h4>Tooling</h4>\n<p>Tools which allows us to bundle our applications efficiently are:</p>\n<ul>\n<li><a href=\"https://github.com/angular/angular-cli\">Angular CLI</a> - A command line interface for Angular which makes it easy to create an application that already works, right out of the box. It already follows many best practices and focuses on performance.</li>\n<li><a href=\"https://webpack.js.org\">Webpack</a> - provides efficient bundling by performing <a href=\"#tree-shaking\">tree-shaking</a>.</li>\n<li><a href=\"https://webpack.js.org/guides/code-splitting/\">Webpack Code Splitting</a> - Techniques to split your code.</li>\n<li><a href=\"https://medium.com/webpack/webpack-http-2-7083ec3f3ce6#.46idrz8kb\">Webpack &amp; http2</a> - Need for splitting with http2.</li>\n<li><a href=\"https://github.com/rollup/rollup\">Rollup</a> - provides bundling by performing efficient tree-shaking, taking advantage of the static nature of the ES2015 modules.</li>\n<li><a href=\"https://github.com/google/closure-compiler\">Google Closure Compiler</a> - performs plenty of optimizations and provides bundling support. Originally written in Java, since recently it also has a <a href=\"https://www.npmjs.com/package/google-closure-compiler-js\">JavaScript version</a> which can be <a href=\"https://www.npmjs.com/package/google-closure-compiler-js\">found here</a>.</li>\n<li><a href=\"https://github.com/systemjs/builder\">SystemJS Builder</a> - provides a single-file build for SystemJS of mixed-dependency module trees.</li>\n<li><a href=\"http://browserify.org/\">Browserify</a>.</li>\n</ul>\n"
+    },
+    "AvD9O": {
+      "id": "AvD9O",
+      "slug": "template-whitespace",
+      "title": "Remove Template Whitespace",
+      "source": "https://github.com/mgechev/angular-performance-checklist",
+      "author": {
+        "name": "Minko Gechev",
+        "url": "https://twitter.com/mgechev"
+      },
+      "content": "<h3>Remove Template Whitespace</h3>\n<p>Although we don’t see the whitespace character (a character matching the <code>\\s</code> regex) it is still represented by bytes which are transfered over the network. If we reduce the whitespace from our templates to minimum we will be respectively able to drop the bundle size of the AoT code even further.</p>\n<p>Thankfully, we don’t have to do this manually. The <code>ComponentMetadata</code> interface provides the property <code>preserveWhitespaces</code> which by default has value <code>true</code>, because removing the whitespace always may influence the DOM layout. In case we set the property to <code>false</code> Angular will trim the unnecessary whitespace which will lead to further reduction of the bundle size.</p>\n<ul>\n<li><a href=\"https://angular.io/api/core/Component#preserveWhitespaces\">preserveWhitespaces in the Angular docs</a></li>\n</ul>\n"
+    },
+    "bkHEY": {
+      "id": "bkHEY",
+      "slug": "caching",
+      "title": "Caching",
+      "content": "<h1>Caching</h1>\n"
+    },
+    "ZzpwmT": {
+      "id": "ZzpwmT",
+      "slug": "pipeable-operators",
+      "title": "Pipeable Operators",
+      "content": "<h3>Pipeable Operators</h3>\n"
+    },
+    "ZHuJoA": {
+      "id": "ZHuJoA",
+      "slug": "subjects",
+      "title": "Subjects",
+      "content": "<h3>Subjects</h3>\n"
+    },
+    "ZBbo7y": {
+      "id": "ZBbo7y",
+      "slug": "subscriptions",
+      "title": "Subscriptions",
+      "content": "<h3>Subscriptions</h3>\n"
+    }
+  }
+}

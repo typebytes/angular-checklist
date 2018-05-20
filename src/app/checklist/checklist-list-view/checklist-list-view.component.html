@@ -1,0 +1,34 @@
+<div class="cta-bar">
+  <div class="filters" *ngIf="filter$ | async as filter">
+    <button class="filter" mat-button (click)="setFilter('ALL')" [class.active]="filter === 'ALL'">
+      <mat-icon>assignment</mat-icon>
+      ALL
+    </button>
+    <button class="filter" mat-button (click)="setFilter('DONE')" [class.active]="filter === 'DONE'">
+      <mat-icon>done</mat-icon>
+      DONE
+    </button>
+    <button class="filter" mat-button (click)="setFilter('TODO')" [class.active]="filter === 'TODO'">
+      <mat-icon>check_box_outline_blank</mat-icon>
+      TODO
+    </button>
+  </div>
+  <div class="cta-buttons">
+    <button mat-button (click)="checkAllItems()">
+      <mat-icon>done_all</mat-icon>
+    </button>
+    <button mat-button (click)="uncheckAllItems()">
+      <mat-icon>filter_none</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="checklist-items">
+  <mat-card class="checklist-item" *ngFor="let item of items$ | async; trackBy: trackById">
+    <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked"></mat-checkbox>
+    <a [routerLink]="[item.id]">{{ item.title }}</a>
+    <button class="favorite-button" mat-icon-button (click)="toggleFavorite(item)">
+      <mat-icon class="favorite-icon" [class.active]="item.favorite">favorite</mat-icon>
+    </button>
+  </mat-card>
+</div>

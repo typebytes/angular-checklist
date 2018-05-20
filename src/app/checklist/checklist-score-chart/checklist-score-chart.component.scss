@@ -1,0 +1,34 @@
+@import '../../../scss/variables';
+@import '~@angular/material/theming';
+
+:host {
+  display: inherit;
+  --percentage: 0;
+  --max-stroke: 189;
+  --filling-color: #dadada;
+  --border-color: #d4d4d4;
+
+  &.primary {
+    --filling-color: #{mat-color($primary, lighter)};
+    --border-color: #{mat-color($primary)};
+  }
+}
+
+.pie {
+  transform: rotate(-90deg);
+  border-radius: 50%;
+}
+
+.filling {
+  fill: transparent;
+  stroke: var(--filling-color);
+  stroke-width: 60px;
+  transition: stroke-dasharray 0.2s ease-out;
+  stroke-dasharray: calc(var(--percentage) * var(--max-stroke)) var(--max-stroke);
+}
+
+.border {
+  fill: transparent;
+  stroke-width: 8px;
+  stroke: var(--border-color);
+}

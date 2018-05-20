@@ -1,0 +1,78 @@
+@import '../../../scss/variables';
+@import '../../../scss/utils';
+@import '~@angular/material/theming';
+
+mat-card {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  mat-checkbox {
+    margin-right: 8px;
+  }
+
+  & + & {
+    margin-top: 14px;
+  }
+}
+
+.cta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1.5rem 0 0.7rem;
+
+  button {
+    @include button-small();
+
+    mat-icon {
+      font-size: 17px;
+      line-height: 17px;
+      height: 17px;
+      width: 17px;
+    }
+  }
+}
+
+.cta-buttons {
+  margin-left: auto;
+
+  button {
+    min-width: 40px;
+    padding: 0;
+  }
+}
+
+.filter {
+  min-width: 75px;
+
+  ::ng-deep {
+    .mat-button-focus-overlay {
+      background-color: mat-color($primary, default, 0.1);
+    }
+
+    .mat-ripple-element {
+      background-color: mat-color($primary, default, 0.1);
+    }
+  }
+
+  &.active {
+    color: mat-color($primary);
+    background: mat-color($primary, lighter, 0.3);
+  }
+
+  & + & {
+    margin-left: 5px;
+  }
+}
+
+.favorite-button {
+  margin-left: auto;
+}
+
+.favorite-icon {
+  color: #d4d4d4;
+
+  &.active {
+    color: mat-color($accent);
+  }
+}
