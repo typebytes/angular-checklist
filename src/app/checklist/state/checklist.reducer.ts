@@ -1,9 +1,4 @@
 import { createSelector } from '@ngrx/store';
-import { computeScore, filterItems, setCheckedState, updateFavorites } from '../utils/checklist';
-import { extractRouteParams } from '../utils/router';
-import { ChecklistActionTypes, ChecklistActions } from './checklist.actions';
-import { ApplicationState } from './index';
-
 import {
   BreadcrumbItem,
   Category,
@@ -12,10 +7,14 @@ import {
   Checklist,
   ChecklistFilter,
   ChecklistItem,
-  ItemMap,
+  Favorite,
   FavoriteEntity,
-  Favorite
+  ItemMap
 } from '../models/checklist';
+import { computeScore, filterItems, setCheckedState, updateFavorites, calculatePercentage } from '../utils/checklist';
+import { extractRouteParams } from '../utils/router';
+import { ChecklistActionTypes, ChecklistActions } from './checklist.actions';
+import { ApplicationState } from './index';
 
 const CHECKLIST: Checklist = require('../../../assets/content.json');
 
@@ -106,22 +105,22 @@ export const favoritesReducer = (state: FavoriteEntity, action: ChecklistActions
 };
 
 export namespace ChecklistQueries {
-  export const getCategoryEntity = (state: ApplicationState) => state.checklist.categories;
-  export const getItemEntity = (state: ApplicationState) => state.checklist.items;
+  export const getCategoriesEntity = (state: ApplicationState) => state.checklist.categories;
+  export const getItemsEntity = (state: ApplicationState) => state.checklist.items;
   export const getRouterState = (state: ApplicationState) => state.router.state;
   export const getFilter = (state: ApplicationState) => state.checklist.filter;
   export const getFavoriteEntity = (state: ApplicationState) => state.checklist.favorites;
 
-  export const getScores = createSelector(getCategoryEntity, getItemEntity, (categories, items) => {
+  export const getScores = createSelector(getCategoriesEntity, getItemsEntity, (categories, items) => {
     return Object.keys(categories).reduce((acc, categoryId) => {
-      acc[categoryId] = computeScore(categories[categoryId], items);
+      acc[categoryId] = computeScore(categories[categoryId].items, items);
       return acc;
     }, {});
   });
 
   export const getCategories = createSelector(
-    getCategoryEntity,
-    getItemEntity,
+    getCategoriesEntity,
+    getItemsEntity,
     getScores,
     (categories, items, scores): Array<Category> => {
       return Object.keys(categories).map(categoryId => {
@@ -134,7 +133,7 @@ export namespace ChecklistQueries {
 
   export const getSelectedCategory = createSelector(
     getRouterState,
-    getCategoryEntity,
+    getCategoriesEntity,
     getScores,
     (routerState, categories, scores): CategoryEntity => {
       const { category } = extractRouteParams(routerState.root, 4);
@@ -143,8 +142,8 @@ export namespace ChecklistQueries {
   );
 
   export const getItemsFromSelectedCategory = createSelector(
-    getCategoryEntity,
-    getItemEntity,
+    getCategoriesEntity,
+    getItemsEntity,
     getSelectedCategory,
     getFilter,
     (categories, items, selectedCategory, filter): Array<ChecklistItem> => {
@@ -159,7 +158,7 @@ export namespace ChecklistQueries {
 
   export const getSelectedItem = createSelector(
     getSelectedCategory,
-    getItemEntity,
+    getItemsEntity,
     getRouterState,
     (category, items, routerState): ChecklistItem => {
       if (category) {
@@ -173,18 +172,38 @@ export namespace ChecklistQueries {
 
   export const getFavorites = createSelector(
     getFavoriteEntity,
-    getCategoryEntity,
-    getItemEntity,
+    getCategoriesEntity,
+    getItemsEntity,
     (favorites, categories, items): Array<Favorite> => {
       return Object.keys(favorites).reduce((acc, categoryId) => {
-        acc.push({ category: categories[categoryId], items: favorites[categoryId].map(itemId => items[itemId]) });
-        console.log(acc);
+        acc.push({
+          category: categories[categoryId],
+          items: favorites[categoryId].map(itemId => items[itemId])
+        });
+
         return acc;
       }, []);
     }
   );
 
-  export const getFavoriteCount = createSelector(getFavorites, favorites => {
+  export const getFavoritesScore = createSelector(getFavorites, favorites => {
+    if (favorites.length) {
+      const score = favorites.reduce(
+        (acc, favorite) => {
+          acc.checkedItems += favorite.items.filter(item => item.checked).length;
+          acc.totalItems += favorite.items.length;
+          return acc;
+        },
+        { checkedItems: 0, totalItems: 0 }
+      );
+
+      return calculatePercentage(score.checkedItems, score.totalItems);
+    }
+
+    return 0;
+  });
+
+  export const getFavoritesCount = createSelector(getFavorites, favorites => {
     return favorites.reduce((acc, category) => {
       return acc + category.items.length;
     }, 0);

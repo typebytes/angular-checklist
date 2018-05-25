@@ -21,12 +21,14 @@ import { ChecklistQueries } from './state/checklist.reducer';
 export class ChecklistComponent implements OnInit {
   categories$: Observable<Array<Category>>;
   favoritesCount$: Observable<number>;
+  favoritesScore$: Observable<number>;
 
   constructor(private store: Store<ApplicationState>) {}
 
   ngOnInit() {
     this.categories$ = this.store.pipe(select(ChecklistQueries.getCategories));
-    this.favoritesCount$ = this.store.pipe(select(ChecklistQueries.getFavoriteCount));
+    this.favoritesCount$ = this.store.pipe(select(ChecklistQueries.getFavoritesCount));
+    this.favoritesScore$ = this.store.pipe(select(ChecklistQueries.getFavoritesScore));
   }
 
   trackBySlug(index, category: Category) {

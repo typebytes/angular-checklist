@@ -1,11 +1,15 @@
-import { CategoryEntity, CategoryMap, ChecklistFilter, ChecklistItem, ItemMap } from '../models/checklist';
+import { CategoryMap, ChecklistFilter, ChecklistItem, ItemMap } from '../models/checklist';
 
-export const computeScore = (category: CategoryEntity, items: ItemMap) => {
-  const score = category.items.reduce((acc, id) => {
+export const computeScore = (categoryItems: Array<string>, items: ItemMap) => {
+  const score = categoryItems.reduce((acc, id) => {
     return items[id].checked ? acc + 1 : acc;
   }, 0);
 
-  return score * 1 / category.items.length;
+  return calculatePercentage(score, categoryItems.length);
+};
+
+export const calculatePercentage = (value: number, max: number) => {
+  return value * 1.0 / max;
 };
 
 export const setCheckedState = (selectedCategory: string, categories: CategoryMap, items: ItemMap, value: boolean) => {

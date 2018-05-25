@@ -60,9 +60,15 @@ mat-toolbar {
   align-items: center;
   color: initial;
   padding: 8px;
+  font-weight: 500;
 
   ::ng-deep .mat-badge-content {
     top: -14px;
+  }
+
+  app-checklist-score-chart {
+    width: 26px;
+    margin-right: 10px;
   }
 
   mat-icon {
