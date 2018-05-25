@@ -90,11 +90,16 @@ export const favoritesReducer = (state: FavoriteEntity, action: ChecklistActions
   switch (action.type) {
     case ChecklistActionTypes.TOGGLE_FAVORITE:
       const categoryId = action.payload.category;
+      const updatedFavorites = updateFavorites(state[categoryId], action.payload.id);
+      const updateState = { ...state };
 
-      return {
-        ...state,
-        [categoryId]: updateFavorites(state[categoryId], action.payload.id)
-      };
+      if (updatedFavorites.length) {
+        updateState[categoryId] = updatedFavorites;
+      } else {
+        delete updateState[categoryId];
+      }
+
+      return updateState;
     default:
       return state;
   }
@@ -172,7 +177,8 @@ export namespace ChecklistQueries {
     getItemEntity,
     (favorites, categories, items): Array<Favorite> => {
       return Object.keys(favorites).reduce((acc, categoryId) => {
-        acc.push({ title: categories[categoryId].title, items: favorites[categoryId].map(itemId => items[itemId]) });
+        acc.push({ category: categories[categoryId], items: favorites[categoryId].map(itemId => items[itemId]) });
+        console.log(acc);
         return acc;
       }, []);
     }

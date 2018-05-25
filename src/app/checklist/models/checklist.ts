@@ -50,7 +50,7 @@ export interface FavoriteEntity {
 }
 
 export interface Favorite {
-  title: string;
+  category: Category;
   items: Array<ChecklistItem>;
 }
 
