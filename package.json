@@ -10,7 +10,8 @@
     "serve:ssr": "npm run prerender && http-server dist/browser",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-content": "ts-node ./tools/build-checklist.ts"
   },
   "private": true,
   "dependencies": {
