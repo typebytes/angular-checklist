@@ -1,5 +1,5 @@
 ---
-title: The providers are only provided at the root level using `forRoot` strategy
+title: Modules and services
 ---
 ### Providing the services only at the root level
 

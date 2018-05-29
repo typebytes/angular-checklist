@@ -1,5 +1,5 @@
 ---
-title: I am using smart and dumb components
+title: Smart and dumb components
 ---
 ### Smart and Dumb Components
 
