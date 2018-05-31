@@ -3,10 +3,8 @@
 </header>
 <ul class="category" *ngFor="let favorite of favorites$ | async; trackBy: trackByCategoryTitle">
   <h4>{{ favorite.category.title }}</h4>
-  <ul class="item-list">
-    <li class="item" *ngFor="let item of favorite.items">
-      <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked"></mat-checkbox>
-      <a [routerLink]="['../', favorite.category.slug, item.id]">{{ item.title }}</a>
-    </li>
-  </ul>
+  <app-checklist-list>
+    <app-checklist-list-item *ngFor="let item of favorite.items" [item]="item" (toggleItem)="toggleItem($event)" (toggleFavorite)="toggleFavorite($event, favorite.category.slug)">
+    </app-checklist-list-item>
+  </app-checklist-list>
 </ul>

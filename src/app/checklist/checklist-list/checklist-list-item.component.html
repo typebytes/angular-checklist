@@ -1,0 +1,5 @@
+<mat-checkbox color="primary" (click)="toggleItem.emit(item)" [checked]="item.checked"></mat-checkbox>
+<a [routerLink]="[item.id]">{{ item.title }}</a>
+<button class="favorite-button" mat-icon-button (click)="toggleFavorite.emit(item)">
+  <mat-icon class="favorite-icon" [class.active]="item.favorite">favorite</mat-icon>
+</button>

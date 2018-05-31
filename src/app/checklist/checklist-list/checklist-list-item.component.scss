@@ -1,0 +1,28 @@
+@import '../../../scss/variables';
+@import '~@angular/material/theming';
+
+:host {
+  @include mat-elevation(1, black);
+
+  display: block;
+  display: flex;
+  align-items: center;
+  padding: 4px 4px 4px 16px;
+  background: white;
+}
+
+mat-checkbox {
+  margin-right: 8px;
+}
+
+.favorite-button {
+  margin-left: auto;
+}
+
+.favorite-icon {
+  color: #d4d4d4;
+
+  &.active {
+    color: mat-color($accent);
+  }
+}

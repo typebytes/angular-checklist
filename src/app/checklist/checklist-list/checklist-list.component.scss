@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+::ng-deep app-checklist-list-item {
+  & + & {
+    margin-top: 14px;
+  }
+}

@@ -2,24 +2,10 @@
 @import '../../../scss/utils';
 @import '~@angular/material/theming';
 
-mat-card {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-
-  mat-checkbox {
-    margin-right: 8px;
-  }
-
-  & + & {
-    margin-top: 14px;
-  }
-}
-
 .cta-bar {
   display: flex;
   flex-wrap: wrap;
-  margin: 1.5rem 0 0.7rem;
+  margin: 1.5rem 0 1rem;
 
   button {
     @include button-small();
@@ -62,17 +48,5 @@ mat-card {
 
   & + & {
     margin-left: 5px;
-  }
-}
-
-.favorite-button {
-  margin-left: auto;
-}
-
-.favorite-icon {
-  color: #d4d4d4;
-
-  &.active {
-    color: mat-color($accent);
   }
 }
