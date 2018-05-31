@@ -1,9 +1,9 @@
 ---
-title: Modules and services
+title: Modules and Services
 ---
 ### Providing the services only at the root level
 
-Every time a service is provided at a different level (component, module), an instance will be created when something inside that module or that component asks for an instance of it. Whilst this can be what you want, it is in most cases not the expected behaviour. 
+Every time a service is provided at a different level (component, module), an instance will be created when something inside that module or that component asks for an instance of it. Whilst this can be what you want, it is in most cases not the expected behaviour.
 
 When you are creating a `SharedModule`, you want to use the components everywhere but only provide the services at the `AppModule` level. You can accomplish this by defining your `SharedModule` like this:
 

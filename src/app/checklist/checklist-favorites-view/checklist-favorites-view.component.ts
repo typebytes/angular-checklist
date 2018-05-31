@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ChecklistItem, Favorite } from '../models/checklist';
 import { ApplicationState } from '../state';
-import { Toggle } from '../state/checklist.actions';
+import { Toggle, ToggleFavorite } from '../state/checklist.actions';
 import { ChecklistQueries } from '../state/checklist.reducer';
 
 @Component({
@@ -22,6 +22,10 @@ export class ChecklistFavoritesViewComponent implements OnInit {
 
   toggleItem(item: ChecklistItem) {
     this.store.dispatch(new Toggle(item));
+  }
+
+  toggleFavorite(item: ChecklistItem, categoryId: string) {
+    this.store.dispatch(new ToggleFavorite({ id: item.id, category: categoryId }));
   }
 
   trackByCategoryTitle(index, favorite: Favorite) {

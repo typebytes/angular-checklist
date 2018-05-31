@@ -15,30 +15,10 @@ header {
 }
 
 .category {
-  padding: 22px 12px 8px;
+  padding: 22px 0 8px;
   margin: 0;
 
   h4 {
     margin: 0 0 0.5rem;
-  }
-}
-
-.item-list {
-  margin: 0;
-  padding: 0px 18px;
-  list-style: none;
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  padding: 4px 6px;
-
-  mat-checkbox {
-    margin-right: 8px;
-  }
-
-  & + & {
-    margin-top: 2px;
   }
 }
