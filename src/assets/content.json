@@ -5,6 +5,7 @@
       "summary": "This category summarizes best practices regarding architecture.",
       "slug": "architecture",
       "items": [
+        "Z1uCcrx",
         "Z1xqb2O",
         "Z11LOp2",
         "Z24l73x"
@@ -16,6 +17,7 @@
       "slug": "performance",
       "items": [
         "Z8rHxb",
+        "Z13mvQ4",
         "AvD9O"
       ]
     },
@@ -32,6 +34,12 @@
     }
   },
   "items": {
+    "Z1uCcrx": {
+      "id": "Z1uCcrx",
+      "slug": "business-logic-in-services",
+      "title": "Business Logic in Services",
+      "content": "<h3>Business Logic in Services</h3>\n<p>All the business logic in the application is moved to services. Smart components (TOOD: link to the smart vs dumb components) can only hold logic that is related to this specific component. All the business logic access to backend resources should be abstracted to services.</p>\n"
+    },
     "Z1xqb2O": {
       "id": "Z1xqb2O",
       "slug": "folder-structure",
@@ -41,7 +49,7 @@
     "Z11LOp2": {
       "id": "Z11LOp2",
       "slug": "modules",
-      "title": "Modules and services",
+      "title": "Modules and Services",
       "content": "<h3>Providing the services only at the root level</h3>\n<p>Every time a service is provided at a different level (component, module), an instance will be created when something inside that module or that component asks for an instance of it. Whilst this can be what you want, it is in most cases not the expected behaviour.</p>\n<p>When you are creating a <code>SharedModule</code>, you want to use the components everywhere but only provide the services at the <code>AppModule</code> level. You can accomplish this by defining your <code>SharedModule</code> like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [...modules],\n  declarations: [...declarations],\n  exports: [...declarations]\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SharedModule {\n  <span class=\"hljs-keyword\">static</span> forRoot() {\n    <span class=\"hljs-keyword\">return</span> {\n      ngModule: SharedModule,\n      providers: [...services]\n    };\n  }\n</code></pre>\n<p>In your <code>AppModule</code>, you could use this module like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [\n  \t...modules,\n  \tSharedModule.forRoot()\n  ],\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> AppModule {}\n</code></pre>\n<p>Thus, also providing the <code>providers</code> section.</p>\n<p>In a feature module where the services are not required, you could use the <code>SharedModule</code> like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [\n  \t...modules,\n  \tSharedModule\n  ],\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeFeature {}\n</code></pre>\n<p>Thus, having access to all the components, pipes, … provided by the <code>SharedModule</code> without creating multiple instances of a service.</p>\n"
     },
     "Z24l73x": {
@@ -60,6 +68,12 @@
         "url": "https://twitter.com/mgechev"
       },
       "content": "<h3>Bundling</h3>\n<p>Bundling is a standard practice aiming to reduce the number of requests that the browser needs to perform in order to deliver the application requested by the user. In essence, the bundler receives as an input a list of entry points and produces one or more bundles. This way, the browser can get the entire application by performing only a few requests, instead of requesting each individual resource separately.</p>\n<p>As your application grows bundling everything into a single large bundle would again be counter productive. Explore Code Splitting techniques using Webpack.</p>\n<p><strong>Additional http requests will not be a concern with HTTP/2 because of the server push feature.</strong></p>\n<h4>Tooling</h4>\n<p>Tools which allows us to bundle our applications efficiently are:</p>\n<ul>\n<li><a href=\"https://github.com/angular/angular-cli\">Angular CLI</a> - A command line interface for Angular which makes it easy to create an application that already works, right out of the box. It already follows many best practices and focuses on performance.</li>\n<li><a href=\"https://webpack.js.org\">Webpack</a> - provides efficient bundling by performing <a href=\"#tree-shaking\">tree-shaking</a>.</li>\n<li><a href=\"https://webpack.js.org/guides/code-splitting/\">Webpack Code Splitting</a> - Techniques to split your code.</li>\n<li><a href=\"https://medium.com/webpack/webpack-http-2-7083ec3f3ce6#.46idrz8kb\">Webpack &amp; http2</a> - Need for splitting with http2.</li>\n<li><a href=\"https://github.com/rollup/rollup\">Rollup</a> - provides bundling by performing efficient tree-shaking, taking advantage of the static nature of the ES2015 modules.</li>\n<li><a href=\"https://github.com/google/closure-compiler\">Google Closure Compiler</a> - performs plenty of optimizations and provides bundling support. Originally written in Java, since recently it also has a <a href=\"https://www.npmjs.com/package/google-closure-compiler-js\">JavaScript version</a> which can be <a href=\"https://www.npmjs.com/package/google-closure-compiler-js\">found here</a>.</li>\n<li><a href=\"https://github.com/systemjs/builder\">SystemJS Builder</a> - provides a single-file build for SystemJS of mixed-dependency module trees.</li>\n<li><a href=\"http://browserify.org/\">Browserify</a>.</li>\n</ul>\n"
+    },
+    "Z13mvQ4": {
+      "id": "Z13mvQ4",
+      "slug": "change-detection-optimization",
+      "title": "ChangeDetection Optimization",
+      "content": "<h3>Using OnPush</h3>\n"
     },
     "AvD9O": {
       "id": "AvD9O",
