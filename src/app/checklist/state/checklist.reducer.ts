@@ -13,7 +13,15 @@ import {
   ItemMap
 } from '../models/checklist';
 
-import { calculatePercentage, computeScore, filterItems, setCheckedState, updateFavorites } from '../utils/checklist';
+import {
+  calculatePercentage,
+  computeScore,
+  filterItems,
+  mergeDeep,
+  setCheckedState,
+  updateFavorites
+} from '../utils/checklist';
+
 import { extractRouteParams } from '../utils/router';
 import { ChecklistActionTypes, ChecklistActions } from './checklist.actions';
 import { ApplicationState } from './index';
@@ -38,6 +46,8 @@ export const INITIAL_STATE: ChecklistState = {
 
 export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions) {
   switch (action.type) {
+    case ChecklistActionTypes.INIT:
+      return mergeDeep(state, CHECKLIST);
     case ChecklistActionTypes.SET_CATEGORIES_FILTER:
     case ChecklistActionTypes.SET_FAVORITES_FILTER:
       return {

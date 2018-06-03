@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, INIT } from '@ngrx/store';
 import { ChecklistFilter, ChecklistItem } from '../models/checklist';
 
 export enum ChecklistActionTypes {
@@ -7,7 +7,12 @@ export enum ChecklistActionTypes {
   UNCHECK_ALL = '[Checklist] Uncheck All',
   SET_CATEGORIES_FILTER = '[Checklist] Set Categories Filter',
   SET_FAVORITES_FILTER = '[Checklist] Set Favroites Filter',
-  TOGGLE_FAVORITE = '[Checklist] Add Favorite'
+  TOGGLE_FAVORITE = '[Checklist] Add Favorite',
+  INIT = '@ngrx/store/init'
+}
+
+export class Init implements Action {
+  readonly type = ChecklistActionTypes.INIT;
 }
 
 export class UncheckAll implements Action {
@@ -47,6 +52,7 @@ export class ToggleFavorite implements Action {
 }
 
 export type ChecklistActions =
+  | Init
   | Toggle
   | CheckAll
   | UncheckAll
