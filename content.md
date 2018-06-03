@@ -16,3 +16,4 @@ It will remember the checks you've made before which allows you to gruadually re
 * usage of jest (optional)
 * usage of cypress (optional)
 * typescript do's and dont's
+* lazing loading feature modules
