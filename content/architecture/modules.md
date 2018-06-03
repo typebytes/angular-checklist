@@ -1,7 +1,7 @@
 ---
 title: Modules and Services
 ---
-### Providing the services only at the root level
+# Providing the services only at the root level
 
 Every time a service is provided at a different level (component, module), an instance will be created when something inside that module or that component asks for an instance of it. Whilst this can be what you want, it is in most cases not the expected behaviour.
 

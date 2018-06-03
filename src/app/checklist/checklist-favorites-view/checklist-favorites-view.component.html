@@ -1,6 +1,13 @@
 <header>
   Favorites
 </header>
+
+<app-checklist-cta-bar
+  [filter]="filter$ | async"
+  [showActionButtons]="false"
+  (filterChange)="setFilter($event)">
+</app-checklist-cta-bar>
+
 <ul class="category" *ngFor="let favorite of favorites$ | async; trackBy: trackByCategoryTitle">
   <h4>{{ favorite.category.title }}</h4>
   <app-checklist-list>

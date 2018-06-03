@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ChecklistFilter, ChecklistItem } from '../models/checklist';
 import { ApplicationState } from '../state';
-import { ToggleFavorite, CheckAll, SetFilter, Toggle, UncheckAll } from '../state/checklist.actions';
+import { ToggleFavorite, CheckAll, SetCategoriesFilter, Toggle, UncheckAll } from '../state/checklist.actions';
 import { ChecklistQueries } from '../state/checklist.reducer';
 
 @Component({
@@ -21,7 +21,7 @@ export class ListViewComponent implements OnInit {
 
   ngOnInit() {
     this.items$ = this.store.pipe(select(ChecklistQueries.getItemsFromSelectedCategory));
-    this.filter$ = this.store.pipe(select(ChecklistQueries.getFilter));
+    this.filter$ = this.store.pipe(select(ChecklistQueries.getCategroriesFilter));
   }
 
   toggleItem(item: ChecklistItem) {
@@ -29,7 +29,7 @@ export class ListViewComponent implements OnInit {
   }
 
   setFilter(filter: ChecklistFilter) {
-    this.store.dispatch(new SetFilter(filter));
+    this.store.dispatch(new SetCategoriesFilter(filter));
   }
 
   checkAllItems() {
@@ -41,7 +41,9 @@ export class ListViewComponent implements OnInit {
   }
 
   toggleFavorite(item: ChecklistItem) {
-    this.getSelectedCategory().subscribe(category => this.store.dispatch(new ToggleFavorite({ id: item.id, category })));
+    this.getSelectedCategory().subscribe(category =>
+      this.store.dispatch(new ToggleFavorite({ id: item.id, category }))
+    );
   }
 
   trackById(index, item: ChecklistItem) {

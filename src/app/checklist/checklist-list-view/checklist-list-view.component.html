@@ -1,27 +1,9 @@
-<div class="cta-bar">
-  <div class="filters" *ngIf="filter$ | async as filter">
-    <button class="filter" mat-button (click)="setFilter('ALL')" [class.active]="filter === 'ALL'">
-      <mat-icon>assignment</mat-icon>
-      ALL
-    </button>
-    <button class="filter" mat-button (click)="setFilter('DONE')" [class.active]="filter === 'DONE'">
-      <mat-icon>done</mat-icon>
-      DONE
-    </button>
-    <button class="filter" mat-button (click)="setFilter('TODO')" [class.active]="filter === 'TODO'">
-      <mat-icon>check_box_outline_blank</mat-icon>
-      TODO
-    </button>
-  </div>
-  <div class="cta-buttons">
-    <button mat-button (click)="checkAllItems()">
-      <mat-icon>done_all</mat-icon>
-    </button>
-    <button mat-button (click)="uncheckAllItems()">
-      <mat-icon>filter_none</mat-icon>
-    </button>
-  </div>
-</div>
+<app-checklist-cta-bar
+  [filter]="filter$ | async"
+  (filterChange)="setFilter($event)"
+  (checkAll)="checkAllItems()"
+  (uncheckAll)="uncheckAllItems()">
+</app-checklist-cta-bar>
 
 <app-checklist-list class="checklist-items">
   <app-checklist-list-item *ngFor="let item of items$ | async; trackBy: trackById" [item]="item" (toggleItem)="toggleItem($event)"

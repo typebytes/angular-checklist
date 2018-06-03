@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ChecklistItem, Favorite } from '../models/checklist';
+import { ChecklistFilter, ChecklistItem, Favorite } from '../models/checklist';
 import { ApplicationState } from '../state';
-import { Toggle, ToggleFavorite } from '../state/checklist.actions';
+import { Toggle, ToggleFavorite, SetFavoritesFilter } from '../state/checklist.actions';
 import { ChecklistQueries } from '../state/checklist.reducer';
 
 @Component({
@@ -13,11 +13,17 @@ import { ChecklistQueries } from '../state/checklist.reducer';
 })
 export class ChecklistFavoritesViewComponent implements OnInit {
   favorites$: Observable<Array<Favorite>>;
+  filter$: Observable<ChecklistFilter>;
 
   constructor(private store: Store<ApplicationState>) {}
 
   ngOnInit() {
-    this.favorites$ = this.store.pipe(select(ChecklistQueries.getFavorites));
+    this.favorites$ = this.store.pipe(select(ChecklistQueries.getFilteredFavorites));
+    this.filter$ = this.store.pipe(select(ChecklistQueries.getFavroitesFilter));
+  }
+
+  setFilter(filter: ChecklistFilter) {
+    this.store.dispatch(new SetFavoritesFilter(filter));
   }
 
   toggleItem(item: ChecklistItem) {

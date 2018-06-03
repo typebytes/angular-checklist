@@ -15,6 +15,7 @@ import { ChecklistRoutingModule } from './checklist-routing.module';
 import { ChecklistScoreChartComponent } from './checklist-score-chart/checklist-score-chart.component';
 import { ChecklistComponent } from './checklist.component';
 import { META_REDUCERS, ROOT_REDUCER } from './state';
+import { ChecklistCtaBarComponent } from './checklist-cta-bar/checklist-cta-bar.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { META_REDUCERS, ROOT_REDUCER } from './state';
     ChecklistScoreChartComponent,
     ChecklistMetadataComponent,
     ChecklistListComponent,
-    ChecklistListItemComponent
+    ChecklistListItemComponent,
+    ChecklistCtaBarComponent
   ]
 })
 export class ChecklistModule {}

@@ -40,6 +40,11 @@ export interface ItemMap {
   [key: string]: ChecklistItem;
 }
 
+export interface Filter {
+  categories: ChecklistFilter;
+  favorites: ChecklistFilter;
+}
+
 export interface Checklist {
   categories: CategoryMap;
   items: ItemMap;

@@ -5,7 +5,7 @@ author:
   name: Minko Gechev
   url: https://twitter.com/mgechev
 ---
-### Bundling
+# Bundling
 
 Bundling is a standard practice aiming to reduce the number of requests that the browser needs to perform in order to deliver the application requested by the user. In essence, the bundler receives as an input a list of entry points and produces one or more bundles. This way, the browser can get the entire application by performing only a few requests, instead of requesting each individual resource separately.
 
@@ -13,7 +13,7 @@ As your application grows bundling everything into a single large bundle would a
 
 **Additional http requests will not be a concern with HTTP/2 because of the server push feature.**
 
-#### Tooling
+## Tooling
 
 Tools which allows us to bundle our applications efficiently are:
 

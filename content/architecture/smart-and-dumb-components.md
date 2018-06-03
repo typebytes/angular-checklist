@@ -1,13 +1,13 @@
 ---
-title: Smart and dumb components
+title: Smart and Dumb Components
 ---
-### Smart and Dumb Components
+# Smart and Dumb Components
 
 Every major frontend framework nowadays is moving towards a component based architecture. Components are a combination of a little bit of html, javascript and css. This way of working can provide us with a lot of benefits if used in the correct way.
 
 The most advocated way to use them is through smart and dumb components (there is a variety of other names as well but the general principle is the same).
 
-#### Component types
+## Component types
 
 A dumb component:
 
@@ -24,13 +24,13 @@ A smart component:
 * It is build up out of several dumb components.
 * It listen for events thrown by the dumb components and performs the required action for them.
 
-#### Benefits
+## Benefits
 
 * Dumb components are completely reusable since they have a defined API and are not linked to any specific services of data calls.
 * Dumb components are easy to test as they are completely isolated.
 * The entire architecture of your components becomes easier to reason about. If there is a business logic or data fetching problem, you know that you need to start searching in the smart component. Since that is the responsability of that component.
 
-#### External resources
+## External resources
 
 * <a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0" target="_blank">Presentational and container components</a> by Dan Abramov.
 * <a href="https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/" target="_blank">Smart components vs Presentational components</a> by angular University.

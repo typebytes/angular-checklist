@@ -4,6 +4,6 @@
 
 ::ng-deep app-checklist-list-item {
   & + & {
-    margin-top: 14px;
+    border-top: 1px solid gainsboro;
   }
 }

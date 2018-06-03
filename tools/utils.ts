@@ -1,10 +1,12 @@
 import chalk from 'chalk';
 import { existsSync, mkdirSync, readFileSync, readdir, writeFileSync } from 'fs';
 import { dirname, join, parse } from 'path';
-import { markdown } from './markdown';
+import { convertHeadingsPlugin, markdown } from './markdown';
 import { FrontMatter } from './models';
 import matter = require('gray-matter');
 import hash = require('shorthash');
+
+markdown.use(convertHeadingsPlugin);
 
 export const buildChecklist = async contentFolder => {
   const checklist = {

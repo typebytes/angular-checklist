@@ -11,7 +11,6 @@
     <section>
       <a class="sidenav-link" routerLink="favorites" #rla="routerLinkActive" routerLinkActive="active">
         <app-checklist-score-chart [class.primary]="rla.isActive" [score]="favoritesScore$ | async"></app-checklist-score-chart>
-        <!-- <mat-icon>favorite</mat-icon> -->
         <span [matBadge]="favoritesCount$ | async" [matBadgeHidden]="!(favoritesCount$ | async)" matBadgeColor="accent" matBadgeOverlap="false">Favorites</span>
       </a>
     </section>

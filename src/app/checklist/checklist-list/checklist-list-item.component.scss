@@ -2,13 +2,10 @@
 @import '~@angular/material/theming';
 
 :host {
-  @include mat-elevation(1, black);
-
   display: block;
   display: flex;
   align-items: center;
-  padding: 4px 4px 4px 16px;
-  background: white;
+  padding: 4px 4px 4px 0;
 }
 
 mat-checkbox {

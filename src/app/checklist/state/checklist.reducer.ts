@@ -1,17 +1,19 @@
 import { createSelector } from '@ngrx/store';
+
 import {
   BreadcrumbItem,
   Category,
   CategoryEntity,
   CategoryMap,
   Checklist,
-  ChecklistFilter,
   ChecklistItem,
   Favorite,
   FavoriteEntity,
+  Filter,
   ItemMap
 } from '../models/checklist';
-import { computeScore, filterItems, setCheckedState, updateFavorites, calculatePercentage } from '../utils/checklist';
+
+import { calculatePercentage, computeScore, filterItems, setCheckedState, updateFavorites } from '../utils/checklist';
 import { extractRouteParams } from '../utils/router';
 import { ChecklistActionTypes, ChecklistActions } from './checklist.actions';
 import { ApplicationState } from './index';
@@ -21,22 +23,26 @@ const CHECKLIST: Checklist = require('../../../assets/content.json');
 export interface ChecklistState {
   categories: CategoryMap;
   items: ItemMap;
-  filter: ChecklistFilter;
+  filter: Filter;
   favorites: FavoriteEntity;
 }
 
 export const INITIAL_STATE: ChecklistState = {
   ...CHECKLIST,
-  filter: 'ALL',
+  filter: {
+    categories: 'ALL',
+    favorites: 'ALL'
+  },
   favorites: {}
 };
 
 export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions) {
   switch (action.type) {
-    case ChecklistActionTypes.SET_FILTER:
+    case ChecklistActionTypes.SET_CATEGORIES_FILTER:
+    case ChecklistActionTypes.SET_FAVORITES_FILTER:
       return {
         ...state,
-        filter: action.payload
+        filter: filterReducer(state.filter, action)
       };
     case ChecklistActionTypes.CHECK_ALL:
       return {
@@ -63,6 +69,23 @@ export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions
       return state;
   }
 }
+
+export const filterReducer = (state: Filter, action: ChecklistActions) => {
+  switch (action.type) {
+    case ChecklistActionTypes.SET_CATEGORIES_FILTER:
+      return {
+        ...state,
+        categories: action.payload
+      };
+    case ChecklistActionTypes.SET_FAVORITES_FILTER:
+      return {
+        ...state,
+        favorites: action.payload
+      };
+    default:
+      return state;
+  }
+};
 
 export const itemsReducer = (state: ItemMap, action: ChecklistActions) => {
   switch (action.type) {
@@ -108,7 +131,8 @@ export namespace ChecklistQueries {
   export const getCategoriesEntity = (state: ApplicationState) => state.checklist.categories;
   export const getItemsEntity = (state: ApplicationState) => state.checklist.items;
   export const getRouterState = (state: ApplicationState) => state.router.state;
-  export const getFilter = (state: ApplicationState) => state.checklist.filter;
+  export const getCategroriesFilter = (state: ApplicationState) => state.checklist.filter.categories;
+  export const getFavroitesFilter = (state: ApplicationState) => state.checklist.filter.favorites;
   export const getFavoriteEntity = (state: ApplicationState) => state.checklist.favorites;
 
   export const getScores = createSelector(getCategoriesEntity, getItemsEntity, (categories, items) => {
@@ -145,7 +169,7 @@ export namespace ChecklistQueries {
     getCategoriesEntity,
     getItemsEntity,
     getSelectedCategory,
-    getFilter,
+    getCategroriesFilter,
     (categories, items, selectedCategory, filter): Array<ChecklistItem> => {
       if (selectedCategory) {
         const category = categories[selectedCategory.slug];
@@ -174,7 +198,8 @@ export namespace ChecklistQueries {
     getFavoriteEntity,
     getCategoriesEntity,
     getItemsEntity,
-    (favorites, categories, items): Array<Favorite> => {
+    getFavroitesFilter,
+    (favorites, categories, items, filter): Array<Favorite> => {
       return Object.keys(favorites).reduce((acc, categoryId) => {
         acc.push({
           category: categories[categoryId],
@@ -185,6 +210,14 @@ export namespace ChecklistQueries {
       }, []);
     }
   );
+
+  export const getFilteredFavorites = createSelector(getFavorites, getFavroitesFilter, (favorites, filter) => {
+    favorites.forEach(favorite => {
+      favorite.items = filterItems(favorite.items, filter);
+    });
+
+    return favorites;
+  });
 
   export const getFavoritesScore = createSelector(getFavorites, favorites => {
     if (favorites.length) {

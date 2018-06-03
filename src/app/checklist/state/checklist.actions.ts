@@ -5,7 +5,8 @@ export enum ChecklistActionTypes {
   TOGGLE = '[Checklist] Toggle',
   CHECK_ALL = '[Checklist] Check All',
   UNCHECK_ALL = '[Checklist] Uncheck All',
-  SET_FILTER = '[Checklist] Set Filter',
+  SET_CATEGORIES_FILTER = '[Checklist] Set Categories Filter',
+  SET_FAVORITES_FILTER = '[Checklist] Set Favroites Filter',
   TOGGLE_FAVORITE = '[Checklist] Add Favorite'
 }
 
@@ -27,8 +28,14 @@ export class Toggle implements Action {
   constructor(public payload: ChecklistItem) {}
 }
 
-export class SetFilter implements Action {
-  readonly type = ChecklistActionTypes.SET_FILTER;
+export class SetCategoriesFilter implements Action {
+  readonly type = ChecklistActionTypes.SET_CATEGORIES_FILTER;
+
+  constructor(public payload: ChecklistFilter) {}
+}
+
+export class SetFavoritesFilter implements Action {
+  readonly type = ChecklistActionTypes.SET_FAVORITES_FILTER;
 
   constructor(public payload: ChecklistFilter) {}
 }
@@ -36,7 +43,13 @@ export class SetFilter implements Action {
 export class ToggleFavorite implements Action {
   readonly type = ChecklistActionTypes.TOGGLE_FAVORITE;
 
-  constructor(public payload: { category: string, id: string }) {}
+  constructor(public payload: { category: string; id: string }) {}
 }
 
-export type ChecklistActions = Toggle | CheckAll | UncheckAll | SetFilter | ToggleFavorite;
+export type ChecklistActions =
+  | Toggle
+  | CheckAll
+  | UncheckAll
+  | SetCategoriesFilter
+  | SetFavoritesFilter
+  | ToggleFavorite;

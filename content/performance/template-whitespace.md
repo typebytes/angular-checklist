@@ -5,7 +5,7 @@ author:
   name: Minko Gechev
   url: https://twitter.com/mgechev
 ---
-### Remove Template Whitespace
+# Remove Template Whitespace
 
 Although we don't see the whitespace character (a character matching the `\s` regex) it is still represented by bytes which are transfered over the network. If we reduce the whitespace from our templates to minimum we will be respectively able to drop the bundle size of the AoT code even further.
 
