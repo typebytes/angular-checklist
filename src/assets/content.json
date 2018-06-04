@@ -6,8 +6,9 @@
       "slug": "architecture",
       "items": [
         "Z1uCcrx",
+        "l2hnF",
         "Z1xqb2O",
-        "Z11LOp2",
+        "opRwV",
         "Z24l73x"
       ]
     },
@@ -27,6 +28,7 @@
       "items": [
         "Z8rHxb",
         "Z13mvQ4",
+        "iOnTI",
         "AvD9O"
       ]
     },
@@ -49,17 +51,23 @@
       "title": "Business Logic in Services",
       "content": "<h3>Business Logic in Services</h3>\n<p>All business logic in the application is moved into services. Smart components (TODO: link to the smart vs dumb components) should only contain logic that is related to this specific component. For example business logic that is used to access backend resources should be abstracted into services.</p>\n"
     },
+    "l2hnF": {
+      "id": "l2hnF",
+      "slug": "file-naming",
+      "title": "File Naming",
+      "content": "<h3>Separate file names with dots and dashes</h3>\n<p>It is recommended to separate words with dashes and dots to separate the descriptive name from the type. The descriptive name of a file should describe the component’s feature.</p>\n<p>Also, try to use conventional suffix that describe the type of the file, e.g. <code>.component.ts</code>, <code>.directive.ts</code>, <code>.service.ts</code>, <code>.module.ts</code>, <code>.pipe.ts</code>.</p>\n<p>Here are a few examples:</p>\n<ul>\n<li><code>app.component.ts</code></li>\n<li><code>contacts.service.ts</code></li>\n<li><code>product-list.component.ts</code></li>\n</ul>\n<p>Using such naming convention helps to provide a consistant way to find content very quickly and easily. Consistancy will save you time and make you and your team more efficient.</p>\n<h3>Use the name and type of the file for your class names</h3>\n<p>If the file you are working on is <code>app.component.ts</code> it is obvious that this must be a component. It also tells us the name of this component, which is <code>app</code>. This means we’d call our class <code>AppComponent</code>:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({ ... })\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> AppComponent { }\n</code></pre>\n<p>Here’s another example of a class defined in <code>product-list.component.ts</code>:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({ ... })\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> ProductListComponent { }\n</code></pre>\n"
+    },
     "Z1xqb2O": {
       "id": "Z1xqb2O",
       "slug": "folder-structure",
       "title": "Folder Structure",
-      "content": "<h3>Folder Structure</h3>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">const</span> foo = <span class=\"hljs-function\">(<span class=\"hljs-params\">bar: <span class=\"hljs-built_in\">string</span></span>) =&gt;</span> {\n  <span class=\"hljs-keyword\">return</span> bar;\n};\n</code></pre>\n"
+      "content": "<h3>Folder Structure</h3>\n"
     },
-    "Z11LOp2": {
-      "id": "Z11LOp2",
-      "slug": "modules",
+    "opRwV": {
+      "id": "opRwV",
+      "slug": "modules-and-services",
       "title": "Modules and Services",
-      "content": "<h3>Providing the services only at the root level</h3>\n<p>Every time a service is provided at a different level (component, module), an instance will be created when something inside that module or that component asks for an instance of it. Whilst this can be what you want, it is in most cases not the expected behaviour.</p>\n<p>When you are creating a <code>SharedModule</code>, you want to use the components everywhere but only provide the services at the <code>AppModule</code> level. You can accomplish this by defining your <code>SharedModule</code> like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [...modules],\n  declarations: [...declarations],\n  exports: [...declarations]\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SharedModule {\n  <span class=\"hljs-keyword\">static</span> forRoot() {\n    <span class=\"hljs-keyword\">return</span> {\n      ngModule: SharedModule,\n      providers: [...services]\n    };\n  }\n</code></pre>\n<p>In your <code>AppModule</code>, you could use this module like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [\n  \t...modules,\n  \tSharedModule.forRoot()\n  ],\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> AppModule {}\n</code></pre>\n<p>Thus, also providing the <code>providers</code> section.</p>\n<p>In a feature module where the services are not required, you could use the <code>SharedModule</code> like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [\n  \t...modules,\n  \tSharedModule\n  ],\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeFeature {}\n</code></pre>\n<p>Thus, having access to all the components, pipes, … provided by the <code>SharedModule</code> without creating multiple instances of a service.</p>\n"
+      "content": "<h3>Providing services only at the root level</h3>\n<p>In Angular we have the possibility to take advantage of the injector tree to provide different service instances on different levels, e.g. component, directive or module. Whilst this can be exactly what you want, in most cases it is not the expected behavior.</p>\n<p>When you are creating a <code>SharedModule</code>, you want to use the components everywhere but only provide the services in your root module, e.g. <code>AppModule</code>. You can accomplish this by leveraging the <code>forRoot</code> convention. Your <code>SharedModule</code> would then like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [...modules],\n  declarations: [...declarations],\n  exports: [...declarations]\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SharedModule {\n  <span class=\"hljs-keyword\">static</span> forRoot(): ModuleWithProviders {\n    <span class=\"hljs-keyword\">return</span> {\n      ngModule: SharedModule,\n      providers: [...services]\n    };\n  }\n</code></pre>\n<p>Note that the actual module definion <strong>does not</strong> contain any providers.</p>\n<p>In your <code>AppModule</code>, you could use this module as follows:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [\n    ...modules,\n    SharedModule.forRoot()\n  ],\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> AppModule {}\n</code></pre>\n<p>By calling the static <code>forRoot</code> method on the <code>SharedModule</code> you will import the entire module <strong>including</strong> its providers.</p>\n<p>In a feature module you would simply import the <code>SharedModule</code> <strong>without</strong> calling <code>forRoot</code>:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@NgModule</span>({\n  imports: [\n    ...modules,\n    SharedModule\n  ],\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeFeature {}\n</code></pre>\n<p>The fact that each component has its own Injector that is inherited from its parent Injector, allows us to ask for services provided at a root level. Hence, we have access to all the components, pipes, etc. provided by the <code>SharedModule</code> without creating multiple instances of its services.</p>\n<h3>Additional Resources</h3>\n<ul>\n<li><a href=\"https://blog.thoughtram.io/angular/2015/05/18/dependency-injection-in-angular-2.html\">Dependency Injection in Angular</a> by Pascal Precht</li>\n<li><a href=\"https://blog.thoughtram.io/angular/2016/09/14/bypassing-providers-in-angular-2.html\">Bypassing Providers in Angular</a> by Pascal Precht</li>\n<li><a href=\"https://blog.angularindepth.com/avoiding-common-confusions-with-modules-in-angular-ada070e6891f\">Avoiding common confusions with modules in Angular</a> by Maxim Koretskyi</li>\n</ul>\n"
     },
     "Z24l73x": {
       "id": "Z24l73x",
@@ -94,6 +102,12 @@
       "id": "Z13mvQ4",
       "slug": "change-detection-optimization",
       "title": "ChangeDetection Optimization",
+      "content": "<h3>Using OnPush</h3>\n"
+    },
+    "iOnTI": {
+      "id": "iOnTI",
+      "slug": "lazy-loading",
+      "title": "Lazy-Loading Modules",
       "content": "<h3>Using OnPush</h3>\n"
     },
     "AvD9O": {

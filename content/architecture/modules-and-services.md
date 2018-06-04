@@ -29,8 +29,8 @@ In your `AppModule`, you could use this module as follows:
 ```ts
 @NgModule({
   imports: [
-  	...modules,
-  	SharedModule.forRoot()
+    ...modules,
+    SharedModule.forRoot()
   ],
   ...
 })
@@ -44,8 +44,8 @@ In a feature module you would simply import the `SharedModule` **without** calli
 ```ts
 @NgModule({
   imports: [
-  	...modules,
-  	SharedModule
+    ...modules,
+    SharedModule
   ],
   ...
 })
