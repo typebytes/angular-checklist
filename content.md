@@ -15,4 +15,4 @@ It will remember the checks you've made before which allows you to gruadually re
 - latest version of everything
 - usage of prettier (optional)
 - usage of jest (optional)
-- 
+- usage of compodoc (optional)
