@@ -26,9 +26,12 @@
       "summary": "This category contains a list of practices which will help us boost the performance of our Angular applications. It covers different topics - from server-side pre-rendering and bundling of our applications, to runtime performance and optimization of the change detection performed by the framework.",
       "slug": "performance",
       "items": [
+        "2g7vDW",
         "Z8rHxb",
         "Z13mvQ4",
         "iOnTI",
+        "gLB8Y",
+        "Z2pAnXm",
         "AvD9O"
       ]
     },
@@ -98,6 +101,17 @@
       "title": "Not everything is in the store",
       "content": "<h3>Not everything is in the store</h3>\n<p>NgRx/Store (or Redux in general) provides us with a lot of great features and can be used in a lot of use cases. In some cases however, this pattern can be overkill and should be avoided. As a general rule of thumb, the following listing will help you to know when it helps to put data into the store.</p>\n<ul>\n<li>When data is shared between components that are in totally different places in the component tree. By putting this data into the store, it is easier to consume this data in those components.</li>\n<li>State that needs to be hydrated between page reloads. If you want your component to look the same way as it did before it was destroyed.</li>\n<li>State that can be updated from multiple places. Let’s say you have a list of users which can be updated through crud operations. In that case it is easier to manage this by putting this data into the store.</li>\n</ul>\n<p>This is a non exhausitve listing and there will always be exceptions to the rule. In most cases however, keeping to data that complies with one or more points in this list, is a good idea.</p>\n<p>In the following cases, using Redux might NOT be the best idea.</p>\n<ul>\n<li>When caching data from a backend call. If you want to cache data coming from a backend call, you can easily accomplish this by keeping a reference to the <code>Observable</code> from the <code>HttpClient</code> and adding a <code>shareReplay(1)</code> operator to it. This operator will cache the underlying result of the backend call and return it to every subsequent subscriber without re-executing it.</li>\n<li>When state is only needed for the lifecyle of the component. In cases where the data is added to the store, just to be removed on the <code>ngOnDestroy</code> lifecycle hook, it doens’t have any benefits.</li>\n</ul>\n"
     },
+    "2g7vDW": {
+      "id": "2g7vDW",
+      "slug": "aot-compilation",
+      "title": "AOT Compilation",
+      "source": "https://github.com/mgechev/angular-performance-checklist",
+      "author": {
+        "name": "Minko Gechev",
+        "url": "https://twitter.com/mgechev"
+      },
+      "content": "<h3>Use Ahead-of-Time Compilation</h3>\n<p>AoT can be helpful not only for achieving more efficient bundling by performing tree-shaking, but also for improving the runtime performance of our applications. The alternative of AoT is Just-in-Time compilation (JiT) which is performed runtime, therefore we can reduce the amount of computations required for rendering of our application by performing the compilation as part of our build process.</p>\n<h3>Tooling</h3>\n<ul>\n<li><a href=\"https://github.com/angular/angular/tree/master/packages/compiler-cli\">@angular/compiler-cli</a> - a drop-in replacement for <a href=\"https://www.npmjs.com/package/typescript\">tsc</a> which statically analyzes our application and emits TypeScript/JavaScript for the component’s templates.</li>\n<li><a href=\"https://github.com/mgechev/angular-seed\">angular2-seed</a> - a starter project which includes support for AoT compilation.</li>\n<li><a href=\"https://cli.angular.io/\">Angular CLI</a> Using the ng serve --prod</li>\n</ul>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"http://blog.mgechev.com/2016/08/14/ahead-of-time-compilation-angular-offline-precompilation/\">Ahead-of-Time Compilation in Angular</a> by Minko Gechev</li>\n</ul>\n"
+    },
     "Z8rHxb": {
       "id": "Z8rHxb",
       "slug": "bundling",
@@ -120,6 +134,28 @@
       "slug": "lazy-loading",
       "title": "Lazy loading",
       "content": "<h3>Lazy loading modules</h3>\n<p>Angular is using a modular architecture. This allows us to split the application into different modules. When using the Angular CLI, it becomes really easy to lazy load these modules via our route definitions.</p>\n<pre class=\"hljs\"><code>[\n  { path: <span class=\"hljs-string\">'/heroes'</span>, loadChildren: <span class=\"hljs-string\">'app/heroes/heroes.module#HeroesModule'</span> },\n  ...\n]\n</code></pre>\n<p>Using lazy loading will make the initial load of our applications faster and will make sure only code that is actually needed is loaded.</p>\n"
+    },
+    "gLB8Y": {
+      "id": "gLB8Y",
+      "slug": "prod-mode",
+      "title": "Enable Production Mode",
+      "source": "https://github.com/mgechev/angular-performance-checklist",
+      "author": {
+        "name": "Minko Gechev",
+        "url": "https://twitter.com/mgechev"
+      },
+      "content": "<h3>Use <code>enableProdMode</code></h3>\n<p>In development mode Angular performs some extra checks in order to verify that performing change detection does not result to any additional changes to any of the bindings. This way the frameworks assures that the unidirectional data flow has been followed.</p>\n<p>In order to disable these changes for production to not forget to invoke enableProdMode:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">import</span> { enableProdMode } <span class=\"hljs-keyword\">from</span> <span class=\"hljs-string\">'@angular/core'</span>;\n\n<span class=\"hljs-keyword\">if</span> (ENV === <span class=\"hljs-string\">'production'</span>) {\n  enableProdMode();\n}\n</code></pre>\n"
+    },
+    "Z2pAnXm": {
+      "id": "Z2pAnXm",
+      "slug": "pure-pipes",
+      "title": "Pure Pipes",
+      "source": "https://github.com/mgechev/angular-performance-checklist",
+      "author": {
+        "name": "Minko Gechev",
+        "url": "https://twitter.com/mgechev"
+      },
+      "content": "<h3>Use pure Pipes</h3>\n<p>As argument the <code>@Pipe</code> decorator accepts an object literal with the following format:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">interface</span> PipeMetadata {\n  name: <span class=\"hljs-built_in\">string</span>;\n  pure: <span class=\"hljs-built_in\">boolean</span>;\n}\n</code></pre>\n<p>The pure flag indicates that the pipe is not dependent on any global state and does not produce side-effects. This means that the pipe will return the same output when invoked with the same input. This way Angular can cache the outputs for all the input parameters the pipe has been invoked with, and reuse them in order to not have to recompute them on each evaluation.</p>\n<p>The default value of the pure property is true.</p>\n"
     },
     "AvD9O": {
       "id": "AvD9O",
