@@ -41,9 +41,7 @@ export class ListViewComponent implements OnInit {
   }
 
   toggleFavorite(item: ChecklistItem) {
-    this.getSelectedCategory().subscribe(category =>
-      this.store.dispatch(new ToggleFavorite({ id: item.id, category }))
-    );
+    this.store.dispatch(new ToggleFavorite({ id: item.id, category: item.category }));
   }
 
   trackById(index, item: ChecklistItem) {

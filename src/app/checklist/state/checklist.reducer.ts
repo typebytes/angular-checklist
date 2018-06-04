@@ -182,8 +182,10 @@ export namespace ChecklistQueries {
     getCategroriesFilter,
     (categories, items, selectedCategory, filter): Array<ChecklistItem> => {
       if (selectedCategory) {
-        const category = categories[selectedCategory.slug];
-        return filterItems(category.items.map(id => items[id]), filter);
+        return filterItems(
+          selectedCategory.items.map(id => ({ ...items[id], category: selectedCategory.slug })),
+          filter
+        );
       }
 
       return null;
@@ -213,7 +215,7 @@ export namespace ChecklistQueries {
       return Object.keys(favorites).reduce((acc, categoryId) => {
         acc.push({
           category: categories[categoryId],
-          items: favorites[categoryId].map(itemId => items[itemId])
+          items: favorites[categoryId].map(itemId => ({ ...items[itemId], category: categoryId }))
         });
 
         return acc;

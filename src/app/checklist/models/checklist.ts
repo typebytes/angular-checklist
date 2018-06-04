@@ -10,6 +10,7 @@ export interface ChecklistItem {
   content: string;
   checked: boolean;
   favorite: boolean;
+  category: string;
   author: Author;
 }
 

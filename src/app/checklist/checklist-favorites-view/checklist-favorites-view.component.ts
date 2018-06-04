@@ -30,11 +30,15 @@ export class ChecklistFavoritesViewComponent implements OnInit {
     this.store.dispatch(new Toggle(item));
   }
 
-  toggleFavorite(item: ChecklistItem, categoryId: string) {
-    this.store.dispatch(new ToggleFavorite({ id: item.id, category: categoryId }));
+  toggleFavorite(item: ChecklistItem) {
+    this.store.dispatch(new ToggleFavorite({ id: item.id, category: item.category }));
   }
 
   trackByCategoryTitle(index, favorite: Favorite) {
     return favorite.category.title;
+  }
+
+  trackById(index, item: ChecklistItem) {
+    return item.id;
   }
 }
