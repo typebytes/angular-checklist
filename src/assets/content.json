@@ -32,6 +32,15 @@
         "AvD9O"
       ]
     },
+    "router": {
+      "title": "Router",
+      "summary": "This category summarizes best practices regarding routing.",
+      "slug": "router",
+      "items": [
+        "PaBkH",
+        "5ScV4"
+      ]
+    },
     "rxjs": {
       "title": "RxJS",
       "summary": "This category summarizes best practices regarding RxJS.",
@@ -120,6 +129,18 @@
         "url": "https://twitter.com/mgechev"
       },
       "content": "<h3>Remove Template Whitespace</h3>\n<p>Although we don’t see the whitespace character (a character matching the <code>\\s</code> regex) it is still represented by bytes which are transfered over the network. If we reduce the whitespace from our templates to minimum we will be respectively able to drop the bundle size of the AoT code even further.</p>\n<p>Thankfully, we don’t have to do this manually. The <code>ComponentMetadata</code> interface provides the property <code>preserveWhitespaces</code> which by default has value <code>true</code>, because removing the whitespace always may influence the DOM layout. In case we set the property to <code>false</code> Angular will trim the unnecessary whitespace which will lead to further reduction of the bundle size.</p>\n<ul>\n<li><a href=\"https://angular.io/api/core/Component#preserveWhitespaces\">preserveWhitespaces in the Angular docs</a></li>\n</ul>\n"
+    },
+    "PaBkH": {
+      "id": "PaBkH",
+      "slug": "404-route",
+      "title": "404 route",
+      "content": "<h3>Defining a 404 route</h3>\n<p>Every application should define a 404 route. This is a route to be shown whenever the user tries to go to an non existing route.</p>\n<pre class=\"hljs\"><code>[\n  { path: <span class=\"hljs-string\">'**'</span>, redirectTo: <span class=\"hljs-string\">'/not-found'</span>, component: <span class=\"hljs-string\">'NotFoundComponent'</span> },\n  ...\n]\n</code></pre>\n<p>This route definition uses a wildcard as a path. Since the Angular router will render the first definitions that matches, be sure to always put this route definition last!</p>\n"
+    },
+    "5ScV4": {
+      "id": "5ScV4",
+      "slug": "default-route",
+      "title": "Default route",
+      "content": "<h3>Defining a default route</h3>\n<p>Every application should define a default route. This is the route that will be used whenever the user goes to ‘/’.</p>\n<pre class=\"hljs\"><code>[\n  { path: <span class=\"hljs-string\">''</span>, redirectTo: <span class=\"hljs-string\">'/heroes'</span>, pathMatch: <span class=\"hljs-string\">'full'</span> },\n  ...\n]\n</code></pre>\n<p>Note that <code>pathMatch: full</code> should be used to make sure that this route definitions is only triggered when the user is going to ‘/’.</p>\n"
     },
     "bkHEY": {
       "id": "bkHEY",
