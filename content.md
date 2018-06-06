@@ -17,3 +17,11 @@ It will remember the checks you've made before which allows you to gruadually re
 * usage of cypress (optional)
 * typescript do's and dont's
 * lazing loading feature modules
+* when to use property bindings
+* guards for sensitive parts
+* Dom manipulation is done via the Renderer
+* No use of globals, this is wrapped in a service
+* Use valueChanges (thus observables from angular) over (keyUp) and a subject
+* performance from minko
+* Avoid logic in templates (not unit testable
+* Resources are cleand up in ngOnDestroy
