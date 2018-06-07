@@ -9,14 +9,12 @@ It will remember the checks you've made before which allows you to gruadually re
 ## Topics to cover
 
 * ngOnInit vs Constructor
-* a default route is defined
-* a 404 route is defined
 * latest version of everything
 * usage of prettier (optional)
 * usage of jest (optional)
+* usage of compodoc (optional)
 * usage of cypress (optional)
 * typescript do's and dont's
-* lazing loading feature modules
 * when to use property bindings
 * guards for sensitive parts
 * Dom manipulation is done via the Renderer
