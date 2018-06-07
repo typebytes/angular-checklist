@@ -20,6 +20,7 @@ export class SharedModule {
       providers: [...services]
     };
   }
+}
 ```
 
 Note that the actual module definion **does not** contain any providers.

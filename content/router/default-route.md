@@ -1,9 +1,9 @@
 ---
-title: Default route
+title: Default Route
 ---
 # Defining a default route
 
-Every application should define a default route. This is the route that will be used whenever the user goes to '/'.
+Every application should define a default route. This is the route that will be used whenever the user goes to `/`.
 
 ```ts
 [
@@ -11,4 +11,5 @@ Every application should define a default route. This is the route that will be 
   ...
 ]
 ```
- Note that `pathMatch: full` should be used to make sure that this route definitions is only triggered when the user is going to '/'.
+
+ Note that `pathMatch: full` should be used to make sure that this route definitions is only triggered when the user is going to `/`.

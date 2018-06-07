@@ -1,29 +1,35 @@
 ---
-title: Preloading strategy
+title: Preloading Strategy
 ---
 # Define a preloading strategy
 
-When using lazy loading, it is interesting to define a preloading strategy. This strategy will define when modules, that are not yet requested, should be loaded. 
+When using lazy loading, it may be interesting to define a preloading strategy. This strategy will define when modules, that are not yet requested, should be loaded.
 
-Depending on the application you are building and with what type of internet connection it will be used, a different strategy should be used. 
-When working on an application that will be used only on a steady wifi connection, it makes sense to preload all of the modules. When your application will be used mainly on slow 3G connections, you should only load the most likely to be used modules.
+Depending on the application you are building and whether you have to deal with low bandwidth, a different strategy may be applied. When working on an application that will be used only on a steady WiFi connection, it makes sense to preload all of the modules. When your application will be used mainly on slow 3G connections, you should only load the modules that are most likely used.
 
-#### Defining a custom preload strategy
+# Defining a custom preload strategy
 
 ```ts
-export class AppPreloadingStrategy implements PreloadingStrategy {
-    preload(route: Route, load: Function): Observable<any> {
-       // implement your strategy here
-    } 
+export class MyCustomPreloadingStrategy implements PreloadingStrategy {
+  preload(route: Route, load: Function): Observable<any> {
+    // Implement your strategy here
+  }
 }
 ```
 
-#### Define the strategy to be used
+# Use preloading strategy
 
 ```ts
-// Existing 
-RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-// Custom
-RouterModule.forRoot(routes, { preloadingStrategy: AppPreloadingStrategy })
+@NgModule({
+  imports: [
+    ...modules,
+    // Existing Preloading Strategy
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+
+    // Custom Preloading Strategy
+    RouterModule.forRoot(routes, { preloadingStrategy: MyCustomPreloadingStrategy });
+  ],
+  ...
+})
+export class AppModule {}
 ```
- 
