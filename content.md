@@ -23,3 +23,5 @@ It will remember the checks you've made before which allows you to gruadually re
 * performance from minko
 * Avoid logic in templates (not unit testable
 * Resources are cleand up in ngOnDestroy
+
+
