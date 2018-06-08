@@ -8,15 +8,11 @@ It will remember the checks you've made before which allows you to gruadually re
 
 ## Topics to cover
 
-* ngOnInit vs Constructor
 * latest version of everything
 * usage of prettier (optional)
 * usage of jest (optional)
 * usage of compodoc (optional)
 * usage of cypress (optional)
-* typescript do's and dont's
-* when to use property bindings
-* guards for sensitive parts
 * Dom manipulation is done via the Renderer
 * No use of globals, this is wrapped in a service
 * Use valueChanges (thus observables from angular) over (keyUp) and a subject
