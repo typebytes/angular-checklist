@@ -40,7 +40,8 @@
         "iOnTI",
         "gLB8Y",
         "Z2pAnXm",
-        "AvD9O"
+        "AvD9O",
+        "ZsirGi"
       ]
     },
     "router": {
@@ -193,6 +194,17 @@
         "url": "https://twitter.com/mgechev"
       },
       "content": "<h3>Remove Template Whitespace</h3>\n<p>Although we don’t see the whitespace character (a character matching the <code>\\s</code> regex) it is still represented by bytes which are transfered over the network. If we reduce the whitespace from our templates to minimum we will be respectively able to drop the bundle size of the AoT code even further.</p>\n<p>Thankfully, we don’t have to do this manually. The <code>ComponentMetadata</code> interface provides the property <code>preserveWhitespaces</code> which by default has value <code>true</code>, because removing the whitespace always may influence the DOM layout. In case we set the property to <code>false</code> Angular will trim the unnecessary whitespace which will lead to further reduction of the bundle size.</p>\n<ul>\n<li><a href=\"https://angular.io/api/core/Component#preserveWhitespaces\">preserveWhitespaces in the Angular docs</a></li>\n</ul>\n"
+    },
+    "ZsirGi": {
+      "id": "ZsirGi",
+      "slug": "tracky-by-option-on-ng-for",
+      "title": "use trackBy option on *ngFor",
+      "source": "https://github.com/mgechev/angular-performance-checklist#use-trackby-option-for-ngfor-directive",
+      "author": {
+        "name": "Minko Gechev",
+        "url": "https://twitter.com/mgechev"
+      },
+      "content": "<h3>Use the trackBy option on *ngFor</h3>\n<p>The *ngFor directive is used for rendering a collection. By default *ngFor identifies object uniqueness by reference.</p>\n<p>Which means when developer breaks reference to object during updating item’s content Angular treats it as removal of the old object and addition of the new object. This effects in destroying old DOM node in the list and adding new DOM node on its place.</p>\n<p>Developer can provide a hint for angular how to identify object uniqueness: custom tracking function as the trackBy option for the *ngFor directive. Tracking function takes two arguments: index and item. Angular uses the value returned from tracking function to track items identity. It is very common to use ID of the particular record as the unique key.</p>\n<h6>Example</h6>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({\n  selector: <span class=\"hljs-string\">'yt-feed'</span>,\n  template: <span class=\"hljs-string\">`\n  &lt;h1&gt;Your video feed&lt;/h1&gt;\n  &lt;yt-player *ngFor=\"let video of feed; trackBy: trackById\" [video]=\"video\"&gt;&lt;/yt-player&gt;\n`</span>\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> YtFeedComponent {\n  feed = [\n    {\n      id: <span class=\"hljs-number\">3849</span>, <span class=\"hljs-comment\">// note \"id\" field, we refer to it in \"trackById\" function</span>\n      title: <span class=\"hljs-string\">\"Angular in 60 minutes\"</span>,\n      url: <span class=\"hljs-string\">\"http://youtube.com/ng2-in-60-min\"</span>,\n      likes: <span class=\"hljs-string\">\"29345\"</span>\n    },\n    <span class=\"hljs-comment\">// ...</span>\n  ];\n\n  trackById(index, item) {\n    <span class=\"hljs-keyword\">return</span> item.id;\n  }\n}\n</code></pre>\n<h6>Resources</h6>\n<ul>\n<li><a href=\"https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html\">“NgFor directive”</a> - official documentation for <code>*ngFor</code></li>\n<li><a href=\"https://netbasal.com/angular-2-improve-performance-with-trackby-cc147b5104e5\">“Angular — Improve performance with trackBy”</a> - shows gif demonstration of the approach</li>\n</ul>\n"
     },
     "PaBkH": {
       "id": "PaBkH",
