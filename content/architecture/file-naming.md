@@ -13,7 +13,7 @@ Here are a few examples:
 * `contacts.service.ts`
 * `product-list.component.ts`
 
-Using such naming convention helps to provide a consistant way to find content very quickly and easily. Consistancy will save you time and make you and your team more efficient.
+Using such naming convention helps to provide a consistent way to find content very quickly and easily. Consistency will save you time and make you and your team more efficient.
 
 # Use the name and type of the file for your class names
 
