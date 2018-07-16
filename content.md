@@ -17,6 +17,9 @@ It will remember the checks you've made before which allows you to gruadually re
 * No use of globals, this is wrapped in a service
 * Use valueChanges (thus observables from angular) over (keyUp) and a subject
 * performance from minko
+* use arrays to seperate components, containers, ...
+* typescript - path mappings - avoid long paths
+
 
 
 
