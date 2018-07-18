@@ -1,13 +1,8 @@
 <ng-container *ngIf="item$ | async as item">
-  <!-- <header>
-    <a mat-icon-button routerLink="../">
-      <mat-icon>
-        arrow_back_ios
-      </mat-icon>
-    </a>
-    <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked"></mat-checkbox>
-    <h2>{{ item.title }}</h2>
-  </header> -->
-  <app-checklist-metadata [author]="item.author" [source]="item.source"></app-checklist-metadata>
+  <header>
+    <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked">Done</mat-checkbox>
+    <app-checklist-favorite-button (toggle)="toggleFavorite(item)" [active]="item.favorite"></app-checklist-favorite-button>
+    <app-checklist-metadata [author]="item.author" [source]="item.source"></app-checklist-metadata>
+  </header>
   <main class="content" [innerHTML]="item.content"></main>
 </ng-container>

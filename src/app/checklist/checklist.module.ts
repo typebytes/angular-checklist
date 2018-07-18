@@ -16,6 +16,7 @@ import { ChecklistScoreChartComponent } from './checklist-score-chart/checklist-
 import { ChecklistComponent } from './checklist.component';
 import { META_REDUCERS, ROOT_REDUCER } from './state';
 import { ChecklistCtaBarComponent } from './checklist-cta-bar/checklist-cta-bar.component';
+import { ChecklistFavoriteButtonComponent } from './checklist-favorite-button/checklist-favorite-button.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { ChecklistCtaBarComponent } from './checklist-cta-bar/checklist-cta-bar.
     ChecklistMetadataComponent,
     ChecklistListComponent,
     ChecklistListItemComponent,
-    ChecklistCtaBarComponent
+    ChecklistCtaBarComponent,
+    ChecklistFavoriteButtonComponent
   ]
 })
 export class ChecklistModule {}

@@ -1,5 +1,6 @@
 <app-checklist-cta-bar
   [filter]="filter$ | async"
+  [showActionButtons]="showActionButtons$ | async"
   (filterChange)="setFilter($event)"
   (checkAll)="checkAllItems()"
   (uncheckAll)="uncheckAllItems()">

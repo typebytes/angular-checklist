@@ -7,7 +7,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav mode="side" #sideNav opened>
+  <mat-sidenav [mode]="sideNavMode" [autoFocus]="false" #sideNav>
     <section>
       <a class="sidenav-link" routerLink="favorites" #rla="routerLinkActive" routerLinkActive="active">
         <app-checklist-score-chart [class.primary]="rla.isActive" [score]="favoritesScore$ | async"></app-checklist-score-chart>
@@ -24,8 +24,8 @@
           </a>
           <div class="list-wrapper" [@bodyExpansion]="rla.isActive" *ngIf="rla.isActive">
             <ul class="category-item-list">
-              <li class="category-item" *ngFor="let item of category.items">
-                <a routerLinkActive="active" [routerLink]="[category.slug, item.id]">{{ item.title }}</a>
+              <li class="category-item" *ngFor="let item of category.items; trackBy: trackById">
+                <a routerLinkActive="active" [class.done]="item.checked" [routerLink]="[category.slug, item.id]">{{ item.title }}</a>
               </li>
             </ul>
           </div>

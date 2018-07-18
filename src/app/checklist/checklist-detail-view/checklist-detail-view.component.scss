@@ -5,21 +5,11 @@ header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  border-bottom: 1px solid gainsboro;
-  padding-bottom: 0.2rem;
-
-  .toolbar {
-    display: flex;
-    align-items: center;
-    flex: 1 0 100%;
-  }
-
-  a {
-    margin-right: 1rem;
-  }
+  margin: 10px 0;
 
   mat-checkbox {
-    margin-right: 0.7rem;
+    margin-right: 0.5rem;
+    color: #757575;
   }
 
   mat-icon {
@@ -27,14 +17,9 @@ header {
     margin-right: 1rem;
   }
 
-  h2 {
-    margin: 0;
+  app-checklist-metadata {
+    margin-left: auto;
   }
-}
-
-app-checklist-metadata {
-  justify-content: flex-end;
-  margin: 10px 0;
 }
 
 main {

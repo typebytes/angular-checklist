@@ -41,6 +41,7 @@
 mat-sidenav {
   width: 300px;
   padding: 1rem 0;
+  overflow-x: hidden;
 }
 
 mat-sidenav-container {
@@ -120,6 +121,11 @@ section {
     color: rgba(0, 0, 0, 0.54);
     font-size: 13px;
     line-height: 16px;
+
+    &.done {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
 
     &:hover,
     &.active {

@@ -1,0 +1,4 @@
+<button class="favorite-button" mat-icon-button (click)="toggle.emit()">
+  <mat-icon class="favorite-icon" [class.active]="active">favorite</mat-icon>
+  <ng-content></ng-content>
+</button>

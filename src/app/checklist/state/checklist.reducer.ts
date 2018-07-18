@@ -176,11 +176,10 @@ export namespace ChecklistQueries {
   );
 
   export const getItemsFromSelectedCategory = createSelector(
-    getCategoriesEntity,
     getItemsEntity,
     getSelectedCategory,
     getCategroriesFilter,
-    (categories, items, selectedCategory, filter): Array<ChecklistItem> => {
+    (items, selectedCategory, filter): Array<ChecklistItem> => {
       if (selectedCategory) {
         return filterItems(
           selectedCategory.items.map(id => ({ ...items[id], category: selectedCategory.slug })),

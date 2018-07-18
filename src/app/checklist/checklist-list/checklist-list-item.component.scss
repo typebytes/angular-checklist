@@ -12,14 +12,6 @@ mat-checkbox {
   margin-right: 8px;
 }
 
-.favorite-button {
+app-checklist-favorite-button {
   margin-left: auto;
-}
-
-.favorite-icon {
-  color: #d4d4d4;
-
-  &.active {
-    color: mat-color($accent);
-  }
 }

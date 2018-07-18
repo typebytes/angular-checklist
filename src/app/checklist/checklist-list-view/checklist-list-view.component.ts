@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -16,12 +16,17 @@ import { ChecklistQueries } from '../state/checklist.reducer';
 export class ListViewComponent implements OnInit {
   items$: Observable<any>;
   filter$: Observable<ChecklistFilter>;
+  showActionButtons$: Observable<boolean>;
 
-  constructor(private store: Store<ApplicationState>, private router: Router, private route: ActivatedRoute) {}
+  constructor(private store: Store<ApplicationState>, private breakPointObserver: BreakpointObserver) {}
 
   ngOnInit() {
     this.items$ = this.store.pipe(select(ChecklistQueries.getItemsFromSelectedCategory));
     this.filter$ = this.store.pipe(select(ChecklistQueries.getCategroriesFilter));
+
+    this.showActionButtons$ = this.breakPointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.Small])
+      .pipe(map((result: BreakpointState) => !result.matches));
   }
 
   toggleItem(item: ChecklistItem) {

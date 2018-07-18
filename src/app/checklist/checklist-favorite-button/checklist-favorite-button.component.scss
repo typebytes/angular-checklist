@@ -1,0 +1,10 @@
+@import '../../../scss/variables';
+@import '~@angular/material/theming';
+
+.favorite-icon {
+  color: #d4d4d4;
+
+  &.active {
+    color: mat-color($accent);
+  }
+}
