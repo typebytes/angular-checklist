@@ -18,7 +18,7 @@
       "slug": "components",
       "items": [
         "2eREkv",
-        "1xd2Y4",
+        "2rF4Hq",
         "590AM",
         "ZXTLWo"
       ]
@@ -128,11 +128,11 @@
       "title": "release resources in ngOnDestroy",
       "content": "<h4>Problem</h4>\n<p>When creating Angular components, we need to use resources to get user input, fetch data from the backend, create animations, … The way we can do this can vary. We could use Observables, browser APIs, event listeners and much more. When using resources, we also need to release those resources when they are no longer required.\nIf we do <strong>not</strong> do this, than we will introduce memory leaks which will make our application crash and introduce other unwanted behavior.</p>\n<h4>Solution</h4>\n<p>We can hook into the lifecyle of our component to known when to release the resources that we used. Whenever Angular is going to destroy our component, it will call the <code>onDestroy</code> lifecycle hook.</p>\n<p>In the following example, we set up a function to be executed every 5000ms using the <code>setTimeout</code> API. In the <code>ngOnDestroy</code> hook, we unregister the interval and release the resources.</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeComponent <span class=\"hljs-keyword\">implements</span> OnInit, OnDestroy {\n  timeoutId;\n  \n  ngOnInit() {\n    <span class=\"hljs-keyword\">this</span>.intervalId = setTimeout(<span class=\"hljs-function\"><span class=\"hljs-params\">()</span> =&gt;</span> {...}, <span class=\"hljs-number\">5000</span>); \n  }\n  \n  ngOnDestroy() {\n    clearInterval(<span class=\"hljs-keyword\">this</span>.intervalId);\n  }\n}\n</code></pre>\n"
     },
-    "1xd2Y4": {
-      "id": "1xd2Y4",
-      "slug": "dont-use-property-bindings-for-attributes",
-      "title": "don't use property bindings for attributes",
-      "content": "<h3>Don’t use property bindings for attributes</h3>\n<p>When you are passing a static string to a component or an HTML tag, don’t use a property binding. Every property binding is constantly checked during change detection.</p>\n<p>For example, this:</p>\n<pre class=\"hljs\"><code>&lt;input [id]=<span class=\"hljs-string\">\"'exampleId'\"</span> /&gt;\n</code></pre>\n<p>Should be:</p>\n<pre class=\"hljs\"><code>&lt;input id=<span class=\"hljs-string\">\"exampleId\"</span> /&gt;\n</code></pre>\n"
+    "2rF4Hq": {
+      "id": "2rF4Hq",
+      "slug": "dont-use-property-bindings-to-pass-static-strings",
+      "title": "don't use property bindings to pass static strings",
+      "content": "<h4>Problem</h4>\n<p>Property bindings in Angular allows us to bind to properties. During change detection, when a component is checked, all the bindings for that component are being checked to see if they are updated. This means that the more bindings, the slower the CD cycle will be.\nIf we have static strings that we want to pass to a native HTML element or a component, it’s not necessary to use a property binding as the value will never change. But it will impact performance.</p>\n<h4>Solution</h4>\n<p>Only use a property binding for dynamic values. Use attributes to pass a static string value.</p>\n<p>In the following example, we pass a static string to the input. This doesn’t make sense as this string is passed statically and will never change.</p>\n<pre class=\"hljs\"><code>&lt;input [id]=<span class=\"hljs-string\">\"'exampleId'\"</span> /&gt;\n</code></pre>\n<p>In order to fix this, we can remove the property binding.</p>\n<pre class=\"hljs\"><code>&lt;input id=<span class=\"hljs-string\">\"exampleId\"</span> /&gt;\n</code></pre>\n"
     },
     "590AM": {
       "id": "590AM",
