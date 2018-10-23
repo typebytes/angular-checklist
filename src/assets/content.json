@@ -18,7 +18,7 @@
       "slug": "components",
       "items": [
         "2eREkv",
-        "1xd2Y4",
+        "2rF4Hq",
         "590AM",
         "ZXTLWo"
       ]
@@ -75,7 +75,9 @@
       "title": "Tooling",
       "summary": "This category summarizes best practices regarding tooling.",
       "slug": "tooling",
-      "items": []
+      "items": [
+        "V15M7"
+      ]
     },
     "typescript": {
       "title": "Typescript",
@@ -94,7 +96,7 @@
       "id": "Z1uCcrx",
       "slug": "business-logic-in-services",
       "title": "Business Logic in Services",
-      "content": "<h3>Business Logic in Services</h3>\n<p>All business logic in the application is moved into services. <a href=\"/checklist/architecture/Z24l73x\">Smart components</a> should only contain logic that is related to this specific component. For example business logic that is used to access backend resources should be abstracted into services.</p>\n"
+      "content": "<h3>Business Logic in Services</h3>\n<p>All business logic in the application is moved into services. Smart components (TODO: link to the smart vs dumb components) should only contain logic that is related to this specific component. For example business logic that is used to access backend resources should be abstracted into services.</p>\n"
     },
     "l2hnF": {
       "id": "l2hnF",
@@ -126,11 +128,11 @@
       "title": "clean up resources in ngOnDestroy",
       "content": "<h3>Clean up the resource in <code>ngOnDestroy</code></h3>\n<p>The <code>onDestroy</code> lifecycle hook gets called whenever the component gets destroyed. This makes it the ideal place to clean up resources.</p>\n<p>For example:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeComponent <span class=\"hljs-keyword\">implements</span> OnInit, OnDestroy {\n  timeoutId;\n  \n  ngOnInit() {\n    <span class=\"hljs-keyword\">this</span>.intervalId = setTimeout(<span class=\"hljs-function\"><span class=\"hljs-params\">()</span> =&gt;</span> {...}, <span class=\"hljs-number\">5000</span>); \n  }\n  \n  ngOnDestroy() {\n    clearInterval(<span class=\"hljs-keyword\">this</span>.intervalId);\n  }\n}\n</code></pre>\n"
     },
-    "1xd2Y4": {
-      "id": "1xd2Y4",
-      "slug": "dont-use-property-bindings-for-attributes",
-      "title": "don't use property bindings for attributes",
-      "content": "<h3>Don’t use property bindings for attributes</h3>\n<p>When you are passing a static string to a component or an HTML tag, don’t use a property binding. Every property binding is constantly checked during change detection.</p>\n<p>For example, this:</p>\n<pre class=\"hljs\"><code>&lt;input [id]=<span class=\"hljs-string\">\"'exampleId'\"</span> /&gt;\n</code></pre>\n<p>Should be:</p>\n<pre class=\"hljs\"><code>&lt;input id=<span class=\"hljs-string\">\"exampleId\"</span> /&gt;\n</code></pre>\n"
+    "2rF4Hq": {
+      "id": "2rF4Hq",
+      "slug": "dont-use-property-bindings-to-pass-static-strings",
+      "title": "don't use property bindings to pass static strings",
+      "content": "<h4>Problem</h4>\n<p>Property bindings in Angular allows us to bind to properties. During change detection, when a component is checked, all the bindings for that component are being checked to see if they are updated. This means that the more bindings, the slower the CD cycle will be.\nIf we have static strings that we want to pass to a native HTML element or a component, it’s not necessary to use a property binding as the value will never change. But it will impact performance.</p>\n<h4>Solution</h4>\n<p>Only use a property binding for dynamic values. Use attributes to pass a static string value.</p>\n<p>In the following example, we pass a static string to the input. This doesn’t make sense as this string is passed statically and will never change.</p>\n<pre class=\"hljs\"><code>&lt;input [id]=<span class=\"hljs-string\">\"'exampleId'\"</span> /&gt;\n</code></pre>\n<p>In order to fix this, we can remove the property binding.</p>\n<pre class=\"hljs\"><code>&lt;input id=<span class=\"hljs-string\">\"exampleId\"</span> /&gt;\n</code></pre>\n"
     },
     "590AM": {
       "id": "590AM",
@@ -232,7 +234,7 @@
         "name": "Minko Gechev",
         "url": "https://twitter.com/mgechev"
       },
-      "content": "<h3>Use the trackBy option on *ngFor</h3>\n<p>The *ngFor directive is used for rendering a collection. By default *ngFor identifies object uniqueness by reference.</p>\n<p>Which means when developer breaks reference to object during updating item’s content Angular treats it as removal of the old object and addition of the new object. This effects in destroying old DOM node in the list and adding new DOM node on its place.</p>\n<p>Developer can provide a hint for angular how to identify object uniqueness: custom tracking function as the trackBy option for the *ngFor directive. Tracking function takes two arguments: index and item. Angular uses the value returned from tracking function to track items identity. It is very common to use ID of the particular record as the unique key.</p>\n<h4>Example</h4>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({\n  selector: <span class=\"hljs-string\">'yt-feed'</span>,\n  template: <span class=\"hljs-string\">`\n  &lt;h1&gt;Your video feed&lt;/h1&gt;\n  &lt;yt-player *ngFor=\"let video of feed; trackBy: trackById\" [video]=\"video\"&gt;&lt;/yt-player&gt;\n`</span>\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> YtFeedComponent {\n  feed = [\n    {\n      id: <span class=\"hljs-number\">3849</span>, <span class=\"hljs-comment\">// note \"id\" field, we refer to it in \"trackById\" function</span>\n      title: <span class=\"hljs-string\">\"Angular in 60 minutes\"</span>,\n      url: <span class=\"hljs-string\">\"http://youtube.com/ng2-in-60-min\"</span>,\n      likes: <span class=\"hljs-string\">\"29345\"</span>\n    },\n    <span class=\"hljs-comment\">// ...</span>\n  ];\n\n  trackById(index, item) {\n    <span class=\"hljs-keyword\">return</span> item.id;\n  }\n}\n</code></pre>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html\">NgFor directive</a></li>\n<li><a href=\"https://netbasal.com/angular-2-improve-performance-with-trackby-cc147b5104e5\">Angular — Improve performance with trackBy</a> by Netanel Basal</li>\n</ul>\n"
+      "content": "<h3>Use the trackBy option on *ngFor</h3>\n<p>The *ngFor directive is used for rendering a collection. By default *ngFor identifies object uniqueness by reference.</p>\n<p>Which means when developer breaks reference to object during updating item’s content Angular treats it as removal of the old object and addition of the new object. This effects in destroying old DOM node in the list and adding new DOM node on its place.</p>\n<p>Developer can provide a hint for angular how to identify object uniqueness: custom tracking function as the trackBy option for the *ngFor directive. Tracking function takes two arguments: index and item. Angular uses the value returned from tracking function to track items identity. It is very common to use ID of the particular record as the unique key.</p>\n<h6>Example</h6>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({\n  selector: <span class=\"hljs-string\">'yt-feed'</span>,\n  template: <span class=\"hljs-string\">`\n  &lt;h1&gt;Your video feed&lt;/h1&gt;\n  &lt;yt-player *ngFor=\"let video of feed; trackBy: trackById\" [video]=\"video\"&gt;&lt;/yt-player&gt;\n`</span>\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> YtFeedComponent {\n  feed = [\n    {\n      id: <span class=\"hljs-number\">3849</span>, <span class=\"hljs-comment\">// note \"id\" field, we refer to it in \"trackById\" function</span>\n      title: <span class=\"hljs-string\">\"Angular in 60 minutes\"</span>,\n      url: <span class=\"hljs-string\">\"http://youtube.com/ng2-in-60-min\"</span>,\n      likes: <span class=\"hljs-string\">\"29345\"</span>\n    },\n    <span class=\"hljs-comment\">// ...</span>\n  ];\n\n  trackById(index, item) {\n    <span class=\"hljs-keyword\">return</span> item.id;\n  }\n}\n</code></pre>\n<h6>Resources</h6>\n<ul>\n<li><a href=\"https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html\">“NgFor directive”</a> - official documentation for <code>*ngFor</code></li>\n<li><a href=\"https://netbasal.com/angular-2-improve-performance-with-trackby-cc147b5104e5\">“Angular — Improve performance with trackBy”</a> - shows gif demonstration of the approach</li>\n</ul>\n"
     },
     "PaBkH": {
       "id": "PaBkH",
@@ -262,7 +264,7 @@
       "id": "Z1PcMvX",
       "slug": "async-pipe",
       "title": "Async pipe",
-      "content": "<h3>Use the async pipe</h3>\n<p>Observables are the async paradigm used in Angular applications. We can ‘start’ Observables by subscribing to them. Whenever we do so, it is very important to also unsubscribe. Unsubscribing will clean up the resources being used by this stream. Otherwise, this might introduce memory leaks.</p>\n<p>The async pipe will:</p>\n<ul>\n<li>subscribe to an Observable</li>\n<li>unsubscribe from the Observable when it is destroyed</li>\n<li>mark this component for the next change detection cycle</li>\n</ul>\n<p>Using the async pipe as much as possible will make sure all the resources are cleaned up.</p>\n<h6>Using the async pipe</h6>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({\n  template: <span class=\"hljs-string\">`{{data$ | async}}`</span>,\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeComponent {\n  data$ = interval(<span class=\"hljs-number\">1000</span>);\n}\n</code></pre>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"https://blog.thoughtram.io/angular/2017/02/27/three-things-you-didnt-know-about-the-async-pipe.html\">Three things you didn’t know about the AsyncPipe</a> by Christoph Burgdorf</li>\n</ul>\n"
+      "content": "<h3>Use the async pipe</h3>\n<p>Observables are the async paradigm used in Angular applications. We can ‘start’ Observables by subscribing to them. Whenever we do so, it is very important to also unsubscribe. Unsubscribing will clean up the resources being used by this stream. Otherwise, this might introduce memory leaks.</p>\n<p>The async pipe will:</p>\n<ul>\n<li>subscribe to an Observable</li>\n<li>unsubscribe from the Observable when it is destroyed</li>\n<li>mark this component for the next change detection cycle</li>\n</ul>\n<p>Using the async pipe as much as possible will make sure all the resources are cleaned up.</p>\n<h6>Using the async pipe</h6>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({\n  template: <span class=\"hljs-string\">`{{data$ | async}}`</span>,\n  ...\n})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeComponent {\n  data$ = interval(<span class=\"hljs-number\">1000</span>);\n}\n</code></pre>\n"
     },
     "bkHEY": {
       "id": "bkHEY",
@@ -288,17 +290,24 @@
       "title": "Subscriptions",
       "content": "<h5>Subscriptions</h5>\n"
     },
+    "V15M7": {
+      "id": "V15M7",
+      "slug": "prettier",
+      "title": "Use prettier for code formatting",
+      "optional": true,
+      "content": "<h3>Use prettier for code formatting</h3>\n<p>Whenever we write code, we want this code to be formatted in a standardised way. This poses two problems. We need to align everyone in the team to agree with the same standards and we need to get all of their IDE’s/editors aligned as well. This can be extremely difficult.\nPrettier is an opinionated code formatter that can fix both of these problems. It imposes a standard way of formatting and it has a CLI that makes sure the formatting happens the same way on all environments. Adding Prettier and running it as a pre-commit hook will make sure only formatted code can be checked in.</p>\n"
+    },
     "Z2hzSxp": {
       "id": "Z2hzSxp",
       "slug": "avoid-using-any",
       "title": "Avoid using any",
-      "content": "<h3>Avoid the using of the any type</h3>\n<p>Typescript allows us to write code that is type checked. This provides huge benefits. Whenever we use the <code>any</code> type, we are basically telling Typescript to ignore the following section, thus loosing all benefits.</p>\n<p>If you are using a library which was written in JavaScript, and thus doesn’t have any types, you can probably find type definitions on npm for this when searching for ‘@types/${library-name}’.</p>\n<p>If you can not find types, try to define a type definition yourself. Using <code>any</code> should be an <strong>exception</strong>.</p>\n"
+      "content": "<h3>Avoid the using of the any type</h3>\n<p>Typescript allows us to write code that is type checked. This provides huge benefits. Whenever we use the <code>any</code> type, we are basically telling Typescript to ignore the following section, thus loosing all benefits.</p>\n<p>If you are using a library which was written in javascript, and thus doesn’t have any types, you can probably find type definitions on npm for this when searching for ‘@types/${library-name}’.\nIf you can not find types, try to define a type yourself. Using <code>any</code> should be an exception.</p>\n"
     },
     "23KPo0": {
       "id": "23KPo0",
       "slug": "define-interfaces-for-models",
       "title": "Define interfaces for models",
-      "content": "<h3>Define interfaces for models</h3>\n<p>When working with APIs, define a type for every call you can perform. This will provide type safety in your own code.</p>\n<p>For example, if you know a backend request will return an object with the properties ‘userName’ and ‘password’, which both are strings, define the type like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">interface</span> User {\n  userName: <span class=\"hljs-built_in\">string</span>;\n  password: <span class=\"hljs-built_in\">string</span>;\n}\n</code></pre>\n"
+      "content": "<h3>Define interfaces for models</h3>\n<p>When working with APIs, define a type for every call you can perform. This will provide type safety in your own code.</p>\n<p>For example, if you know a backend request will return an object with the properties ‘userName’ and ‘password’, which both are strings. Define the type like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">interface</span> User {\n  userName: <span class=\"hljs-built_in\">string</span>;\n  password: <span class=\"hljs-built_in\">string</span>;\n}\n</code></pre>\n"
     },
     "12Aq23": {
       "id": "12Aq23",
@@ -310,7 +319,7 @@
       "id": "ZEhkug",
       "slug": "use-type-inference",
       "title": "Use type inference",
-      "content": "<h3>Use type inference</h3>\n<p>Typescript is a typed language which supports type inference. This means that:</p>\n<ul>\n<li>you can define the type for a certain variable</li>\n<li>Typescript is smart enough to deduct the type based on its location</li>\n</ul>\n<p>Leveraging the type inference will allow us to benefit from the power of Typescript without constantly having to define the types ourselves.</p>\n<p>Type inference example:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">const</span> example = <span class=\"hljs-string\">'typescript will infer the string type by default'</span>;\n</code></pre>\n<p>Here’s another example:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">const</span> result = <span class=\"hljs-number\">1</span> + <span class=\"hljs-number\">1</span>;\n</code></pre>\n<p>The type of <code>result</code> will automatically, by inference, be number.</p>\n"
+      "content": "<h3>Use type inference</h3>\n<p>Typescript is a typed language which supports type inference. This means that:</p>\n<ul>\n<li>you can define the type for a certain variable</li>\n<li>Typescript is smart enough to deduct the type based on its location</li>\n</ul>\n<p>Leveraging the type inference will allow us to benefit from the power of Typescript without constantly having to define the types ourselves.</p>\n<p>Type inference example:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-keyword\">const</span> example = <span class=\"hljs-string\">'typescript will infer the string type by default'</span>;\n</code></pre>\n"
     }
   }
 }
