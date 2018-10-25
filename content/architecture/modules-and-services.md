@@ -1,11 +1,15 @@
 ---
-title: Modules and Services
+title: Provide shared services only at root module
 ---
-# Providing services only at the root level
+# Problem
 
-In Angular we have the possibility to take advantage of the injector tree to provide different service instances on different levels, e.g. component, directive or module. Whilst this can be exactly what you want, in most cases it is not the expected behavior.
+Due to the way DI in Angular is implemented, with an injector tree, we can provide instances of our service at multiple levels, e.g. component, directive or module. While we can use this feature, it's not always what we want.
 
-When you are creating a `SharedModule`, you want to use the components everywhere but only provide the services in your root module, e.g. `AppModule`. You can accomplish this by leveraging the `forRoot` convention. Your `SharedModule` would then like this:
+Working with a shared module is a common and recommended way of working. This module can be used to share services, components, directives, pipes, ... between different feature modules. If we import our shared module in multiple modules, we will provide the service multiple times and multiple instances will be generated, and we would like to avoid that here.
+
+# Solution
+
+When we are creating our `SharedModule`, we only want to use the components everywhere but only provide the services in our root module, e.g. `AppModule`. We can accomplish this by leveraging the `forRoot` convention. In that scenario, our `SharedModule` would look like this:
 
 ```ts
 @NgModule({
@@ -25,7 +29,7 @@ export class SharedModule {
 
 Note that the actual module definion **does not** contain any providers.
 
-In your `AppModule`, you could use this module as follows:
+In our `AppModule`, we could use this module as follows:
 
 ```ts
 @NgModule({
