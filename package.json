@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"ng serve\" \"yarn build-content:watch\"",
     "build": "ng build",
     "build:ssr": "ng build --prod && ng run angular-checklist:server -- --output-hashing=false",
     "prerender": "npm run build:ssr && ts-node prerender.ts",
@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-content": "ts-node ./tools/build-checklist.ts"
+    "build-content": "ts-node ./tools/build-checklist.ts",
+    "build-content:watch": "nodemon"
   },
   "private": true,
   "dependencies": {
@@ -51,6 +52,7 @@
     "@types/markdown-it": "^0.0.4",
     "chalk": "^2.4.1",
     "codelyzer": "~4.2.1",
+    "concurrently": "^4.0.1",
     "gray-matter": "^4.0.1",
     "http-server": "^0.11.1",
     "jasmine-core": "~2.99.1",
@@ -62,6 +64,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "markdown-it": "^8.4.1",
     "ngrx-store-freeze": "^0.2.3",
+    "nodemon": "^1.18.4",
     "protractor": "~5.3.0",
     "shorthash": "^0.0.2",
     "ts-node": "^6.0.3",
