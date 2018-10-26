@@ -11,7 +11,6 @@ export interface ChecklistFrontMatter {
   title: string;
   summary?: string;
   description?: string;
-  short_description?: string;
 }
 
 export interface FrontMatter {

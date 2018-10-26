@@ -72,10 +72,6 @@ export const compileFilesForCategory = (files: Array<string>, category: string, 
       throwError(`No metadata defined for ${category}/${file}. You must define at least a title.`);
     }
 
-    if (!frontMatter.short_description) {
-      logWarning(`[Warning] Consider defining a short description for ${category}/${file}.`);
-    }
-
     const id = hash.unique(file);
     const slug = cleanFileName(file);
 
