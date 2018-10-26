@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content [class.no-scroll]="!scrollEnabled">
+  {{ data.text }}
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>{{ data.buttonText }}</button>
+</div>

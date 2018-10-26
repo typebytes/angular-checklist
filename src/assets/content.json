@@ -4,6 +4,7 @@
       "title": "Architecture",
       "summary": "This category summarizes best practices regarding architecture.",
       "slug": "architecture",
+      "enabled": true,
       "items": [
         "Z1uCcrx",
         "l2hnF",
@@ -16,6 +17,7 @@
       "title": "Components",
       "summary": "This category summarizes best practices regarding Components.",
       "slug": "components",
+      "enabled": true,
       "items": [
         "2eREkv",
         "2rF4Hq",
@@ -27,6 +29,7 @@
       "title": "NgRx",
       "summary": "This category summarizes best practices regarding NgRx.",
       "slug": "ngrx",
+      "enabled": true,
       "items": [
         "4gz6q",
         "2sJuJG"
@@ -36,6 +39,7 @@
       "title": "Performance",
       "summary": "This category contains a list of practices which will help us boost the performance of our Angular applications. It covers different topics - from server-side pre-rendering and bundling of our applications, to runtime performance and optimization of the change detection performed by the framework.",
       "slug": "performance",
+      "enabled": true,
       "items": [
         "2g7vDW",
         "Z8rHxb",
@@ -51,6 +55,7 @@
       "title": "Router",
       "summary": "This category summarizes best practices regarding routing.",
       "slug": "router",
+      "enabled": true,
       "items": [
         "PaBkH",
         "5ScV4",
@@ -63,6 +68,7 @@
       "title": "RxJS",
       "summary": "This category summarizes best practices regarding RxJS.",
       "slug": "rxjs",
+      "enabled": true,
       "items": [
         "Z1PcMvX",
         "bkHEY",
@@ -75,6 +81,10 @@
       "title": "Tooling",
       "summary": "This category summarizes best practices regarding tooling.",
       "slug": "tooling",
+<<<<<<< HEAD
+=======
+      "enabled": true,
+>>>>>>> feat: add edit mode and improve look and feel
       "items": [
         "V15M7"
       ]
@@ -83,6 +93,7 @@
       "title": "Typescript",
       "summary": "This category summarizes best practices regarding Typescript.",
       "slug": "typescript",
+      "enabled": true,
       "items": [
         "Z2hzSxp",
         "23KPo0",

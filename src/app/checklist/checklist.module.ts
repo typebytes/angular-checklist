@@ -17,12 +17,22 @@ import { ChecklistComponent } from './checklist.component';
 import { META_REDUCERS, ROOT_REDUCER } from './state';
 import { ChecklistCtaBarComponent } from './checklist-cta-bar/checklist-cta-bar.component';
 import { ChecklistFavoriteButtonComponent } from './checklist-favorite-button/checklist-favorite-button.component';
+import { ChecklistFooterComponent } from './checklist-footer/checklist-footer.component';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHeart, faHandsHelping, faBell, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+
+library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan);
 
 @NgModule({
   imports: [
     CommonModule,
     ChecklistRoutingModule,
     ChecklistMaterialModule,
+    FontAwesomeModule,
     StoreModule.forRoot(ROOT_REDUCER, { metaReducers: META_REDUCERS }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -41,7 +51,10 @@ import { ChecklistFavoriteButtonComponent } from './checklist-favorite-button/ch
     ChecklistListComponent,
     ChecklistListItemComponent,
     ChecklistCtaBarComponent,
-    ChecklistFavoriteButtonComponent
-  ]
+    ChecklistFavoriteButtonComponent,
+    ChecklistFooterComponent,
+    ConfirmationDialogComponent
+  ],
+  entryComponents: [ConfirmationDialogComponent]
 })
 export class ChecklistModule {}

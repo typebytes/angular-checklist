@@ -1,36 +1,6 @@
 @import '../../scss/variables';
+@import '../../scss/mixins';
 @import '~@angular/material/theming';
-
-@mixin linkHover() {
-  --hover-box-translate-x: 120%;
-  --hover-box-skew: 0;
-
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    background: mat-color($primary, lighter, 0.3);
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    transition: transform 0.2s cubic-bezier(0.35, 0, 0.25, 1);
-    transform: skew(var(--hover-box-skew)) translateX(var(--hover-box-translate-x));
-  }
-
-  &:not(.active):hover::after {
-    --hover-box-translate-x: 200px;
-    --hover-box-skew: 20deg;
-  }
-
-  &.active {
-    color: mat-color($primary);
-    --hover-box-translate-x: 0;
-    --hover-box-skew: 0deg;
-  }
-}
 
 :host {
   display: flex;
@@ -39,18 +9,76 @@
 }
 
 mat-sidenav {
+  display: flex;
+  flex-direction: column;
   width: 300px;
-  padding: 1rem 0;
-  overflow-x: hidden;
+  padding: 1rem 0 0;
+  overflow: hidden;
 }
 
 mat-sidenav-container {
   flex: 1;
 }
 
+mat-sidenav-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.scroll-container {
+  flex: 1;
+  overflow: scroll;
+}
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(250, 250, 250, 0.8);
+
+  &:hover span {
+    opacity: 1;
+  }
+
+  span {
+    transition: opacity 0.2s cubic-bezier(0.35, 0, 0.25, 1);
+    opacity: 0;
+  }
+}
+
 mat-toolbar {
   button:not(.menu-button) {
     margin-left: auto;
+  }
+}
+
+.category-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-bottom: 0;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+
+  img {
+    height: 38px;
+    width: auto;
+  }
+
+  h4 {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
   }
 }
 
@@ -62,19 +90,19 @@ mat-toolbar {
   color: initial;
   padding: 8px;
   font-weight: 500;
+  padding-left: 45px;
 
   ::ng-deep .mat-badge-content {
     top: -14px;
   }
 
-  app-checklist-score-chart {
-    width: 26px;
-    margin-right: 10px;
-  }
-
   mat-icon {
     margin-right: 10px;
     color: #d4d4d4;
+  }
+
+  &.disabled {
+    color: gainsboro;
   }
 
   &.active {
@@ -90,24 +118,27 @@ mat-toolbar {
 
 section {
   padding: 10px 0 10px 15px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  flex-shrink: 0;
 
   h4 {
-    margin: 15px 0;
+    flex: 1;
+    margin: 0;
+  }
+
+  mat-slide-toggle {
+    margin-right: 10px;
   }
 }
 
 .category-list {
   padding: 0;
-}
-
-.category-header {
-  @include linkHover();
-
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  font-weight: 500;
-  color: inherit;
+  overflow-y: scroll;
 }
 
 .category-item-list {
@@ -127,39 +158,42 @@ section {
       opacity: 0.5;
     }
 
-    &:hover,
     &.active {
       color: mat-color($primary);
     }
   }
 }
 
-.category-item {
-  padding: 2px 8px 2px 20px;
-
-  & + & {
-    margin-top: 4px;
-  }
-}
-
-.category {
+.category,
+.nav-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   overflow: hidden;
+  margin-bottom: 5px;
 
-  &:active,
-  &:focus,
-  &:active {
-    color: mat-color($primary);
+  mat-checkbox {
+    left: 13px;
   }
 
   app-checklist-score-chart {
-    width: 26px;
-    margin-right: 10px;
+    left: 10px;
   }
 
-  & + & {
-    margin-top: 10px;
+  mat-checkbox,
+  app-checklist-score-chart {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
+}
+
+.nav-item {
+  overflow: inherit;
+}
+
+app-checklist-score-chart {
+  width: 26px;
+  margin-right: 10px;
 }

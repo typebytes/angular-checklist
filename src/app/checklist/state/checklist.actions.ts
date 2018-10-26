@@ -1,8 +1,9 @@
-import { Action, INIT } from '@ngrx/store';
-import { ChecklistFilter, ChecklistItem } from '../models/checklist';
+import { Action } from '@ngrx/store';
+import { ChecklistFilter, ChecklistItem, Category } from '../models/checklist';
 
 export enum ChecklistActionTypes {
   TOGGLE = '[Checklist] Toggle',
+  TOGGLE_CATEGORY = '[Checklist] Toggle Category',
   CHECK_ALL = '[Checklist] Check All',
   UNCHECK_ALL = '[Checklist] Uncheck All',
   SET_CATEGORIES_FILTER = '[Checklist] Set Categories Filter',
@@ -33,6 +34,12 @@ export class Toggle implements Action {
   constructor(public payload: ChecklistItem) {}
 }
 
+export class ToggleCategory implements Action {
+  readonly type = ChecklistActionTypes.TOGGLE_CATEGORY;
+
+  constructor(public payload: Category) {}
+}
+
 export class SetCategoriesFilter implements Action {
   readonly type = ChecklistActionTypes.SET_CATEGORIES_FILTER;
 
@@ -54,6 +61,7 @@ export class ToggleFavorite implements Action {
 export type ChecklistActions =
   | Init
   | Toggle
+  | ToggleCategory
   | CheckAll
   | UncheckAll
   | SetCategoriesFilter

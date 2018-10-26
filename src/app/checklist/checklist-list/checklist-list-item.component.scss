@@ -15,3 +15,8 @@ mat-checkbox {
 app-checklist-favorite-button {
   margin-left: auto;
 }
+
+.done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

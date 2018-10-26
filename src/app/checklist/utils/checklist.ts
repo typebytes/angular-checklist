@@ -9,7 +9,7 @@ export const computeScore = (categoryItems: Array<string>, items: ItemMap) => {
 };
 
 export const calculatePercentage = (value: number, max: number) => {
-  return value * 1.0 / max;
+  return (value * 1.0) / max;
 };
 
 export const setCheckedState = (selectedCategory: string, categories: CategoryMap, items: ItemMap, value: boolean) => {
@@ -54,15 +54,19 @@ export const isObject = (item: any) => {
   return item && typeof item === 'object' && !Array.isArray(item) && item !== null;
 };
 
-export function mergeDeep<T>(target: T, source: Object): T {
+export const isBoolean = (item: any) => {
+  return item === true || item === false || toString.call(item) === '[object Boolean]';
+};
+
+export function mergeDeep<T>(target: T, source: Object, whitelist = []): T {
   if (isObject(target) && isObject(source)) {
     Object.keys(source).forEach(key => {
       if (isObject(source[key])) {
         if (!target[key]) {
           Object.assign(target, { [key]: {} });
         }
-        mergeDeep(target[key], source[key]);
-      } else {
+        mergeDeep(target[key], source[key], whitelist);
+      } else if (!whitelist.includes(key)) {
         Object.assign(target, { [key]: source[key] });
       }
     });

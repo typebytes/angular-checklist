@@ -40,6 +40,7 @@ export const buildChecklist = async contentFolder => {
       checklist['categories'][category] = {
         ...frontMatter,
         slug: category,
+        enabled: true,
         items: compiledItems.map(item => item.id)
       };
 

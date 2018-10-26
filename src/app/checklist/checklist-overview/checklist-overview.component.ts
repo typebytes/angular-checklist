@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { ChecklistItem, Category } from '../models/checklist';
 import { ApplicationState } from '../state';
@@ -44,15 +44,17 @@ export class ChecklistOverviewComponent implements OnInit {
   ngOnInit() {
     this.breadcrumb$ = this.store.pipe(select(ChecklistQueries.getBreadcrumb));
 
-    this.store
-      .pipe(select(ChecklistQueries.getCategories))
+    zip(
+      this.store.pipe(select(ChecklistQueries.getActiveCategoryEntities)),
+      this.store.pipe(select(ChecklistQueries.getActiveCategories))
+    )
       .pipe(
-        filter(categories => !!categories.length),
+        filter(([, categories]) => !!categories.length),
         take(1),
-        tap(categories => {
+        tap(([entities, categories]) => {
           const { category } = extractRouteParams(this.route.snapshot, 1);
 
-          if (!category) {
+          if (!category || !entities[category]) {
             this.router.navigate([categories[0].slug], { relativeTo: this.route });
           }
         })

@@ -1,4 +1,4 @@
-<button class="favorite-button" mat-icon-button (click)="toggle.emit()">
+<button class="favorite-button" [ngStyle]="_style" mat-icon-button [disableRipple]="disableRipple" (click)="toggle.emit()">
   <mat-icon class="favorite-icon" [class.active]="active">favorite</mat-icon>
   <ng-content></ng-content>
 </button>

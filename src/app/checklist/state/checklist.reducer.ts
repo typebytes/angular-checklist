@@ -47,7 +47,7 @@ export const INITIAL_STATE: ChecklistState = {
 export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions) {
   switch (action.type) {
     case ChecklistActionTypes.INIT:
-      return mergeDeep(state, CHECKLIST);
+      return mergeDeep(state, CHECKLIST, ['enabled']);
     case ChecklistActionTypes.SET_CATEGORIES_FILTER:
     case ChecklistActionTypes.SET_FAVORITES_FILTER:
       return {
@@ -75,10 +75,29 @@ export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions
         ...state,
         items: itemsReducer(state.items, action)
       };
+    case ChecklistActionTypes.TOGGLE_CATEGORY:
+      return {
+        ...state,
+        categories: categoryReducer(state.categories, action)
+      };
     default:
       return state;
   }
 }
+
+export const categoryReducer = (state: CategoryMap, action: ChecklistActions) => {
+  switch (action.type) {
+    case ChecklistActionTypes.TOGGLE_CATEGORY:
+      const categoryId = action.payload.slug;
+      const category = state[categoryId];
+      return {
+        ...state,
+        [categoryId]: { ...category, enabled: !category.enabled }
+      };
+    default:
+      return state;
+  }
+};
 
 export const filterReducer = (state: Filter, action: ChecklistActions) => {
   switch (action.type) {
@@ -152,7 +171,7 @@ export namespace ChecklistQueries {
     }, {});
   });
 
-  export const getCategories = createSelector(
+  export const getAllCategories = createSelector(
     getCategoriesEntity,
     getItemsEntity,
     getScores,
@@ -162,6 +181,22 @@ export namespace ChecklistQueries {
         const categoryItems = category.items.map(itemId => items[itemId]);
         return { ...category, score: scores[categoryId], items: categoryItems } as Category;
       });
+    }
+  );
+
+  export const getActiveCategories = createSelector(
+    getAllCategories,
+    (categories): Array<Category> => categories.filter(category => category.enabled)
+  );
+
+  export const getActiveCategoryEntities = createSelector(
+    getCategoriesEntity,
+    getActiveCategories,
+    (categoryEntities, categories): CategoryMap => {
+      return categories.reduce((acc, category) => {
+        acc[category.slug] = categoryEntities[category.slug];
+        return acc;
+      }, {});
     }
   );
 
@@ -251,6 +286,10 @@ export namespace ChecklistQueries {
     return favorites.reduce((acc, category) => {
       return acc + category.items.length;
     }, 0);
+  });
+
+  export const getOverallScore = createSelector(getActiveCategories, categories => {
+    return categories.reduce((score, category) => score + category.score, 0) / categories.length;
   });
 
   export const getBreadcrumb = createSelector(getSelectedCategory, getSelectedItem, (category, item) => {

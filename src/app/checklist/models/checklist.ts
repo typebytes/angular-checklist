@@ -23,6 +23,7 @@ interface BaseCategory {
   source: string;
   author: Author;
   score: number;
+  enabled: boolean;
 }
 
 export interface Category extends BaseCategory {

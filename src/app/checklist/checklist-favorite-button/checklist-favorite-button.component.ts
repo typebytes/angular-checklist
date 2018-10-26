@@ -6,6 +6,23 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./checklist-favorite-button.component.scss']
 })
 export class ChecklistFavoriteButtonComponent {
-  @Input() active = false;
-  @Output() toggle = new EventEmitter<void>();
+  _style = {};
+
+  @Input()
+  active = false;
+
+  @Input()
+  disableRipple = false;
+
+  @Input()
+  set size(value) {
+    this._style = {
+      width: value,
+      height: value,
+      lineHeight: value
+    };
+  }
+
+  @Output()
+  toggle = new EventEmitter<void>();
 }
