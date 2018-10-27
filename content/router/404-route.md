@@ -1,7 +1,13 @@
 ---
 title: 404 Route
 ---
-# Defining a 404 route
+# Problem
+
+There are multiple reasons why we need to make sure that we have a fallback for when a page is not found.
+- Our users are humans. Humans are quite error-prone. This means that they are likely to mistype a url at some point. 
+- over time, our applications will change. Users might bookmark urls for pages which are not supported anymore.
+
+# Solution
 
 Every application should define a 404 route. This is a route to be shown whenever the user tries to go to an non existing route.
 
@@ -12,4 +18,4 @@ Every application should define a 404 route. This is a route to be shown wheneve
 ]
 ```
 
- This route definition uses a wildcard as a path. Since the Angular router will render the first definitions that matches, be sure to always put this route definition last!
+This route definition uses a wildcard as a path. Since the Angular router will render the first definitions that matches, be sure to always put this route definition last!

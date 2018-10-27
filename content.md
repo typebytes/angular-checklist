@@ -9,9 +9,6 @@ It will remember the checks you've made before which allows you to gruadually re
 ## Topics to cover
 
 * latest version of everything
-* usage of prettier (optional)
-* usage of jest (optional)
-* usage of compodoc (optional)
 * usage of cypress (optional)
 * Dom manipulation is done via the Renderer
 * No use of globals, this is wrapped in a service
@@ -19,7 +16,6 @@ It will remember the checks you've made before which allows you to gruadually re
 * performance from minko
 * use arrays to seperate components, containers, ...
 * typescript - path mappings - avoid long paths
-
 
 
 

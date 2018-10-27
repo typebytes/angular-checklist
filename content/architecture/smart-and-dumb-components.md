@@ -1,15 +1,18 @@
 ---
-title: Smart and Dumb Components
+title: Use smart and dumb components
 ---
-# Smart and Dumb Components
 
-Every major frontend framework nowadays is moving towards a component-based architecture. Components are a combination of a little bit of HTML, JavaScript and CSS. This way of working can provide us with a lot of benefits if used in the correct way.
+# Problem
 
-The most advocated way to use them is through smart and dumb components (there is a variety of other names as well but the general principle is the same).
+Every major frontend framework is moving towards a component based architecture. Components are a combination of a little bit of HTML, JavaScript and CSS. If we start injecting services in every component, tightly couple it by letting it fetch its own data, we are not leveraging the power of a component based architecture.
 
-# Component Types
+# Solution
 
-**Dumb Component**:
+The most advocated way to arrang your is to use smart and dumb components (there is a variety of other names for this principle but the general principle is the same).
+
+## Component Types
+
+### Dumb Components
 
 * Receives data through `@Input`s and communicates only with it's direct parent through `@Output`s.
 * Dumb components should not receive `Observables` as inputs
@@ -18,20 +21,20 @@ The most advocated way to use them is through smart and dumb components (there i
 * It can use other dumb components as children.
 * It can inject services that are related to the view layer of your application (think `TranslateService`, `Router`, ...) but never services to fetch its own data.
 
-**Smart Component**:
+## Smart Component
 
 * Knows about the application and will fetch data.
 * It passes data down to dumb components as much as possible and mostly only contains the business logic to fetch the data.
 * It is build up out of several dumb components.
 * It listen for events thrown by the dumb components and performs the required action for them.
 
-# Benefits
+## Benefits
 
 * Dumb components are completely reusable since they have a defined API and are independet of any buiness logic.
 * Dumb components are easy to test as they are completely isolated.
 * The entire architecture of your components becomes easier to reason about. If there is a business logic or data fetching problem, you know that you need to start searching in your smart components since this is the responsability of that component.
 
-# External Resources
+# Resources
 
 * [Presentational and container components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) by Dan Abramov.
 * [Smart components vs Presentational components](https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/) by Angular University.

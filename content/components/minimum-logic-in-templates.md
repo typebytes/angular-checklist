@@ -2,20 +2,12 @@
 title: minimum logic in templates
 ---
 
-<<<<<<< HEAD
-## Problem
-=======
 # Problem
->>>>>>> content: refactor to problem solution formt
 
 When we put too much logic in our templates, we are making our applications more difficult to test. The fastest way to write and execute tests is by using simple unit tests. But, templates are not testable with plain unit tests.
 It can also make our template less readable.
 
-<<<<<<< HEAD
-## Solution 	
-=======
 # Solution 	
->>>>>>> content: refactor to problem solution formt
 
 Avoid putting to much logic in your templates.
 

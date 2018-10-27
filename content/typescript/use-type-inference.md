@@ -1,16 +1,23 @@
 ---
 title: Use type inference
 ---
-# Use type inference
+# Problem 
 
-Typescript is a typed language which supports type inference. This means that:
-- you can define the type for a certain variable
-- Typescript is smart enough to deduct the type based on its location
+Typescript is really good at inferring the types in our code. Whenever it can do that, we don't have to add the type ourselves. 
 
-Leveraging the type inference will allow us to benefit from the power of Typescript without constantly having to define the types ourselves.
+If we do add them everywhere, it doesn't only take a lot of time, but it also means that we have to update them everywhere whenever anything changes.
 
-Type inference example:
+# Solution
 
+Instead of defining the types, we can let typescript infer the types. 
+
+So instead of doing this:
+
+```ts
+const example: string = 'typescript will infer the string type by default';
+```
+
+We omit the type as typescript can infer that as we assign it a string property.
 ```ts
 const example = 'typescript will infer the string type by default';
 ```
