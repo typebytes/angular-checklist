@@ -34,6 +34,7 @@
 
     &:last-of-type {
       @include truncate();
+      flex: 1;
     }
 
     &:not(:last-of-type) {

@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
@@ -51,28 +50,13 @@ export class ChecklistComponent implements OnInit {
     this.favoritesScore$ = this.store.pipe(select(ChecklistQueries.getFavoritesScore));
     this.overallScore$ = this.store.pipe(select(ChecklistQueries.getOverallScore));
 
-    this.breakPointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(
-        matches,
-        tap(() => this.sideNav.close()),
-        observeOn(asyncScheduler)
-      )
-      .subscribe(() => this.toggleSidenavMode());
-
-    this.breakPointObserver
-      .observe([Breakpoints.Medium, Breakpoints.Web])
-      .pipe(matches)
-      .subscribe(() => {
-        this.setSidenavMode('side');
-        this.sideNav.open();
-      });
+    this.setupBreakpointObserver();
   }
 
   toggleCategory(category: Category) {
     this.store
       .pipe(
-        select(ChecklistQueries.getFavoriteEntity),
+        select(ChecklistQueries.getFavoriteEntities),
         take(1),
         switchMap(entities => {
           const favoritesToBeRemoved = entities[category.slug];
@@ -161,5 +145,24 @@ export class ChecklistComponent implements OnInit {
 
   private setSidenavMode(mode: 'side' | 'over') {
     this.sideNavMode = mode;
+  }
+
+  private setupBreakpointObserver() {
+    this.breakPointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.Small])
+      .pipe(
+        matches,
+        tap(() => this.sideNav.close()),
+        observeOn(asyncScheduler)
+      )
+      .subscribe(() => this.toggleSidenavMode());
+
+    this.breakPointObserver
+      .observe([Breakpoints.Medium, Breakpoints.Web])
+      .pipe(matches)
+      .subscribe(() => {
+        this.setSidenavMode('side');
+        this.sideNav.open();
+      });
   }
 }

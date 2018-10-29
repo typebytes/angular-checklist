@@ -10,7 +10,9 @@ import {
   MatSidenavModule,
   MatToolbarModule,
   MatSlideToggleModule,
-  MatDialogModule
+  MatDialogModule,
+  MatAutocompleteModule,
+  MatInputModule
 } from '@angular/material';
 
 @NgModule({
@@ -23,7 +25,9 @@ import {
     MatIconModule,
     MatBadgeModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   providers: [{ provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' }]
 })

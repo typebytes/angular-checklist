@@ -2,7 +2,6 @@ import MarkdownIt = require('markdown-it');
 import { getLanguage, highlight } from 'highlight.js';
 
 export const convertHeadingsPlugin = (md, options) => {
-  console.log(md.core.ruler.getRules());
   md.core.ruler.push('convert_headings', convertHeadings);
 };
 

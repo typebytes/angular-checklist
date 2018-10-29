@@ -157,14 +157,14 @@ export const favoritesReducer = (state: FavoriteEntity, action: ChecklistActions
 };
 
 export namespace ChecklistQueries {
-  export const getCategoriesEntity = (state: ApplicationState) => state.checklist.categories;
-  export const getItemsEntity = (state: ApplicationState) => state.checklist.items;
+  export const getCategoryEntities = (state: ApplicationState) => state.checklist.categories;
+  export const getItemEntities = (state: ApplicationState) => state.checklist.items;
   export const getRouterState = (state: ApplicationState) => state.router.state;
   export const getCategroriesFilter = (state: ApplicationState) => state.checklist.filter.categories;
   export const getFavroitesFilter = (state: ApplicationState) => state.checklist.filter.favorites;
-  export const getFavoriteEntity = (state: ApplicationState) => state.checklist.favorites;
+  export const getFavoriteEntities = (state: ApplicationState) => state.checklist.favorites;
 
-  export const getScores = createSelector(getCategoriesEntity, getItemsEntity, (categories, items) => {
+  export const getScores = createSelector(getCategoryEntities, getItemEntities, (categories, items) => {
     return Object.keys(categories).reduce((acc, categoryId) => {
       acc[categoryId] = computeScore(categories[categoryId].items, items);
       return acc;
@@ -172,8 +172,8 @@ export namespace ChecklistQueries {
   });
 
   export const getAllCategories = createSelector(
-    getCategoriesEntity,
-    getItemsEntity,
+    getCategoryEntities,
+    getItemEntities,
     getScores,
     (categories, items, scores): Array<Category> => {
       return Object.keys(categories).map(categoryId => {
@@ -190,7 +190,7 @@ export namespace ChecklistQueries {
   );
 
   export const getActiveCategoryEntities = createSelector(
-    getCategoriesEntity,
+    getCategoryEntities,
     getActiveCategories,
     (categoryEntities, categories): CategoryMap => {
       return categories.reduce((acc, category) => {
@@ -202,7 +202,7 @@ export namespace ChecklistQueries {
 
   export const getSelectedCategory = createSelector(
     getRouterState,
-    getCategoriesEntity,
+    getCategoryEntities,
     getScores,
     (routerState, categories, scores): CategoryEntity => {
       const { category } = extractRouteParams(routerState.root, 4);
@@ -211,15 +211,12 @@ export namespace ChecklistQueries {
   );
 
   export const getItemsFromSelectedCategory = createSelector(
-    getItemsEntity,
+    getItemEntities,
     getSelectedCategory,
     getCategroriesFilter,
     (items, selectedCategory, filter): Array<ChecklistItem> => {
       if (selectedCategory) {
-        return filterItems(
-          selectedCategory.items.map(id => ({ ...items[id], category: selectedCategory.slug })),
-          filter
-        );
+        return filterItems(selectedCategory.items.map(id => ({ ...items[id] })), filter);
       }
 
       return null;
@@ -228,7 +225,7 @@ export namespace ChecklistQueries {
 
   export const getSelectedItem = createSelector(
     getSelectedCategory,
-    getItemsEntity,
+    getItemEntities,
     getRouterState,
     (category, items, routerState): ChecklistItem => {
       if (category) {
@@ -241,15 +238,14 @@ export namespace ChecklistQueries {
   );
 
   export const getFavorites = createSelector(
-    getFavoriteEntity,
-    getCategoriesEntity,
-    getItemsEntity,
-    getFavroitesFilter,
-    (favorites, categories, items, filter): Array<Favorite> => {
+    getFavoriteEntities,
+    getCategoryEntities,
+    getItemEntities,
+    (favorites, categories, items): Array<Favorite> => {
       return Object.keys(favorites).reduce((acc, categoryId) => {
         acc.push({
           category: categories[categoryId],
-          items: favorites[categoryId].map(itemId => ({ ...items[itemId], category: categoryId }))
+          items: favorites[categoryId].map(itemId => ({ ...items[itemId] }))
         });
 
         return acc;

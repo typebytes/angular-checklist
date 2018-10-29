@@ -37,15 +37,15 @@ export const buildChecklist = async contentFolder => {
 
       const compiledItems = compileFilesForCategory(items, category, categoryPath);
 
-      checklist['categories'][category] = {
+      checklist.categories[category] = {
         ...frontMatter,
         slug: category,
         enabled: true,
         items: compiledItems.map(item => item.id)
       };
 
-      checklist['items'] = {
-        ...checklist['items'],
+      checklist.items = {
+        ...checklist.items,
         ...compiledItems.reduce((acc, item) => {
           acc[item.id] = item;
           return acc;
@@ -78,20 +78,26 @@ export const compileFilesForCategory = (files: Array<string>, category: string, 
     return {
       id,
       slug,
+      category,
       ...frontMatter,
       content: markdown.render(content)
     };
   });
 };
 
-export const dumpDataToDisk = (data: any, dest: string) => {
+export const dumpDataToDisk = (filename: string, data: any, dest: string) => {
   const dir = dirname(dest);
 
   if (!existsSync(dir)) {
     mkdirSync(dir);
   }
 
-  writeFileSync(join(dest, 'content.json'), generateJSON(data));
+  try {
+    writeFileSync(join(dest, `${filename}.json`), generateJSON(data));
+    printSuccess(`${filename}.json created`);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const cleanFileName = (fileName: string) => {
@@ -108,6 +114,10 @@ export const readdirAsync = (path: string): Promise<Array<string>> => {
       error ? reject(error) : resolve(files);
     });
   });
+};
+
+export const printSuccess = (message: string, type = 'Sucess', addNewLine = false) => {
+  console.log(`${addNewLine ? '\n' : ''}${chalk.bold.green(`[${type}]`)} ${message}`);
 };
 
 export const throwError = (message: string) => {

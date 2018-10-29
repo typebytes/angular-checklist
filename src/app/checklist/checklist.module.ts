@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
@@ -18,12 +19,14 @@ import { META_REDUCERS, ROOT_REDUCER } from './state';
 import { ChecklistCtaBarComponent } from './checklist-cta-bar/checklist-cta-bar.component';
 import { ChecklistFavoriteButtonComponent } from './checklist-favorite-button/checklist-favorite-button.component';
 import { ChecklistFooterComponent } from './checklist-footer/checklist-footer.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ChecklistSearchComponent } from './checklist-search/checklist-search.component';
+import { SearchService } from './search/search.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faHandsHelping, faBell, faBan } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan);
 
@@ -33,6 +36,7 @@ library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan);
     ChecklistRoutingModule,
     ChecklistMaterialModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(ROOT_REDUCER, { metaReducers: META_REDUCERS }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -53,8 +57,10 @@ library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan);
     ChecklistCtaBarComponent,
     ChecklistFavoriteButtonComponent,
     ChecklistFooterComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ChecklistSearchComponent
   ],
+  providers: [SearchService],
   entryComponents: [ConfirmationDialogComponent]
 })
 export class ChecklistModule {}

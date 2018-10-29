@@ -1,0 +1,33 @@
+@import '../../../scss/variables';
+@import '~@angular/material/theming';
+
+input {
+  outline: 0;
+  height: 15px;
+  border-radius: 3px;
+  border: 1px solid gainsboro;
+  font-size: 1rem;
+  line-height: 1rem;
+  padding: 10px 8px;
+  width: 350px;
+}
+
+.result-type {
+  border-radius: 2px;
+  background: gainsboro;
+  padding: 2px 4px;
+  font-size: 11px;
+  margin-right: 6px;
+  color: #737373;
+  text-transform: uppercase;
+}
+
+::ng-deep .mat-autocomplete-panel {
+  margin-top: 5px;
+  box-shadow: none !important;
+  border: 1px solid gainsboro;
+
+  b {
+    color: mat-color($primary);
+  }
+}

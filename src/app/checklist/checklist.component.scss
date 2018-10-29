@@ -59,6 +59,10 @@ mat-toolbar {
   }
 }
 
+app-checklist-search {
+  margin-right: 15px;
+}
+
 .category-list-wrapper {
   display: flex;
   flex-direction: column;
@@ -69,6 +73,7 @@ mat-toolbar {
 .logo {
   display: flex;
   flex-direction: row;
+  flex: 1;
 
   img {
     height: 38px;

@@ -4,10 +4,7 @@
   line-height: 30px;
 }
 
-@mixin truncate($width: 100%) {
-  width: $width;
-  max-width: 100%;
-  display: block;
+@mixin truncate() {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

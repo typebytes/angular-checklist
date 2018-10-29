@@ -54,10 +54,6 @@ export const isObject = (item: any) => {
   return item && typeof item === 'object' && !Array.isArray(item) && item !== null;
 };
 
-export const isBoolean = (item: any) => {
-  return item === true || item === false || toString.call(item) === '[object Boolean]';
-};
-
 export function mergeDeep<T>(target: T, source: Object, whitelist = []): T {
   if (isObject(target) && isObject(source)) {
     Object.keys(source).forEach(key => {

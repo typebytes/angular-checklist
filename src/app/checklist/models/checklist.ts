@@ -62,3 +62,14 @@ export interface Favorite {
 }
 
 export type ChecklistFilter = 'ALL' | 'DONE' | 'TODO';
+
+export interface IndexEntry<T> {
+  value: T;
+  link: string;
+}
+
+export interface SearchResult {
+  text: string;
+  document: CategoryEntity | ChecklistItem;
+  link: string;
+}

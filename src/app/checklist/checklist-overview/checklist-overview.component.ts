@@ -7,7 +7,7 @@ import { ChecklistItem, Category } from '../models/checklist';
 import { ApplicationState } from '../state';
 import { ChecklistQueries } from '../state/checklist.reducer';
 import { extractRouteParams, getActivatedChild } from '../utils/router';
-import { trigger, transition, query, stagger, style, animate, sequence } from '@angular/animations';
+import { trigger, transition, query, stagger, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-checklist-overview',
