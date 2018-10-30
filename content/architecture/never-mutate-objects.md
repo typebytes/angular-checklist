@@ -4,7 +4,7 @@ title: never mutate objects and embrace immutability
 
 # Problem
 
-Performing a deep comparison of objects in JavaScript is a quite costly operation. Reference checks, however, are extremely fast and easy. For that reason, Angular and lots of other libraries depend on reference check comparisons instead of deeply comparing objects. If you mutate objects, you most likely experience weird and unexpected behavior.
+Performing a deep comparison of objects in JavaScript is a quite costly operation. Reference checks however, are extremely fast and easy. For that reason, Angular and lots of other libraries depend on reference check comparisons instead of deeply comparing objects. If you mutate objects, you most likely experience weird and unexpected behavior when using any of these libs.
 
 Here are some examples of things that don't work properly when mutating objects are:
 
