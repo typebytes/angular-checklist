@@ -18,7 +18,7 @@ In this scenario, we are both storing the id of the `selectedUser` and the objec
 
 # Solution
 
-To fix this, we **shouldn't store state that can be derived**. If we store the `users` and the `selectedUserId`, we can easily derive which user is selected. This is logic that we can put in a selector. The state object's type would look like this.
+To fix this, we **shouldn't store state that can be derived**. If we store the `users` and the `selectedUserId`, we can easily derive which user is selected. This is logic that we can put in a selector or most probably in a composed selector. As a solution, we can define the state object as follows:
 
 ```ts
 export interface ApplicationState {
@@ -27,4 +27,4 @@ export interface ApplicationState {
 }
 ```
 
-In this scenario, when we update a user, we only need to update the reference in the `users` array.
+Now, when we update a user, we only need to update the reference in the `users` array.
