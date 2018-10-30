@@ -1,28 +1,30 @@
 ---
 title: release resources in ngOnDestroy
 ---
+
 ## Problem
 
-When creating Angular components, we need to use resources to get user input, fetch data from the backend, create animations, ... The way we can do this can vary. We could use Observables, browser APIs, event listeners and much more. When using resources, we also need to release those resources when they are no longer required. 
-If we do **not** do this, than we will introduce memory leaks which will make our application crash and introduce other unwanted behavior.
+When creating Angular components, we need to use resources to get user input, fetch data from the backend, create animations, etc. The way we do this varies. We could use Observables, browser APIs, event listeners or other means. When using resources, we also need to release those resources when they are no longer required. If we do **not** do this, we might introduce memory leaks which will make our application crash and introduce other unwanted behavior.
 
 ## Solution
 
-We can hook into the lifecyle of our component to known when to release the resources that we used. Whenever Angular is going to destroy our component, it will call the `onDestroy` lifecycle hook. 
+For every component and directive, Angular offers lifecycle hooks that provide visibility into key life moments of a component, such as creation, rendering, or when data-bound properties have changed.
 
-In the following example, we set up a function to be executed every 5000ms using the `setTimeout` API. In the `ngOnDestroy` hook, we unregister the interval and release the resources.
+In order to release our resources, we can hook into the `ngOnDestroy` lifecyle of a component. This hook is called **before** a component is destroyed and removed from the DOM.
 
-```ts 
+In the following example, we set up a function to be executed every 5000ms using the `setInterval` API. Inside `ngOnDestroy`, we clear the interval and release the resource.
+
+```ts
 @Component({
   ...
 })
 export class SomeComponent implements OnInit, OnDestroy {
-  timeoutId;
-  
+  intervalId;
+
   ngOnInit() {
-    this.intervalId = setTimeout(() => {...}, 5000); 
+    this.intervalId = setInterval(() => {...}, 5000);
   }
-  
+
   ngOnDestroy() {
     clearInterval(this.intervalId);
   }
