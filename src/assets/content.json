@@ -82,9 +82,9 @@
       "slug": "tooling",
       "enabled": true,
       "items": [
-        "Z1yDHe5",
         "Z1uf1Rj",
-        "V15M7"
+        "Z2fVpC5",
+        "PWWcx"
       ]
     },
     "typescript": {
@@ -308,29 +308,28 @@
       "title": "don't manage subscriptions imperatively",
       "content": "<h3>Problem</h3>\n<p>When we subscribe to an Observable, we also need to unsubscribe to clean op it’s resources. Unsubscribing can be done like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-comment\">// hold a reference to the subscription object</span>\n<span class=\"hljs-keyword\">const</span> subscription = interval(<span class=\"hljs-number\">1000</span>).subscribe(<span class=\"hljs-built_in\">console</span>.log);\n\n<span class=\"hljs-comment\">// use this subscription object to kill the subscription</span>\nsubscription.unsubscribe();\n</code></pre>\n<p>But if we have multiple subscriptions, we need to manage all of them. We could do this in an array but this is getting extremely verbose. We want to avoid having to do this.</p>\n<h3>Solution</h3>\n<p>RxJS provides us with the <code>takeUntil</code> operator. This operator will mirror the source observable ‘till a certain event happens’. In most cases, we want to stop listening to Observables when the component gets destroyed. This allows us to write something like this:</p>\n<pre class=\"hljs\"><code><span class=\"hljs-meta\">@Component</span>({...})\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">class</span> SomeComponent <span class=\"hljs-keyword\">implements</span> OnInit, OnDestroy {\n  <span class=\"hljs-keyword\">private</span> stop$ = <span class=\"hljs-keyword\">new</span> Subject();\n  users;\n  \n  <span class=\"hljs-keyword\">constructor</span>(<span class=\"hljs-params\"><span class=\"hljs-keyword\">private</span> usersService: UsersService</span>) {\n  }\n\t\n  ngOnInit() {\n    <span class=\"hljs-keyword\">this</span>.usersService.getUsers()\n     .pipe(\n       takeUntil(<span class=\"hljs-keyword\">this</span>.stop$)\n     )\n     .subscribe(\n       <span class=\"hljs-function\"><span class=\"hljs-params\">users</span> =&gt;</span> <span class=\"hljs-keyword\">this</span>.users = users;\n     );\n   }\n   \n   ngOnDestroy() {\n     <span class=\"hljs-keyword\">this</span>.stop$.next();\n   }   \n}\n</code></pre>\n<p>We create a Subject called <code>stop$</code> and when the <code>ngOnDestroy</code> hook is called, we <code>next</code> a value onto the Subject.</p>\n<p>The manual subscribe we defined in the <code>ngOnInit</code> hook uses the <code>takeUntil</code> operator in combination with the <code>this.stop$</code>. This means that the subscription will remain active <strong>until</strong> the <code>stop$</code> gets a value. After that, it will unsubscribe the source stream and complete it.</p>\n<p>This is way better than imperatively handling the subscriptions.</p>\n<p><strong>Note:</strong> Using the async pipe is even better as we don’t have to think about this at all. It will hook into the destroy lifecycle hook and unsubscribe for us.</p>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"https://medium.com/@benlesh/rxjs-dont-unsubscribe-6753ed4fda87\">RxJS: don’t unsubscribe</a> by Ben Lesh</li>\n<li><a href=\"https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef\">RxJS: Avoiding takeUntil leaks</a> by Nicholas Jamieson</li>\n</ul>\n"
     },
-    "Z1yDHe5": {
-      "id": "Z1yDHe5",
-      "slug": "angular-cli",
-      "category": "tooling",
-      "title": "Use the @angular/cli",
-      "optional": true,
-      "content": "<h3>Problem</h3>\n<p>When we ship our code to the browsers, it first needs to be bundled, it needs to be minified, it needs to be uglified, … This is a hard and cumbersome task to do and especially maintain.</p>\n<h3>Solution</h3>\n<p>Using the <code>@angular/cli</code> to take over the build process simplifies the development of your angular applications drastically. Aside from the build process, the CLI also provides you with code scaffolding which you can use to easily generate entire projects, components and much more.</p>\n<p>The CLI abstracts everything for us. This also means that when there are better solutions avaiable to perform for example the build process, if they integrate this, we get this update for free. Since version 6, it also possible to hook into the entire build process.</p>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"https://cli.angular.io/\">Angular CLI</a> by the Angular team</li>\n<li><a href=\"https://medium.com/dailyjs/angular-cli-6-under-the-hood-builders-demystified-f0690ebcf01\">Angular CLI under the hood - builders demistified</a> by Evgeny Barabanov</li>\n</ul>\n"
-    },
     "Z1uf1Rj": {
       "id": "Z1uf1Rj",
       "slug": "compodoc",
       "category": "tooling",
       "title": "Use compodoc for documentation",
       "optional": true,
-      "content": "<h3>Problem</h3>\n<p>On boarding of new developers in your project can be quite difficult. Especially if the applications are getting bigger and bigger.</p>\n<p>And when the project is getting really big, even for developers that have been working on it for a long time, keeping an overview can become hard.</p>\n<h3>Solution</h3>\n<p>Documentation for our code is the solution to these problems. Of course, everyone knows that writing documentation is hard, boring and the documentation itself gets out of date quite quickly.</p>\n<p>We can however use compodoc to generate documentation from our code. This means that it doesn’t take any time to write and it can never get out of date as it is generated from the existing code at all times.</p>\n<h3>Resources</h3>\n<p><a href=\"https://compodoc.app/\">Compodoc</a></p>\n"
+      "content": "<h3>Problem</h3>\n<p>On boarding of new developers in your project can be quite difficult. Especially if the applications are getting bigger and bigger.</p>\n<p>When the project becomes really big, even for developers that have been working on it for a long time, keeping an overview is not that easy.</p>\n<h3>Solution</h3>\n<p>Documentation for our code is the solution to this problem. Of course, everyone knows that writing documentation is hard, boring and the documentation itself gets out of date quite quickly.</p>\n<p>However, we can use compodoc to generate documentation from our code. This means that it doesn’t take any time to write and it can never get out of date as it is generated from the existing code at all times.</p>\n<h3>Resources</h3>\n<p><a href=\"https://compodoc.app/\">Compodoc</a></p>\n"
     },
-    "V15M7": {
-      "id": "V15M7",
-      "slug": "prettier",
+    "Z2fVpC5": {
+      "id": "Z2fVpC5",
+      "slug": "use-angular-cli",
       "category": "tooling",
-      "title": "Use prettier for code formatting",
+      "title": "use @angular/cli",
       "optional": true,
-      "content": "<h3>Problem</h3>\n<p>Whenever we write code, we want this code to be formatted in a standardised way. This poses two problems.</p>\n<ul>\n<li>We need to align everyone in the team to agree with the same standards.</li>\n<li>We need to get all of their IDE’s/editors aligned as well. This can be extremely difficult.</li>\n</ul>\n<h3>Solution</h3>\n<p>Prettier is an opinionated code formatter that can fix both of these problems. It imposes a standard way of formatting and it has a CLI that makes sure the formatting happens the same way on all environments. Adding Prettier and running it as a pre-commit hook will make sure only formatted code can be checked in.</p>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"https://prettier.io/\">Prettier</a></li>\n<li><a href=\"https://github.com/schuchard/prettier-schematic\">Add prettier to angular CLI schematic</a></li>\n</ul>\n"
+      "content": "<h3>Problem</h3>\n<p>When we ship our code to the browsers, it needs to be optimized, that is bundled, minified and uglified. This is only a small portion and there are also other steps involved in a proper build process. This can be quite a difficult and cumbersome task to do and especially to maintain.</p>\n<h3>Solution</h3>\n<p>To fix this, we should use the <code>@angular/cli</code> to take over the build process. The Angular CLI simplifies the development of your Angular applications drastically. Aside from the build process, the CLI also provides you with code scaffolding which you can use to easily generate entire projects, components and much more.</p>\n<p>The CLI abstracts everything for us. This also means that when there are better solutions avaiable to for example perform the build process, and if they integrate this, we get this update for free. Since version 6, it also possible to hook into the entire build process via builders.</p>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"https://cli.angular.io/\">Angular CLI</a></li>\n<li><a href=\"https://medium.com/dailyjs/angular-cli-6-under-the-hood-builders-demystified-f0690ebcf01\">Angular CLI under the hood - builders demistified</a> by Evgeny Barabanov</li>\n</ul>\n"
+    },
+    "PWWcx": {
+      "id": "PWWcx",
+      "slug": "use-prettier",
+      "category": "tooling",
+      "title": "use prettier for code formatting",
+      "content": "<h3>Problem</h3>\n<p>Whenever we write code, we want this code to be formatted in a standardised way. This poses two problems.</p>\n<ul>\n<li>We need to align everyone in the team to agree with the same standards</li>\n<li>We need to get all of their IDE’s/editors aligned as well. This can be extremely difficult</li>\n</ul>\n<h3>Solution</h3>\n<p>Prettier is an opinionated code formatter that can fix both of these problems. It imposes a standard way of formatting and it has a CLI that makes sure the formatting happens the same way on all environments. Adding Prettier and running it as a pre-commit hook will make sure only formatted code can be checked in.</p>\n<h3>Resources</h3>\n<ul>\n<li><a href=\"https://prettier.io/\">Prettier</a></li>\n<li><a href=\"https://github.com/schuchard/prettier-schematic\">Add prettier to Angular CLI schematic</a></li>\n</ul>\n"
     },
     "Z2hzSxp": {
       "id": "Z2hzSxp",
