@@ -1,9 +1,10 @@
 ---
-title: default route is defined
+title: make sure default route is defined
 ---
+
 # Problem
 
-When users type in the url for your application, they do not know all the routes in our application. We need to make sure that we have a landing page or a redirect setup.
+When users type in the url for your application, they do not know all the routes of our application. We need to make sure that we always have a landing page or a redirect set up.
 
 # Solution
 
