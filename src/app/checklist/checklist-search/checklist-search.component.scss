@@ -1,7 +1,13 @@
 @import '../../../scss/variables';
 @import '~@angular/material/theming';
 
+:host {
+  width: 450px;
+  display: flex;
+}
+
 input {
+  flex: 1;
   outline: 0;
   height: 15px;
   border-radius: 3px;
@@ -9,7 +15,6 @@ input {
   font-size: 1rem;
   line-height: 1rem;
   padding: 10px 8px;
-  width: 350px;
 }
 
 .result-type {

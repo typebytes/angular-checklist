@@ -1,16 +1,15 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { asyncScheduler, BehaviorSubject, Observable, of } from 'rxjs';
-import { filter, observeOn, switchMap, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { filter, map, pluck, shareReplay, switchMap, take } from 'rxjs/operators';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { Category, ChecklistItem } from './models/checklist';
 import { ApplicationState } from './state';
 import { ToggleCategory, ToggleFavorite } from './state/checklist.actions';
 import { ChecklistQueries } from './state/checklist.reducer';
-import { matches } from './utils/operators';
 
 enum CategoryListMode {
   List,
@@ -24,6 +23,10 @@ enum CategoryListMode {
 })
 export class ChecklistComponent implements OnInit {
   private editMode$ = new BehaviorSubject(CategoryListMode.List);
+
+  small$: Observable<boolean>;
+  mediumUp$: Observable<boolean>;
+  desktop$: Observable<boolean>;
 
   categories$: Observable<Array<Category>>;
   favoritesCount$: Observable<number>;
@@ -50,7 +53,21 @@ export class ChecklistComponent implements OnInit {
     this.favoritesScore$ = this.store.pipe(select(ChecklistQueries.getFavoritesScore));
     this.overallScore$ = this.store.pipe(select(ChecklistQueries.getOverallScore));
 
-    this.setupBreakpointObserver();
+    const { small$, medium$, desktop$ } = this.setupBreakpointObserver();
+
+    this.small$ = small$;
+    this.desktop$ = desktop$;
+    this.mediumUp$ = combineLatest(medium$, desktop$).pipe(map(([medium, desktop]) => medium || desktop));
+
+    desktop$.subscribe(matches => {
+      if (!matches) {
+        this.sideNav.close();
+        this.setSidenavMode('over');
+      } else {
+        this.sideNav.open();
+        this.setSidenavMode('side');
+      }
+    });
   }
 
   toggleCategory(category: Category) {
@@ -124,15 +141,6 @@ export class ChecklistComponent implements OnInit {
     favorites.forEach(favoriteId => this.store.dispatch(new ToggleFavorite({ category, id: favoriteId })));
   }
 
-  private toggleSidenavMode() {
-    const states = {
-      over: 'side',
-      side: 'over'
-    };
-
-    this.sideNavMode = states[this.sideNavMode];
-  }
-
   private getCategories(mode: CategoryListMode) {
     let categories$ = this.store.pipe(select(ChecklistQueries.getActiveCategories));
 
@@ -148,21 +156,25 @@ export class ChecklistComponent implements OnInit {
   }
 
   private setupBreakpointObserver() {
-    this.breakPointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(
-        matches,
-        tap(() => this.sideNav.close()),
-        observeOn(asyncScheduler)
-      )
-      .subscribe(() => this.toggleSidenavMode());
+    const small$ = this.breakPointObserver.observe(['(max-width: 576px)']).pipe(
+      pluck<BreakpointState, boolean>('matches'),
+      shareReplay(1)
+    );
 
-    this.breakPointObserver
-      .observe([Breakpoints.Medium, Breakpoints.Web])
-      .pipe(matches)
-      .subscribe(() => {
-        this.setSidenavMode('side');
-        this.sideNav.open();
-      });
+    const medium$ = this.breakPointObserver.observe(['(min-width: 576px) and (max-width: 992px)']).pipe(
+      pluck<BreakpointState, boolean>('matches'),
+      shareReplay(1)
+    );
+
+    const desktop$ = this.breakPointObserver.observe(['(min-width: 992px)']).pipe(
+      pluck<BreakpointState, boolean>('matches'),
+      shareReplay(1)
+    );
+
+    return {
+      small$,
+      medium$,
+      desktop$
+    };
   }
 }

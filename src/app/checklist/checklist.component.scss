@@ -57,10 +57,20 @@ mat-toolbar {
   button:not(.menu-button) {
     margin-left: auto;
   }
+
+  &.desktop {
+    .logo {
+      flex: 1;
+    }
+  }
+
+  &:not(.desktop) app-checklist-search {
+    flex: 1;
+  }
 }
 
 app-checklist-search {
-  margin-right: 15px;
+  margin: 0 15px;
 }
 
 .category-list-wrapper {
@@ -73,7 +83,6 @@ app-checklist-search {
 .logo {
   display: flex;
   flex-direction: row;
-  flex: 1;
 
   img {
     height: 38px;

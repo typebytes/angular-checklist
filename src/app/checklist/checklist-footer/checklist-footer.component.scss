@@ -41,6 +41,10 @@ mat-toolbar {
   span:not(:first-child) {
     margin: 0 5px;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .author {
