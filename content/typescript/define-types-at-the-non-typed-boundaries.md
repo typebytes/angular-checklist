@@ -1,14 +1,14 @@
 ---
-title: Define types at the non typed boundaries
+title: define types at the non-typed boundaries
 ---
 
 # Problem
 
-All our Javascript code is written in Typescript. This means that we can leverage types. Our code however interacts with different non typed boundaries such as the html layer (think of events) and backend requests. Interacting with these boundaries influences the type safety of our code.
+All our JavaScript code is written in TypeScript. This means that we can leverage types. However, our codes interacts with different non-typed boundaries such as the HTML layer (think of events) and backend requests. Interacting with these boundaries influences the type safety of our code.
 
 # Solution
 
-When interacting with these boundaries, it is important to add the types so Typescript knows the structure of the object. By providing the type at the boundary, Typescript is able to infer it everywhere else that variable is being used.
+When interacting with these boundaries, it is important to add type information so TypeScript knows the structure of the objects we are dealing with. By providing the type right at the boundary, TypeScript is able to infer it everywhere else where that variable is being used.
 
 For example when working with custom events:
 
@@ -18,9 +18,9 @@ For example when working with custom events:
 })
 export class SomeComponent {
   someEventHandler(event: TypeForThisEvent) {
-    // ...
+    ...
   }
 }
 ```
 
-`TypeForThisEvent` will make sure that the non typed html event is typed inside of our Typescript code.
+`TypeForThisEvent` will make sure that the non-typed HTML event is typed inside of our TypeScript code.

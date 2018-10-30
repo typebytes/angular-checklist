@@ -1,16 +1,16 @@
 ---
-title: Define interfaces for models
+title: define interfaces for models
 ---
 
 # Problem
 
-Typescript helps us to create type safe code. When we let our application interface with some REST apis, we will get back data at runtime that is in a specific format. When we don't define types in our code for the objects we expect to get back, we lose the benefit of typescript for data coming back from the client at compile time.
+TypeScript helps us to create type safe code. When working with REST APIs, we will get back data (a DTO) at runtime that has a specific format. In case we don't define types in our code for the objects we expect to get back, we lose the benefit of TypeScript.
 
 # Solution
 
-Defining an interface for every API we will interface gives us all the benefits typescript brings.
+We should define our models or DTOs (Data Transfer Objects) as interfaces instead of classes. Interfaces are virtual structures that only exist within the context of TypeScript. This means an interface does not generate code whereas a class is primarily syntactical sugar over JavaScript's existing prototype-based inheritance. Consequently, a class generates code when it's compiled to JavaScript.
 
-For example, if you know a backend request will return an object with the properties 'userName' and 'password', which both are strings. Define the type like this:
+For example, if we make a backend request that will return an a user object with the properties `userName` and `password`, both strings, we can define an interface `User` that describes the shape of the response:
 
 ```ts
 export interface User {

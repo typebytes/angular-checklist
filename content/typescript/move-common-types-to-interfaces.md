@@ -1,22 +1,22 @@
 ---
-title: Define interfaces for models
+title: move common types to interfaces
 ---
 
 # Problem
 
-With typescript, we can easily add types to our code like this:
+With Typescript, we can easily add types to our code like this:
 
 ```ts
-let user: {userName: string, password: string};
+let user: { userName: string; password: string };
 ```
 
-In this case, we defined the type of our user 'inline'. While this is a valid option, it also means that it's not reusable. We could define it in multiple places. The downside here is that, when it is updated, we have to update it everywhere.
+In this case, we defined the type of our user _inline_. While this is a valid option, it also means that it's not reusable. We could define it in multiple places. The downside here is that, when it is updated, we have to update multiple places.
 
 # Solution
 
-Whenever a type is used in multiple places, it is best to move it to a separate interface. 
+Whenever a type is reused in multiple places, it is recommended to move it into a separate interface.
 
-Here is an example:
+For example, we could define an interface `User`:
 
 ```ts
 export interface User {
