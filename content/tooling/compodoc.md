@@ -1,5 +1,5 @@
 ---
-title: Use compodoc for documentation
+title: use compodoc for documentation
 optional: true
 ---
 
