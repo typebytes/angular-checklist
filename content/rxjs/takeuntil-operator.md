@@ -4,54 +4,54 @@ title: don't manage subscriptions imperatively
 
 # Problem
 
-When we subscribe to an Observable, we also need to unsubscribe to clean op it's resources. Unsubscribing can be done like this:
+When we subscribe to an Observable, we also need to unsubscribe to clean op its resources. Unsubscribing can be done like this:
 
 ```ts
 // hold a reference to the subscription object
 const subscription = interval(1000).subscribe(console.log);
 
-// use this subscription object to kill the subscription
+// use the subscription object to kill the subscription
 subscription.unsubscribe();
 ```
 
-But if we have multiple subscriptions, we need to manage all of them. We could do this in an array but this is getting extremely verbose. We want to avoid having to do this.
+But if we have multiple subscriptions, we need to manage all of them. We could do this in an array but this gets extremely verbose and easily out of hand. We want to avoid having to do this imperatively.
 
 # Solution
 
-RxJS provides us with the `takeUntil` operator. This operator will mirror the source observable 'till a certain event happens'. In most cases, we want to stop listening to Observables when the component gets destroyed. This allows us to write something like this:
+RxJS provides us with the `takeUntil` operator, and a few other conditional operators. This operator will mirror the source observable util a certain event happens. In most cases, we want to stop listening to Observables when the component gets destroyed. This allows us to write something like this:
 
 ```ts
 @Component({...})
 export class SomeComponent implements OnInit, OnDestroy {
-  private stop$ = new Subject();
-  users;
-  
-  constructor(private usersService: UsersService) {
-  }
-	
+  private destroy$ = new Subject();
+  users: Array<User>;
+
+  constructor(private usersService: UsersService) {}
+
   ngOnInit() {
+    // long-living stream of users
     this.usersService.getUsers()
      .pipe(
-       takeUntil(this.stop$)
+       takeUntil(this.destroy$)
      )
      .subscribe(
        users => this.users = users;
      );
    }
-   
+
    ngOnDestroy() {
-     this.stop$.next();
-   }   
+     this.destroy$.next();
+   }
 }
 ```
 
-We create a Subject called `stop$` and when the `ngOnDestroy` hook is called, we `next` a value onto the Subject. 
+We create a `Subject` called `destroy$` and when the `ngOnDestroy` hook is called, we `next` a value onto the subject.
 
-The manual subscribe we defined in the `ngOnInit` hook uses the `takeUntil` operator in combination with the `this.stop$`. This means that the subscription will remain active **until** the `stop$` gets a value. After that, it will unsubscribe the source stream and complete it.
+The manual subscribe we defined in the `ngOnInit` hook uses the `takeUntil` operator in combination with our subject. This means that the subscription will remain active **until** `destroy$` emits a value. After that, it will unsubscribe from the source stream and complete it.
 
 This is way better than imperatively handling the subscriptions.
 
-**Note:** Using the async pipe is even better as we don't have to think about this at all. It will hook into the destroy lifecycle hook and unsubscribe for us.
+**Note:** Using the `async` pipe is even better as we don't have to think about this at all. It will hook into the destroy lifecycle hook and unsubscribe for us.
 
 # Resources
 
