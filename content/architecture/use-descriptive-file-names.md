@@ -1,6 +1,7 @@
 ---
-title: Use descriptive file names
+title: use descriptive file names
 ---
+
 # Problem
 
 When applications grow over time, it can be quite hard to identify and find certain parts in our application. When we don't give a descriptive name to our files, this makes it even more difficult to do so.
@@ -15,9 +16,9 @@ Also, try to use conventional suffix that describe the type of the file, e.g. `.
 
 Here are a few examples:
 
-* `app.component.ts`
-* `contacts.service.ts`
-* `product-list.component.ts`
+- `app.component.ts`
+- `contacts.service.ts`
+- `product-list.component.ts`
 
 Using such naming convention helps to provide a consistent way to find content very quickly and easily. Consistency will save you time and make you and your team more efficient.
 
