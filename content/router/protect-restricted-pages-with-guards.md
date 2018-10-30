@@ -1,5 +1,5 @@
 ---
-title: protect restricted parts with guards
+title: protect restricted pages with guards
 ---
 
 # Problem
