@@ -5,9 +5,10 @@ author:
   name: Minko Gechev
   url: https://twitter.com/mgechev
 ---
+
 # Problem
 
-The `*ngFor` directive is used for rendering a collection. By default `*ngFor` identifies object uniqueness by reference. 
+The `*ngFor` directive is used for rendering a collection. By default `*ngFor` identifies object uniqueness by reference.
 
 Which means when developer breaks reference to object during updating item's content Angular treats it as removal of the old object and addition of the new object. This effects in destroying old DOM node in the list and adding new DOM node on its place.
 
@@ -27,10 +28,10 @@ export class YtFeedComponent {
   feed = [
     {
       id: 3849, // note "id" field, we refer to it in "trackById" function
-      title: "Angular in 60 minutes",
-      url: "http://youtube.com/ng2-in-60-min",
-      likes: "29345"
-    },
+      title: 'Angular in 60 minutes',
+      url: 'http://youtube.com/ng2-in-60-min',
+      likes: '29345'
+    }
     // ...
   ];
 
@@ -41,5 +42,6 @@ export class YtFeedComponent {
 ```
 
 # Resources
-- ["NgFor directive"](https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html) - official documentation for `*ngFor`
-- ["Angular — Improve performance with trackBy"](https://netbasal.com/angular-2-improve-performance-with-trackby-cc147b5104e5) - shows gif demonstration of the approach
+
+- ["NgFor directive"](https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html) - Official documentation for `*ngFor`
+- ["Angular  —  Improve performance with trackBy"](https://netbasal.com/angular-2-improve-performance-with-trackby-cc147b5104e5) - By Netanel Basal
