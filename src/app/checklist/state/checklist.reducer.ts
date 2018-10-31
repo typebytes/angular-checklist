@@ -254,11 +254,10 @@ export namespace ChecklistQueries {
   );
 
   export const getFilteredFavorites = createSelector(getFavorites, getFavroitesFilter, (favorites, filter) => {
-    favorites.forEach(favorite => {
-      favorite.items = filterItems(favorite.items, filter);
-    });
-
-    return favorites;
+    return favorites.map(favorite => ({
+      ...favorite,
+      items: filterItems(favorite.items, filter)
+    }));
   });
 
   export const getFavoritesScore = createSelector(getFavorites, favorites => {
