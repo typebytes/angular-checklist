@@ -12,7 +12,7 @@ In addition, too much logic inside the template makes them less readable. We can
 
 Try to avoid putting too much logic in your templates.
 
-For example here, we have have an `ngIf` that has too much logic.
+For example here, we have have an `*ngIf` that has too much logic.
 
 ```ts
 @Component({
