@@ -6,7 +6,7 @@ title: use preloading strategy
 
 When we use lazy loading, we are only loading the code that is needed for the first page render. Modules that are not yet needed are not loaded.
 
-By default, the next modules will be loaded whenever the user requests them. This is not ideal in every scenario because it means that whenever a user requests a url, they have to wait until the module was loaded and parsed.
+By default, the next modules will be loaded whenever the user requests them. This is not ideal in every scenario because it means that whenever a user requests a url, they have to wait until the module is loaded and parsed.
 
 # Solution
 

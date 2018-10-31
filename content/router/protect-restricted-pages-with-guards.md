@@ -4,7 +4,7 @@ title: protect restricted pages with guards
 
 # Problem
 
-Users should not be able to access pages that they don't have access to. We could hide the menu item so they could not navigate to it by clicking on it but this means they can still manually type in the url to go to that page. We need some way to protect certain routes.
+Users should not be able to access pages that they don't have access to. We could hide the menu item so they could not navigate to it by clicking on that menu item but this means they can still manually type in the url to go to that page. We need some way to protect certain routes.
 
 # Solution
 

@@ -59,7 +59,7 @@ export class AppModule {}
 
 We updated the `/users` route to use the `loadChildren` property. This points to the module file of the `UsersModule` and always has a fixed format: `${pathToModule}#${nameOfTheModule}`.
 
-Also note that we no longer add the `UsersModule` to the imports of the `AppModule`. This is important because otherwise lazy loading wouldn't work as expected. That's because it is referenced by the `AppModule` and hence the code would be added to the main bundle.
+Also note that we no longer add the `UsersModule` to the imports of the `AppModule`. This is important because otherwise lazy loading wouldn't work as expected. If the `UsersModule` was referenced by the `AppModule` the code for that module would be added to the main bundle.
 
 By using `loadChildren` and removing the module import from the `AppModule`, the `UsersModule` will be packaged in its own bundle and will only be loaded when the user navigates to `/users`.
 
