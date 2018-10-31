@@ -14,7 +14,7 @@ export interface ApplicationState {
 }
 ```
 
-In this scenario, we are both storing the id of the `selectedUser` and the object of the `selectedUser`. This poses a lot of problems. First of all, when we change the selected user, we need to remember to update both references. But even worse, what if we update the user that is currently selected. Then we need to update both the reference in the `users` array and the `selectedUser`. This will make it really easy to make mistakes.
+In this scenario, we are both storing the id of the `selectedUser` and the object of the `selectedUser`. This poses a lot of problems. First of all, when we change the selected user, we need to remember to update both references. But even worse, what if we update the user that is currently selected. Then we need to update both the reference in the `users` array and the `selectedUser`. This is easily overlooked and makes the implementation much more difficult and verbose.
 
 # Solution
 

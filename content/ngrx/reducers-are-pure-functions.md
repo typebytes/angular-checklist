@@ -47,3 +47,5 @@ pureFunction(1, state);
 ```
 
 Now, `pureFunction` only relies on its parameters, does not mutate its arguments and has no side-effects.
+
+The same is true for reducers. They have the following signature `(state, action) => state`. They do not rely on external state and shouldn't update its inputs.
