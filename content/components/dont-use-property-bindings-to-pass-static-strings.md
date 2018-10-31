@@ -4,7 +4,7 @@ title: don't use property bindings to pass static strings
 
 # Problem
 
-Property bindings in Angular allows us to bind to properties. During change detection, when a component is checked, all of the bindings for that component are being checked to see if they have been changed. This means that the more bindings we create, the slower the CD cycle will be.
+Property bindings in Angular allows us to bind to properties. During change detection, when a component is checked, all of the bindings for that component are being checked to see if the view needs to be updated. This means that the more bindings we create, the slower the CD cycle will be, as more bindings need to be checked.
 
 If we have static strings that we want to pass to a native HTML element or a component, it's not necessary to use a property binding as the value will never change. This seems to be a trivial thing to talk about, but it can have a great impact the performance of our application.
 
