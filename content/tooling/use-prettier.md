@@ -6,8 +6,8 @@ title: use prettier for code formatting
 
 Whenever we write code, we want this code to be formatted in a standardised way. This poses two problems.
 
-- We need to align everyone in the team to agree with the same standards
-- We need to get all of their IDE's/editors aligned as well. This can be extremely difficult
+- We need to align everyone in the team to agree with the same standards.
+- We need to get all of their IDE's/editors aligned as well. This can be extremely difficult.
 
 # Solution
 
