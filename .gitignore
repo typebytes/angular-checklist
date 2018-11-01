@@ -5,6 +5,9 @@
 /tmp
 /out-tsc
 
+# generated content
+content.json
+
 # dependencies
 /node_modules
 

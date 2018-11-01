@@ -17,7 +17,7 @@ export class ChecklistSearchComponent implements OnInit {
   results$: Observable<any>;
   searchField = new FormControl();
 
-  focus$ = new BehaviorSubject('INIT');
+  focus$ = new BehaviorSubject<string>('INIT');
 
   constructor(private searchService: SearchService, private router: Router) {}
 
