@@ -12,7 +12,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-content": "ts-node ./tools/build-checklist.ts",
-    "build-content:watch": "nodemon"
+    "build-content:watch": "nodemon",
+    "ci": "npm run build-content && ng build --prod"
   },
   "private": true,
   "dependencies": {
