@@ -1,8 +1,8 @@
-#.travis.yml
+#..travis.yml
 
 language: node_js
 node_js:
-- "6.9"
+- "10.13.0"
 
 branches:
   only:
