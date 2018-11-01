@@ -1,10 +1,10 @@
 ---
-title: use appropriate operators
+title: use switchMap only when you need cancellation
 ---
 
 # Problem
 
-When using the wrong flattening operators from RxJS in certain scenarios it is possible to introduce unwanted behavior and race conditions.
+In certain scenarios, using the wrong flattening operators from RxJS can result in unwanted behavior and race conditions.
 
 # Solution
 
@@ -40,4 +40,4 @@ For more information see the article from [Nicholas Jamieson](https://twitter.co
 
 # Resources
 
-- [Multicasting operators in RxJS](https://blog.angularindepth.com/switchmap-bugs-b6de69155524) by Nicholas Jamieson
+- [RxJS: Avoiding switchMap-Related Bugs](https://blog.angularindepth.com/switchmap-bugs-b6de69155524) by Nicholas Jamieson

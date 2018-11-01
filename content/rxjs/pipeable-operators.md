@@ -40,4 +40,4 @@ Even if you are using the older versions of RxJS, all new code should be written
 
 ## Upgrading
 
-If you have a lot of code written using patch operators, you can use a script released written by Google engineers to do this upgrade automatically for you. You can find the script and how to use it in the [rxjs-tslint](https://github.com/ReactiveX/rxjs-tslint#migration-to-rxjs-6)' package.
+If you have a lot of code written using patch operators, you can use a script released written by Google engineers to do this upgrade automatically for you. You can find the script and how to use it in the [rxjs-tslint](https://github.com/ReactiveX/rxjs-tslint#migration-to-rxjs-6) package.

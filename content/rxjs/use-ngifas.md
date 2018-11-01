@@ -4,7 +4,7 @@ title: use ngIfAs to subscribe only once
 
 # Problem
 
-An Observable is lazy by default but also unicast. This means that for every subscription, the Observable is executed. If the Observable is triggering a backend call when subscribed to, the following code will trigger two backend calls.
+An Observable is lazy and unicast by default. This means that for every subscription, the Observable is executed. If the Observable is triggering a backend call when subscribed to, the following code will trigger two backend calls.
 
 ```ts
 @Component({
@@ -68,7 +68,9 @@ Now, the template will be rendered as:
 
 ## Make the Observable hot
 
-We can transform our component so that the Observable will no longer trigger a backend call with every subscription. This fixes our problem because it means it doesn't matter anymore if we have multiple subscriptions.
+We can also make our Observable hot so that the Observable will no longer trigger a backend call with every subscription. A hot Observable will share the underlying subscription so the source Observable is only executed once.
+
+This fixes our problem because it means it doesn't matter anymore if we have multiple subscriptions.
 
 To do this, we can use for example the `shareReplay` operator.
 

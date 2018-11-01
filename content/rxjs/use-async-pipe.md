@@ -4,7 +4,7 @@ title: use the async pipe
 
 # Problem
 
-In Angular, everything async is handled by Observables and they are triggered by subscribing to them. Whenever we do so, it is very important to also unsubscribe. Unsubscribing will clean up the resources being used by this stream. Otherwise, this might introduce memory leaks.
+In Angular, everything async is handled by Observables and they are triggered by subscribing to them. Whenever we do so, it is very important to also unsubscribe. Unsubscribing will clean up the resources being used by this stream. If we neglect to do this, we might introduce memory leaks.
 
 If we manually subscribe, it also means that we have to manually unsubscribe. This is something that is easily forgotten.
 
@@ -15,7 +15,7 @@ Instead of manually subscribing, we can use the `async` pipe provided by Angular
 The async pipe will:
 
 - subscribe to an Observable
-- unsubscribe from the Observable when the component is destroyed
+- unsubscribe from the Observable when the component is destroyed by hooking into the `onDestroy` hook
 - mark this component as "to be checked" for the next change detection cycle
 
 Using the `async` pipe as much as possible will make sure all the resources are cleaned up properly and reduce the likelihood of memory leaks.

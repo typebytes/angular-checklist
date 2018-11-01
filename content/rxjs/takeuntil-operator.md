@@ -14,7 +14,7 @@ const subscription = interval(1000).subscribe(console.log);
 subscription.unsubscribe();
 ```
 
-But if we have multiple subscriptions, we need to manage all of them. We could do this in an array but this gets extremely verbose and easily out of hand. We want to avoid having to do this imperatively.
+But if we have multiple subscriptions, we need to manage all of them. We could do this in an array but this gets extremely verbose. We want to avoid having to do this imperatively.
 
 # Solution
 
@@ -49,7 +49,7 @@ We create a `Subject` called `destroy$` and when the `ngOnDestroy` hook is calle
 
 The manual subscribe we defined in the `ngOnInit` hook uses the `takeUntil` operator in combination with our subject. This means that the subscription will remain active **until** `destroy$` emits a value. After that, it will unsubscribe from the source stream and complete it.
 
-This is way better than imperatively handling the subscriptions.
+This is a lot better than imperatively handling the subscriptions.
 
 **Note:** Using the `async` pipe is even better as we don't have to think about this at all. It will hook into the destroy lifecycle hook and unsubscribe for us.
 
