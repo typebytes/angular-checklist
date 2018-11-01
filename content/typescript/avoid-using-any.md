@@ -10,7 +10,7 @@ If we start using the `any` type, we lose all these benefits.
 
 # Solution
 
-The solution is to avoid the `any` type whereever possible in our code and we should define proper types instead.
+The solution is to avoid the `any` type wherever possible in our code and we should define proper types instead.
 
 Here's a classic example:
 
