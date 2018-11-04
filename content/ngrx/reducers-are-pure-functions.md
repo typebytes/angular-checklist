@@ -8,9 +8,10 @@ Reducers are responsible for updating the state in our application based on acti
 
 # Solution
 
-By writing our reducers as pure functions, we are 100% sure that the reducer is determinstic and can be used to manage our state. A pure function has the following properties:
+By writing our reducers as pure functions, we are 100% sure that the reducer is deterministic and can be used to manage our state. A pure function has the following properties:
 
-* it does not depend on side effects
+* it does not depend on external state
+* it does not produce any side-effects
 * it does not mutate any of its inputs
 * if you call it over and over again, with the same arguments, you always get back the same results
 
@@ -33,7 +34,7 @@ impureFunction(1);
 
 The `impureFunction` relies on external state making it non-deterministic. We have no control of the state defined outside of the function as it is visible to many other functions.
 
-Instead we can make this function **pure** by passing in the data it needs:
+Instead, we can make this function **pure** by passing in the data it needs:
 
 ```ts
 const state = 1;

@@ -4,7 +4,7 @@ title: define actions as classes
 
 # Problem
 
-When we send an action to the store, we need to send an object that has a type property and an optional payload property. We could recreate an object every time we want to send that but we would violate the DRY principle.
+When we send an action to the store, we need to send an object that has a type property and optional metadata (often added as a payload property). We could recreate an object every time we want to send that but we would violate the DRY principle.
 
 One of the promises in NgRx is that it provides extreme type safety. This is something that cannot be achieved with plain objects.
 
