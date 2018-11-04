@@ -4,7 +4,7 @@ title: capture events with actions, not commands
 
 # Problem
 
-When using NgRx, we are constantly dispatching actions to the store. These can be dispatched from different places such as components and effects. It can become really hard to figure out where all these actions originated from, why they were send and how they are impacting the state.
+When using NgRx, we are constantly dispatching actions to the store. These can be dispatched from different places such as components and effects. It can become really hard to figure out where all these actions originated from, why they were sent and how they are impacting the state.
 
 # Solution
 

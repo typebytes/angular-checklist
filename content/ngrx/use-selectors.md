@@ -8,13 +8,13 @@ When we want to fetch data from the store, we can use queries to get the data ou
 
 While retrieving state from the store, we can execute some pretty complex and potentially inefficient or blocking logic. Every time the state changes, this logic will be re-executed.
 
-Also, the plain queries we define cannot be used to compose new ones. This means that we have to define the same queries in multiple location violating the DRY principle.
+Also, the plain queries we define cannot be used to compose new ones. This means that we have to define the same queries in multiple locations violating the DRY principle.
 
 # Solution
 
 `@ngrx/store` provides us with the concept of selectors. A selector helps us to build up queries that have a type signature of `(state: T): K`. The great benefit of these selectors is that they are composable.
 
-`@ngrx` exposes a `createSelector` function that accepts other selectors to create new ones based on these. This means that we only have to define every selector just once and reuse them in multiple places.
+`@ngrx/store` exposes a `createSelector` function that accepts other selectors to create new ones based on these. This means that we only have to define every selector just once and reuse them in multiple places.
 
 Let's look at a simple example:
 

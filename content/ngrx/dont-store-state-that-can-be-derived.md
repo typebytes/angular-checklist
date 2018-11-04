@@ -4,7 +4,7 @@ title: don't store state that can be derived
 
 # Problem
 
-We can use `@ngrx/store` to store data. When we store duplicate data, we are making our reducer logic way more difficult. Take a look at the following type definiton for a potential state object:
+We can use `@ngrx/store` to store data. When we store duplicate data, we are making our reducer logic way more difficult. Take a look at the following type definition for a potential state object:
 
 ```ts
 export interface ApplicationState {
