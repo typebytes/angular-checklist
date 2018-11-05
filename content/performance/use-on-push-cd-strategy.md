@@ -4,9 +4,9 @@ title: use onPush CD strategy on dumb components
 
 # Problem
 
-Change detection (CD) in Angular is performed from top to bottom. This means that everything is only checked once. This is a huge difference compared to AngularJS where change detection was performend in cycles until everything was considered stable.
+Change detection (CD) in Angular is performed from top to bottom. This means that everything is only checked once. This is a huge difference compared to AngularJS where change detection was performed in cycles until everything was considered stable.
 
-However, it still means that everything is checked everytime CD is triggered, even things that we know for sure have not changed.
+However, it still means that everything is checked every time CD is triggered, even things that we know for sure have not changed.
 
 # Solution
 
