@@ -8,7 +8,7 @@ In certain scenarios, using the wrong flattening operators from RxJS can result 
 
 # Solution
 
-For example, in an e-commerce application users can add and remove items from their shoppings cart. The logic for removing an item could look like this:
+For example, in an e-commerce application users can add and remove items from their shopping cart. The logic for removing an item could look like this:
 
 ```ts
 removeItemButtonClick.pipe(

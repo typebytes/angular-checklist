@@ -25,7 +25,7 @@ We can fix this problem in multiple ways, either with the `ngIfAs` syntax, or by
 
 ## ngIfAs syntax
 
-We can use an `*ngIf` to hide an element. We can also leverage it to _unpack_ an obsevable and bind the value to a variable. We can then use that variable inside of the template.
+We can use an `*ngIf` to hide an element. We can also leverage it to _unpack_ an observable and bind the value to a variable. We can then use that variable inside of the template.
 
 ```ts
 @Component({

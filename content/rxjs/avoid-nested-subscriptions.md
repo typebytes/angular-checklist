@@ -4,7 +4,7 @@ title: avoid nested subscriptions
 
 # Problem
 
-Sometimes we need to aggregate values from mulitple observables or deal with nested observables to perform an action. In that case, you could  subscribe to an observable in the subscribe block of another observable. This makes handling subscriptions way more difficult and feels like callback hell all over again.
+Sometimes we need to aggregate values from multiple observables or deal with nested observables to perform an action. In that case, you could  subscribe to an observable in the subscribe block of another observable. This makes handling subscriptions way more difficult and feels like callback hell all over again.
 
 # Solution
 
