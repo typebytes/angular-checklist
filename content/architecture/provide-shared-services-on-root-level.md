@@ -28,7 +28,7 @@ export class SharedModule {
 }
 ```
 
-Note that the actual module definion **does not** contain any providers.
+Note that the actual module definition **does not** contain any providers.
 
 In our `AppModule`, we could use this module as follows:
 

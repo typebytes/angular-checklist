@@ -31,9 +31,9 @@ The most advocated way to lay out your components is to use smart and dumb compo
 
 ## Benefits
 
-* Dumb components are completely reusable since they have a defined API and are independet of any buiness logic.
+* Dumb components are completely reusable since they have a defined API and are independent of any business logic.
 * Dumb components are easy to test as they are completely isolated.
-* The entire architecture of your components becomes easier to reason about. If there is problem with business logic or if the data is not correctly fetched, you know that you need to start searching in your smart components since this is their only responsability.
+* The entire architecture of your components becomes easier to reason about. If there is problem with business logic or if the data is not correctly fetched, you know that you need to start searching in your smart components since this is their only responsibility.
 
 # Resources
 

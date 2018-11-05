@@ -4,7 +4,7 @@ title: put business logic into services
 
 # Problem
 
-With Angular we are creating applications using a layered architecture. Every layer in our application should have its own responsability. This means we have decoupled layers and each with its own concern.
+With Angular we are creating applications using a layered architecture. Every layer in our application should have its own responsibility. This means we have decoupled layers and each with its own concern.
 Business logic in our application does not belong in the component layer. The component layer is purely meant to be used for visualization, displaying user interface and handling user input. Therefore, business logic should be extracted into the service layer.
 
 # Solution
