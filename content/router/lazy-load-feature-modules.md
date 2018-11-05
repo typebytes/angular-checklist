@@ -4,7 +4,7 @@ title: lazy load feature modules
 
 # Problem
 
-When working with SPAs, we need to ship an entire applicaton to the client. The more bytes we need to ship, the slower it will be to load but also to parse. This will greatly influence the TTI (Time to Interactive) of our application.
+When working with SPAs, we need to ship an entire application to the client. The more bytes we need to ship, the slower it will be to load but also to parse. This will greatly influence the TTI (Time to Interactive) of our application.
 
 We are shipping way too much JavaScript to the client.
 
