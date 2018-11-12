@@ -10,6 +10,7 @@ import { Category, ChecklistItem } from './models/checklist';
 import { ApplicationState } from './state';
 import { ToggleCategory, ToggleFavorite } from './state/checklist.actions';
 import { ChecklistQueries } from './state/checklist.reducer';
+import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
 
 enum CategoryListMode {
   List,
@@ -112,6 +113,10 @@ export class ChecklistComponent implements OnInit {
 
   trackById(index, item: ChecklistItem) {
     return item.id;
+  }
+
+  showAbout() {
+    this.dialog.open(AboutDialogComponent);
   }
 
   private openUserPrompt(category: Category, favorites: Array<string>) {

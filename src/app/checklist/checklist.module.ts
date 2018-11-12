@@ -27,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faHandsHelping, faBell, faBan } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
 
 library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan);
 
@@ -58,9 +59,10 @@ library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan);
     ChecklistFavoriteButtonComponent,
     ChecklistFooterComponent,
     ConfirmationDialogComponent,
-    ChecklistSearchComponent
+    ChecklistSearchComponent,
+    AboutDialogComponent,
   ],
   providers: [SearchService],
-  entryComponents: [ConfirmationDialogComponent]
+  entryComponents: [ConfirmationDialogComponent, AboutDialogComponent]
 })
 export class ChecklistModule {}

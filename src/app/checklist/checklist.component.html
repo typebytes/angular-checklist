@@ -7,7 +7,7 @@
     <h4 *ngIf="desktop$ | async">Angular Checklist</h4>
   </div>
   <app-checklist-search *ngIf="mediumUp$ | async"></app-checklist-search>
-  <button mat-raised-button color="primary">ABOUT</button>
+  <button mat-raised-button color="primary" (click)="showAbout()">ABOUT</button>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav [mode]="sideNavMode" [autoFocus]="false" #sideNav>
