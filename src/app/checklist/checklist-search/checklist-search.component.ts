@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import * as fuzzysort from 'fuzzysort';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, map, switchMap } from 'rxjs/operators';
-import { CategoryEntity, ChecklistItem, IndexEntry, SearchResult } from '../models/checklist';
+import { CategoryEntity, ChecklistItem } from '../models/checklist.model';
+import { IndexEntry, SearchResult } from '../search/search.models';
 import { SearchService } from '../search/search.service';
 
 @Component({
-  selector: 'app-checklist-search',
+  selector: 'ac-checklist-search',
   templateUrl: './checklist-search.component.html',
   styleUrls: ['./checklist-search.component.scss']
 })

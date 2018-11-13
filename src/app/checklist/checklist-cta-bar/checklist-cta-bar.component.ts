@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ChecklistFilter } from '../models/checklist';
+import { ChecklistFilter } from '../models/checklist.model';
 
 @Component({
-  selector: 'app-checklist-cta-bar',
+  selector: 'ac-checklist-cta-bar',
   templateUrl: './checklist-cta-bar.component.html',
   styleUrls: ['./checklist-cta-bar.component.scss']
 })

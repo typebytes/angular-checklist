@@ -28,3 +28,27 @@
     --hover-box-skew: 0deg;
   }
 }
+
+@mixin small-only {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+
+@mixin medium-up {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin large-up {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin for-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}

@@ -2,7 +2,7 @@
   display: block;
 }
 
-::ng-deep app-checklist-list-item {
+::ng-deep ac-checklist-list-item {
   & + & {
     border-top: 1px solid gainsboro;
   }

@@ -1,4 +1,5 @@
-@import '../../../scss/variables';
+@import '../../../scss//mixins';
+@import '../../../scss//variables';
 @import '~@angular/material/theming';
 
 mat-toolbar {
@@ -33,6 +34,11 @@ mat-toolbar {
   color: rgba(244, 81, 30, 0.9);
 }
 
+.links,
+.authors {
+  min-height: 33px;
+}
+
 .authors {
   span:first-child {
     margin-right: 10px;
@@ -42,7 +48,7 @@ mat-toolbar {
     margin: 0 5px;
   }
 
-  @media (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     display: none;
   }
 }

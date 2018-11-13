@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { Routes } from '@angular/router';
 import { ChecklistDetailViewComponent } from './checklist-detail-view/checklist-detail-view.component';
 import { ChecklistFavoritesViewComponent } from './checklist-favorites-view/checklist-favorites-view.component';
 import { ListViewComponent } from './checklist-list-view/checklist-list-view.component';
 import { ChecklistOverviewComponent } from './checklist-overview/checklist-overview.component';
 import { ChecklistComponent } from './checklist.component';
+import { ProjectExistsGuard } from './project-exists.guard';
 
-const routes: Routes = [
+export const CHECKLIST_ROUTES: Routes = [
   {
-    path: '',
+    path: ':project/checklist',
     component: ChecklistComponent,
+    canActivate: [ProjectExistsGuard],
     children: [
       { path: 'favorites', component: ChecklistFavoritesViewComponent },
       {
@@ -24,9 +24,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes), StoreRouterConnectingModule],
-  exports: [RouterModule]
-})
-export class ChecklistRoutingModule {}

@@ -1,18 +1,15 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-checklist-favorite-button',
+  selector: 'ac-checklist-favorite-button',
   templateUrl: './checklist-favorite-button.component.html',
   styleUrls: ['./checklist-favorite-button.component.scss']
 })
 export class ChecklistFavoriteButtonComponent {
   _style = {};
 
-  @Input()
-  active = false;
-
-  @Input()
-  disableRipple = false;
+  @Input() active = false;
+  @Input() disableRipple = false;
 
   @Input()
   set size(value) {

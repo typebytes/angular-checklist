@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Store, select } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { ChecklistFilter, ChecklistItem } from '../models/checklist';
-import { ApplicationState } from '../state';
-import { ToggleFavorite, CheckAll, SetCategoriesFilter, Toggle, UncheckAll } from '../state/checklist.actions';
-import { ChecklistQueries } from '../state/checklist.reducer';
+import { map } from 'rxjs/operators';
+import { CheckAll, ToggleFavorite, ToggleItem, UncheckAll } from '../../projects/state/projects.actions';
+import { selectOnce } from '../../shared/operators';
+import { ApplicationState } from '../../state/app.state';
+import { CategoryEntity, ChecklistFilter, ChecklistItem } from '../models/checklist.model';
+import { SetCategoriesFilter } from '../state/checklist.actions';
+import { ChecklistSelectors } from '../state/checklist.selectors';
 
 @Component({
-  selector: 'app-list-view',
+  selector: 'ac-list-view',
   templateUrl: './checklist-list-view.component.html',
   styleUrls: ['./checklist-list-view.component.scss']
 })
@@ -21,8 +23,8 @@ export class ListViewComponent implements OnInit {
   constructor(private store: Store<ApplicationState>, private breakPointObserver: BreakpointObserver) {}
 
   ngOnInit() {
-    this.items$ = this.store.pipe(select(ChecklistQueries.getItemsFromSelectedCategory));
-    this.filter$ = this.store.pipe(select(ChecklistQueries.getCategroriesFilter));
+    this.items$ = this.store.pipe(select(ChecklistSelectors.getItemsFromSelectedCategory));
+    this.filter$ = this.store.pipe(select(ChecklistSelectors.getCategroriesFilter));
 
     this.showActionButtons$ = this.breakPointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
@@ -30,7 +32,7 @@ export class ListViewComponent implements OnInit {
   }
 
   toggleItem(item: ChecklistItem) {
-    this.store.dispatch(new Toggle(item));
+    this.store.dispatch(new ToggleItem(item));
   }
 
   setFilter(filter: ChecklistFilter) {
@@ -46,18 +48,14 @@ export class ListViewComponent implements OnInit {
   }
 
   toggleFavorite(item: ChecklistItem) {
-    this.store.dispatch(new ToggleFavorite({ id: item.id, category: item.category }));
+    this.store.dispatch(new ToggleFavorite(item));
   }
 
-  trackById(index, item: ChecklistItem) {
+  trackById(_, item: ChecklistItem) {
     return item.id;
   }
 
-  private getSelectedCategory() {
-    return this.store.pipe(
-      select(ChecklistQueries.getSelectedCategory),
-      take(1),
-      map(({ slug: category }) => category)
-    );
+  private getSelectedCategory(): Observable<CategoryEntity> {
+    return this.store.pipe(selectOnce(ChecklistSelectors.getSelectedCategory));
   }
 }

@@ -1,19 +1,22 @@
-<mat-toolbar [class.desktop]="desktop$ | async">
+<ac-toolbar [class.desktop]="desktop$ | async" [class.small]="small$ | async">
   <button class="menu-button" mat-icon-button (click)="sideNav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="logo">
-    <img src="assets/angular-checklist.png" alt="Logo">
-    <h4 *ngIf="desktop$ | async">Angular Checklist</h4>
-  </div>
-  <app-checklist-search *ngIf="mediumUp$ | async"></app-checklist-search>
-  <button mat-raised-button color="primary" (click)="showAbout()">ABOUT</button>
-</mat-toolbar>
+  <ac-toolbar-logo [showText]="desktop$ | async"></ac-toolbar-logo>
+  <ac-dropdown (selectionChange)="navigateToProject($event)" [items]="projects$ | async"
+    [selected]="selectedProjectId$ | async" bindLabel="name" bindValue="id">
+    <ac-dropdown-static-options>
+      <ac-dropdown-static-option routerLink="/">Manage Projects</ac-dropdown-static-option>
+    </ac-dropdown-static-options>
+  </ac-dropdown>
+  <ac-checklist-search *ngIf="mediumUp$ | async"></ac-checklist-search>
+</ac-toolbar>
+
 <mat-sidenav-container>
   <mat-sidenav [mode]="sideNavMode" [autoFocus]="false" #sideNav>
     <section>
       <nav class="nav-item">
-        <app-checklist-score-chart [class.primary]="rla.isActive" [score]="favoritesScore$ | async"></app-checklist-score-chart>
+        <ac-score-chart [class.primary]="rla.isActive" [score]="favoritesScore$ | async"></ac-score-chart>
         <a class="sidenav-link" routerLink="favorites" #rla="routerLinkActive" routerLinkActive="active">
           <span [matBadge]="favoritesCount$ | async" [matBadgeHidden]="!(favoritesCount$ | async)" matBadgeColor="accent"
             matBadgeOverlap="false">Favorites</span>
@@ -27,7 +30,7 @@
       </div>
       <div class="category-list">
         <nav class="category" *ngFor="let category of categories$ | async; trackBy: trackBySlug">
-          <app-checklist-score-chart *ngIf="!editMode" [class.primary]="rla.isActive" [score]="category.score"></app-checklist-score-chart>
+          <ac-score-chart *ngIf="!editMode" [class.primary]="rla.isActive" [score]="category.score"></ac-score-chart>
           <a class="sidenav-link" [class.disabled]="!category.enabled" #rla="routerLinkActive" routerLinkActive="active"
             [routerLink]="category.slug">
             {{ category.title }}
@@ -46,4 +49,4 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<app-checklist-footer></app-checklist-footer>
+<ac-footer></ac-footer>

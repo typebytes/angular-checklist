@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-checklist-list',
+  selector: 'ac-checklist-list',
   template: '<ng-content></ng-content>',
   styleUrls: ['./checklist-list.component.scss']
 })

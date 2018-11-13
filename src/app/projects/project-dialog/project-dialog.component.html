@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>
+  <span>{{ title }}</span>
+</h1>
+<mat-dialog-content>
+  <div class="project-info">
+    <mat-form-field>
+      <input
+        matInput
+        [formControl]="projectName"
+        [errorStateMatcher]="errorStateMatcher"
+        (keydown.enter)="close()"
+        cdkFocusInitial
+        placeholder="Project Name"
+        type="text"
+      />
+      <mat-hint align="end">{{ projectName.value?.length || 0 }}/{{ maxLength }}</mat-hint>
+      <mat-error *ngIf="projectName.hasError('projectExists')">Project already exists</mat-error>
+      <mat-spinner *ngIf="projectName.pending" diameter="20" color="primary" matSuffix></mat-spinner>
+    </mat-form-field>
+  </div>
+  <div class="danger-zone-wrapper" *ngIf="isEditMode()">
+    <h4>DANGER ZONE</h4>
+    <ul class="danger-zone">
+      <li class="danger-zone-cta">
+        <span class="danger-zone-cta-title">Delete Project</span>
+        <div class="danger-zone-cta-content">
+          <p>Once you delete a project, there is no going back. Please be certain.</p>
+          <mat-form-field>
+            <input matInput [formControl]="verifyProjectName" type="text" />
+            <mat-hint align="end">Please type in the project name to confirm.</mat-hint>
+          </mat-form-field>
+          <button (click)="deleteProject()" [disabled]="!verifyProjectName.valid" mat-raised-button color="warn">
+            Delete this Project
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="null">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="close()"
+    [disabled]="!canClose()"
+    [mat-dialog-close]="projectName.value"
+  >
+    {{ submitButtonText }}
+  </button>
+</mat-dialog-actions>

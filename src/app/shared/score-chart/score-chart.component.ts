@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-checklist-score-chart',
-  templateUrl: './checklist-score-chart.component.html',
-  styleUrls: ['./checklist-score-chart.component.scss'],
+  selector: 'ac-score-chart',
+  templateUrl: './score-chart.component.html',
+  styleUrls: ['./score-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChecklistScoreChartComponent implements OnChanges {
+export class ScoreChartComponent implements OnChanges {
   @Input() score: number;
 
   constructor(private elementRef: ElementRef) {}

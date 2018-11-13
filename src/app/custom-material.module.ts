@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 
 import {
-  MAT_CHECKBOX_CLICK_ACTION,
+  MatAutocompleteModule,
   MatBadgeModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
-  MatIconModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  MatSlideToggleModule,
   MatDialogModule,
-  MatAutocompleteModule,
-  MatInputModule
+  MatIconModule,
+  MatInputModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
+  MAT_CHECKBOX_CLICK_ACTION
 } from '@angular/material';
 
 @NgModule({
@@ -27,8 +31,12 @@ import {
     MatSlideToggleModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressBarModule,
+    MatRippleModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [{ provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' }]
 })
-export class ChecklistMaterialModule {}
+export class CustomMaterialModule {}

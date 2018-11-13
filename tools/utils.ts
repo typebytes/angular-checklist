@@ -40,7 +40,6 @@ export const buildChecklist = async contentFolder => {
       checklist.categories[category] = {
         ...frontMatter,
         slug: category,
-        enabled: true,
         items: compiledItems.map(item => item.id)
       };
 
@@ -117,11 +116,11 @@ export const readdirAsync = (path: string): Promise<Array<string>> => {
 };
 
 export const printSuccess = (message: string, type = 'Sucess', addNewLine = false) => {
-  console.log(`${addNewLine ? '\n' : ''}${chalk.bold.green(`[${type}]`)} ${message}`);
+  console.log(`${addNewLine ? '\n' : ''}${chalk.green(`[${type}]`)} ${message}`);
 };
 
 export const throwError = (message: string) => {
-  throw chalk.bold.red(`[Error] ${message}`);
+  throw chalk.red(`[Error] ${message}`);
 };
 
 export const logWarning = (message: string) => {

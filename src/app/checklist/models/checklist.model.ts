@@ -1,3 +1,5 @@
+import { EntityState } from '../../shared/models';
+
 export interface Author {
   name: string;
   link: string;
@@ -30,30 +32,11 @@ export interface Category extends BaseCategory {
   items: Array<ChecklistItem>;
 }
 
-export interface CategoryEntity extends BaseCategory {
-  items: Array<string>;
-}
-
-export interface CategoryMap {
-  [key: string]: CategoryEntity;
-}
-
-export interface ItemMap {
-  [key: string]: ChecklistItem;
-}
+export type ChecklistFilter = 'ALL' | 'DONE' | 'TODO';
 
 export interface Filter {
   categories: ChecklistFilter;
   favorites: ChecklistFilter;
-}
-
-export interface Checklist {
-  categories: CategoryMap;
-  items: ItemMap;
-}
-
-export interface FavoriteEntity {
-  [category: string]: Array<string>;
 }
 
 export interface Favorite {
@@ -61,15 +44,10 @@ export interface Favorite {
   items: Array<ChecklistItem>;
 }
 
-export type ChecklistFilter = 'ALL' | 'DONE' | 'TODO';
-
-export interface IndexEntry<T> {
-  value: T;
-  link: string;
+export interface CategoryEntity extends BaseCategory {
+  items: Array<string>;
 }
 
-export interface SearchResult {
-  text: string;
-  document: CategoryEntity | ChecklistItem;
-  link: string;
-}
+export type CategoryEntities = EntityState<CategoryEntity>;
+export type ItemEntities = EntityState<ChecklistItem>;
+export type FavoriteEntity = EntityState<Array<string>>;

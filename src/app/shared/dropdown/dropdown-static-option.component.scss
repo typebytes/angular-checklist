@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  font-size: inherit;
+  line-height: 3em;
+  height: 3em;
+  padding: 0 16px;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}

@@ -1,16 +1,17 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable, zip } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
-import { ChecklistItem, Category } from '../models/checklist';
-import { ApplicationState } from '../state';
-import { ChecklistQueries } from '../state/checklist.reducer';
-import { extractRouteParams, getActivatedChild } from '../utils/router';
-import { trigger, transition, query, stagger, style, animate } from '@angular/animations';
+import { filter, switchMap, tap } from 'rxjs/operators';
+import { selectOnce } from '../../shared/operators';
+import { extractRouteParams, getActivatedChild } from '../../shared/router.utils';
+import { ApplicationState } from '../../state/app.state';
+import { Category, ChecklistItem } from '../models/checklist.model';
+import { ChecklistSelectors } from '../state/checklist.selectors';
 
 @Component({
-  selector: 'app-checklist-overview',
+  selector: 'ac-checklist-overview',
   templateUrl: './checklist-overview.component.html',
   styleUrls: ['./checklist-overview.component.scss'],
   animations: [
@@ -42,15 +43,17 @@ export class ChecklistOverviewComponent implements OnInit {
   constructor(private store: Store<ApplicationState>, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.breadcrumb$ = this.store.pipe(select(ChecklistQueries.getBreadcrumb));
+    this.breadcrumb$ = this.store.pipe(select(ChecklistSelectors.getBreadcrumb));
 
-    zip(
-      this.store.pipe(select(ChecklistQueries.getActiveCategoryEntities)),
-      this.store.pipe(select(ChecklistQueries.getActiveCategories))
-    )
+    this.route.params
       .pipe(
+        switchMap(_ =>
+          zip(
+            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategoryEntities)),
+            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategories))
+          )
+        ),
         filter(([, categories]) => !!categories.length),
-        take(1),
         tap(([entities, categories]) => {
           const { category } = extractRouteParams(this.route.snapshot, 1);
 
@@ -69,7 +72,7 @@ export class ChecklistOverviewComponent implements OnInit {
     }
   }
 
-  trackByTitle(index, item: Category | ChecklistItem) {
+  trackByTitle(_, item: Category | ChecklistItem) {
     return item.title;
   }
 }

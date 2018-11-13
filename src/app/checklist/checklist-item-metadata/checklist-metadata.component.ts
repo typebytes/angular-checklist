@@ -1,8 +1,8 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { Author } from '../models/checklist';
+import { Author } from '../models/checklist.model';
 
 @Component({
-  selector: 'app-checklist-metadata',
+  selector: 'ac-checklist-metadata',
   templateUrl: './checklist-metadata.component.html',
   styleUrls: ['./checklist-metadata.component.scss']
 })

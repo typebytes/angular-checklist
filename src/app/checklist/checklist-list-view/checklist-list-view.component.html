@@ -1,13 +1,13 @@
-<app-checklist-cta-bar
+<ac-checklist-cta-bar
   [filter]="filter$ | async"
   [showActionButtons]="showActionButtons$ | async"
   (filterChange)="setFilter($event)"
   (checkAll)="checkAllItems()"
   (uncheckAll)="uncheckAllItems()">
-</app-checklist-cta-bar>
+</ac-checklist-cta-bar>
 
-<app-checklist-list class="checklist-items">
-  <app-checklist-list-item *ngFor="let item of items$ | async; trackBy: trackById" [item]="item" (toggleItem)="toggleItem($event)"
+<ac-checklist-list class="checklist-items">
+  <ac-checklist-list-item *ngFor="let item of items$ | async; trackBy: trackById" [item]="item" (toggleItem)="toggleItem($event)"
     (toggleFavorite)="toggleFavorite($event)">
-  </app-checklist-list-item>
-</app-checklist-list>
+  </ac-checklist-list-item>
+</ac-checklist-list>

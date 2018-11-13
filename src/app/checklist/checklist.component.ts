@@ -1,16 +1,20 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { filter, map, pluck, shareReplay, switchMap, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of, zip } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
+import { Project } from '../projects/models/projects.model';
+import { ToggleAllFavorites, ToggleCategory } from '../projects/state/projects.actions';
+import { ProjectsSelectors } from '../projects/state/projects.selectors';
+import { BreakpointService } from '../shared/breakpoint.service';
+import { selectOnce } from '../shared/operators';
+import { hasEntities } from '../shared/utils';
+import { ApplicationState } from '../state/app.state';
+import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { Category, ChecklistItem } from './models/checklist';
-import { ApplicationState } from './state';
-import { ToggleCategory, ToggleFavorite } from './state/checklist.actions';
-import { ChecklistQueries } from './state/checklist.reducer';
-import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
+import { Category, ChecklistItem } from './models/checklist.model';
+import { ChecklistSelectors } from './state/checklist.selectors';
 
 enum CategoryListMode {
   List,
@@ -18,7 +22,7 @@ enum CategoryListMode {
 }
 
 @Component({
-  selector: 'app-checklist',
+  selector: 'ac-checklist',
   templateUrl: './checklist.component.html',
   styleUrls: ['./checklist.component.scss']
 })
@@ -30,6 +34,8 @@ export class ChecklistComponent implements OnInit {
   desktop$: Observable<boolean>;
 
   categories$: Observable<Array<Category>>;
+  projects$: Observable<Array<Project>>;
+  selectedProjectId$: Observable<string>;
   favoritesCount$: Observable<number>;
   favoritesScore$: Observable<number>;
   overallScore$: Observable<number>;
@@ -43,18 +49,19 @@ export class ChecklistComponent implements OnInit {
 
   constructor(
     private store: Store<ApplicationState>,
-    private breakPointObserver: BreakpointObserver,
+    private breakpointService: BreakpointService,
     private dialog: MatDialog,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.categories$ = this.editMode$.pipe(switchMap(mode => this.getCategories(mode)));
-    this.favoritesCount$ = this.store.pipe(select(ChecklistQueries.getFavoritesCount));
-    this.favoritesScore$ = this.store.pipe(select(ChecklistQueries.getFavoritesScore));
-    this.overallScore$ = this.store.pipe(select(ChecklistQueries.getOverallScore));
+    this.projects$ = this.store.pipe(select(ProjectsSelectors.getProjects));
+    this.selectedProjectId$ = this.store.pipe(select(ProjectsSelectors.getSelectedProjectId));
+    this.favoritesCount$ = this.store.pipe(select(ChecklistSelectors.getFavoritesCount));
+    this.favoritesScore$ = this.store.pipe(select(ChecklistSelectors.getFavoritesScore));
 
-    const { small$, medium$, desktop$ } = this.setupBreakpointObserver();
+    const { small$, medium$, desktop$ } = this.breakpointService.getAllBreakpoints();
 
     this.small$ = small$;
     this.desktop$ = desktop$;
@@ -74,20 +81,17 @@ export class ChecklistComponent implements OnInit {
   toggleCategory(category: Category) {
     this.store
       .pipe(
-        select(ChecklistQueries.getFavoriteEntities),
-        take(1),
-        switchMap(entities => {
-          const favoritesToBeRemoved = entities[category.slug];
-
-          if (favoritesToBeRemoved && category.enabled) {
-            return this.openUserPrompt(category, favoritesToBeRemoved);
+        selectOnce(ChecklistSelectors.getFavoriteEntitiesByCategory(category.slug)),
+        switchMap((favorites: Array<ChecklistItem>) => {
+          if (hasEntities(favorites) && category.enabled) {
+            return this.openUserPrompt(favorites);
           }
 
           return of(true);
         }),
         filter(remove => remove)
       )
-      .subscribe(() => this.store.dispatch(new ToggleCategory(category)));
+      .subscribe(() => this.store.dispatch(new ToggleCategory(category.slug)));
   }
 
   toggleEditMode() {
@@ -97,21 +101,30 @@ export class ChecklistComponent implements OnInit {
     of(this.editMode)
       .pipe(
         filter(editMode => !editMode),
-        switchMap(_ => this.store.select(ChecklistQueries.getSelectedCategory).pipe(take(1))),
+        switchMap(_ => this.store.pipe(selectOnce(ChecklistSelectors.getSelectedCategory))),
         filter(category => !!category),
         filter(category => !category.enabled),
-        switchMap(_ => this.store.select(ChecklistQueries.getActiveCategories).pipe(take(1)))
+        switchMap(_ =>
+          zip(
+            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategories)),
+            this.store.pipe(selectOnce(ProjectsSelectors.getSelectedProjectId))
+          )
+        )
       )
-      .subscribe(categories => {
-        this.router.navigate(['/checklist', categories[0].slug]);
+      .subscribe(([categories, projectId]) => {
+        this.router.navigate(['/', projectId, 'checklist', categories[0].slug]);
       });
   }
 
-  trackBySlug(index, category: Category) {
+  navigateToProject(project: string) {
+    this.router.navigate([`/${project}/checklist`]);
+  }
+
+  trackBySlug(_, category: Category) {
     return category.slug;
   }
 
-  trackById(index, item: ChecklistItem) {
+  trackById(_, item: ChecklistItem) {
     return item.id;
   }
 
@@ -119,38 +132,31 @@ export class ChecklistComponent implements OnInit {
     this.dialog.open(AboutDialogComponent);
   }
 
-  private openUserPrompt(category: Category, favorites: Array<string>) {
+  private openUserPrompt(favorites: Array<ChecklistItem>) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        category,
         title: 'Disable Category',
-        text: `Wooops! The category you are trying to disable has favroites. Disabling it will remove the favorites from this category.`,
+        text: `Wooops! The category you are trying to disable has favorites. Disabling it will remove the favorites from this category.`,
         buttonText: 'Disable Anyways'
       }
     });
 
-    return dialogRef
-      .afterClosed()
-      .pipe(switchMap(result => this.processDialogResult(result, category.slug, favorites)));
+    return dialogRef.afterClosed().pipe(switchMap(result => this.processDialogResult(result, favorites)));
   }
 
-  private processDialogResult(result: boolean, categoryId: string, favorites: Array<string>) {
+  private processDialogResult(result: boolean, favorites: Array<ChecklistItem>) {
     if (result) {
-      this.toggleAllFavorites(categoryId, favorites);
+      this.store.dispatch(new ToggleAllFavorites(favorites));
     }
 
     return of(result);
   }
 
-  private toggleAllFavorites(category: string, favorites: Array<string>) {
-    favorites.forEach(favoriteId => this.store.dispatch(new ToggleFavorite({ category, id: favoriteId })));
-  }
-
   private getCategories(mode: CategoryListMode) {
-    let categories$ = this.store.pipe(select(ChecklistQueries.getActiveCategories));
+    let categories$ = this.store.pipe(select(ChecklistSelectors.getActiveCategories));
 
     if (mode === CategoryListMode.Edit) {
-      categories$ = this.store.pipe(select(ChecklistQueries.getAllCategories));
+      categories$ = this.store.pipe(select(ChecklistSelectors.getAllCategories));
     }
 
     return categories$;
@@ -158,28 +164,5 @@ export class ChecklistComponent implements OnInit {
 
   private setSidenavMode(mode: 'side' | 'over') {
     this.sideNavMode = mode;
-  }
-
-  private setupBreakpointObserver() {
-    const small$ = this.breakPointObserver.observe(['(max-width: 576px)']).pipe(
-      pluck<BreakpointState, boolean>('matches'),
-      shareReplay(1)
-    );
-
-    const medium$ = this.breakPointObserver.observe(['(min-width: 576px) and (max-width: 992px)']).pipe(
-      pluck<BreakpointState, boolean>('matches'),
-      shareReplay(1)
-    );
-
-    const desktop$ = this.breakPointObserver.observe(['(min-width: 992px)']).pipe(
-      pluck<BreakpointState, boolean>('matches'),
-      shareReplay(1)
-    );
-
-    return {
-      small$,
-      medium$,
-      desktop$
-    };
   }
 }

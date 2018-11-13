@@ -3,15 +3,16 @@ import { ActionsSubject, select, Store } from '@ngrx/store';
 import * as fuzzysort from 'fuzzysort';
 import { merge, of, zip } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
-import { CategoryEntity, CategoryMap, ChecklistItem, IndexEntry, ItemMap } from '../models/checklist';
-import { ApplicationState } from '../state';
-import { ChecklistActionTypes } from '../state/checklist.actions';
-import { ChecklistQueries } from '../state/checklist.reducer';
+import { ProjectsActionTypes } from '../../projects/state/projects.actions';
+import { ProjectsSelectors } from '../../projects/state/projects.selectors';
+import { AppSelectors } from '../../state/app.selectors';
+import { ApplicationState } from '../../state/app.state';
+import { CategoryEntities, CategoryEntity, ChecklistItem, ItemEntities } from '../models/checklist.model';
+import { ChecklistSelectors } from '../state/checklist.selectors';
+import { IndexEntry } from './search.models';
 
 @Injectable()
 export class SearchService {
-  private baseLink = '/checklist';
-
   private index: Array<IndexEntry<ChecklistItem | CategoryEntity>>;
 
   private options: Fuzzysort.KeyOptions = {
@@ -22,12 +23,12 @@ export class SearchService {
   };
 
   constructor(private store: Store<ApplicationState>, private actions: ActionsSubject) {
-    const actions$ = this.actions.pipe(filter(action => action.type === ChecklistActionTypes.TOGGLE_CATEGORY));
+    const actions$ = this.actions.pipe(filter(action => action.type === ProjectsActionTypes.TOGGLE_CATEGORY));
 
     merge(actions$, of('INIT INDEX'))
       .pipe(switchMap(_ => this.getStoreData()))
-      .subscribe(([categories, items]) => {
-        this.index = this.createIndex(categories, items);
+      .subscribe(([categories, items, projectId]) => {
+        this.index = this.createIndex(categories, items, projectId);
       });
   }
 
@@ -35,37 +36,42 @@ export class SearchService {
     return of(fuzzysort.go(term, this.index, this.options));
   }
 
-  createIndex(categoryEntities: CategoryMap, itemEntities: ItemMap) {
-    const categories = Object.values(categoryEntities).map(category => this.compileCategory(category));
-    const items = categories.reduce(this.compileCategoryItems(itemEntities), []);
+  createIndex(categoryEntities: CategoryEntities, itemEntities: ItemEntities, projectId: string) {
+    const categories = Object.values(categoryEntities).map(category => this.compileCategory(category, projectId));
+    const items = categories.reduce(this.compileCategoryItems(itemEntities, projectId), []);
     return [...categories, ...items];
   }
 
   private getStoreData() {
     return zip(
-      this.store.pipe(select(ChecklistQueries.getActiveCategoryEntities)),
-      this.store.pipe(select(ChecklistQueries.getItemEntities))
+      this.store.pipe(select(ChecklistSelectors.getActiveCategoryEntities)),
+      this.store.pipe(select(AppSelectors.getItemEntities)),
+      this.store.pipe(select(ProjectsSelectors.getSelectedProjectId))
     ).pipe(take(1));
   }
 
-  private compileCategory(category: CategoryEntity) {
+  private compileCategory(category: CategoryEntity, projectId: string) {
     return {
       value: category,
-      link: `${this.baseLink}/${category.slug}`
+      link: `${this.getBaseLink(projectId)}/${category.slug}`
     };
   }
 
-  private compileCategoryItems(itemEntities: ItemMap) {
+  private compileCategoryItems(itemEntities: ItemEntities, projectId: string) {
     return (acc: Array<IndexEntry<ChecklistItem>>, category: IndexEntry<CategoryEntity>) => {
       return acc.concat(
         category.value.items.map(itemId => {
           const checklistItem = itemEntities[itemId];
           return {
             value: checklistItem,
-            link: `${this.baseLink}/${checklistItem.category}/${checklistItem.id}`
+            link: `${this.getBaseLink(projectId)}/${checklistItem.category}/${checklistItem.id}`
           };
         })
       );
     };
+  }
+
+  private getBaseLink(projectId: string) {
+    return `/${projectId}/checklist`;
   }
 }

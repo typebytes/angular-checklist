@@ -53,24 +53,26 @@ mat-sidenav-content {
   }
 }
 
-mat-toolbar {
-  button:not(.menu-button) {
-    margin-left: auto;
-  }
+ac-toolbar {
+  $spacing: 16px;
 
-  &.desktop {
-    .logo {
-      flex: 1;
+  ac-dropdown,
+  ac-checklist-search {
+    margin-left: $spacing;
+
+    @include small-only() {
+      margin-left: auto;
     }
   }
 
-  &:not(.desktop) app-checklist-search {
-    flex: 1;
+  &.desktop ac-dropdown {
+    margin-left: auto;
   }
-}
 
-app-checklist-search {
-  margin: 0 15px;
+  &:not(.desktop) ac-checklist-search {
+    flex: 1;
+    margin-left: $spacing;
+  }
 }
 
 .category-list-wrapper {
@@ -191,12 +193,12 @@ section {
     left: 13px;
   }
 
-  app-checklist-score-chart {
+  ac-score-chart {
     left: 10px;
   }
 
   mat-checkbox,
-  app-checklist-score-chart {
+  ac-score-chart {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -207,7 +209,7 @@ section {
   overflow: inherit;
 }
 
-app-checklist-score-chart {
+ac-score-chart {
   width: 26px;
   margin-right: 10px;
 }

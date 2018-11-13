@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ChecklistItem } from '../models/checklist';
+import { ChecklistItem } from '../models/checklist.model';
 
 @Component({
-  selector: 'app-checklist-list-item',
+  selector: 'ac-checklist-list-item',
   templateUrl: './checklist-list-item.component.html',
   styleUrls: ['./checklist-list-item.component.scss']
 })

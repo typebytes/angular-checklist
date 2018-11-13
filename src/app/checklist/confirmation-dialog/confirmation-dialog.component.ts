@@ -2,7 +2,7 @@ import { Component, HostBinding, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-confirmation-dialog',
+  selector: 'ac-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss']
 })
