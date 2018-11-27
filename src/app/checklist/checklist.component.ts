@@ -13,6 +13,7 @@ import { hasEntities } from '../shared/utils';
 import { ApplicationState } from '../state/app.state';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { Category, ChecklistItem } from './models/checklist.model';
+import { ToggleEditMode } from './state/checklist.actions';
 import { ChecklistSelectors } from './state/checklist.selectors';
 
 enum CategoryListMode {
@@ -95,6 +96,7 @@ export class ChecklistComponent implements OnInit {
 
   toggleEditMode() {
     this.editMode = !this.editMode;
+    this.store.dispatch(new ToggleEditMode());
     this.editMode$.next(this.editMode ? CategoryListMode.Edit : CategoryListMode.List);
 
     of(this.editMode)

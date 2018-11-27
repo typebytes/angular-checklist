@@ -50,14 +50,16 @@ export class ChecklistOverviewComponent implements OnInit {
         switchMap(_ =>
           zip(
             this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategoryEntities)),
-            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategories))
+            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategories)),
+            this.store.pipe(selectOnce(ChecklistSelectors.getEditMode))
           )
         ),
         filter(([, categories]) => !!categories.length),
-        tap(([entities, categories]) => {
+        tap(([entities, categories, editMode]) => {
           const { category } = extractRouteParams(this.route.snapshot, 1);
+          const categoryDisabled = !category || !entities[category];
 
-          if (!category || !entities[category]) {
+          if (categoryDisabled && !editMode) {
             this.router.navigate([categories[0].slug], { relativeTo: this.route });
           }
         })

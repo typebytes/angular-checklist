@@ -4,4 +4,5 @@ export interface ChecklistState {
   categories: CategoryEntities;
   items: ItemEntities;
   filter: Filter;
+  editMode: boolean;
 }

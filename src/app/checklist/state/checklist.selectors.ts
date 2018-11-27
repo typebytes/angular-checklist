@@ -18,6 +18,11 @@ export namespace ChecklistSelectors {
     checklist => checklist.filter.categories
   );
 
+  export const getEditMode = createSelector(
+    AppSelectors.getChecklistState,
+    checklist => checklist.editMode
+  );
+
   export const getScores = createSelector(
     AppSelectors.getCategoryEntities,
     ProjectsSelectors.getProjectItems,

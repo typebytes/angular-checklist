@@ -9,7 +9,8 @@ export const INITIAL_STATE: ChecklistState = {
   filter: {
     categories: 'ALL',
     favorites: 'ALL'
-  }
+  },
+  editMode: false
 };
 
 export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions) {
@@ -19,6 +20,11 @@ export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions
       return {
         ...state,
         filter: filterReducer(state.filter, action)
+      };
+    case ChecklistActionTypes.TOGGLE_EDIT_MODE:
+      return {
+        ...state,
+        editMode: !state.editMode
       };
     default:
       return state;
