@@ -1,3 +1,4 @@
+@import '../../../scss/mixins';
 @import '../../../scss/variables';
 @import '~@angular/material/theming';
 
@@ -12,7 +13,7 @@
 ::ng-deep {
   .ac-dropdown {
     border-radius: 8px;
-    margin: -8px 20px 0 0;
+    margin: -8px 0 0 0;
     max-height: 268px !important;
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15) !important;
 
