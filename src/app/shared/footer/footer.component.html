@@ -1,27 +1,27 @@
 <mat-toolbar>
   <div class="links">
-    <a href="https://github.com/angular-checklist/angular-checklist" target="blank">
-      <fa-icon [icon]="['fab','github']"></fa-icon>
+    <a class="cta" href="https://github.com/angular-checklist/angular-checklist" target="_blank">
+      <fa-icon [icon]="['fab', 'github']"></fa-icon>
       <span>GitHub</span>
     </a>
-    <a href="#" target="blank">
+    <a class="cta" href="#" target="_blank">
       <fa-icon icon="hands-helping"></fa-icon>
       <span>Contribute</span>
     </a>
-    <a href="#" target="blank">
+    <button class="cta" (click)="showAbout()">
       <fa-icon icon="info"></fa-icon>
       <span>About</span>
-    </a>
+    </button>
   </div>
   <div class="authors">
     <span>Made with <fa-icon class="heart" icon="heart"></fa-icon> by</span>
-    <a class="author" href="https://www.twitter.com/elmd_" target="blank">
-      <fa-icon class="twitter" [icon]="['fab','twitter']"></fa-icon>
+    <a class="author" href="https://www.twitter.com/elmd_" target="_blank">
+      <fa-icon class="twitter" [icon]="['fab', 'twitter']"></fa-icon>
       <span>Dominic Elm</span>
     </a>
     <span>&</span>
-    <a class="author" href="https://www.twitter.com/KwintenP" target="blank">
-      <fa-icon class="twitter" [icon]="['fab','twitter']"></fa-icon>
+    <a class="author" href="https://www.twitter.com/KwintenP" target="_blank">
+      <fa-icon class="twitter" [icon]="['fab', 'twitter']"></fa-icon>
       <span>Kwinten Pisman</span>
     </a>
   </div>

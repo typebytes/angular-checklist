@@ -18,6 +18,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ScoreChartComponent } from './score-chart/score-chart.component';
 import { ToolbarLogoComponent } from './toolbar/toolbar-logo/toolbar-logo.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 
 library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo);
 
@@ -28,12 +29,14 @@ const COMPONENTS = [
   DropdownComponent,
   DropdownStaticOptionComponent,
   DropdownStaticOptionsComponent,
-  ScoreChartComponent
+  ScoreChartComponent,
+  AboutDialogComponent
 ];
 
 @NgModule({
   imports: [CommonModule, FontAwesomeModule, CustomMaterialModule, RouterModule, ReactiveFormsModule],
   declarations: [...COMPONENTS],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
+  entryComponents: [AboutDialogComponent]
 })
 export class SharedModule {}

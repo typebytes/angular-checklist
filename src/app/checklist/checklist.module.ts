@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { CustomMaterialModule } from '../custom-material.module';
 import { SharedModule } from '../shared/shared.module';
-import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { ChecklistCtaBarComponent } from './checklist-cta-bar/checklist-cta-bar.component';
 import { ChecklistDetailViewComponent } from './checklist-detail-view/checklist-detail-view.component';
 import { ChecklistFavoriteButtonComponent } from './checklist-favorite-button/checklist-favorite-button.component';
@@ -44,10 +43,9 @@ import { checklistReducer } from './state/checklist.reducer';
     ChecklistCtaBarComponent,
     ChecklistFavoriteButtonComponent,
     ConfirmationDialogComponent,
-    ChecklistSearchComponent,
-    AboutDialogComponent
+    ChecklistSearchComponent
   ],
   providers: [SearchService],
-  entryComponents: [ConfirmationDialogComponent, AboutDialogComponent]
+  entryComponents: [ConfirmationDialogComponent]
 })
 export class ChecklistModule {}

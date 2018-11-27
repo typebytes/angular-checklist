@@ -11,7 +11,6 @@ import { BreakpointService } from '../shared/breakpoint.service';
 import { selectOnce } from '../shared/operators';
 import { hasEntities } from '../shared/utils';
 import { ApplicationState } from '../state/app.state';
-import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { Category, ChecklistItem } from './models/checklist.model';
 import { ChecklistSelectors } from './state/checklist.selectors';
@@ -126,10 +125,6 @@ export class ChecklistComponent implements OnInit {
 
   trackById(_, item: ChecklistItem) {
     return item.id;
-  }
-
-  showAbout() {
-    this.dialog.open(AboutDialogComponent);
   }
 
   private openUserPrompt(favorites: Array<ChecklistItem>) {

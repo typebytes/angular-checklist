@@ -7,26 +7,36 @@ mat-toolbar {
   color: rgba(0, 0, 0, 0.5);
   font-size: 1rem !important;
   font-weight: 300 !important;
-
-  a {
-    cursor: pointer;
-    color: inherit;
-
-    fa-icon {
-      margin-right: 5px;
-    }
-
-    &:hover {
-      color: mat-color($primary);
-    }
-  }
 }
 
 .links {
   flex: 1;
 
-  a + a {
+  .cta + .cta {
     margin-left: 15px;
+  }
+}
+
+.author,
+.cta {
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.cta {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  outline: none;
+
+  fa-icon {
+    margin-right: 5px;
+  }
+
+  &:hover {
+    color: mat-color($primary);
   }
 }
 
