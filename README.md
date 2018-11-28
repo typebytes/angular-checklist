@@ -31,4 +31,4 @@ If you want to add a checklist item, file a bug, contribute some code, or improv
 
 # 📄 Licence
 
-MIT License (MIT) © [Dominic Elm](http://github.com/d3lm) and [Kwinten Pisman](https://github.com/KwintenP)
+MIT License (MIT) © [Dominic Elm](https://github.com/d3lm) and [Kwinten Pisman](https://github.com/KwintenP)
