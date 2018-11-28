@@ -1,18 +1,34 @@
-# Angular checklist
+<h1>
+    <img width="32" valign="bottom" src="https://angular-checklist.io/assets/angular-checklist.png">
+    Angular Checklist
+</h1>
 
-Repo for the code from [angular-checklist.io](https://angular-checklist.io). 
+This repo contains the code for [angular-checklist.io](https://angular-checklist.io).
 
-## Who
+---
 
-Hi 🤗, this is a project brought to you by <a href="https://twitter.com/elmd_">Dominic Elm</a> and <a
-    href="https://twitter.com/kwintenp">Kwinten Pisman</a>.
-## Why
+# 🤔 What is it?
 
-When we were doing code reviews, we would often see the same mistakes being made. That's when we decided to create angular-checklist 😊!
-  
-## What 
+Angular Checklist is a curated list of items that we believe every application should follow. Over the past couple of years, we have been doing a lot of code reviews and have often seen the same mistakes being made again and again.
 
-Angular checklist is a curated list of items that we believe every application should follow. We transformed every item into a 'todo' item.
-    The idea is that for every project you have, you can go over the checklist and see which points your projects already complies with and which you still have to put in some more effort!
+That's when we decided to create **Angular Checklist**.
 
-If you follow every point in this list, your project will definitely be on track to success!
+It's a curated list of best practices that we believe every application should follow in order to avoid some common pitfalls.
+
+Therefore, we transformed a bunch of best practices and common mistakes into _todo_ items.
+
+The idea is that for of your projects, you can go over the checklist and see which items your projects already comply with and which you still have to put in some more effort!
+
+To keep track of your progress, every group has a progress indicator which tells you how many items you have already checked. If the pie chart is fully filled, congratulations 🎉 ... your project will definitely be on track to success 🏆!
+
+# 👨‍💻 Who is behind this project?
+
+This project is brought to you with ❤️ by [Dominic Elm](https://twitter.com/elmd_) and [Kwinten Pisman](https://twitter.com/KwintenP).
+
+# 👷 Want to contribute?
+
+If you want to add a checklist item, file a bug, contribute some code, or improve our documentation, read up on our [contributing guidelines](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md), and check out [open issues](/issues) as well as [open pull requests](/pulls) to avoid potential conflicts.
+
+# 📄 Licence
+
+MIT License (MIT) © [Dominic Elm](http://github.com/d3lm) and [Kwinten Pisman](https://github.com/KwintenP)
