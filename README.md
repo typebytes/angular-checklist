@@ -1,5 +1,5 @@
 <h1>
-    <img width="32" valign="bottom" src="https://angular-checklist.io/assets/angular-checklist.png">
+    <img width="35" valign="bottom" src="https://angular-checklist.io/assets/angular-checklist.png">
     Angular Checklist
 </h1>
 
