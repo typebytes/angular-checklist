@@ -17,19 +17,15 @@ mat-toolbar {
   }
 }
 
-.author,
-.cta {
-  color: inherit;
-  font-weight: inherit;
-  font-size: inherit;
-  cursor: pointer;
-}
-
 .cta {
   background: transparent;
   border: 0;
   padding: 0;
   outline: none;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  cursor: pointer;
 
   fa-icon {
     margin-right: 5px;
@@ -40,37 +36,6 @@ mat-toolbar {
   }
 }
 
-.heart {
-  color: rgba(244, 81, 30, 0.9);
-}
-
-.links,
-.authors {
-  min-height: 33px;
-}
-
-.authors {
-  span:first-child {
-    margin-right: 10px;
-  }
-
-  span:not(:first-child) {
-    margin: 0 5px;
-  }
-
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-}
-
-.author {
-  font-size: 0.8rem;
-  background: #e2e2e2;
-  border-radius: 15px;
-  padding: 4px 10px;
-
-  &:hover {
-    background: mat-color($primary);
-    color: white !important;
-  }
+.links {
+  min-height: 34px;
 }

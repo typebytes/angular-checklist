@@ -8,7 +8,11 @@
       <fa-icon [icon]="['fab', 'github']"></fa-icon>
       <span>GitHub</span>
     </a>
-    <a class="cta" href="#" target="_blank">
+    <a
+      class="cta"
+      href="https://github.com/angular-checklist/angular-checklist/blob/master/CONTRIBUTING.md"
+      target="_blank"
+    >
       <fa-icon icon="hands-helping"></fa-icon>
       <span>Contribute</span>
     </a>
@@ -17,16 +21,5 @@
       <span>About</span>
     </button>
   </div>
-  <div class="authors">
-    <span>Made with <fa-icon class="heart" icon="heart"></fa-icon> by</span>
-    <a class="author" href="https://www.twitter.com/elmd_" target="_blank">
-      <fa-icon class="twitter" [icon]="['fab', 'twitter']"></fa-icon>
-      <span>Dominic Elm</span>
-    </a>
-    <span>&</span>
-    <a class="author" href="https://www.twitter.com/KwintenP" target="_blank">
-      <fa-icon class="twitter" [icon]="['fab', 'twitter']"></fa-icon>
-      <span>Kwinten Pisman</span>
-    </a>
-  </div>
+  <ac-authors></ac-authors>
 </mat-toolbar>

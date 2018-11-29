@@ -11,6 +11,8 @@ export class FooterComponent {
   constructor(private dialog: MatDialog) {}
 
   showAbout() {
-    this.dialog.open(AboutDialogComponent);
+    this.dialog.open(AboutDialogComponent, {
+      maxWidth: 600
+    });
   }
 }

@@ -1,0 +1,40 @@
+@import '../../../scss//mixins';
+@import '../../../scss//variables';
+@import '~@angular/material/theming';
+
+:host {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+}
+
+.authors {
+  span:first-child {
+    margin-right: 10px;
+  }
+
+  span:not(:first-child) {
+    margin: 0 5px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.author {
+  font-size: 0.8rem;
+  background: #e2e2e2;
+  border-radius: 15px;
+  padding: 4px 10px;
+  color: rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    background: mat-color($primary);
+    color: white !important;
+  }
+}
+
+.heart {
+  color: rgba(244, 81, 30, 0.9);
+}

@@ -25,6 +25,7 @@ import { ScoreChartComponent } from "./score-chart/score-chart.component";
 import { ToolbarLogoComponent } from "./toolbar/toolbar-logo/toolbar-logo.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { AboutDialogComponent } from "./about-dialog/about-dialog.component";
+import { AuthorsComponent } from "./authors/authors.component";
 
 library.add(
   faGithub,
@@ -55,7 +56,7 @@ const COMPONENTS = [
     RouterModule,
     ReactiveFormsModule
   ],
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, AuthorsComponent],
   exports: [...COMPONENTS],
   entryComponents: [AboutDialogComponent]
 })
