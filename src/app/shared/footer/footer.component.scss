@@ -39,3 +39,9 @@ mat-toolbar {
 .links {
   min-height: 34px;
 }
+
+ac-authors {
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
