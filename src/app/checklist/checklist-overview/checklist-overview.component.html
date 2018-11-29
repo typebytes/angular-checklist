@@ -1,5 +1,11 @@
-<ul [@breadcrumb]="breadcrumb.length" class="breadcrumb" *ngIf="breadcrumb$ | async as breadcrumb">
-  <ng-container *ngFor="let item of breadcrumb; let last = last; trackBy: trackByTitle">
+<ul
+  [@breadcrumb]="breadcrumb.length"
+  class="breadcrumb"
+  *ngIf="(breadcrumb$ | async) as breadcrumb"
+>
+  <ng-container
+    *ngFor="let item of breadcrumb; let last = last; trackBy: trackByTitle"
+  >
     <li (click)="goBack(last)" [class.active]="last" class="breadcrumb-item">
       {{ item.title }}
     </li>

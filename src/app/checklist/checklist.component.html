@@ -1,5 +1,7 @@
 <ac-toolbar [class.desktop]="desktop$ | async" [class.small]="small$ | async">
-  <button class="menu-button" mat-icon-button (click)="sideNav.toggle()"><mat-icon>menu</mat-icon></button>
+  <button class="menu-button" mat-icon-button (click)="sideNav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
   <ac-toolbar-logo [showText]="desktop$ | async"></ac-toolbar-logo>
   <ac-dropdown
     (selectionChange)="navigateToProject($event)"
@@ -9,7 +11,9 @@
     bindValue="id"
   >
     <ac-dropdown-static-options>
-      <ac-dropdown-static-option routerLink="/"> <mat-icon>edit</mat-icon> Manage Projects </ac-dropdown-static-option>
+      <ac-dropdown-static-option routerLink="/">
+        <mat-icon>edit</mat-icon> Manage Projects
+      </ac-dropdown-static-option>
     </ac-dropdown-static-options>
   </ac-dropdown>
   <ac-checklist-search *ngIf="(mediumUp$ | async)"></ac-checklist-search>
@@ -19,8 +23,16 @@
     <div class="section-container">
       <section>
         <nav class="nav-item">
-          <ac-score-chart [class.primary]="rla.isActive" [score]="favoritesScore$ | async"></ac-score-chart>
-          <a class="sidenav-link" routerLink="favorites" #rla="routerLinkActive" routerLinkActive="active">
+          <ac-score-chart
+            [class.primary]="rla.isActive"
+            [score]="favoritesScore$ | async"
+          ></ac-score-chart>
+          <a
+            class="sidenav-link"
+            routerLink="favorites"
+            #rla="routerLinkActive"
+            routerLinkActive="active"
+          >
             <span
               [matBadge]="favoritesCount$ | async"
               [matBadgeHidden]="!(favoritesCount$ | async)"
@@ -37,8 +49,15 @@
           <mat-slide-toggle (change)="toggleEditMode()">Edit</mat-slide-toggle>
         </div>
         <div class="category-list">
-          <nav class="category" *ngFor="let category of (categories$ | async); trackBy: trackBySlug">
-            <ac-score-chart *ngIf="!editMode" [class.primary]="rla.isActive" [score]="category.score"></ac-score-chart>
+          <nav
+            class="category"
+            *ngFor="let category of (categories$ | async); trackBy: trackBySlug"
+          >
+            <ac-score-chart
+              *ngIf="!editMode"
+              [class.primary]="rla.isActive"
+              [score]="category.score"
+            ></ac-score-chart>
             <a
               class="sidenav-link"
               [class.disabled]="!category.enabled"
@@ -61,7 +80,9 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="scroll-container"><router-outlet></router-outlet></div>
-    <div *ngIf="editMode" class="overlay"><span>🧐 Ups, seems like you're in edit mode!</span></div>
+    <div *ngIf="editMode" class="overlay">
+      <span>🧐 Ups, seems like you're in edit mode!</span>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <ac-footer></ac-footer>

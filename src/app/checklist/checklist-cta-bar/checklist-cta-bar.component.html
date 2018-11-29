@@ -1,14 +1,29 @@
 <div class="cta-bar">
   <div class="filters" *ngIf="filter">
-    <button class="filter" mat-button (click)="filterChange.emit('ALL')" [class.active]="filter === 'ALL'">
+    <button
+      class="filter"
+      mat-button
+      (click)="filterChange.emit('ALL')"
+      [class.active]="filter === 'ALL'"
+    >
       <mat-icon>assignment</mat-icon>
       ALL
     </button>
-    <button class="filter" mat-button (click)="filterChange.emit('DONE')" [class.active]="filter === 'DONE'">
+    <button
+      class="filter"
+      mat-button
+      (click)="filterChange.emit('DONE')"
+      [class.active]="filter === 'DONE'"
+    >
       <mat-icon>done</mat-icon>
       DONE
     </button>
-    <button class="filter" mat-button (click)="filterChange.emit('TODO')" [class.active]="filter === 'TODO'">
+    <button
+      class="filter"
+      mat-button
+      (click)="filterChange.emit('TODO')"
+      [class.active]="filter === 'TODO'"
+    >
       <mat-icon>check_box_outline_blank</mat-icon>
       TODO
     </button>

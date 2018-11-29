@@ -1,3 +1,14 @@
-<mat-checkbox color="primary" (click)="toggleItem.emit(item)" [checked]="item.checked"></mat-checkbox>
-<a [class.done]="item.checked" [routerLink]="['../../checklist', item.category, item.id]">{{ item.title }}</a>
-<ac-checklist-favorite-button [active]="item.favorite" (toggle)="toggleFavorite.emit(item)"></ac-checklist-favorite-button>
+<mat-checkbox
+  color="primary"
+  (click)="toggleItem.emit(item)"
+  [checked]="item.checked"
+></mat-checkbox>
+<a
+  [class.done]="item.checked"
+  [routerLink]="['../../checklist', item.category, item.id]"
+  >{{ item.title }}</a
+>
+<ac-checklist-favorite-button
+  [active]="item.favorite"
+  (toggle)="toggleFavorite.emit(item)"
+></ac-checklist-favorite-button>
