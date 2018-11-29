@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 
 import {
   MatAutocompleteModule,
@@ -17,7 +17,7 @@ import {
   MatSlideToggleModule,
   MatToolbarModule,
   MAT_CHECKBOX_CLICK_ACTION
-} from '@angular/material';
+} from "@angular/material";
 
 @NgModule({
   exports: [
@@ -37,6 +37,6 @@ import {
     MatProgressSpinnerModule,
     MatSelectModule
   ],
-  providers: [{ provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' }]
+  providers: [{ provide: MAT_CHECKBOX_CLICK_ACTION, useValue: "noop" }]
 })
 export class CustomMaterialModule {}

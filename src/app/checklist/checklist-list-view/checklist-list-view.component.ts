@@ -1,30 +1,50 @@
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CheckAll, ToggleFavorite, ToggleItem, UncheckAll } from '../../projects/state/projects.actions';
-import { selectOnce } from '../../shared/operators';
-import { ApplicationState } from '../../state/app.state';
-import { CategoryEntity, ChecklistFilter, ChecklistItem } from '../models/checklist.model';
-import { SetCategoriesFilter } from '../state/checklist.actions';
-import { ChecklistSelectors } from '../state/checklist.selectors';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from "@angular/cdk/layout";
+import { Component, OnInit } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import {
+  CheckAll,
+  ToggleFavorite,
+  ToggleItem,
+  UncheckAll
+} from "../../projects/state/projects.actions";
+import { selectOnce } from "../../shared/operators";
+import { ApplicationState } from "../../state/app.state";
+import {
+  CategoryEntity,
+  ChecklistFilter,
+  ChecklistItem
+} from "../models/checklist.model";
+import { SetCategoriesFilter } from "../state/checklist.actions";
+import { ChecklistSelectors } from "../state/checklist.selectors";
 
 @Component({
-  selector: 'ac-list-view',
-  templateUrl: './checklist-list-view.component.html',
-  styleUrls: ['./checklist-list-view.component.scss']
+  selector: "ac-list-view",
+  templateUrl: "./checklist-list-view.component.html",
+  styleUrls: ["./checklist-list-view.component.scss"]
 })
 export class ListViewComponent implements OnInit {
   items$: Observable<any>;
   filter$: Observable<ChecklistFilter>;
   showActionButtons$: Observable<boolean>;
 
-  constructor(private store: Store<ApplicationState>, private breakPointObserver: BreakpointObserver) {}
+  constructor(
+    private store: Store<ApplicationState>,
+    private breakPointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit() {
-    this.items$ = this.store.pipe(select(ChecklistSelectors.getItemsFromSelectedCategory));
-    this.filter$ = this.store.pipe(select(ChecklistSelectors.getCategroriesFilter));
+    this.items$ = this.store.pipe(
+      select(ChecklistSelectors.getItemsFromSelectedCategory)
+    );
+    this.filter$ = this.store.pipe(
+      select(ChecklistSelectors.getCategroriesFilter)
+    );
 
     this.showActionButtons$ = this.breakPointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
@@ -40,11 +60,15 @@ export class ListViewComponent implements OnInit {
   }
 
   checkAllItems() {
-    this.getSelectedCategory().subscribe(category => this.store.dispatch(new CheckAll(category)));
+    this.getSelectedCategory().subscribe(category =>
+      this.store.dispatch(new CheckAll(category))
+    );
   }
 
   uncheckAllItems() {
-    this.getSelectedCategory().subscribe(category => this.store.dispatch(new UncheckAll(category)));
+    this.getSelectedCategory().subscribe(category =>
+      this.store.dispatch(new UncheckAll(category))
+    );
   }
 
   toggleFavorite(item: ChecklistItem) {

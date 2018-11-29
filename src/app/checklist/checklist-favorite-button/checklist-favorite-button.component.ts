@@ -1,9 +1,9 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from "@angular/core";
 
 @Component({
-  selector: 'ac-checklist-favorite-button',
-  templateUrl: './checklist-favorite-button.component.html',
-  styleUrls: ['./checklist-favorite-button.component.scss']
+  selector: "ac-checklist-favorite-button",
+  templateUrl: "./checklist-favorite-button.component.html",
+  styleUrls: ["./checklist-favorite-button.component.scss"]
 })
 export class ChecklistFavoriteButtonComponent {
   _style = {};

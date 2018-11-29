@@ -1,18 +1,21 @@
-import { Action } from '@ngrx/store';
-import { CategoryEntity, ChecklistItem } from '../../checklist/models/checklist.model';
-import { Project } from '../models/projects.model';
+import { Action } from "@ngrx/store";
+import {
+  CategoryEntity,
+  ChecklistItem
+} from "../../checklist/models/checklist.model";
+import { Project } from "../models/projects.model";
 
 export enum ProjectsActionTypes {
-  TOGGLE_ITEM = '[Projects] toggle item',
-  TOGGLE_CATEGORY = '[Projects] toggle category',
-  ADD_PROJECT = '[Projects] add project',
-  DELETE_PROJECT = '[Projects] delete project',
-  EDIT_PROJECT = '[Projects] edit project',
-  SELECT_PROJECT = '[Projects] select project',
-  CHECK_ALL = '[Projects] check all',
-  UNCHECK_ALL = '[Projects] uncheck all',
-  TOGGLE_FAVORITE = '[Projects] add favorite',
-  TOGGLE_ALL_FAVORITES = '[Projects] toggle all favorites'
+  TOGGLE_ITEM = "[Projects] toggle item",
+  TOGGLE_CATEGORY = "[Projects] toggle category",
+  ADD_PROJECT = "[Projects] add project",
+  DELETE_PROJECT = "[Projects] delete project",
+  EDIT_PROJECT = "[Projects] edit project",
+  SELECT_PROJECT = "[Projects] select project",
+  CHECK_ALL = "[Projects] check all",
+  UNCHECK_ALL = "[Projects] uncheck all",
+  TOGGLE_FAVORITE = "[Projects] add favorite",
+  TOGGLE_ALL_FAVORITES = "[Projects] toggle all favorites"
 }
 
 export class UncheckAll implements Action {
@@ -54,7 +57,9 @@ export class DeleteProject implements Action {
 export class EditProject implements Action {
   readonly type = ProjectsActionTypes.EDIT_PROJECT;
 
-  constructor(public payload: { current: Project; updated: Partial<Project> }) {}
+  constructor(
+    public payload: { current: Project; updated: Partial<Project> }
+  ) {}
 }
 
 export class SelectProject implements Action {

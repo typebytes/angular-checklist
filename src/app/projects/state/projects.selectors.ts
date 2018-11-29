@@ -1,8 +1,8 @@
-import { createSelector } from '@ngrx/store';
-import { extractRouteParams } from '../../shared/router.utils';
-import { computeScore } from '../../state/app-state.utils';
-import { AppSelectors } from '../../state/app.selectors';
-import { Project } from '../models/projects.model';
+import { createSelector } from "@ngrx/store";
+import { extractRouteParams } from "../../shared/router.utils";
+import { computeScore } from "../../state/app-state.utils";
+import { AppSelectors } from "../../state/app.selectors";
+import { Project } from "../models/projects.model";
 
 export namespace ProjectsSelectors {
   export const getProjectEntities = createSelector(
@@ -59,11 +59,22 @@ export namespace ProjectsSelectors {
     AppSelectors.getCategoryEntities,
     (projectEntities, categoryEntities) => {
       return Object.keys(projectEntities).reduce((scores, projectId) => {
-        const categoryScore = Object.keys(categoryEntities).reduce((score, categoryId) => {
-          return score + computeScore(categoryEntities[categoryId].items, projectEntities[projectId].items);
-        }, 0);
+        const categoryScore = Object.keys(categoryEntities).reduce(
+          (score, categoryId) => {
+            return (
+              score +
+              computeScore(
+                categoryEntities[categoryId].items,
+                projectEntities[projectId].items
+              )
+            );
+          },
+          0
+        );
 
-        scores[projectId] = (categoryScore / Object.keys(categoryEntities).length).toFixed(2);
+        scores[projectId] = (
+          categoryScore / Object.keys(categoryEntities).length
+        ).toFixed(2);
 
         return scores;
       }, {});

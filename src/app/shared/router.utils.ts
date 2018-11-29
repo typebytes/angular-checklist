@@ -1,6 +1,13 @@
-import { ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Params
+} from "@angular/router";
 
-export const extractRouteParams = (snapshot: ActivatedRouteSnapshot, levels = 0): Params => {
+export const extractRouteParams = (
+  snapshot: ActivatedRouteSnapshot,
+  levels = 0
+): Params => {
   if (levels === 0 || !snapshot.firstChild) {
     return snapshot.params;
   }

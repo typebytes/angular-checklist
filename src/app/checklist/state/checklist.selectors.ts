@@ -1,11 +1,21 @@
-import { createSelector } from '@ngrx/store';
-import { ProjectsSelectors } from '../../projects/state/projects.selectors';
-import { extractRouteParams } from '../../shared/router.utils';
-import { calculatePercentage, computeScore, createChecklistItem, filterItems } from '../../state/app-state.utils';
-import { AppSelectors } from '../../state/app.selectors';
-import { BreadcrumbItem, Category, CategoryEntity, ChecklistItem } from '../models/checklist.model';
+import { createSelector } from "@ngrx/store";
+import { ProjectsSelectors } from "../../projects/state/projects.selectors";
+import { extractRouteParams } from "../../shared/router.utils";
+import {
+  calculatePercentage,
+  computeScore,
+  createChecklistItem,
+  filterItems
+} from "../../state/app-state.utils";
+import { AppSelectors } from "../../state/app.selectors";
+import {
+  BreadcrumbItem,
+  Category,
+  CategoryEntity,
+  ChecklistItem
+} from "../models/checklist.model";
 
-const _groupBy = require('lodash.groupby');
+const _groupBy = require("lodash.groupby");
 
 export namespace ChecklistSelectors {
   export const getFavroitesFilter = createSelector(
@@ -79,7 +89,12 @@ export namespace ChecklistSelectors {
     AppSelectors.getCategoryEntities,
     ProjectsSelectors.getDisabledCategories,
     getScores,
-    (routerState, categoryEntities, disabledCategories, scores): CategoryEntity => {
+    (
+      routerState,
+      categoryEntities,
+      disabledCategories,
+      scores
+    ): CategoryEntity => {
       const { category } = extractRouteParams(routerState.root, 4);
 
       let selectedCategory = null;
@@ -114,10 +129,18 @@ export namespace ChecklistSelectors {
     getCategroriesFilter,
     ProjectsSelectors.getProjectItems,
     getFavoritesFromSelectedCategory,
-    (items, selectedCategory, filter, projectItems, favorites): Array<ChecklistItem> => {
+    (
+      items,
+      selectedCategory,
+      filter,
+      projectItems,
+      favorites
+    ): Array<ChecklistItem> => {
       if (selectedCategory) {
         return filterItems(
-          selectedCategory.items.map(id => createChecklistItem(id, items, projectItems, favorites)),
+          selectedCategory.items.map(id =>
+            createChecklistItem(id, items, projectItems, favorites)
+          ),
           filter
         );
       }
@@ -132,7 +155,13 @@ export namespace ChecklistSelectors {
     AppSelectors.getRouterState,
     ProjectsSelectors.getProjectItems,
     getFavoritesFromSelectedCategory,
-    (selectedCategory, items, routerState, projectItems, favorites): ChecklistItem => {
+    (
+      selectedCategory,
+      items,
+      routerState,
+      projectItems,
+      favorites
+    ): ChecklistItem => {
       const { item: id } = extractRouteParams(routerState.root, 4);
 
       if (selectedCategory && id) {
@@ -152,7 +181,7 @@ export namespace ChecklistSelectors {
         createChecklistItem(itemId, itemEntities, projectItems, favorites)
       );
 
-      return _groupBy(items, 'category');
+      return _groupBy(items, "category");
     }
   );
 
@@ -195,7 +224,9 @@ export namespace ChecklistSelectors {
       if (favorites.length) {
         const score = favorites.reduce(
           (acc, category) => {
-            acc.checkedItems += category.items.filter((item: ChecklistItem) => item.checked).length;
+            acc.checkedItems += category.items.filter(
+              (item: ChecklistItem) => item.checked
+            ).length;
             acc.totalItems += category.items.length;
             return acc;
           },

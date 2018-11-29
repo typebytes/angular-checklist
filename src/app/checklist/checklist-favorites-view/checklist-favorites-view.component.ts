@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { ToggleFavorite, ToggleItem } from '../../projects/state/projects.actions';
-import { ApplicationState } from '../../state/app.state';
-import { ChecklistFilter, ChecklistItem, Favorite } from '../models/checklist.model';
-import { SetFavoritesFilter } from '../state/checklist.actions';
-import { ChecklistSelectors } from '../state/checklist.selectors';
+import { Component, OnInit } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import {
+  ToggleFavorite,
+  ToggleItem
+} from "../../projects/state/projects.actions";
+import { ApplicationState } from "../../state/app.state";
+import {
+  ChecklistFilter,
+  ChecklistItem,
+  Favorite
+} from "../models/checklist.model";
+import { SetFavoritesFilter } from "../state/checklist.actions";
+import { ChecklistSelectors } from "../state/checklist.selectors";
 
 @Component({
-  selector: 'ac-checklist-favorites-view',
-  templateUrl: './checklist-favorites-view.component.html',
-  styleUrls: ['./checklist-favorites-view.component.scss']
+  selector: "ac-checklist-favorites-view",
+  templateUrl: "./checklist-favorites-view.component.html",
+  styleUrls: ["./checklist-favorites-view.component.scss"]
 })
 export class ChecklistFavoritesViewComponent implements OnInit {
   favorites$: Observable<Array<Favorite>>;
@@ -19,8 +26,12 @@ export class ChecklistFavoritesViewComponent implements OnInit {
   constructor(private store: Store<ApplicationState>) {}
 
   ngOnInit() {
-    this.favorites$ = this.store.pipe(select(ChecklistSelectors.getFilteredFavorites));
-    this.filter$ = this.store.pipe(select(ChecklistSelectors.getFavroitesFilter));
+    this.favorites$ = this.store.pipe(
+      select(ChecklistSelectors.getFilteredFavorites)
+    );
+    this.filter$ = this.store.pipe(
+      select(ChecklistSelectors.getFavroitesFilter)
+    );
   }
 
   setFilter(filter: ChecklistFilter) {

@@ -1,4 +1,8 @@
-import { CategoryEntities, Filter, ItemEntities } from '../models/checklist.model';
+import {
+  CategoryEntities,
+  Filter,
+  ItemEntities
+} from "../models/checklist.model";
 
 export interface ChecklistState {
   categories: CategoryEntities;

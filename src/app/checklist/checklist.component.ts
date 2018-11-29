@@ -1,20 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSidenav } from '@angular/material';
-import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, Observable, of, zip } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { Project } from '../projects/models/projects.model';
-import { ToggleAllFavorites, ToggleCategory } from '../projects/state/projects.actions';
-import { ProjectsSelectors } from '../projects/state/projects.selectors';
-import { BreakpointService } from '../shared/breakpoint.service';
-import { selectOnce } from '../shared/operators';
-import { hasEntities } from '../shared/utils';
-import { ApplicationState } from '../state/app.state';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { Category, ChecklistItem } from './models/checklist.model';
-import { ToggleEditMode } from './state/checklist.actions';
-import { ChecklistSelectors } from './state/checklist.selectors';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatDialog, MatSidenav } from "@angular/material";
+import { Router } from "@angular/router";
+import { select, Store } from "@ngrx/store";
+import { BehaviorSubject, combineLatest, Observable, of, zip } from "rxjs";
+import { filter, map, switchMap } from "rxjs/operators";
+import { Project } from "../projects/models/projects.model";
+import {
+  ToggleAllFavorites,
+  ToggleCategory
+} from "../projects/state/projects.actions";
+import { ProjectsSelectors } from "../projects/state/projects.selectors";
+import { BreakpointService } from "../shared/breakpoint.service";
+import { selectOnce } from "../shared/operators";
+import { hasEntities } from "../shared/utils";
+import { ApplicationState } from "../state/app.state";
+import { ConfirmationDialogComponent } from "./confirmation-dialog/confirmation-dialog.component";
+import { Category, ChecklistItem } from "./models/checklist.model";
+import { ToggleEditMode } from "./state/checklist.actions";
+import { ChecklistSelectors } from "./state/checklist.selectors";
 
 enum CategoryListMode {
   List,
@@ -22,9 +25,9 @@ enum CategoryListMode {
 }
 
 @Component({
-  selector: 'ac-checklist',
-  templateUrl: './checklist.component.html',
-  styleUrls: ['./checklist.component.scss']
+  selector: "ac-checklist",
+  templateUrl: "./checklist.component.html",
+  styleUrls: ["./checklist.component.scss"]
 })
 export class ChecklistComponent implements OnInit {
   private editMode$ = new BehaviorSubject(CategoryListMode.List);
@@ -42,7 +45,7 @@ export class ChecklistComponent implements OnInit {
 
   editMode = false;
 
-  sideNavMode = 'side';
+  sideNavMode = "side";
 
   @ViewChild(MatSidenav)
   sideNav: MatSidenav;
@@ -55,25 +58,39 @@ export class ChecklistComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.categories$ = this.editMode$.pipe(switchMap(mode => this.getCategories(mode)));
+    this.categories$ = this.editMode$.pipe(
+      switchMap(mode => this.getCategories(mode))
+    );
     this.projects$ = this.store.pipe(select(ProjectsSelectors.getProjects));
-    this.selectedProjectId$ = this.store.pipe(select(ProjectsSelectors.getSelectedProjectId));
-    this.favoritesCount$ = this.store.pipe(select(ChecklistSelectors.getFavoritesCount));
-    this.favoritesScore$ = this.store.pipe(select(ChecklistSelectors.getFavoritesScore));
+    this.selectedProjectId$ = this.store.pipe(
+      select(ProjectsSelectors.getSelectedProjectId)
+    );
+    this.favoritesCount$ = this.store.pipe(
+      select(ChecklistSelectors.getFavoritesCount)
+    );
+    this.favoritesScore$ = this.store.pipe(
+      select(ChecklistSelectors.getFavoritesScore)
+    );
 
-    const { small$, medium$, desktop$ } = this.breakpointService.getAllBreakpoints();
+    const {
+      small$,
+      medium$,
+      desktop$
+    } = this.breakpointService.getAllBreakpoints();
 
     this.small$ = small$;
     this.desktop$ = desktop$;
-    this.mediumUp$ = combineLatest(medium$, desktop$).pipe(map(([medium, desktop]) => medium || desktop));
+    this.mediumUp$ = combineLatest(medium$, desktop$).pipe(
+      map(([medium, desktop]) => medium || desktop)
+    );
 
     desktop$.subscribe(matches => {
       if (!matches) {
         this.sideNav.close();
-        this.setSidenavMode('over');
+        this.setSidenavMode("over");
       } else {
         this.sideNav.open();
-        this.setSidenavMode('side');
+        this.setSidenavMode("side");
       }
     });
   }
@@ -81,7 +98,9 @@ export class ChecklistComponent implements OnInit {
   toggleCategory(category: Category) {
     this.store
       .pipe(
-        selectOnce(ChecklistSelectors.getFavoriteEntitiesByCategory(category.slug)),
+        selectOnce(
+          ChecklistSelectors.getFavoriteEntitiesByCategory(category.slug)
+        ),
         switchMap((favorites: Array<ChecklistItem>) => {
           if (hasEntities(favorites) && category.enabled) {
             return this.openUserPrompt(favorites);
@@ -97,12 +116,16 @@ export class ChecklistComponent implements OnInit {
   toggleEditMode() {
     this.editMode = !this.editMode;
     this.store.dispatch(new ToggleEditMode());
-    this.editMode$.next(this.editMode ? CategoryListMode.Edit : CategoryListMode.List);
+    this.editMode$.next(
+      this.editMode ? CategoryListMode.Edit : CategoryListMode.List
+    );
 
     of(this.editMode)
       .pipe(
         filter(editMode => !editMode),
-        switchMap(_ => this.store.pipe(selectOnce(ChecklistSelectors.getSelectedCategory))),
+        switchMap(_ =>
+          this.store.pipe(selectOnce(ChecklistSelectors.getSelectedCategory))
+        ),
         filter(category => !!category),
         filter(category => !category.enabled),
         switchMap(_ =>
@@ -113,7 +136,7 @@ export class ChecklistComponent implements OnInit {
         )
       )
       .subscribe(([categories, projectId]) => {
-        this.router.navigate(['/', projectId, 'checklist', categories[0].slug]);
+        this.router.navigate(["/", projectId, "checklist", categories[0].slug]);
       });
   }
 
@@ -132,16 +155,21 @@ export class ChecklistComponent implements OnInit {
   private openUserPrompt(favorites: Array<ChecklistItem>) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        title: 'Disable Category',
+        title: "Disable Category",
         text: `Wooops! The category you are trying to disable has favorites. Disabling it will remove the favorites from this category.`,
-        buttonText: 'Disable Anyways'
+        buttonText: "Disable Anyways"
       }
     });
 
-    return dialogRef.afterClosed().pipe(switchMap(result => this.processDialogResult(result, favorites)));
+    return dialogRef
+      .afterClosed()
+      .pipe(switchMap(result => this.processDialogResult(result, favorites)));
   }
 
-  private processDialogResult(result: boolean, favorites: Array<ChecklistItem>) {
+  private processDialogResult(
+    result: boolean,
+    favorites: Array<ChecklistItem>
+  ) {
     if (result) {
       this.store.dispatch(new ToggleAllFavorites(favorites));
     }
@@ -150,16 +178,20 @@ export class ChecklistComponent implements OnInit {
   }
 
   private getCategories(mode: CategoryListMode) {
-    let categories$ = this.store.pipe(select(ChecklistSelectors.getActiveCategories));
+    let categories$ = this.store.pipe(
+      select(ChecklistSelectors.getActiveCategories)
+    );
 
     if (mode === CategoryListMode.Edit) {
-      categories$ = this.store.pipe(select(ChecklistSelectors.getAllCategories));
+      categories$ = this.store.pipe(
+        select(ChecklistSelectors.getAllCategories)
+      );
     }
 
     return categories$;
   }
 
-  private setSidenavMode(mode: 'side' | 'over') {
+  private setSidenavMode(mode: "side" | "over") {
     this.sideNavMode = mode;
   }
 }
