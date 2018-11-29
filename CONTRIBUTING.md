@@ -114,7 +114,7 @@ Bottom line is, keep it small and on the point!
 
 Here are a few things you can do that will increase the likelihood of your pull request being accepted:
 
-- Follow the [style guide][style] which is using Prettier. Any linting errors should be shown when running `yarn lint`. Linting or formatting errors can be automatically fixed by running `yarn style:fix`.
+- Follow the [style guide][style] which is using Prettier. Any linting errors should be shown when running `yarn lint`. Linting or formatting errors can be automatically fixed by running `yarn format:fix`.
 - Keep your change as focused as possible. If there are multiple changes you would like to make that are not dependent upon each other, consider submitting them as separate pull requests.
 - Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
