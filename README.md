@@ -13,11 +13,11 @@ Angular Checklist is a curated list of items that we believe every application s
 
 That's when we decided to create **Angular Checklist**.
 
-It's a curated list of best practices that we believe every application should follow in order to avoid some common pitfalls.
+It's a curated list of best practices to avoid some common pitfalls.
 
 Therefore, we transformed a bunch of best practices and common mistakes into _todo_ items.
 
-The idea is that for of your projects, you can go over the checklist and see which items your projects already comply with and which you still have to put in some more effort!
+The idea is that for all your projects, you can go over the checklist and see which items your projects already comply with and which you still have to put in some more effort!
 
 To keep track of your progress, every group has a progress indicator which tells you how many items you have already checked. If the pie chart is fully filled, congratulations 🎉 ... your project will definitely be on track to success 🏆!
 
