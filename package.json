@@ -13,7 +13,22 @@
     "e2e": "ng e2e",
     "build-content": "ts-node ./tools/build-checklist.ts",
     "build-content:watch": "nodemon",
-    "ci": "npm run build-content && ng build --prod"
+    "ci": "npm run build-content && ng build --prod",
+    "format:base": "prettier \"{src,tools}/**/*{.ts,.js,.json}\"",
+    "format:check": "npm run format:base -- --list-different",
+    "format:fix": "npm run format:base -- --write"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint --env HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{src,tools}/**/*{.ts,.js,.json}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "private": true,
   "dependencies": {
@@ -53,6 +68,9 @@
     "@angular/cli": "~7.1.0",
     "@angular/compiler-cli": "^7.1.0",
     "@angular/language-service": "^7.1.0",
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-angular": "^7.1.2",
+    "@commitlint/travis-cli": "^7.2.1",
     "@nguniversal/module-map-ngfactory-loader": "^7.0.2",
     "@types/highlight.js": "^9.12.2",
     "@types/jasmine": "~2.8.6",
@@ -63,6 +81,7 @@
     "concurrently": "^4.1.0",
     "gray-matter": "^4.0.1",
     "http-server": "^0.11.1",
+    "husky": "^1.2.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -70,9 +89,11 @@
     "karma-coverage-istanbul-reporter": "~1.4.2",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "lint-staged": "^8.1.0",
     "markdown-it": "^8.4.1",
     "ngrx-store-freeze": "^0.2.4",
     "nodemon": "^1.18.7",
+    "prettier": "^1.15.2",
     "protractor": "~5.3.0",
     "shorthash": "^0.0.2",
     "ts-node": "^6.0.3",
