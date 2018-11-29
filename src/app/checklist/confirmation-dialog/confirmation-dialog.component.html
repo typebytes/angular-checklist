@@ -2,7 +2,5 @@
 <div mat-dialog-content>{{ data.text }}</div>
 <div mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="false">Cancel</button>
-  <button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>
-    {{ data.buttonText }}
-  </button>
+  <button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>{{ data.buttonText }}</button>
 </div>

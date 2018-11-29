@@ -1,16 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: "ac-score-chart",
-  templateUrl: "./score-chart.component.html",
-  styleUrls: ["./score-chart.component.scss"],
+  selector: 'ac-score-chart',
+  templateUrl: './score-chart.component.html',
+  styleUrls: ['./score-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreChartComponent implements OnChanges {
@@ -20,10 +13,7 @@ export class ScoreChartComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.score) {
-      this.elementRef.nativeElement.style.setProperty(
-        "--percentage",
-        this.score
-      );
+      this.elementRef.nativeElement.style.setProperty('--percentage', this.score);
     }
   }
 }

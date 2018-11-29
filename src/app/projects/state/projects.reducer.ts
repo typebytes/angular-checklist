@@ -1,19 +1,10 @@
-import { Action, ActionReducer } from "@ngrx/store";
-import {
-  Project,
-  ProjectEntities,
-  ProjectsState,
-  FavoriteEntities
-} from "../models/projects.model";
-import {
-  createNewProject,
-  toggleEntity,
-  toggleManny
-} from "./project-state.utils";
-import { ProjectsActions, ProjectsActionTypes } from "./projects.actions";
+import { Action, ActionReducer } from '@ngrx/store';
+import { Project, ProjectEntities, ProjectsState, FavoriteEntities } from '../models/projects.model';
+import { createNewProject, toggleEntity, toggleManny } from './project-state.utils';
+import { ProjectsActions, ProjectsActionTypes } from './projects.actions';
 
 const DEFAULT_PROJECT: ProjectEntities = {
-  default: createNewProject("default")
+  default: createNewProject('default')
 };
 
 function projectsStateReducer(state: ProjectsState, action: ProjectsActions) {
@@ -41,10 +32,7 @@ function projectsStateReducer(state: ProjectsState, action: ProjectsActions) {
   }
 }
 
-export const projectEntitiesReducer = (
-  state: ProjectsState,
-  action: ProjectsActions
-): ProjectEntities => {
+export const projectEntitiesReducer = (state: ProjectsState, action: ProjectsActions): ProjectEntities => {
   const selectedProject = state.selectedProjectId;
   const entities = state.entities;
 
@@ -70,10 +58,7 @@ export const projectEntitiesReducer = (
         [project.id]: createNewProject(project.id, project.name)
       };
     case ProjectsActionTypes.DELETE_PROJECT:
-      const {
-        [action.payload]: deletedProject,
-        ...updatedEntities
-      } = state.entities;
+      const { [action.payload]: deletedProject, ...updatedEntities } = state.entities;
 
       return {
         ...updatedEntities
@@ -93,10 +78,7 @@ export const projectEntitiesReducer = (
   }
 };
 
-export const projectReducer = (
-  project: Project,
-  action: ProjectsActions
-): Project => {
+export const projectReducer = (project: Project, action: ProjectsActions): Project => {
   switch (action.type) {
     case ProjectsActionTypes.TOGGLE_FAVORITE:
     case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
@@ -128,20 +110,14 @@ export const projectReducer = (
     case ProjectsActionTypes.TOGGLE_CATEGORY:
       return {
         ...project,
-        disabledCategories: toggleEntity(
-          project.disabledCategories,
-          action.payload
-        )
+        disabledCategories: toggleEntity(project.disabledCategories, action.payload)
       };
     default:
       return project;
   }
 };
 
-export const favoritesReducer = (
-  favoriteEntities: FavoriteEntities,
-  action: ProjectsActions
-) => {
+export const favoritesReducer = (favoriteEntities: FavoriteEntities, action: ProjectsActions) => {
   switch (action.type) {
     case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
       const updatedFavorites = { ...favoriteEntities };

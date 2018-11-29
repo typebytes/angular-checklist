@@ -1,18 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import {
-  ToggleFavorite,
-  ToggleItem
-} from "../../projects/state/projects.actions";
-import { ApplicationState } from "../../state/app.state";
-import { ChecklistItem } from "../models/checklist.model";
-import { ChecklistSelectors } from "../state/checklist.selectors";
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ToggleFavorite, ToggleItem } from '../../projects/state/projects.actions';
+import { ApplicationState } from '../../state/app.state';
+import { ChecklistItem } from '../models/checklist.model';
+import { ChecklistSelectors } from '../state/checklist.selectors';
 
 @Component({
-  selector: "ac-checklist-detail-view",
-  templateUrl: "./checklist-detail-view.component.html",
-  styleUrls: ["./checklist-detail-view.component.scss"]
+  selector: 'ac-checklist-detail-view',
+  templateUrl: './checklist-detail-view.component.html',
+  styleUrls: ['./checklist-detail-view.component.scss']
 })
 export class ChecklistDetailViewComponent implements OnInit {
   item$: Observable<any>;

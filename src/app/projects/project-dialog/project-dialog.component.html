@@ -13,18 +13,9 @@
         placeholder="Project Name"
         type="text"
       />
-      <mat-hint align="end"
-        >{{ projectName.value?.length || 0 }}/{{ maxLength }}</mat-hint
-      >
-      <mat-error *ngIf="projectName.hasError('projectExists')"
-        >Project already exists</mat-error
-      >
-      <mat-spinner
-        *ngIf="projectName.pending"
-        diameter="20"
-        color="primary"
-        matSuffix
-      ></mat-spinner>
+      <mat-hint align="end">{{ projectName.value?.length || 0 }}/{{ maxLength }}</mat-hint>
+      <mat-error *ngIf="projectName.hasError('projectExists')">Project already exists</mat-error>
+      <mat-spinner *ngIf="projectName.pending" diameter="20" color="primary" matSuffix></mat-spinner>
     </mat-form-field>
   </div>
   <div class="danger-zone-wrapper" *ngIf="isEditMode()">
@@ -33,22 +24,12 @@
       <li class="danger-zone-cta">
         <span class="danger-zone-cta-title">Delete Project</span>
         <div class="danger-zone-cta-content">
-          <p>
-            Once you delete a project, there is no going back. Please be
-            certain.
-          </p>
+          <p>Once you delete a project, there is no going back. Please be certain.</p>
           <mat-form-field>
             <input matInput [formControl]="verifyProjectName" type="text" />
-            <mat-hint align="end"
-              >Please type in the project name to confirm.</mat-hint
-            >
+            <mat-hint align="end">Please type in the project name to confirm.</mat-hint>
           </mat-form-field>
-          <button
-            (click)="deleteProject()"
-            [disabled]="!verifyProjectName.valid"
-            mat-raised-button
-            color="warn"
-          >
+          <button (click)="deleteProject()" [disabled]="!verifyProjectName.valid" mat-raised-button color="warn">
             Delete this Project
           </button>
         </div>

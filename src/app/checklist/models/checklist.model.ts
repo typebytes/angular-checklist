@@ -1,4 +1,4 @@
-import { EntityState } from "../../shared/models";
+import { EntityState } from '../../shared/models';
 
 export interface Author {
   name: string;
@@ -32,7 +32,7 @@ export interface Category extends BaseCategory {
   items: Array<ChecklistItem>;
 }
 
-export type ChecklistFilter = "ALL" | "DONE" | "TODO";
+export type ChecklistFilter = 'ALL' | 'DONE' | 'TODO';
 
 export interface Filter {
   categories: ChecklistFilter;

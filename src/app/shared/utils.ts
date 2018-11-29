@@ -1,9 +1,7 @@
-import { EntityState } from "./models";
+import { EntityState } from './models';
 
 export const isObject = (item: any) => {
-  return (
-    item && typeof item === "object" && !Array.isArray(item) && item !== null
-  );
+  return item && typeof item === 'object' && !Array.isArray(item) && item !== null;
 };
 
 export const hasEntities = (entityState: EntityState<any>) => {
@@ -13,6 +11,6 @@ export const hasEntities = (entityState: EntityState<any>) => {
 export const convertToProjectId = (projectName: string) => {
   return projectName
     .toLowerCase()
-    .replace(/\s+/g, "-")
+    .replace(/\s+/g, '-')
     .trim();
 };

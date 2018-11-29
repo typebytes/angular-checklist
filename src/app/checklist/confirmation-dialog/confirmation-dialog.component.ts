@@ -1,16 +1,16 @@
-import { Component, HostBinding, Inject, OnInit } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material";
+import { Component, HostBinding, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: "ac-confirmation-dialog",
-  templateUrl: "./confirmation-dialog.component.html",
-  styleUrls: ["./confirmation-dialog.component.scss"]
+  selector: 'ac-confirmation-dialog',
+  templateUrl: './confirmation-dialog.component.html',
+  styleUrls: ['./confirmation-dialog.component.scss']
 })
 export class ConfirmationDialogComponent implements OnInit {
-  @HostBinding("style.maxWidth")
-  width = "350px";
+  @HostBinding('style.maxWidth')
+  width = '350px';
 
-  confirmationButtonColor = "warn";
+  confirmationButtonColor = 'warn';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 

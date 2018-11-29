@@ -1,4 +1,4 @@
-import { CategoryEntity, ChecklistItem } from "../models/checklist.model";
+import { CategoryEntity, ChecklistItem } from '../models/checklist.model';
 
 export interface IndexEntry<T> {
   value: T;

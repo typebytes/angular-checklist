@@ -1,27 +1,23 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
-import {
-  ErrorStateMatcher,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from "@angular/material";
-import { Store } from "@ngrx/store";
-import { of, timer } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
-import { selectOnce } from "../../shared/operators";
-import { convertToProjectId } from "../../shared/utils";
-import { ApplicationState } from "../../state/app.state";
-import { Project } from "../models/projects.model";
-import { ProjectsSelectors } from "../state/projects.selectors";
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { ErrorStateMatcher, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Store } from '@ngrx/store';
+import { of, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { selectOnce } from '../../shared/operators';
+import { convertToProjectId } from '../../shared/utils';
+import { ApplicationState } from '../../state/app.state';
+import { Project } from '../models/projects.model';
+import { ProjectsSelectors } from '../state/projects.selectors';
 
 export enum ProjectDialogMode {
-  Create = "Create",
-  Edit = "Edit"
+  Create = 'Create',
+  Edit = 'Edit'
 }
 
 export enum ProjectDialogResultType {
-  AddOrEdit = "AddOrEdit",
-  Delete = "Delete"
+  AddOrEdit = 'AddOrEdit',
+  Delete = 'Delete'
 }
 
 export interface ProjectDialogData {
@@ -42,25 +38,14 @@ class CustomErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-const validateProjectId = (
-  whitelist: string[] | string = [],
-  store: Store<ApplicationState>
-) => {
+const validateProjectId = (whitelist: string[] | string = [], store: Store<ApplicationState>) => {
   return (control: FormControl) => {
-    whitelist = typeof whitelist === "string" ? [whitelist] : whitelist;
+    whitelist = typeof whitelist === 'string' ? [whitelist] : whitelist;
 
     return whitelist.includes(control.value)
       ? of(null)
       : timer(300).pipe(
-          switchMap(_ =>
-            store.pipe(
-              selectOnce(
-                ProjectsSelectors.getProjectById(
-                  convertToProjectId(control.value)
-                )
-              )
-            )
-          ),
+          switchMap(_ => store.pipe(selectOnce(ProjectsSelectors.getProjectById(convertToProjectId(control.value))))),
           map(project => (!project ? null : { projectExists: true }))
         );
   };
@@ -73,9 +58,9 @@ const verifyProjectName = (projectName: string) => {
 };
 
 @Component({
-  selector: "ac-project-dialog",
-  templateUrl: "./project-dialog.component.html",
-  styleUrls: ["./project-dialog.component.scss"]
+  selector: 'ac-project-dialog',
+  templateUrl: './project-dialog.component.html',
+  styleUrls: ['./project-dialog.component.scss']
 })
 export class ProjectDialogComponent implements OnInit {
   mode: ProjectDialogMode;
@@ -86,11 +71,8 @@ export class ProjectDialogComponent implements OnInit {
   showDangerZone = false;
   maxLength = 25;
 
-  projectName = new FormControl("", [
-    Validators.required,
-    Validators.maxLength(this.maxLength)
-  ]);
-  verifyProjectName = new FormControl("");
+  projectName = new FormControl('', [Validators.required, Validators.maxLength(this.maxLength)]);
+  verifyProjectName = new FormControl('');
   errorStateMatcher = new CustomErrorStateMatcher();
 
   constructor(
@@ -100,22 +82,15 @@ export class ProjectDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const {
-      title,
-      project,
-      mode = ProjectDialogMode.Create,
-      submitButtonText
-    } = this.data;
+    const { title, project, mode = ProjectDialogMode.Create, submitButtonText } = this.data;
 
-    this.project = project ? project : { name: "" };
+    this.project = project ? project : { name: '' };
     this.mode = mode;
     this.title = title;
     this.submitButtonText = !submitButtonText ? title : submitButtonText;
 
     this.projectName.setValue(this.project.name);
-    this.projectName.setAsyncValidators(
-      validateProjectId(this.project.name, this.store)
-    );
+    this.projectName.setAsyncValidators(validateProjectId(this.project.name, this.store));
     this.verifyProjectName.setValidators(verifyProjectName(this.project.name));
   }
 

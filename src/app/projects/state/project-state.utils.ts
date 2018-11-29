@@ -1,17 +1,13 @@
-import { EntityState } from "../../shared/models";
-import { Project } from "../models/projects.model";
+import { EntityState } from '../../shared/models';
+import { Project } from '../models/projects.model';
 
 interface ToggleMannyOptions {
   initialValue: EntityState<boolean>;
   value?: boolean;
 }
 
-export const toggleEntity = (
-  entities: EntityState<boolean>,
-  entity: string,
-  value?: boolean | undefined
-) => {
-  value = typeof value === "undefined" ? !entities[entity] : value;
+export const toggleEntity = (entities: EntityState<boolean>, entity: string, value?: boolean | undefined) => {
+  value = typeof value === 'undefined' ? !entities[entity] : value;
 
   if (!value) {
     const { [entity]: removed, ...rest } = entities;

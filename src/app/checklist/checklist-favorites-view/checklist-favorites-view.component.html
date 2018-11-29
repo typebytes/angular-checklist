@@ -1,18 +1,11 @@
 <header>Favorites</header>
 
-<ac-checklist-cta-bar
-  [filter]="filter$ | async"
-  [showActionButtons]="false"
-  (filterChange)="setFilter($event)"
->
+<ac-checklist-cta-bar [filter]="filter$ | async" [showActionButtons]="false" (filterChange)="setFilter($event)">
 </ac-checklist-cta-bar>
 
 <ng-container *ngIf="(favorites$ | async) as favorites">
   <ng-container *ngIf="favorites.length; else: noFavorites">
-    <ul
-      class="category"
-      *ngFor="let favorite of favorites; trackBy: trackByCategoryTitle"
-    >
+    <ul class="category" *ngFor="let favorite of favorites; trackBy: trackByCategoryTitle">
       <h4>{{ favorite.category.title }}</h4>
       <ac-checklist-list>
         <ac-checklist-list-item
@@ -28,9 +21,7 @@
   <ng-template #noFavorites>
     <div class="no-favorites">
       <img src="assets/undraw_no_data.svg" alt="No Data" />
-      <span
-        >You have no favorites yet... but they are only a few clicks away!</span
-      >
+      <span>You have no favorites yet... but they are only a few clicks away!</span>
     </div>
   </ng-template>
 </ng-container>

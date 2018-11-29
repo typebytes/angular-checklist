@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router } from "@angular/router";
-import { select, Store } from "@ngrx/store";
-import { of } from "rxjs";
-import { switchMap } from "rxjs/operators";
-import { SelectProject } from "../projects/state/projects.actions";
-import { ProjectsSelectors } from "../projects/state/projects.selectors";
-import { ApplicationState } from "../state/app.state";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { SelectProject } from '../projects/state/projects.actions';
+import { ProjectsSelectors } from '../projects/state/projects.selectors';
+import { ApplicationState } from '../state/app.state';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ProjectExistsGuard implements CanActivate {
   constructor(private store: Store<ApplicationState>, private router: Router) {}
@@ -20,7 +20,7 @@ export class ProjectExistsGuard implements CanActivate {
       select(ProjectsSelectors.getProjectById(projectId)),
       switchMap(project => {
         if (!project) {
-          this.router.navigate(["/projects"]);
+          this.router.navigate(['/projects']);
           return of(false);
         }
 

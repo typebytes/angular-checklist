@@ -1,4 +1,4 @@
-import { EntityState } from "../../shared/models";
+import { EntityState } from '../../shared/models';
 
 export interface Project {
   id: string;

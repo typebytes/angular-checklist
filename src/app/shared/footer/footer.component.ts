@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { AboutDialogComponent } from "../about-dialog/about-dialog.component";
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AboutDialogComponent } from '../about-dialog/about-dialog.component';
 
 @Component({
-  selector: "ac-footer",
-  templateUrl: "./footer.component.html",
-  styleUrls: ["./footer.component.scss"]
+  selector: 'ac-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
   constructor(private dialog: MatDialog) {}
