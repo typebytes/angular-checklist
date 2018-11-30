@@ -12,6 +12,33 @@
     --filling-color: #{mat-color($primary, lighter)};
     --border-color: #{mat-color($primary)};
   }
+
+  &.done {
+    .filling-done {
+      animation: fill-circle 0.3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+      animation-delay: 0.25s;
+    }
+
+    .path {
+      stroke-dashoffset: -100;
+      -webkit-animation: dash-check 0.9s 0.35s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+      animation: dash-check 0.9s 0.35s ease-in-out forwards;
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+.filling-done {
+  stroke: mat-color($primary);
+}
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  stroke: white;
+  stroke-width: 10px;
+  transform: rotate(90deg) translate(16px, 20px) scale(0.9);
+  transform-origin: center;
 }
 
 .pie {
@@ -31,4 +58,19 @@
   fill: transparent;
   stroke-width: 8px;
   stroke: var(--border-color);
+}
+
+@keyframes fill-circle {
+  to {
+    stroke-width: 120px;
+  }
+}
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
 }
