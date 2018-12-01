@@ -1,16 +1,21 @@
 @import '../../../scss/variables';
 @import '~@angular/material/theming';
 
+$default-filling: #dadada;
+$default-border: #dadada;
+
 :host {
   display: inherit;
   --percentage: 0;
   --max-stroke: 189;
-  --filling-color: #dadada;
-  --border-color: #d4d4d4;
+  --progress-color: #{$default-filling};
+  --done-color: #{$default-filling};
+  --border-color: #{$default-border};
 
   &.primary {
-    --filling-color: #{mat-color($primary, lighter)};
+    --progress-color: #{mat-color($primary, lighter)};
     --border-color: #{mat-color($primary)};
+    --done-color: #{mat-color($primary)};
   }
 
   &.done {
@@ -30,7 +35,7 @@
 
 .filling-done {
   opacity: 0;
-  stroke: mat-color($primary);
+  stroke: var(--done-color);
 }
 
 .path {
@@ -49,7 +54,7 @@
 
 .filling {
   fill: transparent;
-  stroke: var(--filling-color);
+  stroke: var(--progress-color);
   stroke-width: 60px;
   transition: stroke-dasharray 0.2s ease-out;
   stroke-dasharray: calc(var(--percentage) * var(--max-stroke)) var(--max-stroke);
