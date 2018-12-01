@@ -20,6 +20,7 @@ import { ToolbarLogoComponent } from './toolbar/toolbar-logo/toolbar-logo.compon
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { PercentagePipe } from './percentage.pipe';
 
 library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo);
 
@@ -31,12 +32,14 @@ const COMPONENTS = [
   DropdownStaticOptionComponent,
   DropdownStaticOptionsComponent,
   ScoreChartComponent,
-  AboutDialogComponent
+  AboutDialogComponent,
+  AuthorsComponent,
+  PercentagePipe
 ];
 
 @NgModule({
   imports: [CommonModule, FontAwesomeModule, CustomMaterialModule, RouterModule, ReactiveFormsModule],
-  declarations: [...COMPONENTS, AuthorsComponent],
+  declarations: [...COMPONENTS],
   exports: [...COMPONENTS],
   entryComponents: [AboutDialogComponent]
 })

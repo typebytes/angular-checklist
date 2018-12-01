@@ -24,7 +24,7 @@
         <mat-card-actions align="right">
           <div class="progress">
             <ac-score-chart class="primary" [score]="project.score"></ac-score-chart>
-            <span class="score">{{ project.score }}% completed</span>
+            <span class="score">{{ project.score | percentage }}% completed</span>
           </div>
           <button (click)="editProject($event, project)" (mousedown)="$event.stopPropagation()" mat-icon-button>
             <mat-icon>edit</mat-icon>
