@@ -29,12 +29,13 @@
 }
 
 .filling-done {
+  opacity: 0;
   stroke: mat-color($primary);
 }
 
 .path {
   stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+  stroke-dashoffset: -100;
   stroke: white;
   stroke-width: 10px;
   transform: rotate(90deg) translate(16px, 20px) scale(0.9);
@@ -61,7 +62,11 @@
 }
 
 @keyframes fill-circle {
-  to {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  100% {
     stroke-width: 120px;
   }
 }
