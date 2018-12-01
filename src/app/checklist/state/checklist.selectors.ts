@@ -37,11 +37,11 @@ export namespace ChecklistSelectors {
   export const getActiveCategoryEntities = createSelector(
     AppSelectors.getCategoryEntities,
     ProjectsSelectors.getDisabledCategories,
-    (categoriyEntities, disabledCategories) => {
+    (categoryEntities, disabledCategories) => {
       return Object.keys(disabledCategories).reduce((acc, disabledCategory) => {
         const { [disabledCategory]: removedCategory, ...rest } = acc;
         return rest;
-      }, categoriyEntities);
+      }, categoryEntities);
     }
   );
 
