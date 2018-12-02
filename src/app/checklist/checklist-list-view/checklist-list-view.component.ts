@@ -1,9 +1,9 @@
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CheckAll, ToggleFavorite, ToggleItem, UncheckAll } from '../../projects/state/projects.actions';
+import { BreakpointService } from '../../shared/breakpoint.service';
 import { selectOnce } from '../../shared/operators';
 import { ApplicationState } from '../../state/app.state';
 import { CategoryEntity, ChecklistFilter, ChecklistItem } from '../models/checklist.model';
@@ -20,15 +20,14 @@ export class ListViewComponent implements OnInit {
   filter$: Observable<ChecklistFilter>;
   showActionButtons$: Observable<boolean>;
 
-  constructor(private store: Store<ApplicationState>, private breakPointObserver: BreakpointObserver) {}
+  constructor(private store: Store<ApplicationState>, private breakpointService: BreakpointService) {}
 
   ngOnInit() {
     this.items$ = this.store.pipe(select(ChecklistSelectors.getItemsFromSelectedCategory));
     this.filter$ = this.store.pipe(select(ChecklistSelectors.getCategroriesFilter));
 
-    this.showActionButtons$ = this.breakPointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(map((result: BreakpointState) => !result.matches));
+    const { medium$, desktop$ } = this.breakpointService.getAllBreakpoints();
+    this.showActionButtons$ = combineLatest(medium$, desktop$, (medium, desktop) => medium || desktop);
   }
 
   toggleItem(item: ChecklistItem) {

@@ -3,6 +3,12 @@ import { Injectable } from '@angular/core';
 import { pluck, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+export enum Breakpoint {
+  Small = 'small$',
+  Medium = 'medium$',
+  Desktop = 'desktop$'
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,10 +23,15 @@ export class BreakpointService {
 
   getAllBreakpoints() {
     return {
-      small$: this._small$,
-      medium$: this._medium$,
-      desktop$: this._desktop$
+      [Breakpoint.Small]: this._small$,
+      [Breakpoint.Medium]: this._medium$,
+      [Breakpoint.Desktop]: this._desktop$
     };
+  }
+
+  getBreakpoint(breakpoint: Breakpoint) {
+    const breakpoints = this.getAllBreakpoints();
+    return breakpoints[breakpoint];
   }
 
   private setupBreakpoints() {
