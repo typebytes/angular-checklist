@@ -39,7 +39,6 @@ $default-border: #dadada;
 }
 
 .path {
-  opacity: 0;
   stroke-dasharray: 1000;
   stroke-dashoffset: -100;
   stroke: white;
@@ -78,9 +77,7 @@ $default-border: #dadada;
 }
 
 @keyframes dash-check {
-  0%,
-  100% {
-    opacity: 1;
+  0% {
     stroke-dashoffset: -100;
   }
   100% {
