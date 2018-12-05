@@ -26,7 +26,7 @@ How to submit a PR:
 
 You think that the checklist is missing a category? No biggy, just follow the following steps to add a new category:
 
-1. Create a new directy inside `/content`. The name of the folder will not show up
+1. Create a new directory inside `/content`. The name of the folder will not show up
    in the UI but nevertheless it should be reasonable and comply its content.
 2. Create a `.category` file that is used as a configuration file and defines some basic information about the category, such as `title` and `summary`. These information are defined inside a YAML front matter block. Here's an example:
 
