@@ -24,7 +24,7 @@ export class ListViewComponent implements OnInit {
 
   ngOnInit() {
     this.items$ = this.store.pipe(select(ChecklistSelectors.getItemsFromSelectedCategory));
-    this.filter$ = this.store.pipe(select(ChecklistSelectors.getCategroriesFilter));
+    this.filter$ = this.store.pipe(select(ChecklistSelectors.getCategoriesFilter));
 
     const { medium$, desktop$ } = this.breakpointService.getAllBreakpoints();
     this.showActionButtons$ = combineLatest(medium$, desktop$, (medium, desktop) => medium || desktop);
