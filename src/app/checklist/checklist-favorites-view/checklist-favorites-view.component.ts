@@ -20,7 +20,7 @@ export class ChecklistFavoritesViewComponent implements OnInit {
 
   ngOnInit() {
     this.favorites$ = this.store.pipe(select(ChecklistSelectors.getFilteredFavorites));
-    this.filter$ = this.store.pipe(select(ChecklistSelectors.getFavroitesFilter));
+    this.filter$ = this.store.pipe(select(ChecklistSelectors.getFavoritesFilter));
   }
 
   setFilter(filter: ChecklistFilter) {

@@ -8,12 +8,12 @@ import { BreadcrumbItem, Category, CategoryEntity, ChecklistItem } from '../mode
 const _groupBy = require('lodash.groupby');
 
 export namespace ChecklistSelectors {
-  export const getFavroitesFilter = createSelector(
+  export const getFavoritesFilter = createSelector(
     AppSelectors.getChecklistState,
     checklist => checklist.filter.favorites
   );
 
-  export const getCategroriesFilter = createSelector(
+  export const getCategoriesFilter = createSelector(
     AppSelectors.getChecklistState,
     checklist => checklist.filter.categories
   );
@@ -111,7 +111,7 @@ export namespace ChecklistSelectors {
   export const getItemsFromSelectedCategory = createSelector(
     AppSelectors.getItemEntities,
     getSelectedCategory,
-    getCategroriesFilter,
+    getCategoriesFilter,
     ProjectsSelectors.getProjectItems,
     getFavoritesFromSelectedCategory,
     (items, selectedCategory, filter, projectItems, favorites): Array<ChecklistItem> => {
@@ -180,7 +180,7 @@ export namespace ChecklistSelectors {
 
   export const getFilteredFavorites = createSelector(
     getFavorites,
-    getFavroitesFilter,
+    getFavoritesFilter,
     (favorites, filter) => {
       return favorites.map(favorite => ({
         ...favorite,
