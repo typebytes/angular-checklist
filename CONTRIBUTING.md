@@ -176,7 +176,7 @@ Must be one of the following:
 
 The following is the list of supported scopes:
 
-- **app** - Checklist
+- **app/\${feature}** - Used for everything related to the app itself. Optionally you can also specify a feature, such as `checklist` or `projects`.
 - **\${content category}** - Content categories, for example `architecture` or `rxjs`. This scope is **optional** however.
 
 ## Resources
