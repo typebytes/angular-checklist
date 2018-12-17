@@ -19,7 +19,7 @@ jobs:
       script:
         - npm run ci
       after_success:
-        - firebase use angular-dhecklist-c7b61
+        - firebase use angular-checklist-c7b61
         - firebase deploy --token $FIREBASE_TOKEN
     - stage: build develop
       if: branch = develop
