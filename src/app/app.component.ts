@@ -12,7 +12,9 @@ import { filter, mapTo } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   loading$: Observable<boolean>;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    console.log('test app deploy');
+  }
 
   ngOnInit() {
     const navigationStart$ = this.router.events.pipe(
