@@ -14,7 +14,7 @@
     "build-content": "ts-node ./tools/build-checklist.ts",
     "build-content:watch": "nodemon",
     "ci": "npm run build-content && ng build --prod",
-    "format:base": "prettier \"{src,tools}/**/*{.ts,.js,.json,.html}\"",
+    "format:base": "prettier \"{src,tools,cypress}/**/*{.ts,.js,.json,.html}\"",
     "format:check": "npm run format:base -- --list-different",
     "format:fix": "npm run format:base -- --write"
   },
