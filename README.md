@@ -19,7 +19,7 @@ Therefore, we transformed a bunch of best practices and common mistakes into _to
 
 The idea is that for all your projects, you can go over the checklist and see which items your projects already comply with and which you still have to put in some more effort!
 
-To keep track of your progress, every group has a progress indicator which tells you how many items you have already checked. If the pie chart is fully filled, congratulations 🎉 ... your project will definitely be on track to success 🏆!
+To keep track of your progress, every group has a progress indicator which tells you how many items you have already checked. If the pie chart has been completely filled, congratulations 🎉 ... your project will definitely be on track to success 🏆!
 
 # 👨‍💻 Who is behind this project?
 
