@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { join } from 'path';
 import { buildChecklist, dumpDataToDisk, printSuccess } from './utils';
 
