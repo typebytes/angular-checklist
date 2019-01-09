@@ -12,6 +12,7 @@
         cdkFocusInitial
         placeholder="Project Name"
         type="text"
+        data-cy="projectName-input"
       />
       <mat-hint align="end">{{ projectName.value?.length || 0 }}/{{ maxLength }}</mat-hint>
       <mat-error *ngIf="projectName.hasError('projectExists')">Project already exists</mat-error>
@@ -38,13 +39,14 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="null">Cancel</button>
+  <button mat-button [mat-dialog-close]="null" data-cy="addProject-cancel">Cancel</button>
   <button
     mat-raised-button
     color="primary"
     (click)="close()"
     [disabled]="!canClose()"
     [mat-dialog-close]="projectName.value"
+    data-cy="addProject-submit"
   >
     {{ submitButtonText }}
   </button>
