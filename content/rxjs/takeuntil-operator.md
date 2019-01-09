@@ -4,7 +4,7 @@ title: don't manage subscriptions imperatively
 
 # Problem
 
-When we subscribe to an Observable, we also need to unsubscribe to clean op its resources. Unsubscribing can be done like this:
+When we subscribe to an Observable, we also need to unsubscribe to clean up its resources. Unsubscribing can be done like this:
 
 ```ts
 // hold a reference to the subscription object
