@@ -35,7 +35,7 @@ export class SomeComponent {
   visible: boolean;
 
   usersExistsAndVisible() {
-    return users && users.length > 1 && visible;
+    return this.users && this.users.length > 1 && this.visible;
   }
 }
 ```
