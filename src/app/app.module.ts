@@ -12,6 +12,7 @@ import { ChecklistModule } from './checklist/checklist.module';
 import { CustomMaterialModule } from './custom-material.module';
 import { ProjectsModule } from './projects/projects.module';
 import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,8 @@ import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
       preloadingStrategy: PreloadAllModules
     }),
     StoreRouterConnectingModule.forRoot(),
-    CustomMaterialModule
+    CustomMaterialModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [AppComponent]
 })
