@@ -15,6 +15,7 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
   MatToolbarModule,
   MAT_CHECKBOX_CLICK_ACTION
 } from '@angular/material';
@@ -22,6 +23,7 @@ import {
 @NgModule({
   exports: [
     MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule,
     MatButtonModule,
     MatCheckboxModule,
