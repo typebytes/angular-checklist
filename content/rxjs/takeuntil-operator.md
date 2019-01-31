@@ -18,7 +18,7 @@ But if we have multiple subscriptions, we need to manage all of them. We could d
 
 # Solution
 
-RxJS provides us with the `takeUntil` operator, and a few other conditional operators. This operator will mirror the source observable util a certain event happens. In most cases, we want to stop listening to Observables when the component gets destroyed. This allows us to write something like this:
+RxJS provides us with the `takeUntil` operator, and a few other conditional operators. This operator will mirror the source observable until a certain event happens. In most cases, we want to stop listening to Observables when the component gets destroyed. This allows us to write something like this:
 
 ```ts
 @Component({...})
