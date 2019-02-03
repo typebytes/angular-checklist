@@ -8,7 +8,7 @@ import {
   Observable,
   of as observableOf
 } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +21,14 @@ export class AppUpdatesService {
       this.snackbar.open('App updated', 'OK', { duration: 2000 });
     });
 
-    this.serviceWorkerUpdates.available.subscribe(() => {
-      const updateSnackbar = this.snackbar.open('Update available!', 'Update Now', {
-        duration: 2000
-      });
-
-      updateSnackbar.onAction().subscribe(() => {
-        updateSnackbar.dismiss();
-        window.location.reload();
-      });
-    });
+    this.serviceWorkerUpdates.available
+      .pipe(
+        switchMap(() => {
+          const updateSnackbar = this.snackbar.open('Update available!', 'Update Now');
+          return updateSnackbar.onAction().pipe(tap(() => updateSnackbar.dismiss()));
+        })
+      )
+      .subscribe(() => window.location.reload());
   }
 
   checkUpdatesManually() {
