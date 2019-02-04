@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ApplicationRef, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { SwUpdate } from '@angular/service-worker';
 import {
@@ -8,13 +8,18 @@ import {
   Observable,
   of as observableOf
 } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppUpdatesService {
-  constructor(public snackbar: MatSnackBar, private serviceWorkerUpdates: SwUpdate) {}
+  constructor(public snackbar: MatSnackBar, private serviceWorkerUpdates: SwUpdate, private appRef: ApplicationRef) {}
+
+  checkAppStability(): Observable<Boolean> {
+    const appIsStable = this.appRef.isStable.pipe(first(isStable => isStable === true));
+    return appIsStable;
+  }
 
   checkUpdatesAuto() {
     this.serviceWorkerUpdates.activated.subscribe(() => {
