@@ -1,13 +1,7 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { SwUpdate } from '@angular/service-worker';
-import {
-  fromEvent as observableFromEvent,
-  interval,
-  merge as observableMerge,
-  Observable,
-  of as observableOf
-} from 'rxjs';
+import { fromEvent as observableFromEvent, merge as observableMerge, Observable, of as observableOf } from 'rxjs';
 import { first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -37,13 +31,20 @@ export class AppUpdatesService {
   }
 
   checkUpdatesManually() {
-    this.snackbar.open(`You'll be notified if an update exists...`, 'OK', {
-      duration: 4000
-    });
+    const updateCheckSnackbar = this.snackbar.open(`Checking for updates...`);
 
-    interval(6 * 60 * 60).subscribe(() => {
-      this.serviceWorkerUpdates.checkForUpdate();
-    });
+    this.serviceWorkerUpdates
+      .checkForUpdate()
+      .then(() => {
+        updateCheckSnackbar.dismiss();
+
+        this.snackbar.open(`Check complete, You'll be notified if an update exists...`, 'OK', { duration: 2000 });
+      })
+      .catch(() => {
+        updateCheckSnackbar.dismiss();
+
+        this.snackbar.open(`Check could not complete, try again later`, 'OK', { duration: 2000 });
+      });
   }
 
   checkConnectionStatus(): Observable<boolean> {
