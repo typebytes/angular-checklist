@@ -1,7 +1,7 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { SwUpdate } from '@angular/service-worker';
-import { fromEvent as observableFromEvent, merge as observableMerge, Observable, of as observableOf } from 'rxjs';
+import { fromEvent, merge, Observable, of } from 'rxjs';
 import { first, mapTo, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -48,10 +48,10 @@ export class AppUpdatesService {
   }
 
   checkConnectionStatus(): Observable<boolean> {
-    return observableMerge(
-      observableOf(navigator.onLine),
-      observableFromEvent(window, 'online').pipe(mapTo(true)),
-      observableFromEvent(window, 'offline').pipe(mapTo(false))
+    return merge(
+      of(navigator.onLine),
+      fromEvent(window, 'online').pipe(mapTo(true)),
+      fromEvent(window, 'offline').pipe(mapTo(false))
     );
   }
 }
