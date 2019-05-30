@@ -60,7 +60,7 @@ export const buildChecklist = async contentFolder => {
 };
 
 export const extractFrontMatter = (filePath: string): FrontMatter => {
-  return matter(readFileSync(filePath)) as FrontMatter;
+  return matter(readFileSync(filePath)) as any;
 };
 
 export const compileFilesForCategory = (files: Array<string>, category: string, categoryPath: string) => {
