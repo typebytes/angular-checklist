@@ -41,7 +41,10 @@ This means that the `UsersModule` will be added to the main bundle. The main bun
 // app.routing.ts
 const routes: Routes = [
   ...
-  {path: 'users', loadChildren: '../users/usersModule#UserModule'}
+  {
+    path: 'users',
+    loadChildren: () => import('../users/usersModule').then(m => m.UsersModule)
+  }
   ...
 ];
 
@@ -57,7 +60,8 @@ const routes: Routes = [
 export class AppModule {}
 ```
 
-We updated the `/users` route to use the `loadChildren` property. This points to the module file of the `UsersModule` and always has a fixed format: `${pathToModule}#${nameOfTheModule}`.
+We updated the `/users` route to use the `loadChildren` property. This uses the standard dynamic import syntax.
+Called as a function, the import returns a promise which loads the module.
 
 Also note that we no longer add the `UsersModule` to the imports of the `AppModule`. This is important because otherwise lazy loading wouldn't work as expected. If the `UsersModule` was referenced by the `AppModule` the code for that module would be added to the main bundle.
 
