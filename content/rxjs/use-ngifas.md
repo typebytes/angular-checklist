@@ -72,7 +72,7 @@ We can also make our Observable hot so that the Observable will no longer trigge
 
 This fixes our problem because it means it doesn't matter anymore if we have multiple subscriptions.
 
-To do this, we can use for example the `publishReplay` and `refCount` operators.
+To do this, we can use for example the `shareReplay` operator.
 
 ```ts
 @Component({
@@ -81,12 +81,13 @@ To do this, we can use for example the `publishReplay` and `refCount` operators.
 })
 export class SomeComponent implements OnInit, OnDestroy {
   sharedData$ = data$.pipe(
-    publishReplay(1),
-    refCount()
+    shareReplay({ bufferSize: 1, refCount: true })
   );
   ...
 }
 ```
+
+> Note: we should specify `refCount: true` to prevent possible memory leaks.
 
 # Resources
 
