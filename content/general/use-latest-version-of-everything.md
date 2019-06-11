@@ -11,7 +11,7 @@ The Angular team and community are continually improving the ecosystem to make i
 
 Angular uses semantic versioning (semver) which means they use a regular schedule of releases. This includes a major release every six month, 1-3 minor releases for each major release, and a patch release almost every week. It's important to keep up with major releases as they contain significant new features. The longer we wait to update our application, the more expensive will be a future update. Be aware, that major releases may contain breaking changes.   
 
-In addition, when API's get deprecated they remain present in the next two major releases until they are removed. Again, if we wait to long, it's likely that the update requires much more work. Deprecations hints are available in the [Changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md).
+In addition, when API's get deprecated they remain present in the next two major releases until they are removed. Again, if we wait to long, it's likely that the update requires much more work. Deprecations are available in the [Changelog](https://github.com/angular/angular/blob/master/CHANGELOG.md).
 
 # Solution
 
@@ -23,7 +23,7 @@ You can follow this steps using Angular CLI:
 - **Step 4:** Fix update deprecations, issues, styling issues in case of Angular Material and run the previous step again
 - **Step 5:** merge or rebase your changes on top of the main branch
 
-For more informations, check out the [official update guide](https://update.angular.io/) on how to update from different versions.
+For more information, check out the [official update guide](https://update.angular.io/) on how to update from different versions.
 
 # Resources
 
