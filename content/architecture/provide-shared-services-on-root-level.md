@@ -10,7 +10,7 @@ Working with a shared module is quite common and recommended. This module can be
 
 # Solution
 
-When creating a `SharedModule`, we want to import the components in all feature modules but only only provide the services in our root module, for instance `AppModule`. We can accomplish this by leveraging the `forRoot` convention. Here's what our `SharedModule` would look like this:
+When creating a `SharedModule`, we want to import the components in all feature modules but only provide the services in our root module, for instance `AppModule`. We can accomplish this by leveraging the `forRoot` convention. Here's what our `SharedModule` would look like this:
 
 ```ts
 @NgModule({
