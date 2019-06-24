@@ -2,15 +2,15 @@
   <div class="filters" *ngIf="filter">
     <button class="filter" mat-button (click)="filterChange.emit('ALL')" [class.active]="filter === 'ALL'">
       <mat-icon>assignment</mat-icon>
-      ALL
+      <ng-container i18n="@@checlistCtaBarAll">ALL</ng-container>
     </button>
     <button class="filter" mat-button (click)="filterChange.emit('DONE')" [class.active]="filter === 'DONE'">
       <mat-icon>done</mat-icon>
-      DONE
+      <ng-container i18n="@@checlistCtaBarDone">DONE</ng-container>
     </button>
     <button class="filter" mat-button (click)="filterChange.emit('TODO')" [class.active]="filter === 'TODO'">
       <mat-icon>check_box_outline_blank</mat-icon>
-      TODO
+      <ng-container i18n="@@checlistCtaBarToto">TODO</ng-container>
     </button>
   </div>
   <div class="cta-buttons" *ngIf="showActionButtons">

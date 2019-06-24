@@ -10,12 +10,25 @@
       target="_blank"
     >
       <fa-icon icon="hands-helping"></fa-icon>
-      <span>Contribute</span>
+      <span i18n="@@footerContribute">Contribute</span>
     </a>
     <button class="cta" (click)="showAbout()">
       <fa-icon icon="info"></fa-icon>
-      <span>About</span>
+      <span i18n="@@footerAbout">About</span>
     </button>
+    <div class="langs">
+      <fa-icon icon="language"></fa-icon>
+      <mat-select [value]="locale">
+        <a
+          *ngFor="let lang of languages"
+          [attr.href]="transrationUrl(lang.code)"
+          [attr.hreflang]="lang.code"
+          [attr.lang]="lang.code"
+        >
+          <mat-option [value]="lang.code"> {{ lang.text }} </mat-option>
+        </a>
+      </mat-select>
+    </div>
   </div>
   <ac-authors></ac-authors>
 </mat-toolbar>

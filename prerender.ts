@@ -14,7 +14,7 @@ enableProdMode();
 
 const ROUTES = ['/', '/checklist'];
 const DIST_FOLDER = join(process.cwd(), 'dist');
-const BROWSER_FOLDER = join(DIST_FOLDER, 'browser');
+const BROWSER_FOLDER = join(DIST_FOLDER, 'browser/en-US');
 
 const index = readFileSync(join(BROWSER_FOLDER, 'index.html'), 'utf8');
 

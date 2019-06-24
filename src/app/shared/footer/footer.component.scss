@@ -36,6 +36,15 @@ mat-toolbar {
   }
 }
 
+.langs {
+  min-width: 100px;
+  display: inline-block;
+  padding-left: 16px;
+  & mat-select {
+    margin-left: 6px;
+  }
+}
+
 .links {
   min-height: 34px;
 }

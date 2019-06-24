@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faBan, faBell, faHandsHelping, faHeart, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faBell, faHandsHelping, faHeart, faInfo, faLanguage } from '@fortawesome/free-solid-svg-icons';
 import { CustomMaterialModule } from '../custom-material.module';
 
 import {
@@ -21,7 +21,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { AuthorsComponent } from './authors/authors.component';
 
-library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo);
+library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo, faLanguage);
 
 const COMPONENTS = [
   FooterComponent,

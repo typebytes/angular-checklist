@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "concurrently \"ng serve\" \"yarn build-content:watch\"",
     "build": "ng build",
-    "build:ssr": "ng build --prod && ng run angular-checklist:server -- --output-hashing=none",
+    "build:ssr": "ng build --prod && ng build -c ja && ng run angular-checklist:server -- --output-hashing=none",
     "prerender": "npm run build:ssr && ts-node prerender.ts",
     "serve:ssr": "npm run prerender && http-server dist/browser",
     "test": "ng test",
@@ -16,7 +16,8 @@
     "ci": "npm run build-content && ng build --prod",
     "format:base": "prettier \"{src,tools,cypress}/**/*{.ts,.js,.json,.html}\"",
     "format:check": "npm run format:base -- --list-different",
-    "format:fix": "npm run format:base -- --write"
+    "format:fix": "npm run format:base -- --write",
+    "i18n": "ng xi18n --output-path locale/ --i18n-locale en && xliffmerge --profile xliffmerge.json"
   },
   "husky": {
     "hooks": {
@@ -58,6 +59,7 @@
     "highlight.js": "^9.13.1",
     "lodash.groupby": "^4.6.0",
     "ngrx-store-localstorage": "^5.1.0",
+    "ngx-i18nsupport": "^0.17.1",
     "normalize.css": "^8.0.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.0",

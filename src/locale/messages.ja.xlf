@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="ja">
+    <body>
+      <trans-unit id="aboutDialogTitle" datatype="html">
+        <source>🤔 What is it?</source><target state="new">🤔 What is it?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutDialogMessageTop" datatype="html">
+        <source>
+    Angular Checklist is a curated list of best practices that we believe every application should follow in order to
+    avoid some common pitfalls.
+  </source><target state="new">
+    Angular Checklist is a curated list of best practices that we believe every application should follow in order to
+    avoid some common pitfalls.
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutDialogMessageMiddle" datatype="html">
+        <source>
+    The idea is that for all your projects, you can go over the checklist and see which items your projects already
+    comply with and which you still have to put in some more effort!
+  </source><target state="new">
+    The idea is that for all your projects, you can go over the checklist and see which items your projects already
+    comply with and which you still have to put in some more effort!
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutDialogMessageBottom" datatype="html">
+        <source>
+    If you follow the items in this list, your project will definitely be on track to success 🏆!
+  </source><target state="new">
+    If you follow the items in this list, your project will definitely be on track to success 🏆!
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="footerContribute" datatype="html">
+        <source>Contribute</source><target state="new">Contribute</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/footer/footer.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="footerAbout" datatype="html">
+        <source>About</source><target state="new">About</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/footer/footer.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="toolbarTitle" datatype="html">
+        <source>Angular Checklist</source><target state="new">Angular Checklist</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/toolbar/toolbar-logo/toolbar-logo.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="authorsCreaters" datatype="html">
+        <source>Made with</source><target state="new">Made with</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/authors/authors.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogExistsError" datatype="html">
+        <source>Project already exists</source><target state="new">Project already exists</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogDengerZoneSection" datatype="html">
+        <source>DANGER ZONE</source><target state="new">DANGER ZONE</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogDeleteProject" datatype="html">
+        <source>Delete Project</source><target state="new">Delete Project</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogConfirmMessage" datatype="html">
+        <source>
+            Once you delete a project, there is no going back. Please be certain.
+          </source><target state="new">
+            Once you delete a project, there is no going back. Please be certain.
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogConfirmMessageHint" datatype="html">
+        <source>Please type in the project name to confirm.</source><target state="new">Please type in the project name to confirm.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogSubmitButton" datatype="html">
+        <source>
+            Delete this Project
+          </source><target state="new">
+            Delete this Project
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogCancel" datatype="html">
+        <source>Cancel</source><target state="new">Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewTitle" datatype="html">
+        <source>Welcome to Angular Checklist!</source><target state="new">Welcome to Angular Checklist!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewSubtitle" datatype="html">
+        <source>
+          Curated list of common mistakes made when developing Angular applications.
+        </source><target state="new">
+          Curated list of common mistakes made when developing Angular applications.
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewMyProjects" datatype="html">
+        <source>Your Projects</source><target state="new">Your Projects</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewProjectAdd" datatype="html">
+        <source>Add Project</source><target state="new">Add Project</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewProjectProgress" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ project.score | percent: '.0-2' }}"/> completed</source><target state="new"><x id="INTERPOLATION" equiv-text="{{ project.score | percent: '.0-2' }}"/> completed</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogCancel" datatype="html">
+        <source>Cancel</source><target state="new">Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/confirmation-dialog/confirmation-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogManageProjects" datatype="html">
+        <source>Manage Projects</source><target state="new">Manage Projects</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogFavorites" datatype="html">
+        <source>Favorites</source><target state="new">Favorites</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogHeader" datatype="html">
+        <source>CATEGORIES</source><target state="new">CATEGORIES</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogEdit" datatype="html">
+        <source>Edit</source><target state="new">Edit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogUpsEditMode" datatype="html">
+        <source>🧐 Ups, seems like you're in edit mode!</source><target state="new">🧐 Ups, seems like you're in edit mode!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checkListDetailDone" datatype="html">
+        <source>Done</source><target state="new">Done</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-detail-view/checklist-detail-view.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checklistViewNoFavorites" datatype="html">
+        <source>You have no favorites yet... but they are only a few clicks away!</source><target state="new">You have no favorites yet... but they are only a few clicks away!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-favorites-view/checklist-favorites-view.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checklistMetadataSource" datatype="html">
+        <source>Source</source><target state="new">Source</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-item-metadata/checklist-metadata.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checlistCtaBarAll" datatype="html">
+        <source>ALL</source><target state="new">ALL</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-cta-bar/checklist-cta-bar.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checlistCtaBarDone" datatype="html">
+        <source>DONE</source><target state="new">DONE</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-cta-bar/checklist-cta-bar.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checlistCtaBarToto" datatype="html">
+        <source>TODO</source><target state="new">TODO</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-cta-bar/checklist-cta-bar.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

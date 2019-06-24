@@ -14,22 +14,34 @@
         type="text"
       />
       <mat-hint align="end">{{ projectName.value?.length || 0 }}/{{ maxLength }}</mat-hint>
-      <mat-error *ngIf="projectName.hasError('projectExists')">Project already exists</mat-error>
+      <mat-error *ngIf="projectName.hasError('projectExists')" i18n="@@projectDialogExistsError"
+        >Project already exists</mat-error
+      >
       <mat-spinner *ngIf="projectName.pending" diameter="20" color="primary" matSuffix></mat-spinner>
     </mat-form-field>
   </div>
   <div class="danger-zone-wrapper" *ngIf="isEditMode()">
-    <h4>DANGER ZONE</h4>
+    <h4 i18n="@@projectDialogDengerZoneSection">DANGER ZONE</h4>
     <ul class="danger-zone">
       <li class="danger-zone-cta">
-        <span class="danger-zone-cta-title">Delete Project</span>
+        <span class="danger-zone-cta-title" i18n="@@projectDialogDeleteProject">Delete Project</span>
         <div class="danger-zone-cta-content">
-          <p>Once you delete a project, there is no going back. Please be certain.</p>
+          <p i18n="@@projectDialogConfirmMessage">
+            Once you delete a project, there is no going back. Please be certain.
+          </p>
           <mat-form-field>
             <input matInput [formControl]="verifyProjectName" type="text" />
-            <mat-hint align="end">Please type in the project name to confirm.</mat-hint>
+            <mat-hint align="end" i18n="@@projectDialogConfirmMessageHint"
+              >Please type in the project name to confirm.</mat-hint
+            >
           </mat-form-field>
-          <button (click)="deleteProject()" [disabled]="!verifyProjectName.valid" mat-raised-button color="warn">
+          <button
+            (click)="deleteProject()"
+            [disabled]="!verifyProjectName.valid"
+            mat-raised-button
+            color="warn"
+            i18n="@@projectDialogSubmitButton"
+          >
             Delete this Project
           </button>
         </div>
@@ -38,7 +50,7 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="null">Cancel</button>
+  <button mat-button [mat-dialog-close]="null" i18n="@@projectDialogCancel">Cancel</button>
   <button
     mat-raised-button
     color="primary"

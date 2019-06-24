@@ -8,9 +8,22 @@
     ],
     "rewrites": [
       {
+        "source": "/en-US/**",
+        "destination": "/en-US/index.html"
+      },
+      {
+        "source": "/ja/**",
+        "destination": "/ja/index.html"
+      },
+      {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/en-US/index.html"
       }
-    ]
+    ],
+    "redirects": [{
+      "source" : "/",
+      "destination" : "/en-US",
+      "type" : 301
+    }]
   }
 }

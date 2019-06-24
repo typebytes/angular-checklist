@@ -9,7 +9,9 @@
     bindValue="id"
   >
     <ac-dropdown-static-options>
-      <ac-dropdown-static-option routerLink="/"> <mat-icon>edit</mat-icon> Manage Projects </ac-dropdown-static-option>
+      <ac-dropdown-static-option routerLink="/">
+        <mat-icon>edit</mat-icon> <ng-container i18n="@@confirmDialogManageProjects">Manage Projects</ng-container>
+      </ac-dropdown-static-option>
     </ac-dropdown-static-options>
   </ac-dropdown>
   <ac-checklist-search *ngIf="(mediumUp$ | async)"></ac-checklist-search>
@@ -26,6 +28,7 @@
               [matBadgeHidden]="!(favoritesCount$ | async)"
               matBadgeColor="accent"
               matBadgeOverlap="false"
+              i18n="@@confirmDialogFavorites"
               >Favorites</span
             >
           </a>
@@ -33,8 +36,8 @@
       </section>
       <section class="category-list-wrapper">
         <div class="section-header">
-          <h4>CATEGORIES</h4>
-          <mat-slide-toggle (change)="toggleEditMode()">Edit</mat-slide-toggle>
+          <h4 i18n="@@confirmDialogHeader">CATEGORIES</h4>
+          <mat-slide-toggle (change)="toggleEditMode()" i18n="@@confirmDialogEdit">Edit</mat-slide-toggle>
         </div>
         <div class="category-list">
           <nav class="category" *ngFor="let category of (categories$ | async); trackBy: trackBySlug">
@@ -61,7 +64,9 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="scroll-container"><router-outlet></router-outlet></div>
-    <div *ngIf="editMode" class="overlay"><span>🧐 Ups, seems like you're in edit mode!</span></div>
+    <div *ngIf="editMode" class="overlay">
+      <span i18n="@@confirmDialogUpsEditMode">🧐 Ups, seems like you're in edit mode!</span>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <ac-footer></ac-footer>

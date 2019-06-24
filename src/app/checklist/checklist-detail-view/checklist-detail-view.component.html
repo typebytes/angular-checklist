@@ -1,6 +1,8 @@
 <ng-container *ngIf="(item$ | async) as item">
   <header>
-    <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked">Done</mat-checkbox>
+    <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked" i18n="@@checkListDetailDone"
+      >Done</mat-checkbox
+    >
     <ac-checklist-favorite-button
       (toggle)="toggleFavorite(item)"
       [active]="item.favorite"
