@@ -6,7 +6,7 @@
 /out-tsc
 
 # generated content
-content.json
+content.*.json
 
 # dependencies
 /node_modules

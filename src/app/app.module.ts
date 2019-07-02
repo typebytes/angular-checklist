@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID, Inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -11,7 +11,8 @@ import { APP_ROUTES } from './app.routes';
 import { ChecklistModule } from './checklist/checklist.module';
 import { CustomMaterialModule } from './custom-material.module';
 import { ProjectsModule } from './projects/projects.module';
-import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
+import { META_REDUCERS, ROOT_REDUCER, ApplicationState } from './state/app.state';
+import { SetLangageCode } from './checklist/state/checklist.actions';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,4 +34,8 @@ import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(@Inject(LOCALE_ID) locale: string, store: Store<ApplicationState>) {
+    store.dispatch(new SetLangageCode(locale));
+  }
+}

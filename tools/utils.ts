@@ -8,6 +8,9 @@ import hash = require('shorthash');
 
 markdown.use(convertHeadingsPlugin);
 
+export const localeEnUS = 'en-US';
+export const langages = [localeEnUS];
+
 export const buildChecklist = async contentFolder => {
   const checklist = {
     categories: {},
@@ -125,4 +128,16 @@ export const throwError = (message: string) => {
 
 export const logWarning = (message: string) => {
   console.log(`${chalk.yellow(message)}`);
+};
+
+export const transrateDeepMerge = (target, source) => {
+  if (typeof source === 'undefined') {
+    return target;
+  } else if (target && typeof target === 'object' && !Array.isArray(target)) {
+    return Object.keys(target)
+      .map(key => ({ [key]: transrateDeepMerge(target[key], source[key]) }))
+      .reduce((p, c) => ({ ...p, ...c }), {});
+  } else {
+    return source;
+  }
 };

@@ -2,7 +2,7 @@ import { Filter } from '../models/checklist.model';
 import { ChecklistActions, ChecklistActionTypes } from './checklist.actions';
 import { ChecklistState } from './checklist.state';
 
-const CHECKLIST = require('../../../assets/content.json');
+const CHECKLIST = require('../../../assets/content.en-US.json');
 
 export const INITIAL_STATE: ChecklistState = {
   ...CHECKLIST,
@@ -24,6 +24,12 @@ export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions
     case ChecklistActionTypes.TOGGLE_EDIT_MODE:
       return {
         ...state,
+        editMode: !state.editMode
+      };
+    case ChecklistActionTypes.SET_LANG_CODE:
+      return {
+        ...state,
+        ...require(`../../../assets/content.${action.payload || 'en-US'}.json`),
         editMode: !state.editMode
       };
     default:
