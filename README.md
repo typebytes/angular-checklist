@@ -27,7 +27,7 @@ This project is brought to you with ❤️ by [Dominic Elm](https://twitter.com/
 
 # 👷 Want to contribute?
 
-If you want to add a checklist item, file a bug, contribute some code, or improve our documentation, read up on our [contributing guidelines](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md), and check out [open issues](/issues) as well as [open pull requests](/pulls) to avoid potential conflicts.
+If you want to add a checklist item, file a bug, contribute some code, or improve our documentation, read up on our [contributing guidelines](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md), and check out [open issues](https://github.com/typebytes/angular-checklist/issues) as well as [open pull requests](https://github.com/typebytes/angular-checklist/pulls) to avoid potential conflicts.
 
 # 📄 Licence
 
