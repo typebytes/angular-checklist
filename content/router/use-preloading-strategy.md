@@ -59,7 +59,7 @@ export class AppModule {}
 
 ## Data-driven bundling
 
-Another way is to use [Guess.js](https://github.com/guess-js/guess), a data-driven bundling approach. The goal with Guess.js is to minimize the bundle layout configuration, make it data-driven, and much more accurate. Guess.js will will figure out which bundles to be combined together and what pre-fetching mechanism to be used.
+Another way is to use [Guess.js](https://github.com/guess-js/guess), a data-driven bundling approach. The goal with Guess.js is to minimize the bundle layout configuration, make it data-driven, and much more accurate. Guess.js will figure out which bundles to be combined together and what pre-fetching mechanism to be used.
 
 Guess.js can also be used with the Angular CLI. Here's an [example](https://github.com/mgechev/guess-js-angular-demo).
 
