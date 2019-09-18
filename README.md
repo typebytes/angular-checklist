@@ -32,3 +32,13 @@ If you want to add a checklist item, file a bug, contribute some code, or improv
 # 📄 Licence
 
 MIT License (MIT) © [Dominic Elm](https://github.com/d3lm) and [Kwinten Pisman](https://github.com/KwintenP)
+
+
+# Build image docker
+docker build -t check-list-apps .
+
+docker run -itd -v ${your_path}/deploy/:/etc/nginx/conf.d/ -p 8888:80 -p 443:443  -u root check-list-apps
+sudo cp ${path}/nginx.conf ${path}/default.conf
+docker exec -it \
+$(docker ps --filter ancestor=check-list-apps:0.0.2 --format {{.ID}}) \
+/bin/sh -c "nginx -t && nginx -s reload"

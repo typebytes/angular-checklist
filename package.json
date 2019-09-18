@@ -18,12 +18,6 @@
     "format:check": "npm run format:base -- --list-different",
     "format:fix": "npm run format:base -- --write"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint --env HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "{src,tools}/**/*{.ts,.js,.json,.html}": [
       "prettier --write",
