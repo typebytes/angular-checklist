@@ -2,6 +2,7 @@ import { Action, ActionReducer } from '@ngrx/store';
 import { Project, ProjectEntities, ProjectsState, FavoriteEntities } from '../models/projects.model';
 import { createNewProject, toggleEntity, toggleManny } from './project-state.utils';
 import { ProjectsActions, ProjectsActionTypes } from './projects.actions';
+import { keyBy } from 'lodash';
 
 const DEFAULT_PROJECT: ProjectEntities = {
   default: createNewProject('default')
@@ -9,6 +10,7 @@ const DEFAULT_PROJECT: ProjectEntities = {
 
 function projectsStateReducer(state: ProjectsState, action: ProjectsActions) {
   switch (action.type) {
+    case ProjectsActionTypes.GET_PROJECTS_SUCCESS:
     case ProjectsActionTypes.TOGGLE_FAVORITE:
     case ProjectsActionTypes.TOGGLE_CATEGORY:
     case ProjectsActionTypes.ADD_PROJECT:
@@ -35,8 +37,10 @@ function projectsStateReducer(state: ProjectsState, action: ProjectsActions) {
 export const projectEntitiesReducer = (state: ProjectsState, action: ProjectsActions): ProjectEntities => {
   const selectedProject = state.selectedProjectId;
   const entities = state.entities;
-
   switch (action.type) {
+    case ProjectsActionTypes.GET_PROJECTS_SUCCESS:
+      const data = action.payload as Array<Project>;
+      return keyBy(data, 'id');
     case ProjectsActionTypes.EDIT_PROJECT:
       const { current, updated } = action.payload;
       const { [current.id]: currentProject, ...projects } = state.entities;

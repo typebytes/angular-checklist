@@ -15,6 +15,10 @@ export const INITIAL_STATE: ChecklistState = {
 
 export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions) {
   switch (action.type) {
+    case ChecklistActionTypes.GET_CHECK_LIST_SUCCESS:
+      const data = action.payload;
+      debugger; // TODO
+      return {};
     case ChecklistActionTypes.SET_CATEGORIES_FILTER:
     case ChecklistActionTypes.SET_FAVORITES_FILTER:
       return {

@@ -12,7 +12,9 @@ export enum ProjectsActionTypes {
   CHECK_ALL = '[Projects] check all',
   UNCHECK_ALL = '[Projects] uncheck all',
   TOGGLE_FAVORITE = '[Projects] add favorite',
-  TOGGLE_ALL_FAVORITES = '[Projects] toggle all favorites'
+  TOGGLE_ALL_FAVORITES = '[Projects] toggle all favorites',
+  GET_PROJECTS = '[Projects] get projects',
+  GET_PROJECTS_SUCCESS = '[Projects] get projects success'
 }
 
 export class UncheckAll implements Action {
@@ -75,6 +77,15 @@ export class ToggleAllFavorites implements Action {
   constructor(public payload: Array<ChecklistItem>) {}
 }
 
+export class GetProjects implements Action {
+  public readonly type = ProjectsActionTypes.GET_PROJECTS;
+}
+
+export class GetProjectsSuccess implements Action {
+  public readonly type = ProjectsActionTypes.GET_PROJECTS_SUCCESS;
+  constructor(public payload: Array<Project>) {}
+}
+
 export type ProjectsActions =
   | ToggleCategory
   | AddProject
@@ -85,4 +96,6 @@ export type ProjectsActions =
   | CheckAll
   | UncheckAll
   | ToggleFavorite
-  | ToggleAllFavorites;
+  | ToggleAllFavorites
+  | GetProjects
+  | GetProjectsSuccess;

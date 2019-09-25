@@ -1,0 +1,8 @@
+export enum RespType {
+  NOT_STARTED,
+  UPLOADING,
+  UPLOADED,
+  CANCELED,
+  DELETED,
+  FAILED
+}

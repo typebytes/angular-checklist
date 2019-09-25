@@ -1,7 +1,9 @@
 import { Action } from '@ngrx/store';
-import { ChecklistFilter } from '../models/checklist.model';
+import { ChecklistFilter, CheckList } from '../models/checklist.model';
 
 export enum ChecklistActionTypes {
+  GET_CHECK_LIST = '[Checklist] get check list',
+  GET_CHECK_LIST_SUCCESS = '[Checklist] get check list success',
   SET_CATEGORIES_FILTER = '[Checklist] set categories filter',
   SET_FAVORITES_FILTER = '[Checklist] set favroites filter',
   TOGGLE_EDIT_MODE = '[Checklist] toggle edit mode'
@@ -25,4 +27,13 @@ export class ToggleEditMode implements Action {
   constructor() {}
 }
 
-export type ChecklistActions = SetCategoriesFilter | SetFavoritesFilter | ToggleEditMode;
+export class GetCheckList implements Action {
+  public readonly type = ChecklistActionTypes.GET_CHECK_LIST;
+}
+
+export class GetCheckListSuccess implements Action {
+  public readonly type = ChecklistActionTypes.GET_CHECK_LIST_SUCCESS;
+  constructor(public payload: CheckList) {}
+}
+
+export type ChecklistActions = SetCategoriesFilter | SetFavoritesFilter | ToggleEditMode | GetCheckList | GetCheckListSuccess;

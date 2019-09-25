@@ -15,7 +15,7 @@ import {
   ProjectDialogResultType
 } from '../project-dialog/project-dialog.component';
 
-import { AddProject, DeleteProject, EditProject } from '../state/projects.actions';
+import { AddProject, DeleteProject, EditProject, GetProjects } from '../state/projects.actions';
 import { ProjectsSelectors } from '../state/projects.selectors';
 
 @Component({
@@ -30,6 +30,7 @@ export class ProjectsViewComponent implements OnInit {
 
   ngOnInit() {
     this.projects$ = this.store.pipe(select(ProjectsSelectors.getProjects));
+    this.store.dispatch(new GetProjects());
   }
 
   navigateToProject(projectId: string) {

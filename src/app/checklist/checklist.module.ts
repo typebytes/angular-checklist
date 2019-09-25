@@ -20,6 +20,9 @@ import { CHECKLIST_ROUTES } from './checklist.routes';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { SearchService } from './search/search.service';
 import { checklistReducer } from './state/checklist.reducer';
+import { CheckListService } from '../services/checklist.service';
+import { EffectsModule } from '@ngrx/effects';
+import { CheckListEffects } from './state/checklist.effects';
 
 @NgModule({
   imports: [
@@ -28,7 +31,8 @@ import { checklistReducer } from './state/checklist.reducer';
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild(CHECKLIST_ROUTES),
-    StoreModule.forFeature('checklist', checklistReducer)
+    StoreModule.forFeature('checklist', checklistReducer),
+    EffectsModule.forFeature([CheckListEffects]),
   ],
   declarations: [
     ChecklistComponent,
@@ -45,7 +49,7 @@ import { checklistReducer } from './state/checklist.reducer';
     ConfirmationDialogComponent,
     ChecklistSearchComponent
   ],
-  providers: [SearchService],
+  providers: [SearchService, CheckListService],
   entryComponents: [ConfirmationDialogComponent]
 })
 export class ChecklistModule {}

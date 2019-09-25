@@ -13,7 +13,7 @@ import { hasEntities } from '../shared/utils';
 import { ApplicationState } from '../state/app.state';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { Category, ChecklistItem } from './models/checklist.model';
-import { ToggleEditMode } from './state/checklist.actions';
+import { ToggleEditMode, GetCheckList } from './state/checklist.actions';
 import { ChecklistSelectors } from './state/checklist.selectors';
 
 enum CategoryListMode {
@@ -60,6 +60,7 @@ export class ChecklistComponent implements OnInit {
     this.selectedProjectId$ = this.store.pipe(select(ProjectsSelectors.getSelectedProjectId));
     this.favoritesCount$ = this.store.pipe(select(ChecklistSelectors.getFavoritesCount));
     this.favoritesScore$ = this.store.pipe(select(ChecklistSelectors.getFavoritesScore));
+    this.store.dispatch(new GetCheckList());
 
     const { small$, medium$, desktop$ } = this.breakpointService.getAllBreakpoints();
 

@@ -1,5 +1,12 @@
 import { EntityState } from '../../shared/models';
 
+export interface CheckList {
+  id: string;
+  name: string;
+  categories: Array<CategoryEntity>;
+  items: Array<ChecklistItem>;
+}
+
 export interface Author {
   name: string;
   link: string;
@@ -19,6 +26,7 @@ export interface ChecklistItem {
 export type BreadcrumbItem = CategoryEntity | ChecklistItem;
 
 interface BaseCategory {
+  id: string;
   title: string;
   summary: string;
   slug: string;
