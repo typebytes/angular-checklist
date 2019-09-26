@@ -115,7 +115,7 @@ export namespace ChecklistSelectors {
     ProjectsSelectors.getProjectItems,
     getFavoritesFromSelectedCategory,
     (items, selectedCategory, filter, projectItems, favorites): Array<ChecklistItem> => {
-      if (selectedCategory) {
+      if (selectedCategory && selectedCategory.items) {
         return filterItems(
           selectedCategory.items.map(id => createChecklistItem(id, items, projectItems, favorites)),
           filter

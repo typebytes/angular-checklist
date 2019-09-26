@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/content.bk
 
 # generated content
 content.json

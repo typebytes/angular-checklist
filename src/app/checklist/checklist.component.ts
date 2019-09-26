@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -13,7 +13,7 @@ import { hasEntities } from '../shared/utils';
 import { ApplicationState } from '../state/app.state';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { Category, ChecklistItem } from './models/checklist.model';
-import { ToggleEditMode, GetCheckList } from './state/checklist.actions';
+import { ToggleEditMode, GetCheckList, CleanCheckList } from './state/checklist.actions';
 import { ChecklistSelectors } from './state/checklist.selectors';
 
 enum CategoryListMode {
@@ -26,7 +26,7 @@ enum CategoryListMode {
   templateUrl: './checklist.component.html',
   styleUrls: ['./checklist.component.scss']
 })
-export class ChecklistComponent implements OnInit {
+export class ChecklistComponent implements OnInit, OnDestroy {
   private editMode$ = new BehaviorSubject(CategoryListMode.List);
 
   small$: Observable<boolean>;
@@ -162,5 +162,9 @@ export class ChecklistComponent implements OnInit {
 
   private setSidenavMode(mode: 'side' | 'over') {
     this.sideNavMode = mode;
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(new CleanCheckList());
   }
 }

@@ -19,11 +19,14 @@ export class CheckListEffects {
       return this._checkListService.getCheckList(selectedProjectId);
     }),
     switchMap((data: any) => {
+      if (!data) { // TODO Work around (nothing handle error at this time)
+        const temp: CheckList = { id: null, name: null, items: [], categories: [] };
+        return of(new GetCheckListSuccess(temp));
+      }
       const checklist = JSON.parse(data.Output.Body) as CheckList;
       return of(new GetCheckListSuccess(checklist));
     })
   );
   constructor(private _action$: Actions, private store: Store<ApplicationState>, private _checkListService: CheckListService) {
-
   }
 }

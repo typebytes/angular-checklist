@@ -9,6 +9,8 @@ import hash = require('shorthash');
 markdown.use(convertHeadingsPlugin);
 
 export const buildChecklist = async contentFolder => {
+  // TODO break this function don't using data from local
+  return null;
   const checklist = {
     categories: {},
     items: {}
