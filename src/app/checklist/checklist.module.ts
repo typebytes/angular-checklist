@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -23,16 +24,21 @@ import { checklistReducer } from './state/checklist.reducer';
 import { CheckListService } from '../services/checklist.service';
 import { EffectsModule } from '@ngrx/effects';
 import { CheckListEffects } from './state/checklist.effects';
+import { AddCheckListViewComponent } from './add-checklist-view/add-checklist-view.component';
+import { NgxMdModule } from 'ngx-md';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     CustomMaterialModule,
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild(CHECKLIST_ROUTES),
     StoreModule.forFeature('checklist', checklistReducer),
     EffectsModule.forFeature([CheckListEffects]),
+    NgxMdModule.forRoot()
   ],
   declarations: [
     ChecklistComponent,
@@ -47,9 +53,10 @@ import { CheckListEffects } from './state/checklist.effects';
     ChecklistCtaBarComponent,
     ChecklistFavoriteButtonComponent,
     ConfirmationDialogComponent,
-    ChecklistSearchComponent
+    ChecklistSearchComponent,
+    AddCheckListViewComponent
   ],
   providers: [SearchService, CheckListService],
   entryComponents: [ConfirmationDialogComponent]
 })
-export class ChecklistModule {}
+export class ChecklistModule { }

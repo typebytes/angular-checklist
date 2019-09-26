@@ -5,6 +5,7 @@ import { ListViewComponent } from './checklist-list-view/checklist-list-view.com
 import { ChecklistOverviewComponent } from './checklist-overview/checklist-overview.component';
 import { ChecklistComponent } from './checklist.component';
 import { ProjectExistsGuard } from './project-exists.guard';
+import { AddCheckListViewComponent } from './add-checklist-view/add-checklist-view.component';
 
 export const CHECKLIST_ROUTES: Routes = [
   {
@@ -13,6 +14,7 @@ export const CHECKLIST_ROUTES: Routes = [
     canActivate: [ProjectExistsGuard],
     children: [
       { path: 'favorites', component: ChecklistFavoritesViewComponent },
+      { path: 'add', component: AddCheckListViewComponent },
       {
         path: '',
         component: ChecklistOverviewComponent,

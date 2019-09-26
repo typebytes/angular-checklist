@@ -44,7 +44,7 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 
   sideNavMode = 'side';
 
-  @ViewChild(MatSidenav)
+  @ViewChild(MatSidenav, { static: false })
   sideNav: MatSidenav;
 
   constructor(
@@ -52,7 +52,7 @@ export class ChecklistComponent implements OnInit, OnDestroy {
     private breakpointService: BreakpointService,
     private dialog: MatDialog,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.categories$ = this.editMode$.pipe(switchMap(mode => this.getCategories(mode)));

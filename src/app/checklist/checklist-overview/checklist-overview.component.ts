@@ -85,4 +85,10 @@ export class ChecklistOverviewComponent implements OnInit {
   trackByTitle(_, item: Category | ChecklistItem) {
     return item.title;
   }
+
+  addNewCheckListHandler() {
+    alert('Add new')
+    // this.router.navigate(['/', projectId, 'checklist', categories[0].slug]);
+    debugger;
+  }
 }
