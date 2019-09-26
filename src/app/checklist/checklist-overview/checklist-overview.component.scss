@@ -1,6 +1,7 @@
 @import '../../../scss/variables';
 @import '../../../scss/utils';
 @import '~@angular/material/theming';
+@import 'prismjs/themes/prism.css';
 
 :host {
   display: block;

@@ -16,7 +16,6 @@ export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions
   switch (action.type) {
     case ChecklistActionTypes.GET_CHECK_LIST_SUCCESS:
       const data = action.payload;
-      debugger;
       return {
         ...state,
         categories: data.categories,

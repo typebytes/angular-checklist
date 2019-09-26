@@ -1,5 +1,24 @@
-<header>Favorites</header>
 
-<ngx-md>
-  ## Markdown h2 content
-</ngx-md>
+<header>Check List Editor
+  <button mat-flat-button (click)="addNewCheckListHandler()">
+    <mat-icon>save</mat-icon>
+  </button>
+  <button mat-flat-button (click)="addNewCheckListHandler()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</header>
+
+<mat-tab-group>
+  <mat-tab label="Editor">
+    <div class="card-body">
+        <form class="" action="index.html" method="post">
+          <textarea name="name" id="textbox" class="form-control md-editor-view" [(ngModel)]="markdownContent"></textarea>
+        </form>
+      </div>
+  </mat-tab>
+  <mat-tab label="Preview MD File">
+    <div class="card-body md-editor-view" style="overflow-y:auto; height: 100vh">
+      <ngx-md [data]="markdownContent"></ngx-md>
+  </div>
+  </mat-tab>
+</mat-tab-group>

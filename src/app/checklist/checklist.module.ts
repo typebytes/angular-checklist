@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { CustomMaterialModule } from '../custom-material.module';
@@ -26,15 +26,20 @@ import { EffectsModule } from '@ngrx/effects';
 import { CheckListEffects } from './state/checklist.effects';
 import { AddCheckListViewComponent } from './add-checklist-view/add-checklist-view.component';
 import { NgxMdModule } from 'ngx-md';
+import { MatTabsModule } from '@angular/material';
 
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    FormsModule,
     CustomMaterialModule,
     ReactiveFormsModule,
     SharedModule,
+    //-------------------- Mat component--------
+    MatTabsModule,
+    //--------------------
     RouterModule.forChild(CHECKLIST_ROUTES),
     StoreModule.forFeature('checklist', checklistReducer),
     EffectsModule.forFeature([CheckListEffects]),

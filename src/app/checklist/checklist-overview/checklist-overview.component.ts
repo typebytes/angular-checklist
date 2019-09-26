@@ -87,8 +87,6 @@ export class ChecklistOverviewComponent implements OnInit {
   }
 
   addNewCheckListHandler() {
-    alert('Add new')
     // this.router.navigate(['/', projectId, 'checklist', categories[0].slug]);
-    debugger;
   }
 }
