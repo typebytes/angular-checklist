@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { buildChecklist, dumpDataToDisk, printSuccess } from './utils';
 
-const CONTENT_FOLDER = join(__dirname, '../content');
+const CONTENT_FOLDER = join(__dirname, '../content.bk');
 const ASSET_FOLDER = join(__dirname, '../src/assets');
 
 buildChecklist(CONTENT_FOLDER).then(checklist => {

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { CustomMaterialModule } from '../custom-material.module';
@@ -20,15 +21,29 @@ import { CHECKLIST_ROUTES } from './checklist.routes';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { SearchService } from './search/search.service';
 import { checklistReducer } from './state/checklist.reducer';
+import { CheckListService } from '../services/checklist.service';
+import { EffectsModule } from '@ngrx/effects';
+import { CheckListEffects } from './state/checklist.effects';
+import { AddCheckListViewComponent } from './add-checklist-view/add-checklist-view.component';
+import { NgxMdModule } from 'ngx-md';
+import { MatTabsModule } from '@angular/material';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
+    FormsModule,
     CustomMaterialModule,
     ReactiveFormsModule,
     SharedModule,
+    //-------------------- Mat component--------
+    MatTabsModule,
+    //--------------------
     RouterModule.forChild(CHECKLIST_ROUTES),
-    StoreModule.forFeature('checklist', checklistReducer)
+    StoreModule.forFeature('checklist', checklistReducer),
+    EffectsModule.forFeature([CheckListEffects]),
+    NgxMdModule.forRoot()
   ],
   declarations: [
     ChecklistComponent,
@@ -43,9 +58,10 @@ import { checklistReducer } from './state/checklist.reducer';
     ChecklistCtaBarComponent,
     ChecklistFavoriteButtonComponent,
     ConfirmationDialogComponent,
-    ChecklistSearchComponent
+    ChecklistSearchComponent,
+    AddCheckListViewComponent
   ],
-  providers: [SearchService],
+  providers: [SearchService, CheckListService],
   entryComponents: [ConfirmationDialogComponent]
 })
-export class ChecklistModule {}
+export class ChecklistModule { }

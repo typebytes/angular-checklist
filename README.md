@@ -1,6 +1,6 @@
 <h1>
     <img width="35" valign="bottom" src="https://angular-checklist.io/assets/angular-checklist.png">
-    Angular Checklist
+    Checklist Application
 </h1>
 
 This repo contains the code for [angular-checklist.io](https://angular-checklist.io).
@@ -9,9 +9,9 @@ This repo contains the code for [angular-checklist.io](https://angular-checklist
 
 # 🤔 What is it?
 
-Angular Checklist is a curated list of items that we believe every application should follow. Over the past couple of years, we have been doing a lot of code reviews and have often seen the same mistakes being made again and again.
+Checklist is a curated list of items that we believe every application should follow. Over the past couple of years, we have been doing a lot of code reviews and have often seen the same mistakes being made again and again.
 
-That's when we decided to create **Angular Checklist**.
+That's when we decided to create **Checklist**.
 
 It's a curated list of best practices to avoid some common pitfalls.
 
@@ -32,3 +32,13 @@ If you want to add a checklist item, file a bug, contribute some code, or improv
 # 📄 Licence
 
 MIT License (MIT) © [Dominic Elm](https://github.com/d3lm) and [Kwinten Pisman](https://github.com/KwintenP)
+
+
+# Build image docker
+docker build -t check-list-apps .
+
+docker run -itd -v ${your_path}/deploy/:/etc/nginx/conf.d/ -p 8888:80 -p 443:443  -u root check-list-apps
+sudo cp ${path}/nginx.conf ${path}/default.conf
+docker exec -it \
+$(docker ps --filter ancestor=check-list-apps:0.0.2 --format {{.ID}}) \
+/bin/sh -c "nginx -t && nginx -s reload"

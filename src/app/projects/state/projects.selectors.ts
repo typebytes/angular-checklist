@@ -13,8 +13,10 @@ export namespace ProjectsSelectors {
   export const getSelectedProjectId = createSelector(
     AppSelectors.getRouterState,
     (routerState): string => {
+      if (!routerState) {
+        return null;
+      }
       const { project } = extractRouteParams(routerState.root, 1);
-
       return project;
     }
   );

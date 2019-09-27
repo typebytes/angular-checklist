@@ -1,6 +1,7 @@
 @import '../../../scss/variables';
 @import '../../../scss/utils';
 @import '~@angular/material/theming';
+@import 'prismjs/themes/prism.css';
 
 :host {
   display: block;
@@ -44,5 +45,13 @@
     &.active {
       color: mat-color($accent);
     }
+  }
+}
+
+.add-new-check-list {
+  span.mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

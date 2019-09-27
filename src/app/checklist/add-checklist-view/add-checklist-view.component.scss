@@ -1,0 +1,135 @@
+@import '../../../scss/mixins';
+@import '../../../scss/variables';
+@import '~@angular/material/theming';
+// @import 'prismjs/themes/prism-dark';
+
+:host {
+  display: block;
+  padding: 20px 30px;
+
+  .mat-tab-body-content {
+    overflow: hidden !important;
+  }
+}
+
+.md-editor-view {
+  resize: none !important;
+  width: 98% !important;
+  height: calc(100vh - 260px) !important;
+}
+
+.mat-input-full-width {
+  min-width: 150px;
+  width: 100%;
+}
+
+pre[class*=language-] {
+  background: #272822;
+}
+
+header {
+  display: flex !important;
+  align-items: center;
+  flex-direction: row;
+  color: mat-color($accent);
+  min-height: 25px;
+  font-size: 1.3rem;
+}
+
+#textbox {
+  width: 100%;
+  height: 100vh;
+}
+
+table.table2 {
+  font-size: 14px;
+  color: #212121;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+table.table2 thead th {
+  font-size: 20px;
+  color: #212121;
+  height: 40px;
+  border: 1px solid #e6e6e6;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+table.table2 tbody tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+
+table.table2 td {
+  height: 40px;
+  width: 230px;
+  border-bottom: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+}
+
+table.table2 td:last-of-type {
+  border-right: 0;
+}
+
+/* From https://codepen.io/maxds/pen/DcveB */
+blockquote.king-quote {
+  display: block;
+  background: #fff;
+  padding: 15px 20px 15px 45px;
+  margin: 0 0 20px;
+  position: relative;
+
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #666;
+  text-align: justify;
+
+  /*Borders - (Optional)*/
+  border-left: 15px solid #c76c0c;
+  border-right: 2px solid #c76c0c;
+
+  /*Box Shadow - (Optional)*/
+  -moz-box-shadow: 2px 2px 15px #ccc;
+  -webkit-box-shadow: 2px 2px 15px #ccc;
+  box-shadow: 2px 2px 15px #ccc;
+}
+
+blockquote.king-quote::before {
+  content: '\\201C'; /*Unicode for Left Double Quote*/
+
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #999;
+
+  /*Positioning*/
+  position: absolute;
+  left: 10px;
+  top: 5px;
+}
+
+blockquote.king-quote::after {
+  /*Reset to make sure*/
+  content: '';
+}
+
+blockquote.king-quote a {
+  text-decoration: none;
+  background: #eee;
+  cursor: pointer;
+  padding: 0 3px;
+  color: #c76c0c;
+}
+
+blockquote.king-quote a:hover {
+  color: #666;
+}
+
+blockquote.king-quote em {
+  font-style: italic;
+}

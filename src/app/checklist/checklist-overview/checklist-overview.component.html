@@ -3,5 +3,9 @@
     <li (click)="goBack(last)" [class.active]="last" class="breadcrumb-item">{{ item.title }}</li>
     <li class="breadcrumb-item-separator" *ngIf="!last"><mat-icon>chevron_right</mat-icon></li>
   </ng-container>
+  <!-- (click)="filterChange.emit('DONE')" [class.active]="filter === 'DONE'" -->
+  <button routerLink="add" #rla="routerLinkActive" routerLinkActive="active" class="add-new-check-list active" mat-button (click)="addNewCheckListHandler()">
+    <mat-icon>add</mat-icon>
+  </button>
 </ul>
 <router-outlet></router-outlet>

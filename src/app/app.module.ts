@@ -1,3 +1,4 @@
+// import 'prismjs/prism';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +13,8 @@ import { ChecklistModule } from './checklist/checklist.module';
 import { CustomMaterialModule } from './custom-material.module';
 import { ProjectsModule } from './projects/projects.module';
 import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
+import { S3Helper } from '../app/lib/s3.helper';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +22,7 @@ import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
     BrowserModule.withServerTransition({ appId: 'angular-checklist' }),
     BrowserAnimationsModule,
     StoreModule.forRoot(ROOT_REDUCER, { metaReducers: META_REDUCERS }),
+    EffectsModule.forRoot([]),
     ProjectsModule,
     ChecklistModule,
     StoreDevtoolsModule.instrument({
@@ -31,6 +35,7 @@ import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
     StoreRouterConnectingModule.forRoot(),
     CustomMaterialModule
   ],
+  providers: [S3Helper],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

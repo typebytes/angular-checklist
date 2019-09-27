@@ -97,7 +97,7 @@ Each item can be concluded with additional resources, like videos, blog posts, l
 
 For inspiration, check out exisiting items!
 
-**Note:** Keep the todo items as concise and small as possible. The Angular Checklist is **not** meant to be a collection of blog posts nor an entire blog. It should be **easy** and **fast** to browser through the list and quickly get an overview of things that are needed to be done to be on the right track to success. If an item is based on a blog post, try to summarize it and only keep the core aspects of the resource.
+**Note:** Keep the todo items as concise and small as possible. The Checklist is **not** meant to be a collection of blog posts nor an entire blog. It should be **easy** and **fast** to browser through the list and quickly get an overview of things that are needed to be done to be on the right track to success. If an item is based on a blog post, try to summarize it and only keep the core aspects of the resource.
 
 If your item is based on somebody else's blog post or video, please give credits and name the original author. If the resource is your own, and you wish your name to be displayed, you can of course also add yourself as an author.
 

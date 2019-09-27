@@ -10,7 +10,7 @@ export namespace AppSelectors {
 
   export const getRouterState = createSelector(
     getRouterReducerState,
-    router => router.state
+    router => router ? router.state : null
   );
 
   export const getCategoryEntities = createSelector(

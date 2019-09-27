@@ -1,0 +1,36 @@
+
+<header>
+  <span>Check List Editor</span>
+  <button mat-button (click)="saveCheckList()">
+    <mat-icon>save</mat-icon>
+  </button>
+  <button mat-button (click)="cancelHandler()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</header>
+<mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="categorySelectionChange($event)">
+      <mat-option *ngFor="let category of (categories$ | async); trackBy: trackBySlug" [value]="category.slug">
+        {{category.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+<mat-form-field class="mat-input-full-width">
+  <input matInput placeholder="Title" [(ngModel)]="title">
+</mat-form-field>
+
+<mat-tab-group>
+  <mat-tab label="Editor">
+    <div class="card-body">
+        <form class="" action="index.html" method="post">
+          <textarea name="name" id="textbox" class="form-control md-editor-view" [(ngModel)]="markdownContent"></textarea>
+        </form>
+      </div>
+  </mat-tab>
+  <mat-tab label="Preview MD File">
+    <div class="card-body md-editor-view" style="overflow-y:auto; height: 100vh">
+      <ngx-md [data]="markdownContent"></ngx-md>
+  </div>
+  </mat-tab>
+</mat-tab-group>
