@@ -48,8 +48,12 @@ export const S3Config = {
 ```
 
 # 👨‍💻 Who is behind this project?
+The core application was written by [Dominic Elm](https://twitter.com/elmd_) and [Kwinten Pisman](https://twitter.com/KwintenP).
 
-This project is brought to you with ❤️ by [Dominic Elm](https://twitter.com/elmd_) and [Kwinten Pisman](https://twitter.com/KwintenP).
+This project is brought to you with ❤️ by [Hai Thai](https://twitter.com/Leak_Memories)
+
+[Skype Info](thaihoanghai.it) & [Email](thaihoanghai.it@gmail.com)
+
 
 # 👷 Want to contribute?
 
@@ -57,6 +61,6 @@ If you want to add a checklist item, file a bug, contribute some code, or improv
 
 # 📄 Licence
 
-MIT License (MIT) © [Dominic Elm](https://github.com/d3lm) and [Kwinten Pisman](https://github.com/KwintenP)
+MIT License
 
 
