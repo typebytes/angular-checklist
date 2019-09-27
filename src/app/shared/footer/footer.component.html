@@ -1,17 +1,18 @@
 <mat-toolbar>
   <div class="links">
+    <button class="cta" (click)="showAbout()">
+      <fa-icon icon="info"></fa-icon>
+      <span>Owner</span>
+    </button>
+    <a class="cta" href="skype:thaihoanghai.it?chat" target="_blank">
+      <fa-icon class="skype" [icon]="['fab', 'skype']"></fa-icon>
+      <i class="fab fa-skype"></i>
+      <span class="name">Hai Thai</span>
+    </a>
     <a class="cta" href="https://github.com/typebytes/angular-checklist" target="_blank">
       <fa-icon [icon]="['fab', 'github']"></fa-icon>
       <span>GitHub</span>
     </a>
-    <a class="cta" href="https://github.com/typebytes/angular-checklist/blob/master/CONTRIBUTING.md" target="_blank">
-      <fa-icon icon="hands-helping"></fa-icon>
-      <span>Contribute</span>
-    </a>
-    <button class="cta" (click)="showAbout()">
-      <fa-icon icon="info"></fa-icon>
-      <span>About</span>
-    </button>
   </div>
   <ac-authors></ac-authors>
 </mat-toolbar>
