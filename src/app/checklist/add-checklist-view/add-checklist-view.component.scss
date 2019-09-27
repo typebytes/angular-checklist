@@ -18,16 +18,22 @@
   height: calc(100vh - 260px) !important;
 }
 
+.mat-input-full-width {
+  min-width: 150px;
+  width: 100%;
+}
+
 pre[class*=language-] {
   background: #272822;
 }
 
 header {
+  display: flex !important;
+  align-items: center;
+  flex-direction: row;
   color: mat-color($accent);
-  padding: 10px 5px;
   min-height: 25px;
   font-size: 1.3rem;
-  border-bottom: 1px solid gainsboro;
 }
 
 #textbox {

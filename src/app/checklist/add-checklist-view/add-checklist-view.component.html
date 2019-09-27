@@ -1,12 +1,24 @@
 
-<header>Check List Editor
-  <button mat-flat-button (click)="addNewCheckListHandler()">
+<header>
+  <span>Check List Editor</span>
+  <button mat-button (click)="saveCheckList()">
     <mat-icon>save</mat-icon>
   </button>
-  <button mat-flat-button (click)="addNewCheckListHandler()">
+  <button mat-button (click)="cancelHandler()">
     <mat-icon>cancel</mat-icon>
   </button>
 </header>
+<mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="categorySelectionChange($event)">
+      <mat-option *ngFor="let category of (categories$ | async); trackBy: trackBySlug" [value]="category.slug">
+        {{category.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+<mat-form-field class="mat-input-full-width">
+  <input matInput placeholder="Title" [(ngModel)]="title">
+</mat-form-field>
 
 <mat-tab-group>
   <mat-tab label="Editor">

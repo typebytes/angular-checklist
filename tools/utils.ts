@@ -10,7 +10,7 @@ markdown.use(convertHeadingsPlugin);
 
 export const buildChecklist = async contentFolder => {
   // TODO break this function don't using data from local
-  return null;
+  // return null;
   const checklist = {
     categories: {},
     items: {}
@@ -81,7 +81,7 @@ export const compileFilesForCategory = (files: Array<string>, category: string, 
       slug,
       category,
       ...frontMatter,
-      content: markdown.render(content)
+      content, //: markdown.render(content)
     };
   });
 };

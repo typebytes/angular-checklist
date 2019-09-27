@@ -153,6 +153,7 @@ mat-card-content {
 mat-card-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .progress {

@@ -17,7 +17,8 @@
 <mat-sidenav-container>
   <mat-sidenav [mode]="sideNavMode" [autoFocus]="false" #sideNav>
     <div class="section-container">
-      <section>
+      <!-- Hai Thai : Comment out this feature ( hidden feature )-->
+      <section style="display: none">
         <nav class="nav-item">
           <ac-score-chart [class.primary]="rla.isActive" [score]="favoritesScore$ | async"></ac-score-chart>
           <a class="sidenav-link" routerLink="favorites" #rla="routerLinkActive" routerLinkActive="active">

@@ -5,6 +5,7 @@ import { ToggleFavorite, ToggleItem } from '../../projects/state/projects.action
 import { ApplicationState } from '../../state/app.state';
 import { ChecklistItem } from '../models/checklist.model';
 import { ChecklistSelectors } from '../state/checklist.selectors';
+import { markdown } from 'tools/markdown';
 
 @Component({
   selector: 'ac-checklist-detail-view',
@@ -26,5 +27,13 @@ export class ChecklistDetailViewComponent implements OnInit {
 
   toggleFavorite(item: ChecklistItem) {
     this.store.dispatch(new ToggleFavorite(item));
+  }
+
+  convertMDtoHTML(mdString: string) {
+    if (!mdString) {
+      return '';
+    }
+    const value = markdown.render(mdString);
+    return value;
   }
 }

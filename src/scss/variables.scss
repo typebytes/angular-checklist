@@ -34,15 +34,15 @@ $custom-green: (
     A700: $light-primary-text
   )
 );
-
-$app-primary: mat-palette($mat-deep-purple);
-$app-accent: mat-palette($custom-green, 600);
-$app-warn: mat-palette($mat-red);
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
-
 $primary: mat-palette($mat-indigo);
 $accent: mat-palette($mat-pink, A200, A100, A400);
 $warn: mat-palette($mat-red);
+$app-primary: $primary;
+$app-accent: $accent;
+$app-warn: $warn;
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+
 $theme: mat-light-theme($primary, $accent, $warn);
 
 
