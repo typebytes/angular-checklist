@@ -25,7 +25,8 @@ To keep track of your progress, every group has a progress indicator which tells
 ```js
 docker build -t check-list-apps .
 
-docker run -itd -v ${your_path}/deploy/:/etc/nginx/conf.d/ -p 8888:80 -p 443:443  -u root check-list-apps
+docker run -itd -v ${your_path}/deploy/:/etc/nginx/conf.d/ 
+  -p 8888:80 -p 443:443  -u root check-list-apps
 
 cp ${path}/nginx.conf ${path}/default.conf
 
