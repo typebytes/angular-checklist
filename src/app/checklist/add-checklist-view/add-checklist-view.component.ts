@@ -5,17 +5,16 @@ import { ApplicationState } from '../../state/app.state';
 import { NgxMdService } from 'ngx-md';
 import { TEMPLATE_MD_FILE } from './template-md';
 import { getLanguage, highlight } from 'highlight.js';
-import { Category } from '../models/checklist.model';
+import { Category, CheckList } from '../models/checklist.model';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { MatSelectChange } from '@angular/material';
-import { markdown } from 'tools/markdown';
-import { dumpDataToDisk, cleanFileName } from 'tools/utils';
-import { join } from 'path';
 import { S3Helper } from 'src/app/lib/s3.helper';
 import { CheckListService } from 'src/app/services/checklist.service';
-import { S3Object } from 'src/app/lib/models/s3-object.model';
 import hash = require('shorthash');
 import { isEmpty } from 'lodash';
+import { ProjectsSelectors } from 'src/app/projects/state/projects.selectors';
+import { GetCheckList, AddCheckListSuccess } from '../state/checklist.actions';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ac-add-checklist-view',
@@ -24,17 +23,22 @@ import { isEmpty } from 'lodash';
 })
 export class AddCheckListViewComponent implements OnInit {
   categories$: Observable<Array<Category>>;
+  _projectId = null;
   _selectedCategory = null;
   title = '';
   markdownContent = TEMPLATE_MD_FILE;
-  list = [{ value: 4 }, { value: 3 }, { value: 2 }, { value: 1 }];
   constructor(
     private store: Store<ApplicationState>,
     private _markdown: NgxMdService,
+    private router: Router,
+    private _route: ActivatedRoute,
     private _s3Helper: S3Helper,
     private _checkListService: CheckListService) { }
 
   ngOnInit() {
+    this.store.pipe(select(ProjectsSelectors.getSelectedProjectId)).subscribe(projectId => {
+      this._projectId = projectId;
+    });
     this.categories$ = this.store.pipe(select(ChecklistSelectors.getAllCategories));
     // extras.init();
     this._markdown.setMarkedOptions({});
@@ -86,8 +90,12 @@ export class AddCheckListViewComponent implements OnInit {
     console.log(this._selectedCategory);
   }
 
+  trackBySlug(_, category: Category) {
+    return category.slug;
+  }
+
   saveCheckList(): void {
-    if (isEmpty(this._selectedCategory) || isEmpty(this.title) ) {
+    if (isEmpty(this._selectedCategory) || isEmpty(this.title)) {
       alert('Category & Title is required');
       return;
     }
@@ -99,16 +107,18 @@ export class AddCheckListViewComponent implements OnInit {
       category: this._selectedCategory,
       title: this.title,
       content: this.markdownContent
-    }
-
-    this._checkListService.setCheckList('pointivo_front_end_check_list', data);
+    };
+    this._checkListService.setCheckList(this._projectId, data).then((latestCheckList: CheckList) => {
+      this.store.dispatch(new AddCheckListSuccess(latestCheckList));
+      if (!this._selectedCategory) {
+        this.router.navigate(['/', this._projectId, 'checklist']);
+      } else {
+        this.router.navigate(['/', this._projectId, 'checklist', this._selectedCategory]);
+      }
+    });
   }
 
   cancelHandler(): void {
-    this._s3Helper.s3Service.getObject('test.json').then((result: any) => {
-      // console.log('data' , result.);
-      const jsonData = JSON.parse(result.Output.Body) as any;
-      this.markdownContent = jsonData.content;
-    });
+
   }
 }

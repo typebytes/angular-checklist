@@ -1,14 +1,8 @@
-// Angular modules
 import { Injectable } from '@angular/core';
-// External modules
 import * as AWS from 'aws-sdk';
-
 // Models
 import { S3Object } from './models/s3-object.model';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class S3Service {
   public s3: AWS.S3;
   private bucket: string;

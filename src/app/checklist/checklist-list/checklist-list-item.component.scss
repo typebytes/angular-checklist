@@ -20,3 +20,12 @@ ac-checklist-favorite-button {
   text-decoration: line-through;
   opacity: 0.5;
 }
+
+
+.delete-icon {
+  color: #d4d4d4;
+
+  &.active {
+    color: mat-color($accent);
+  }
+}
