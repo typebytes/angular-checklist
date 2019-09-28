@@ -3,7 +3,7 @@ import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, of, zip } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Project } from '../projects/models/projects.model';
 import { ToggleAllFavorites, ToggleCategory } from '../projects/state/projects.actions';
 import { ProjectsSelectors } from '../projects/state/projects.selectors';
@@ -12,9 +12,10 @@ import { selectOnce } from '../shared/operators';
 import { hasEntities } from '../shared/utils';
 import { ApplicationState } from '../state/app.state';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { Category, ChecklistItem } from './models/checklist.model';
-import { ToggleEditMode, GetCheckList, CleanCheckList } from './state/checklist.actions';
+import { Category, ChecklistItem, CategoryEntity, CheckList } from './models/checklist.model';
+import { ToggleEditMode, GetCheckList, CleanCheckList, GetCheckListSuccess } from './state/checklist.actions';
 import { ChecklistSelectors } from './state/checklist.selectors';
+import { CheckListService } from '../services/checklist.service';
 
 enum CategoryListMode {
   List,
@@ -51,7 +52,8 @@ export class ChecklistComponent implements OnInit, OnDestroy {
     private store: Store<ApplicationState>,
     private breakpointService: BreakpointService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private _checkListService: CheckListService
   ) { }
 
   ngOnInit() {
@@ -164,7 +166,39 @@ export class ChecklistComponent implements OnInit, OnDestroy {
     this.sideNavMode = mode;
   }
 
+  deleteCategory(category: Category):void {
+    this.deleteCategoryConfirmation().pipe(
+      withLatestFrom(this.store.pipe(select(ProjectsSelectors.getSelectedProjectId))),
+      switchMap(([result, projectId]) => {
+        return of({ result, projectId });
+      })
+    ).subscribe(({ result, projectId }) => {
+      if (!result) {
+        return;
+      }
+      this._checkListService.deleteCategory(projectId, category).then((latestChecklist: CheckList) => {
+        this.store.dispatch(new GetCheckListSuccess(latestChecklist));
+      });
+    });
+  }
+
   ngOnDestroy(): void {
     this.store.dispatch(new CleanCheckList());
+  }
+
+  private deleteCategoryConfirmation() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete Category',
+        text: `Wooops! Would you like to remove this Category. All Items in this removed too `,
+        buttonText: 'Delete'
+      }
+    });
+
+    return dialogRef.afterClosed().pipe(switchMap(result => this.processDeleteCatDialogResult(result)));
+  }
+
+  private processDeleteCatDialogResult(result: boolean) {
+    return of(result);
   }
 }

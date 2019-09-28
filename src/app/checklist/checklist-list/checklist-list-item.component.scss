@@ -29,3 +29,11 @@ ac-checklist-favorite-button {
     color: mat-color($accent);
   }
 }
+
+.edit-icon {
+  color: #d4d4d4;
+
+  &.active {
+    color: mat-color($accent);
+  }
+}

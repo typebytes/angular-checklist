@@ -133,3 +133,14 @@ blockquote.king-quote a:hover {
 blockquote.king-quote em {
   font-style: italic;
 }
+
+
+.new-category-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  mat-icon {
+    cursor: pointer;
+  }
+}

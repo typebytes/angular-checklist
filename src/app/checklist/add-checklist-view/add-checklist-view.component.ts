@@ -5,7 +5,7 @@ import { ApplicationState } from '../../state/app.state';
 import { NgxMdService } from 'ngx-md';
 import { TEMPLATE_MD_FILE } from './template-md';
 import { getLanguage, highlight } from 'highlight.js';
-import { Category, CheckList } from '../models/checklist.model';
+import { Category, CheckList, ChecklistItem } from '../models/checklist.model';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { MatSelectChange } from '@angular/material';
 import { S3Helper } from 'src/app/lib/s3.helper';
@@ -27,6 +27,10 @@ export class AddCheckListViewComponent implements OnInit {
   _selectedCategory = null;
   title = '';
   markdownContent = TEMPLATE_MD_FILE;
+  isEditMode = false;
+  _rawCheckList: ChecklistItem = null;
+  _newCategoryMode = false;
+  _newCategory = '';
   constructor(
     private store: Store<ApplicationState>,
     private _markdown: NgxMdService,
@@ -40,9 +44,93 @@ export class AddCheckListViewComponent implements OnInit {
       this._projectId = projectId;
     });
     this.categories$ = this.store.pipe(select(ChecklistSelectors.getAllCategories));
-    // extras.init();
-    this._markdown.setMarkedOptions({});
-    // console.log(extras.markedDefaults);
+    this.processMarkDownRender();
+    this.processDataEditMode();
+  }
+
+  processDataEditMode() {
+    this.store.pipe(select(ChecklistSelectors.getSelectedItem)).subscribe(result => {
+      if (!result) {
+        return;
+      }
+      console.log(result);
+      this.isEditMode = true;
+      this.title = result.title;
+      this.markdownContent = result.content;
+      this._rawCheckList = result;
+    });
+  }
+
+  categorySelectionChange(event: MatSelectChange): void {
+    this._selectedCategory = event.value;
+    if (this._selectedCategory === 'new') {
+      this._newCategoryMode = true;
+      this._selectedCategory = '';
+    }
+    console.log(this._selectedCategory);
+  }
+
+  cancelCreateCategory(): void {
+    this._newCategoryMode = false;
+    this._selectedCategory = '';
+  }
+
+  trackBySlug(_, category: Category) {
+    return category.slug;
+  }
+
+  createAndUpdateCheckList() {
+    if (this.isEditMode) {
+      this.editCheckList();
+    } else {
+      this.createCheckList();
+    }
+  }
+
+  editCheckList(): void {
+    const updateCheckList: ChecklistItem = {
+      ...this._rawCheckList,
+      title: this.title,
+      content: this.markdownContent
+    };
+    this._checkListService.updateCheckListItem(this._projectId, updateCheckList).then((latestCheckList: CheckList) => {
+      this.store.dispatch(new AddCheckListSuccess(latestCheckList));
+      this.router.navigate(['/', this._projectId, 'checklist', updateCheckList.category, updateCheckList.id]);
+    });
+  }
+
+  createCheckList(): void {
+    if (isEmpty(this._selectedCategory) || isEmpty(this.title)) {
+      alert('Category & Title is required');
+      return;
+    }
+    const id = hash.unique(this.title);
+    const slug = this.title.toLowerCase().replace(new RegExp(' ', 'g'), '-');
+    const newCheckList: ChecklistItem = {
+      id,
+      slug,
+      category: this._selectedCategory,
+      title: this.title,
+      content: this.markdownContent,
+      checked: false,
+      favorite: false,
+      author: null
+    };
+    this._checkListService.setCheckList(this._projectId, newCheckList).then((latestCheckList: CheckList) => {
+      this.store.dispatch(new AddCheckListSuccess(latestCheckList));
+      if (!this._selectedCategory) {
+        this.router.navigate(['/', this._projectId, 'checklist']);
+      } else {
+        this.router.navigate(['/', this._projectId, 'checklist', this._selectedCategory]);
+      }
+    });
+  }
+
+  cancelHandler(): void {
+    this.router.navigate(['/', this._projectId, 'checklist']);
+  }
+
+  processMarkDownRender() {
     this._markdown.setMarkedOptions(
       Object.assign(
         {},
@@ -83,42 +171,5 @@ export class AddCheckListViewComponent implements OnInit {
         return str;
       }
     };
-  }
-
-  categorySelectionChange(event: MatSelectChange): void {
-    this._selectedCategory = event.value;
-    console.log(this._selectedCategory);
-  }
-
-  trackBySlug(_, category: Category) {
-    return category.slug;
-  }
-
-  saveCheckList(): void {
-    if (isEmpty(this._selectedCategory) || isEmpty(this.title)) {
-      alert('Category & Title is required');
-      return;
-    }
-    const id = hash.unique(this.title);
-    const slug = this.title.toLowerCase().replace(new RegExp(' ', 'g'), '-');
-    const data = {
-      id,
-      slug,
-      category: this._selectedCategory,
-      title: this.title,
-      content: this.markdownContent
-    };
-    this._checkListService.setCheckList(this._projectId, data).then((latestCheckList: CheckList) => {
-      this.store.dispatch(new AddCheckListSuccess(latestCheckList));
-      if (!this._selectedCategory) {
-        this.router.navigate(['/', this._projectId, 'checklist']);
-      } else {
-        this.router.navigate(['/', this._projectId, 'checklist', this._selectedCategory]);
-      }
-    });
-  }
-
-  cancelHandler(): void {
-
   }
 }

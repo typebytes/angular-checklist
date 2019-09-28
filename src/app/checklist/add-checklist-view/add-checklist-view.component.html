@@ -1,21 +1,31 @@
 
 <header>
   <span>Check List Editor</span>
-  <button mat-button (click)="saveCheckList()">
+  <button mat-button (click)="createAndUpdateCheckList()">
     <mat-icon>save</mat-icon>
   </button>
   <button mat-button (click)="cancelHandler()">
     <mat-icon>cancel</mat-icon>
   </button>
 </header>
-<mat-form-field>
+
+<div class="new-category-form">
+  <mat-form-field *ngIf="!isEditMode && !_newCategoryMode">
     <mat-label>Category</mat-label>
     <mat-select (selectionChange)="categorySelectionChange($event)">
+      <mat-option value="new">
+        --New Category--
+      </mat-option>
       <mat-option *ngFor="let category of (categories$ | async); trackBy: trackBySlug" [value]="category.slug">
         {{category.title}}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field class="mat-input-new-category" *ngIf="_newCategoryMode">
+    <input matInput placeholder="New Category" [(ngModel)]="_selectedCategory">
+  </mat-form-field>
+  <mat-icon *ngIf="_newCategoryMode" (click)="cancelCreateCategory()" title="Cancel create new category" class="delete-icon" [class.active]="active">cancel</mat-icon>
+</div>
 <mat-form-field class="mat-input-full-width">
   <input matInput placeholder="Title" [(ngModel)]="title">
 </mat-form-field>

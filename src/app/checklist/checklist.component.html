@@ -55,6 +55,9 @@
               (click)="toggleCategory(category)"
               [checked]="category.enabled"
             ></mat-checkbox>
+            <button *ngIf="editMode" class="delete-icon" [ngStyle]="_style" mat-icon-button [disableRipple]="disableRipple" (click)="deleteCategory(category)">
+              <mat-icon class="delete-icon" [class.active]="active">delete</mat-icon>
+            </button>
           </nav>
         </div>
       </section>

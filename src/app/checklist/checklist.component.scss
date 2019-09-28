@@ -95,7 +95,7 @@ ac-toolbar {
 
 .sidenav-link {
   @include linkHover();
-
+  width: 100%;
   display: flex;
   align-items: center;
   color: initial;
@@ -169,6 +169,12 @@ section {
     }
   }
 }
+
+.category {
+  display: flex;
+  flex-direction: row !important;
+}
+
 
 .category,
 .nav-item {
