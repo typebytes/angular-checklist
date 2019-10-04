@@ -20,7 +20,8 @@ export const CHECKLIST_ROUTES: Routes = [
         component: ChecklistOverviewComponent,
         children: [
           { path: ':category', component: ListViewComponent },
-          { path: ':category/:item', component: ChecklistDetailViewComponent }
+          { path: ':category/:item', component: ChecklistDetailViewComponent },
+          { path: ':category/:item/edit', component: AddCheckListViewComponent }
         ]
       }
     ]

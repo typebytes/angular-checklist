@@ -4,7 +4,8 @@ import { S3Helper } from '../lib/s3.helper';
 import { S3Object } from '../lib/models/s3-object.model';
 import { TEMPLATE_MD_FILE } from '../checklist/add-checklist-view/template-md';
 import { markdown } from 'tools/markdown';
-import { isEmpty } from 'lodash';
+import { isEmpty, remove, forEach } from 'lodash';
+import { CheckList, ChecklistItem, CategoryEntity, Category } from '../checklist/models/checklist.model';
 
 @Injectable()
 export class CheckListService {
@@ -14,32 +15,34 @@ export class CheckListService {
     return from(this._s3Helper.s3Service.getObject(`${projectId}.json`));
   }
 
-  setCheckList(projectId: string, checkList: any): any {
-    this._s3Helper.s3Service.getObject(`${projectId}.json`).then((result: any) => {
-      const checklist = JSON.parse(result.Output.Body);
-      checklist.items[checkList.id] = checkList;
-      const category = checklist.categories[checkList.category];
-      if (category) {
-        if (isEmpty(category.items)) {
-          category.items = [checkList.id];
+  setCheckList(projectId: string, checkListItem: any): Promise<CheckList> {
+    return new Promise((resolve, reject) => {
+      this._s3Helper.s3Service.getObject(`${projectId}.json`).then((result: any) => {
+        const checklist = JSON.parse(result.Output.Body) as CheckList;
+        checklist.items[checkListItem.id] = checkListItem;
+        const category = checklist.categories[checkListItem.category];
+        if (category) {
+          if (isEmpty(category.items)) {
+            category.items = [checkListItem.id];
+          } else {
+            category.items.push(checkListItem.id);
+          }
         } else {
-          category.items.push(checkList.id);
+          const slug = checkListItem.category.toLowerCase().replace(new RegExp(' ', 'g'), '-');;
+          const newCategory = {
+            title: checkListItem.category,
+            slug: slug,
+            summary: 'Unknown Check List',
+            items: [checkListItem.id]
+          } as CategoryEntity;
+          checklist.categories[slug] = newCategory;
         }
-      } else {
-        const currentUnknown = checklist.categories['unknown'];
-        checklist.categories['unknown'] = {
-          title: 'Unknown',
-          slug: 'default',
-          summary: 'Unknown Check List',
-          items: isEmpty(currentUnknown) ? this.getArrayData(currentUnknown, checkList) : [checklist.id]
-        };
-      }
-      debugger;
-      this._s3Helper.s3Service.putObject(JSON.stringify(checklist), `${projectId}.json`).then(result => {
-        console.log('Done');
+        resolve(checklist);
+        this._s3Helper.s3Service.putObject(JSON.stringify(checklist), `${projectId}.json`).then(result => {
+          console.log('Done');
+        });
       });
     });
-    return null;
   }
 
   getArrayData(currentUnknown: any, checkList: any) {
@@ -48,5 +51,51 @@ export class CheckListService {
       result.push(element);
     });
     return result;
+  }
+
+  updateCheckListItem(projectId: string, checkListItem: ChecklistItem): Promise<CheckList> {
+    return new Promise((resolve, reject) => {
+      this._s3Helper.s3Service.getObject(`${projectId}.json`).then((result: any) => {
+        const checklist = JSON.parse(result.Output.Body) as CheckList;
+        checklist.items[checkListItem.id] = checkListItem;
+        resolve(checklist);
+        this._s3Helper.s3Service.putObject(JSON.stringify(checklist), `${projectId}.json`).then(result => {
+          console.log('Done');
+        });
+      });
+    });
+  }
+
+  deleteCheckListItem(projectId: string, checkListItem: ChecklistItem): Promise<CheckList> {
+    return new Promise((resolve, reject) => {
+      this._s3Helper.s3Service.getObject(`${projectId}.json`).then((result: any) => {
+        const checklist = JSON.parse(result.Output.Body) as CheckList;
+        delete checklist.items[checkListItem.id];
+        const category = checklist.categories[checkListItem.category];
+        remove(category.items, (itemId: string) => {
+          return itemId === checkListItem.id;
+        });
+        resolve(checklist);
+        this._s3Helper.s3Service.putObject(JSON.stringify(checklist), `${projectId}.json`).then(result => {
+          console.log('Done');
+        });
+      });
+    });
+  }
+
+  deleteCategory(projectId: string, categoryInfo: Category): Promise<CheckList> {
+    return new Promise((resolve, reject) => {
+      this._s3Helper.s3Service.getObject(`${projectId}.json`).then((result: any) => {
+        const checklist = JSON.parse(result.Output.Body) as CheckList;
+        delete checklist.categories[categoryInfo.slug];
+        forEach(categoryInfo.items, (item: ChecklistItem) => {
+          delete checklist.items[item.id];
+        });
+        resolve(checklist);
+        this._s3Helper.s3Service.putObject(JSON.stringify(checklist), `${projectId}.json`).then(result => {
+          console.log('Done');
+        });
+      });
+    });
   }
 }

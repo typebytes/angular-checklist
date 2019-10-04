@@ -4,3 +4,10 @@
   [active]="item.favorite"
   (toggle)="toggleFavorite.emit(item)"
 ></ac-checklist-favorite-button>
+<button class="edit-icon" [ngStyle]="_style" mat-icon-button [disableRipple]="disableRipple" (click)="editCheckListItem()">
+  <mat-icon class="edit-icon" [class.active]="active" [routerLink]="['../../checklist', item.category, item.id, 'edit']">edit</mat-icon>
+</button>
+<button class="delete-icon" [ngStyle]="_style" mat-icon-button [disableRipple]="disableRipple" (click)="deleteCheckListItem()">
+  <mat-icon class="delete-icon" [class.active]="active">delete</mat-icon>
+</button>
+

@@ -21,9 +21,39 @@ The idea is that for all your projects, you can go over the checklist and see wh
 
 To keep track of your progress, every group has a progress indicator which tells you how many items you have already checked. If the pie chart has been completely filled, congratulations 🎉 ... your project will definitely be on track to success 🏆!
 
-# 👨‍💻 Who is behind this project?
+# 👷 Build image docker
+```js
+docker build -t check-list-apps .
 
-This project is brought to you with ❤️ by [Dominic Elm](https://twitter.com/elmd_) and [Kwinten Pisman](https://twitter.com/KwintenP).
+docker run -itd -v ${your_path}/deploy/:/etc/nginx/conf.d/ 
+  -p 8888:80 -p 443:443  -u root check-list-apps
+
+cp ${path}/nginx.conf ${path}/default.conf
+
+docker exec -it \
+    $(docker ps --filter ancestor=check-list-apps:0.0.1 --format {{.ID}}) \
+    /bin/sh -c "nginx -t && nginx -s reload"
+```
+
+# Integration with S3
+
+Open file src/app/lib/s3Config.ts - Setting S3 Configuration
+```js
+export const S3Config = {
+  region: 'region',
+  bucket : 'check-list-app',
+  access_key: 'accessKey',
+  secret_key: 'secretKey',
+};
+```
+
+# 👨‍💻 Who is behind this project?
+The core application was written by [Dominic Elm](https://twitter.com/elmd_) and [Kwinten Pisman](https://twitter.com/KwintenP).
+
+This project is brought to you with ❤️ by [Hai Thai](https://twitter.com/Leak_Memories)
+
+[Skype Info](thaihoanghai.it) & [Email](thaihoanghai.it@gmail.com)
+
 
 # 👷 Want to contribute?
 
@@ -31,14 +61,6 @@ If you want to add a checklist item, file a bug, contribute some code, or improv
 
 # 📄 Licence
 
-MIT License (MIT) © [Dominic Elm](https://github.com/d3lm) and [Kwinten Pisman](https://github.com/KwintenP)
+MIT License
 
 
-# Build image docker
-docker build -t check-list-apps .
-
-docker run -itd -v ${your_path}/deploy/:/etc/nginx/conf.d/ -p 8888:80 -p 443:443  -u root check-list-apps
-sudo cp ${path}/nginx.conf ${path}/default.conf
-docker exec -it \
-$(docker ps --filter ancestor=check-list-apps:0.0.2 --format {{.ID}}) \
-/bin/sh -c "nginx -t && nginx -s reload"

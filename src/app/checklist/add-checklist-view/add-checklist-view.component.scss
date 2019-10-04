@@ -15,7 +15,7 @@
 .md-editor-view {
   resize: none !important;
   width: 98% !important;
-  height: calc(100vh - 260px) !important;
+  height: calc(100vh - 370px) !important;
 }
 
 .mat-input-full-width {
@@ -132,4 +132,15 @@ blockquote.king-quote a:hover {
 
 blockquote.king-quote em {
   font-style: italic;
+}
+
+
+.new-category-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  mat-icon {
+    cursor: pointer;
+  }
 }

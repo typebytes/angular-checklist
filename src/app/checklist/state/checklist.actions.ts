@@ -8,6 +8,7 @@ export enum ChecklistActionTypes {
   SET_FAVORITES_FILTER = '[Checklist] set favroites filter',
   TOGGLE_EDIT_MODE = '[Checklist] toggle edit mode',
   CLEAN_CHECK_LIST = '[Checklist] clean check list',
+  ADD_CHECK_LIST_SUCCESS = '[Checklist] add check list success',
 }
 
 export class SetCategoriesFilter implements Action {
@@ -44,9 +45,15 @@ export class GetCheckListSuccess implements Action {
   constructor(public payload: CheckList) {}
 }
 
+export class AddCheckListSuccess implements Action {
+  public readonly type = ChecklistActionTypes.ADD_CHECK_LIST_SUCCESS;
+  constructor(public payload: CheckList) {}
+}
+
 export type ChecklistActions = SetCategoriesFilter
   | SetFavoritesFilter
   | ToggleEditMode
   | GetCheckList
   | GetCheckListSuccess
-  | CleanCheckList;
+  | CleanCheckList
+  | AddCheckListSuccess;
