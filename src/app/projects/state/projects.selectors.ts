@@ -61,7 +61,13 @@ export namespace ProjectsSelectors {
     AppSelectors.getCategoryEntities,
     (projectEntities, categoryEntities) => {
       return Object.keys(projectEntities).reduce((scores, projectId) => {
+        if (!projectEntities[projectId]) {
+          return 0;
+        }
         const disabledCategories = projectEntities[projectId].disabledCategories;
+        if (!disabledCategories || !categoryEntities) {
+          return 0;
+        }
         const activeCategories = Object.keys(categoryEntities).filter(categoryId => !disabledCategories[categoryId]);
         const categoryScore = activeCategories.reduce((score, categoryId) => {
           return score + computeScore(categoryEntities[categoryId].items, projectEntities[projectId].items);

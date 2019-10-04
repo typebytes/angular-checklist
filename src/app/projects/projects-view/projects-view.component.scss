@@ -38,6 +38,9 @@ main {
 }
 
 .welcome-message {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   max-width: 350px;
 
   h1 {
@@ -51,6 +54,9 @@ main {
 }
 
 .welcome-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
   position: relative;
 
   img {
@@ -125,6 +131,10 @@ mat-card-content {
   }
 }
 
+mat-card-content {
+  margin-bottom: 0;
+}
+
 .project-name {
   max-width: 100%;
   text-overflow: ellipsis;
@@ -132,6 +142,30 @@ mat-card-content {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  margin-bottom: 0;
+}
+
+.project-summary {
+  display: flex;
+  flex-direction: column;
+  --line-height: 22px;
+  .label {
+    font-style: italic;
+    color: #9EA0A5;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: var(--line-height);
+  }
+  .info {
+    color: #9EA0A5;
+    font-size: 12px;
+    line-height: var(--line-height);
+    max-height: calc(var(--line-height) * 2);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 }
 
 .add-project-card {

@@ -2,24 +2,32 @@
 <main>
   <div class="projects-header">
     <div class="welcome-wrapper">
+      <h1>Welcome to INote App!</h1>
       <div class="welcome-message">
-        <h1>Welcome to Checklist App!</h1>
-        <p class="welcome-subtitle">Curated list of common mistakes made when developing software applications.</p>
+        <div></div>
+        <p class="welcome-subtitle">INote is a simple and awesome note app.<br/>
+          It gives you a quick and simple create and editing notes, memos, and to-do lists.<br/>
+          Support search/notification help you easy to find and remind you</p>
       </div>
-      <img src="assets/undraw_checklist.svg" alt="Checklist" />
+      <img src="assets/undraw_checklist.svg" alt="INote" />
     </div>
   </div>
   <div class="projects-list-wrapper">
-    <h5>Your Projects</h5>
+    <br />
+    <h5>Your Note Modules</h5>
     <div class="projects-grid">
       <mat-card matRipple (click)="addProject()" class="add-project-card">
         <mat-icon>add</mat-icon>
-        Add Project
+        Add Note Module
       </mat-card>
       <mat-card (click)="navigateToProject(project.id)" *ngFor="let project of (projects$ | async)">
         <div class="card-ripple" matRipple></div>
         <mat-card-content>
           <h2 class="project-name">{{ project.name }}</h2>
+          <div class="project-summary">
+            <span class="label">Check List Info</span>
+            <span class="info">{{ project.summary }}</span>
+          </div>
         </mat-card-content>
         <mat-card-actions align="right">
           <!-- Hai Thai : Comment out this feature ( hidden feature )-->
@@ -27,8 +35,13 @@
             <ac-score-chart class="primary" [score]="project.score"></ac-score-chart>
             <span class="score">{{ project.score | percent: '.0-2' }} completed</span>
           </div>
-          <button (click)="editProject($event, project)" (mousedown)="$event.stopPropagation()" mat-icon-button>
+          <button class="ck-icon" (click)="editProject($event, project)" (mousedown)="$event.stopPropagation()"
+            mat-icon-button>
             <mat-icon>edit</mat-icon>
+          </button>
+          <button class="ck-icon" (click)="deleteProject($event, project)" (mousedown)="$event.stopPropagation()"
+            mat-icon-button>
+            <mat-icon>delete</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>

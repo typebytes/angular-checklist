@@ -24,7 +24,9 @@
   <mat-form-field class="mat-input-new-category" *ngIf="_newCategoryMode">
     <input matInput placeholder="New Category" [(ngModel)]="_selectedCategory">
   </mat-form-field>
-  <mat-icon *ngIf="_newCategoryMode" (click)="cancelCreateCategory()" title="Cancel create new category" class="delete-icon" [class.active]="active">cancel</mat-icon>
+  <button *ngIf="_newCategoryMode" class="ck-icon" mat-icon-button (click)="cancelCreateCategory()" title="Cancel create new category" >
+    <mat-icon>cancel</mat-icon>
+  </button>
 </div>
 <mat-form-field class="mat-input-full-width">
   <input matInput placeholder="Title" [(ngModel)]="title">

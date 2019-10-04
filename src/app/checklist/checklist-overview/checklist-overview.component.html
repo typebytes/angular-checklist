@@ -1,6 +1,6 @@
 <ul [@breadcrumb]="breadcrumb.length" class="breadcrumb" *ngIf="(breadcrumb$ | async) as breadcrumb">
   <ng-container *ngFor="let item of breadcrumb; let last = last; trackBy: trackByTitle">
-    <li (click)="goBack(last)" [class.active]="last" class="breadcrumb-item">{{ item.title }}</li>
+    <li (click)="goBack(last)" [class.active]="last" class="breadcrumb-item">#{{ item.title }}</li>
     <li class="breadcrumb-item-separator" *ngIf="!last"><mat-icon>chevron_right</mat-icon></li>
   </ng-container>
   <!-- (click)="filterChange.emit('DONE')" [class.active]="filter === 'DONE'" -->

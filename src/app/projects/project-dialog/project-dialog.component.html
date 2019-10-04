@@ -17,6 +17,16 @@
       <mat-error *ngIf="projectName.hasError('projectExists')">Project already exists</mat-error>
       <mat-spinner *ngIf="projectName.pending" diameter="20" color="primary" matSuffix></mat-spinner>
     </mat-form-field>
+
+    <mat-form-field>
+        <textarea
+          class="ck-txt-project-info"
+          matInput
+          placeholder="Project Info"
+          [(ngModel)]="projectInfo"
+          type="text"
+        ></textarea>
+      </mat-form-field>
   </div>
   <div class="danger-zone-wrapper" *ngIf="isEditMode()">
     <h4>DANGER ZONE</h4>

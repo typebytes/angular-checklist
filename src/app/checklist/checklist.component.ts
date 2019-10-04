@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -27,7 +27,7 @@ enum CategoryListMode {
   templateUrl: './checklist.component.html',
   styleUrls: ['./checklist.component.scss']
 })
-export class ChecklistComponent implements OnInit, OnDestroy {
+export class ChecklistComponent implements OnInit, AfterViewInit, OnDestroy {
   private editMode$ = new BehaviorSubject(CategoryListMode.List);
 
   small$: Observable<boolean>;
@@ -45,8 +45,7 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 
   sideNavMode = 'side';
 
-  @ViewChild(MatSidenav, { static: false })
-  sideNav: MatSidenav;
+  @ViewChild(MatSidenav, { static: false }) sideNav: MatSidenav;
 
   constructor(
     private store: Store<ApplicationState>,
@@ -69,8 +68,10 @@ export class ChecklistComponent implements OnInit, OnDestroy {
     this.small$ = small$;
     this.desktop$ = desktop$;
     this.mediumUp$ = combineLatest(medium$, desktop$).pipe(map(([medium, desktop]) => medium || desktop));
+  }
 
-    desktop$.subscribe(matches => {
+  ngAfterViewInit(): void {
+    this.desktop$.subscribe(matches => {
       if (!matches) {
         this.sideNav.close();
         this.setSidenavMode('over');

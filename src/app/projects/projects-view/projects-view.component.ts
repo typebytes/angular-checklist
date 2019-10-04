@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { asyncScheduler, Observable } from 'rxjs';
-import { filter, map, observeOn } from 'rxjs/operators';
+import { asyncScheduler, Observable, of } from 'rxjs';
+import { filter, map, observeOn, switchMap } from 'rxjs/operators';
 import { ApplicationState } from '../../state/app.state';
 import { Project } from '../models/projects.model';
 
@@ -15,8 +15,10 @@ import {
   ProjectDialogResultType
 } from '../project-dialog/project-dialog.component';
 
-import { AddProject, DeleteProject, EditProject, GetProjects } from '../state/projects.actions';
+import { AddProject, DeleteProject, EditProject, GetProjects, GetProjectsSuccess } from '../state/projects.actions';
 import { ProjectsSelectors } from '../state/projects.selectors';
+import { ConfirmationDialogComponent } from 'src/app/checklist/confirmation-dialog/confirmation-dialog.component';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'ac-projects-view',
@@ -26,7 +28,7 @@ import { ProjectsSelectors } from '../state/projects.selectors';
 export class ProjectsViewComponent implements OnInit {
   projects$: Observable<Array<Project>>;
 
-  constructor(private store: Store<ApplicationState>, private router: Router, private dialog: MatDialog) {}
+  constructor(private store: Store<ApplicationState>, private router: Router, private dialog: MatDialog, private _projectService: ProjectService) { }
 
   ngOnInit() {
     this.projects$ = this.store.pipe(select(ProjectsSelectors.getProjects));
@@ -38,7 +40,7 @@ export class ProjectsViewComponent implements OnInit {
   }
 
   addProject() {
-    this.openProjectDialog({ title: 'Add Project', submitButtonText: 'Create' })
+    this.openProjectDialog({ title: 'Add Note Module', submitButtonText: 'Create' })
       .pipe(
         map(({ payload: newProject }) => {
           this.store.dispatch(new AddProject(newProject));
@@ -46,7 +48,7 @@ export class ProjectsViewComponent implements OnInit {
         }),
         observeOn(asyncScheduler)
       )
-      .subscribe(({ id }) => this.navigateToProject(id));
+      .subscribe(({ id }) => console.log('id: ', id));
   }
 
   editProject(event: MouseEvent, project: Project) {
@@ -78,5 +80,33 @@ export class ProjectsViewComponent implements OnInit {
       .pipe<ProjectDialogResult>(filter((x) => {
         return x;
       }));
+  }
+
+  private deleteProjectConfirmation() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete Project',
+        text: `Wooops! Would you like to remove this Project. All Items in this removed too `,
+        buttonText: 'Delete'
+      }
+    });
+
+    return dialogRef.afterClosed().pipe(switchMap(result => this.processDeleteProject(result)));
+  }
+
+  private processDeleteProject(result: boolean) {
+    return of(result);
+  }
+
+  deleteProject(event: MouseEvent, project: Project): void {
+    event.stopPropagation();
+    this.deleteProjectConfirmation().subscribe(result => {
+      if (!result) {
+        return;
+      }
+      this._projectService.deleteProject(project.id).subscribe((projects: any) => {
+        this.store.dispatch(new GetProjectsSuccess(projects));
+      });
+    });
   }
 }

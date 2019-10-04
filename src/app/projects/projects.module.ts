@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { CustomMaterialModule } from '../custom-material.module';
@@ -16,6 +16,7 @@ import { ProjectEffects } from './state/project.effects';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     CustomMaterialModule,
     SharedModule,
     ReactiveFormsModule,

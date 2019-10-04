@@ -3,6 +3,7 @@ import { EntityState } from '../../shared/models';
 export interface Project {
   id: string;
   name: string;
+  summary: string;
   disabledCategories: EntityState<boolean>;
   favorites: FavoriteEntities;
   items: EntityState<boolean>;

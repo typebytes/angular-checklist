@@ -69,11 +69,13 @@ export class ProjectDialogComponent implements OnInit {
   submitButtonText: string;
   enableDangerZone = false;
   showDangerZone = false;
-  maxLength = 25;
+  maxLength = 50;
 
   projectName = new FormControl('', [Validators.required, Validators.maxLength(this.maxLength)]);
   verifyProjectName = new FormControl('');
   errorStateMatcher = new CustomErrorStateMatcher();
+
+  projectInfo = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProjectDialogData,
@@ -108,7 +110,7 @@ export class ProjectDialogComponent implements OnInit {
 
       return this.dialogRef.close({
         type: ProjectDialogResultType.AddOrEdit,
-        payload: { id: projectId, name: projectName }
+        payload: { id: projectId, name: projectName, summary: this.projectInfo }
       });
     }
   }

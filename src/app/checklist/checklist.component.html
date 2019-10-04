@@ -34,7 +34,13 @@
       </section>
       <section class="category-list-wrapper">
         <div class="section-header">
-          <h4>CATEGORIES</h4>
+          <div class="category-label">
+            <h4>TAGS</h4>
+            <button mat-icon-button class="ck-icon">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="category-extend-space"></div>
           <mat-slide-toggle (change)="toggleEditMode()">Edit</mat-slide-toggle>
         </div>
         <div class="category-list">

@@ -33,6 +33,7 @@ export const toggleManny = <T>(
 export const createNewProject = (id: string, name?: string): Project => {
   return {
     id,
+    summary: '',
     name: name ? name : id,
     disabledCategories: {},
     items: {},

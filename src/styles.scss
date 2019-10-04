@@ -13,3 +13,18 @@ a {
   color: mat-color($primary);
   text-decoration: none;
 }
+
+.ck-icon {
+  mat-icon {
+    color: #d4d4d4;
+  }
+}
+
+.ck-icon:hover {
+  mat-icon {
+    color: mat-color($primary, 500) !important;
+  }
+  background: #f1eded !important;
+  border-radius: 100%;
+  box-sizing: border-box;
+}
