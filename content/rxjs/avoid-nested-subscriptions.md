@@ -24,7 +24,12 @@ fetchProduct(1).subscribe(product => {
 
 We first fetch the product and once the request is resolved we fetch similar products inside the subscribe block of the first, most outer observable.
 
-This is considered to be an anti-pattern or code smell.
+This is considered to be an anti-pattern or code smell for the following reasons:
+- 👹 it brings us back to callback hell,
+- 💔 it breaks Reactive Programming,
+- 🐢 it breaks observables laziness,
+- 💥 it doesn’t help with subscription management,
+- 🤢 it's ugly anyway.
 
 Instead we can use one of the flattening operators to get rid of this code smell and solve it more elegantly:
 
