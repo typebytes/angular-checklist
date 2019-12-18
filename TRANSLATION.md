@@ -5,8 +5,8 @@
 The following tasks are required to add a new language.
 [See available code here](https://github.com/angular/angular/tree/master/packages/common/locales).
 
-- Add  word transration file ​​in `src/assets/i18n/[lang-code].json`.
-- Add languages ​​to `langages`, an array of `tools/utils.ts` files.
+- Add word translation file in `src/assets/i18n/[lang-code].json`.
+- Add languages to `langages`, an array of `tools/utils.ts` files.
 - Register langage code of the language to be added to `translocoConfig()` in `src/app/app.module.ts`.
 - Make a target language directory by copying `en-US` in the content directory. And then run `yarn build-content`.
 
