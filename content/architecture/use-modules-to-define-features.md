@@ -1,15 +1,15 @@
 ---
 title: use modules to define features
-author: 
+author:
   name: Billy Lando
   url: https://github.com/billyjov
 ---
 
-# Problem 
+# Problem
 
 As an app scales, the root module starts growing and declaring a vast number of components increases the start time as well as affects the application's performance. Additionally, the more components we add to the root module, the harder it gets to understand the application's structure, and therefore making it hard to maintain.
 
-# Solution 
+# Solution
 
 Using an `NgModule` to define features in Angular allows lazy loading, isolation and portability of this features. The purpose of feature modules is to organize relevant code into cohesive blocks. This helps to apply clear boundaries between features or application domains.
 
@@ -42,8 +42,7 @@ export class ListPeopleComponent implements OnInit {
 export class AppModule {}
 ```
 
-The above can be refactored to: 
-
+The above can be refactored to:
 
 ```ts
 
@@ -93,6 +92,6 @@ But we aware of possibly multiple service instances. For more information check 
 
 # Resources
 
-- [Avoiding common confusions with modules in Angular](https://blog.angularindepth.com/avoiding-common-confusions-with-modules-in-angular-ada070e6891f) by Max Koretskyi 
+- [Avoiding common confusions with modules in Angular](https://blog.angularindepth.com/avoiding-common-confusions-with-modules-in-angular-ada070e6891f) by Max Koretskyi
 - [Module vs Module](https://www.youtube.com/watch?v=ntJ-P-Cvo7o) by Deborah Kurata
 - [Angular documentation for Feature Modules](https://angular.io/guide/feature-modules)
