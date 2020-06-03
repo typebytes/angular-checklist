@@ -33,6 +33,9 @@
   }
 
   .mat-select-trigger {
+    display: flex;
+    align-items: center;
+    height: 35px;
     padding: 0px 10px;
   }
 

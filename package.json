@@ -18,6 +18,9 @@
     "format:check": "npm run format:base -- --list-different",
     "format:fix": "npm run format:base -- --write"
   },
+  "engines": {
+    "node": "11.15.0"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint --env HUSKY_GIT_PARAMS",
