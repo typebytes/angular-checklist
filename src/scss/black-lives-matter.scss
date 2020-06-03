@@ -1,0 +1,11 @@
+mat-toolbar {
+  &.mat-toolbar {
+    background: #03070b;
+    color: white;
+
+    ac-dropdown {
+      background: white;
+      border-color: white;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@import '../../../scss/variables';
+@import '~@angular/material/theming';
+
+.black-lives-matter {
+  font-weight: 100;
+  background: #25292c;
+  padding: 16px;
+  color: white;
+
+  a {
+    color: mat-color($accent, 1);
+  }
+}

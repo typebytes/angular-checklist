@@ -1,4 +1,6 @@
-<ac-toolbar> <ac-toolbar-logo></ac-toolbar-logo> </ac-toolbar>
+<ac-toolbar>
+  <ac-toolbar-logo></ac-toolbar-logo>
+</ac-toolbar>
 <main>
   <div class="projects-header">
     <div class="welcome-wrapper">
@@ -16,7 +18,7 @@
         <mat-icon>add</mat-icon>
         Add Project
       </mat-card>
-      <mat-card (click)="navigateToProject(project.id)" *ngFor="let project of (projects$ | async)">
+      <mat-card (click)="navigateToProject(project.id)" *ngFor="let project of projects$ | async">
         <div class="card-ripple" matRipple></div>
         <mat-card-content>
           <h2 class="project-name">{{ project.name }}</h2>
