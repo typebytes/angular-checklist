@@ -2,12 +2,12 @@
 
 language: node_js
 node_js:
-- "10.13.0"
+  - '11.15.0'
 
 branches:
   only:
-  - master
-  - develop
+    - master
+    - develop
 
 jobs:
   include:
@@ -31,7 +31,6 @@ jobs:
       after_success:
         - firebase use angular-checklist-dev
         - firebase deploy --token $FIREBASE_TOKEN_DEVELOP
-
 
 notifications:
   email:
