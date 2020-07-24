@@ -4,7 +4,8 @@ import { ChecklistFilter } from '../models/checklist.model';
 export enum ChecklistActionTypes {
   SET_CATEGORIES_FILTER = '[Checklist] set categories filter',
   SET_FAVORITES_FILTER = '[Checklist] set favroites filter',
-  TOGGLE_EDIT_MODE = '[Checklist] toggle edit mode'
+  TOGGLE_EDIT_MODE = '[Checklist] toggle edit mode',
+  SET_LANG_CODE = '[Checklist] set langage code '
 }
 
 export class SetCategoriesFilter implements Action {
@@ -25,4 +26,10 @@ export class ToggleEditMode implements Action {
   constructor() {}
 }
 
-export type ChecklistActions = SetCategoriesFilter | SetFavoritesFilter | ToggleEditMode;
+export class SetLangageCode implements Action {
+  readonly type = ChecklistActionTypes.SET_LANG_CODE;
+
+  constructor(public payload: string) {}
+}
+
+export type ChecklistActions = SetCategoriesFilter | SetFavoritesFilter | ToggleEditMode | SetLangageCode;
