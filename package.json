@@ -58,7 +58,7 @@
     "core-js": "^2.5.4",
     "fuzzysort": "^1.1.4",
     "hammerjs": "^2.0.8",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^10.1.2",
     "lodash.groupby": "^4.6.0",
     "ngrx-store-localstorage": "^5.1.0",
     "normalize.css": "^8.0.0",
