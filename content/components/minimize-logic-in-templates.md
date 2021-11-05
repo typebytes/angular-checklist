@@ -39,3 +39,7 @@ export class SomeComponent {
   }
 }
 ```
+
+### Caution
+
+Be careful when doing this while the `ChangeDetectionStrategy` is set as `Default`, as it'd cause the template bound functions to be called each time the `Change Detection Cycle` runs. Optimize this by using the `async` pipe and having `observables` that return the required value (also while using `OnPush` Change Detection Strategy.
