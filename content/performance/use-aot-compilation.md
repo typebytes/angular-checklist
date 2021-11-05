@@ -6,6 +6,8 @@ author:
   url: https://twitter.com/mgechev
 ---
 
+**Note**: Starting from Angular v9 AOT compiler is the default one, so if you're on Angular v9+ you need to do nothing.
+
 # Problem
 
 The biggest part of the code that we ship to the browser when we use Angular is the compiler. The compiler is needed to transform our HTML-like templates to Javascript. This is doesn't only has a negative impact on the bundle size but also on the performance as this process is computationally expensive.
