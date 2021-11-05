@@ -33,12 +33,8 @@ We can refactor this and move the logic into a `PeopleService`.
   ...
 })
 export class SomeComponent implements OnInit, OnDestroy {
-  data$;
+  data$ = this.peopleService.getPeople();
 
   constructor(private peopleService: PeopleService) {}
-
-  ngOnInit() {
-    this.data$ = this.peopleService.getPeople();
-  }
 }
 ```
