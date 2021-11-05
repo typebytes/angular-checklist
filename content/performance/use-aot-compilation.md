@@ -6,7 +6,7 @@ author:
   url: https://twitter.com/mgechev
 ---
 
-**Note**: Starting from Angular v9 AOT compiler is the default one, so if you're on Angular v9+ you need to do nothing.
+**Note**: Starting from Angular v9, the AOT compiler is the default compiler, so if you're using Angular v9+ you don't need to take any action.
 
 # Problem
 
