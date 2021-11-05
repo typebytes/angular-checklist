@@ -32,7 +32,7 @@ We can refactor this and move the logic into a `PeopleService`.
 @Component({
   ...
 })
-export class SomeComponent implements OnInit, OnDestroy {
+export class SomeComponent {
   data$ = this.peopleService.getPeople();
 
   constructor(private peopleService: PeopleService) {}
