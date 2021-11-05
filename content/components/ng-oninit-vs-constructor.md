@@ -47,4 +47,4 @@ export class SomeComponent implements OnInit {
 
 # Resources
 
-- [The essential difference between Constructor and ngOnInit in Angular](https://indepth.dev/the-essential-difference-between-constructor-and-ngoninit-in-angular/) by Maxim Koretskyi
+- [The essential difference between Constructor and ngOnInit in Angular](https://indepth.dev/the-essential-difference-between-constructor-and-ngoninit-in-angular) by Maxim Koretskyi
