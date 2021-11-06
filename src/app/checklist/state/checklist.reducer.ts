@@ -13,6 +13,23 @@ export const INITIAL_STATE: ChecklistState = {
   editMode: false
 };
 
+export const filterReducer = (state: Filter, action: ChecklistActions) => {
+  switch (action.type) {
+    case ChecklistActionTypes.SET_CATEGORIES_FILTER:
+      return {
+        ...state,
+        categories: action.payload
+      };
+    case ChecklistActionTypes.SET_FAVORITES_FILTER:
+      return {
+        ...state,
+        favorites: action.payload
+      };
+    default:
+      return state;
+  }
+};
+
 export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions) {
   switch (action.type) {
     case ChecklistActionTypes.SET_CATEGORIES_FILTER:
@@ -30,20 +47,3 @@ export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions
       return state;
   }
 }
-
-export const filterReducer = (state: Filter, action: ChecklistActions) => {
-  switch (action.type) {
-    case ChecklistActionTypes.SET_CATEGORIES_FILTER:
-      return {
-        ...state,
-        categories: action.payload
-      };
-    case ChecklistActionTypes.SET_FAVORITES_FILTER:
-      return {
-        ...state,
-        favorites: action.payload
-      };
-    default:
-      return state;
-  }
-};

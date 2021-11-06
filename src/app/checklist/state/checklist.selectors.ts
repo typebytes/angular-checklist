@@ -5,7 +5,7 @@ import { calculatePercentage, computeScore, createChecklistItem, filterItems } f
 import { AppSelectors } from '../../state/app.selectors';
 import { BreadcrumbItem, Category, CategoryEntity, ChecklistItem } from '../models/checklist.model';
 
-const _groupBy = require('lodash.groupby');
+import * as _groupBy from 'lodash.groupby';
 
 export namespace ChecklistSelectors {
   export const getFavoritesFilter = createSelector(
@@ -18,10 +18,7 @@ export namespace ChecklistSelectors {
     checklist => checklist.filter.categories
   );
 
-  export const getEditMode = createSelector(
-    AppSelectors.getChecklistState,
-    checklist => checklist.editMode
-  );
+  export const getEditMode = createSelector(AppSelectors.getChecklistState, checklist => checklist.editMode);
 
   export const getScores = createSelector(
     AppSelectors.getCategoryEntities,
@@ -172,67 +169,50 @@ export namespace ChecklistSelectors {
   );
 
   export const getFavoriteEntitiesByCategory = (id: string) => {
-    return createSelector(
-      getFavoriteGroupedByCategory,
-      categories => categories[id] || {}
-    );
+    return createSelector(getFavoriteGroupedByCategory, categories => categories[id] || {});
   };
 
-  export const getFilteredFavorites = createSelector(
-    getFavorites,
-    getFavoritesFilter,
-    (favorites, filter) => {
-      return favorites.map(favorite => ({
-        ...favorite,
-        items: filterItems(favorite.items, filter)
-      }));
+  export const getFilteredFavorites = createSelector(getFavorites, getFavoritesFilter, (favorites, filter) => {
+    return favorites.map(favorite => ({
+      ...favorite,
+      items: filterItems(favorite.items, filter)
+    }));
+  });
+
+  export const getFavoritesScore = createSelector(getFavorites, favorites => {
+    if (favorites.length) {
+      const score = favorites.reduce(
+        (acc, category) => {
+          acc.checkedItems += category.items.filter((item: ChecklistItem) => item.checked).length;
+          acc.totalItems += category.items.length;
+          return acc;
+        },
+        { checkedItems: 0, totalItems: 0 }
+      );
+
+      return calculatePercentage(score.checkedItems, score.totalItems);
     }
-  );
 
-  export const getFavoritesScore = createSelector(
-    getFavorites,
-    favorites => {
-      if (favorites.length) {
-        const score = favorites.reduce(
-          (acc, category) => {
-            acc.checkedItems += category.items.filter((item: ChecklistItem) => item.checked).length;
-            acc.totalItems += category.items.length;
-            return acc;
-          },
-          { checkedItems: 0, totalItems: 0 }
-        );
+    return 0;
+  });
 
-        return calculatePercentage(score.checkedItems, score.totalItems);
-      }
+  export const getFavoritesCount = createSelector(getFavorites, favorites => {
+    return favorites.reduce((acc, category) => {
+      return acc + category.items.length;
+    }, 0);
+  });
 
-      return 0;
+  export const getBreadcrumb = createSelector(getSelectedCategory, getSelectedItem, (category, item) => {
+    const breadcrumb: Array<BreadcrumbItem> = [];
+
+    if (category) {
+      breadcrumb.push(category);
     }
-  );
 
-  export const getFavoritesCount = createSelector(
-    getFavorites,
-    favorites => {
-      return favorites.reduce((acc, category) => {
-        return acc + category.items.length;
-      }, 0);
+    if (item) {
+      breadcrumb.push(item);
     }
-  );
 
-  export const getBreadcrumb = createSelector(
-    getSelectedCategory,
-    getSelectedItem,
-    (category, item) => {
-      const breadcrumb: Array<BreadcrumbItem> = [];
-
-      if (category) {
-        breadcrumb.push(category);
-      }
-
-      if (item) {
-        breadcrumb.push(item);
-      }
-
-      return breadcrumb;
-    }
-  );
+    return breadcrumb;
+  });
 }

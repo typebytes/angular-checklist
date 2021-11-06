@@ -12,7 +12,7 @@
       <ac-dropdown-static-option routerLink="/"> <mat-icon>edit</mat-icon> Manage Projects </ac-dropdown-static-option>
     </ac-dropdown-static-options>
   </ac-dropdown>
-  <ac-checklist-search *ngIf="(mediumUp$ | async)"></ac-checklist-search>
+  <ac-checklist-search *ngIf="mediumUp$ | async"></ac-checklist-search>
 </ac-toolbar>
 <mat-sidenav-container>
   <mat-sidenav [mode]="sideNavMode" [autoFocus]="false" #sideNav>
@@ -37,7 +37,7 @@
           <mat-slide-toggle (change)="toggleEditMode()">Edit</mat-slide-toggle>
         </div>
         <div class="category-list">
-          <nav class="category" *ngFor="let category of (categories$ | async); trackBy: trackBySlug">
+          <nav class="category" *ngFor="let category of categories$ | async; trackBy: trackBySlug">
             <ac-score-chart *ngIf="!editMode" [class.primary]="rla.isActive" [score]="category.score"></ac-score-chart>
             <a
               class="sidenav-link"

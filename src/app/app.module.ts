@@ -19,11 +19,7 @@ import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
     BrowserModule.withServerTransition({ appId: 'angular-checklist' }),
     BrowserAnimationsModule,
     StoreModule.forRoot(ROOT_REDUCER, {
-      metaReducers: USER_PROVIDED_META_REDUCERS,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
+      metaReducers: USER_PROVIDED_META_REDUCERS
     }),
     ProjectsModule,
     ChecklistModule,
@@ -34,7 +30,7 @@ import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules
     }),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({}),
     CustomMaterialModule
   ],
   bootstrap: [AppComponent]

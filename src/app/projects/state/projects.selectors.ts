@@ -5,19 +5,13 @@ import { AppSelectors } from '../../state/app.selectors';
 import { Project } from '../models/projects.model';
 
 export namespace ProjectsSelectors {
-  export const getProjectEntities = createSelector(
-    AppSelectors.getProjectsState,
-    projects => projects.entities
-  );
+  export const getProjectEntities = createSelector(AppSelectors.getProjectsState, projects => projects.entities);
 
-  export const getSelectedProjectId = createSelector(
-    AppSelectors.getRouterState,
-    (routerState): string => {
-      const { project } = extractRouteParams(routerState.root, 1);
+  export const getSelectedProjectId = createSelector(AppSelectors.getRouterState, (routerState): string => {
+    const { project } = extractRouteParams(routerState.root, 1);
 
-      return project;
-    }
-  );
+    return project;
+  });
 
   export const getSelectedProject = createSelector(
     getProjectEntities,
@@ -33,26 +27,17 @@ export namespace ProjectsSelectors {
     }
   );
 
-  export const getProjectItems = createSelector(
-    getSelectedProject,
-    project => {
-      return project.items || {};
-    }
-  );
+  export const getProjectItems = createSelector(getSelectedProject, project => {
+    return project.items || {};
+  });
 
-  export const getDisabledCategories = createSelector(
-    getSelectedProject,
-    project => {
-      return project.disabledCategories || {};
-    }
-  );
+  export const getDisabledCategories = createSelector(getSelectedProject, project => {
+    return project.disabledCategories || {};
+  });
 
-  export const getFavoriteEntities = createSelector(
-    getSelectedProject,
-    project => {
-      return project.favorites || {};
-    }
-  );
+  export const getFavoriteEntities = createSelector(getSelectedProject, project => {
+    return project.favorites || {};
+  });
 
   export const getProjectsScores = createSelector(
     getProjectEntities,
@@ -72,27 +57,20 @@ export namespace ProjectsSelectors {
     }
   );
 
-  export const getProjects = createSelector(
-    getProjectEntities,
-    getProjectsScores,
-    (projectEntities, projectScores) => {
-      const addScore = (project): Project => {
-        return {
-          ...project,
-          score: projectScores[project.id]
-        };
+  export const getProjects = createSelector(getProjectEntities, getProjectsScores, (projectEntities, projectScores) => {
+    const addScore = (project): Project => {
+      return {
+        ...project,
+        score: projectScores[project.id]
       };
+    };
 
-      return Object.values(projectEntities)
-        .map(addScore)
-        .sort((a: Project, b: Project) => b.creationTime - a.creationTime);
-    }
-  );
+    return Object.values(projectEntities)
+      .map(addScore)
+      .sort((a: Project, b: Project) => b.creationTime - a.creationTime);
+  });
 
   export const getProjectById = (id: string) => {
-    return createSelector(
-      getProjectEntities,
-      projectEntities => projectEntities[id]
-    );
+    return createSelector(getProjectEntities, projectEntities => projectEntities[id]);
   };
 }

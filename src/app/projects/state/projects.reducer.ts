@@ -7,30 +7,62 @@ const DEFAULT_PROJECT: ProjectEntities = {
   default: createNewProject('default')
 };
 
-function projectsStateReducer(state: ProjectsState, action: ProjectsActions) {
+export const favoritesReducer = (favoriteEntities: FavoriteEntities, action: ProjectsActions) => {
+  switch (action.type) {
+    case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
+      const updatedFavorites = { ...favoriteEntities };
+
+      action.payload.forEach(item => {
+        delete updatedFavorites[item.id];
+      });
+
+      return updatedFavorites;
+    case ProjectsActionTypes.TOGGLE_FAVORITE:
+      const { id: itemId } = action.payload;
+      return toggleEntity(favoriteEntities, itemId);
+    default:
+      return favoriteEntities;
+  }
+};
+
+export const projectReducer = (project: Project, action: ProjectsActions): Project => {
   switch (action.type) {
     case ProjectsActionTypes.TOGGLE_FAVORITE:
-    case ProjectsActionTypes.TOGGLE_CATEGORY:
-    case ProjectsActionTypes.ADD_PROJECT:
-    case ProjectsActionTypes.DELETE_PROJECT:
-    case ProjectsActionTypes.EDIT_PROJECT:
-    case ProjectsActionTypes.TOGGLE_ITEM:
-    case ProjectsActionTypes.CHECK_ALL:
-    case ProjectsActionTypes.UNCHECK_ALL:
     case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
       return {
-        ...state,
-        entities: projectEntitiesReducer(state, action)
+        ...project,
+        favorites: favoritesReducer(project.favorites, action)
       };
-    case ProjectsActionTypes.SELECT_PROJECT:
+    case ProjectsActionTypes.UNCHECK_ALL:
       return {
-        ...state,
-        selectedProjectId: action.payload
+        ...project,
+        items: toggleManny(action.payload.items, item => item, {
+          initialValue: project.items,
+          value: false
+        })
+      };
+    case ProjectsActionTypes.CHECK_ALL:
+      return {
+        ...project,
+        items: toggleManny(action.payload.items, item => item, {
+          initialValue: project.items,
+          value: true
+        })
+      };
+    case ProjectsActionTypes.TOGGLE_ITEM:
+      return {
+        ...project,
+        items: toggleEntity(project.items, action.payload.id)
+      };
+    case ProjectsActionTypes.TOGGLE_CATEGORY:
+      return {
+        ...project,
+        disabledCategories: toggleEntity(project.disabledCategories, action.payload)
       };
     default:
-      return state;
+      return project;
   }
-}
+};
 
 export const projectEntitiesReducer = (state: ProjectsState, action: ProjectsActions): ProjectEntities => {
   const selectedProject = state.selectedProjectId;
@@ -78,62 +110,30 @@ export const projectEntitiesReducer = (state: ProjectsState, action: ProjectsAct
   }
 };
 
-export const projectReducer = (project: Project, action: ProjectsActions): Project => {
+function projectsStateReducer(state: ProjectsState, action: ProjectsActions) {
   switch (action.type) {
     case ProjectsActionTypes.TOGGLE_FAVORITE:
-    case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
-      return {
-        ...project,
-        favorites: favoritesReducer(project.favorites, action)
-      };
-    case ProjectsActionTypes.UNCHECK_ALL:
-      return {
-        ...project,
-        items: toggleManny(action.payload.items, item => item, {
-          initialValue: project.items,
-          value: false
-        })
-      };
-    case ProjectsActionTypes.CHECK_ALL:
-      return {
-        ...project,
-        items: toggleManny(action.payload.items, item => item, {
-          initialValue: project.items,
-          value: true
-        })
-      };
-    case ProjectsActionTypes.TOGGLE_ITEM:
-      return {
-        ...project,
-        items: toggleEntity(project.items, action.payload.id)
-      };
     case ProjectsActionTypes.TOGGLE_CATEGORY:
+    case ProjectsActionTypes.ADD_PROJECT:
+    case ProjectsActionTypes.DELETE_PROJECT:
+    case ProjectsActionTypes.EDIT_PROJECT:
+    case ProjectsActionTypes.TOGGLE_ITEM:
+    case ProjectsActionTypes.CHECK_ALL:
+    case ProjectsActionTypes.UNCHECK_ALL:
+    case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
       return {
-        ...project,
-        disabledCategories: toggleEntity(project.disabledCategories, action.payload)
+        ...state,
+        entities: projectEntitiesReducer(state, action)
+      };
+    case ProjectsActionTypes.SELECT_PROJECT:
+      return {
+        ...state,
+        selectedProjectId: action.payload
       };
     default:
-      return project;
+      return state;
   }
-};
-
-export const favoritesReducer = (favoriteEntities: FavoriteEntities, action: ProjectsActions) => {
-  switch (action.type) {
-    case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
-      const updatedFavorites = { ...favoriteEntities };
-
-      action.payload.forEach(item => {
-        delete updatedFavorites[item.id];
-      });
-
-      return updatedFavorites;
-    case ProjectsActionTypes.TOGGLE_FAVORITE:
-      const { id: itemId } = action.payload;
-      return toggleEntity(favoriteEntities, itemId);
-    default:
-      return favoriteEntities;
-  }
-};
+}
 
 export const projectsInitReducer = (stateReducer: ActionReducer<any>) => {
   return (state: ProjectsState, action: Action): ProjectsState => {

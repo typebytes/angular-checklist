@@ -3,8 +3,8 @@
 <ac-checklist-cta-bar [filter]="filter$ | async" [showActionButtons]="false" (filterChange)="setFilter($event)">
 </ac-checklist-cta-bar>
 
-<ng-container *ngIf="(favorites$ | async) as favorites">
-  <ng-container *ngIf="favorites.length; else: noFavorites">
+<ng-container *ngIf="favorites$ | async as favorites">
+  <ng-container *ngIf="favorites.length; else noFavorites">
     <ul class="category" *ngFor="let favorite of favorites; trackBy: trackByCategoryTitle">
       <h4>{{ favorite.category.title }}</h4>
       <ac-checklist-list>
