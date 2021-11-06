@@ -11,14 +11,20 @@ import { APP_ROUTES } from './app.routes';
 import { ChecklistModule } from './checklist/checklist.module';
 import { CustomMaterialModule } from './custom-material.module';
 import { ProjectsModule } from './projects/projects.module';
-import { META_REDUCERS, ROOT_REDUCER } from './state/app.state';
+import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'angular-checklist' }),
     BrowserAnimationsModule,
-    StoreModule.forRoot(ROOT_REDUCER, { metaReducers: META_REDUCERS }),
+    StoreModule.forRoot(ROOT_REDUCER, {
+      metaReducers: USER_PROVIDED_META_REDUCERS,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
     ProjectsModule,
     ChecklistModule,
     StoreDevtoolsModule.instrument({

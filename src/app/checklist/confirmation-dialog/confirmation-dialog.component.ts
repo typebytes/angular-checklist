@@ -1,5 +1,5 @@
 import { Component, HostBinding, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'ac-confirmation-dialog',

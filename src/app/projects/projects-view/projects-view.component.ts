@@ -74,6 +74,6 @@ export class ProjectsViewComponent implements OnInit {
         data
       })
       .afterClosed()
-      .pipe<ProjectDialogResult>(filter(Boolean));
+      .pipe<ProjectDialogResult>(filter(x => !!x));
   }
 }
