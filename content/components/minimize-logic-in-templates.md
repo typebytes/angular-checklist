@@ -16,7 +16,7 @@ For example here, we have have an `*ngIf` that has too much logic.
 
 ```ts
 @Component({
-  template: `<div *ngIf="users && users.length > 1 && visible">content to show</div>`
+  template: `<div *ngIf="users && users.length > 1 && visible">content to show</div>`,
 })
 export class SomeComponent {
   users: User[];
@@ -28,7 +28,7 @@ We can refactor this by extracting the logic into the component's class. This wi
 
 ```ts
 @Component({
-  template: `<div *ngIf="usersExistsAndVisible()">content to show</div>`
+  template: `<div *ngIf="usersExistsAndVisible()">content to show</div>`,
 })
 export class SomeComponent {
   users: User[];
@@ -40,6 +40,6 @@ export class SomeComponent {
 }
 ```
 
-### Caution
+### Gotchas
 
-Be careful when doing this while the `ChangeDetectionStrategy` is set as `Default`, as it'd cause the template bound functions to be called each time the `Change Detection Cycle` runs. Optimize this by using the `async` pipe and having `observables` that return the required value (also while using `OnPush` Change Detection Strategy.
+Be careful when the `ChangeDetectionStrategy` is set to `Default`, as it'd cause the functions bound in the template to be called each time the `Change Detection Cycle` runs. You can optimize this by turning on the `OnPush` change detection strategy and leverage the `async` pipe in combination with `Observable`s that return the desired value.
