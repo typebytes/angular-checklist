@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,7 +6,9 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  HostBinding
+  HostBinding,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
 
 @Component({
@@ -19,10 +22,14 @@ export class ScoreChartComponent implements OnChanges {
 
   @HostBinding('class.done') done = false;
 
-  constructor(private elementRef: ElementRef) {}
+  isBrowser = true;
+
+  constructor(private elementRef: ElementRef, @Inject(PLATFORM_ID) platformId: string) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.score) {
+    if (changes.score && this.isBrowser) {
       this.elementRef.nativeElement.style.setProperty('--percentage', this.score);
       this.done = this.score === 1;
     }

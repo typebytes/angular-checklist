@@ -13,11 +13,15 @@ export interface ApplicationState {
 }
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({ keys: ['projects'], rehydrate: true })(reducer);
+  return localStorageSync({
+    keys: ['projects'],
+    rehydrate: true,
+    checkStorageAvailability: true
+  })(reducer);
 }
 
 const DEFAULT_META_REDUCERS = [localStorageSyncReducer];
-const DEV_META_REDUCERS = [storeFreeze].concat(DEFAULT_META_REDUCERS as any);
+const DEV_META_REDUCERS = [storeFreeze, ...DEFAULT_META_REDUCERS];
 
 export const USER_PROVIDED_META_REDUCERS = !environment.production ? DEV_META_REDUCERS : DEFAULT_META_REDUCERS;
 

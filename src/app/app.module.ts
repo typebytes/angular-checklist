@@ -28,7 +28,8 @@ import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
       logOnly: environment.production
     }),
     RouterModule.forRoot(APP_ROUTES, {
-      preloadingStrategy: PreloadAllModules
+      preloadingStrategy: PreloadAllModules,
+      initialNavigation: 'enabled'
     }),
     StoreRouterConnectingModule.forRoot({}),
     CustomMaterialModule
