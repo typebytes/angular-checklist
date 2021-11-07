@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatSidenav, MatDrawerMode } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -43,7 +43,7 @@ export class ChecklistComponent implements OnInit {
 
   editMode = false;
 
-  sideNavMode = 'side';
+  sideNavMode: MatDrawerMode = 'side';
 
   @ViewChild(MatSidenav, { static: true })
   sideNav: MatSidenav;
