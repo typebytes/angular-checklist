@@ -1,6 +1,8 @@
 ---
-title: use Angular DevTools author:
-name: Maciej Wójcik url: https://twitter.com/maciej_wwojcik
+title: use Angular DevTools
+author:
+  name: Maciej Wójcik
+  url: https://twitter.com/maciej_wwojcik
 ---
 
 # Problem
