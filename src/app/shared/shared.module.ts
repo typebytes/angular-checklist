@@ -35,8 +35,7 @@ const COMPONENTS = [
 @NgModule({
   imports: [CommonModule, FontAwesomeModule, CustomMaterialModule, RouterModule, ReactiveFormsModule],
   declarations: [...COMPONENTS],
-  exports: [...COMPONENTS],
-  entryComponents: [AboutDialogComponent]
+  exports: [...COMPONENTS]
 })
 export class SharedModule {
   constructor(library: FaIconLibrary) {

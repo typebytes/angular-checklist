@@ -45,7 +45,7 @@ export class ChecklistComponent implements OnInit {
 
   sideNavMode: MatDrawerMode = 'side';
 
-  @ViewChild(MatSidenav)
+  @ViewChild(MatSidenav, { static: true })
   sideNav: MatSidenav;
 
   constructor(
@@ -66,7 +66,7 @@ export class ChecklistComponent implements OnInit {
 
     this.small$ = small$;
     this.desktop$ = desktop$;
-    this.mediumUp$ = combineLatest(medium$, desktop$).pipe(map(([medium, desktop]) => medium || desktop));
+    this.mediumUp$ = combineLatest([medium$, desktop$]).pipe(map(([medium, desktop]) => medium || desktop));
 
     desktop$.subscribe(matches => {
       if (!matches) {

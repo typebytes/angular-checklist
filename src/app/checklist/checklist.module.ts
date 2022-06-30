@@ -45,7 +45,6 @@ import { checklistReducer } from './state/checklist.reducer';
     ConfirmationDialogComponent,
     ChecklistSearchComponent
   ],
-  providers: [SearchService],
-  entryComponents: [ConfirmationDialogComponent]
+  providers: [SearchService]
 })
 export class ChecklistModule {}

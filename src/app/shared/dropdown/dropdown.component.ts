@@ -14,7 +14,7 @@ export class DropdownComponent implements OnChanges {
 
   @Output() selectionChange = new EventEmitter<any>();
 
-  select = new FormControl();
+  select = new FormControl<string>('');
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.selected) {

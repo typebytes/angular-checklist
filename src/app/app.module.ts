@@ -29,7 +29,7 @@ import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
     }),
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules,
-      initialNavigation: 'enabled'
+      initialNavigation: 'enabledNonBlocking'
     }),
     StoreRouterConnectingModule.forRoot({}),
     CustomMaterialModule
