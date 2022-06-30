@@ -1,6 +1,6 @@
-<ac-toolbar [class.desktop]="desktop$ | async" [class.small]="small$ | async">
+<ac-toolbar [class.desktop]="(desktop$ | async) === true" [class.small]="(small$ | async) === true">
   <button class="menu-button" mat-icon-button (click)="sideNav.toggle()"><mat-icon>menu</mat-icon></button>
-  <ac-toolbar-logo [showText]="desktop$ | async"></ac-toolbar-logo>
+  <ac-toolbar-logo [showText]="(desktop$ | async) === true"></ac-toolbar-logo>
   <ac-dropdown
     (selectionChange)="navigateToProject($event)"
     [items]="projects$ | async"
@@ -23,7 +23,7 @@
           <a class="sidenav-link" routerLink="favorites" #rla="routerLinkActive" routerLinkActive="active">
             <span
               [matBadge]="favoritesCount$ | async"
-              [matBadgeHidden]="!(favoritesCount$ | async)"
+              [matBadgeHidden]="(favoritesCount$ | async) <= 0"
               matBadgeColor="accent"
               matBadgeOverlap="false"
               >Favorites</span
