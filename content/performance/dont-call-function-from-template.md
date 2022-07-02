@@ -95,7 +95,8 @@ Change Detection strategy describes how Angular should handle Change Detection a
 @Component({
   template: `
     <div>{{ getName() }}</div>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyComponent {
   @Input() id;
