@@ -11,13 +11,12 @@ Understanding complex and nested component trees can be challenging, especially 
 
 # Solution
 
-Angular DevTools (available in Chrome) is an extension to Chrome DevTools. It provides a set of helpful features to
-debug your Angular application.
+Angular DevTools (available in Chrome) is an extension to Chrome DevTools. It provides a set of helpful features to debug your Angular application.
 
 You can:
 
-- explore component or directive structure, check its current state or even edit it,
-- profile your application to check for performance bottlenecks, including change detection execution information.
+- explore component or directive structure, check its current state or even edit it
+- profile your application to check for performance bottlenecks, including change detection execution information
 
 # Resources
 
