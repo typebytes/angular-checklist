@@ -7,9 +7,7 @@ author:
 
 # Problem
 
-Understanding complex and nested components trees can be challenging, especially if you are interested in the DOM view
-and the logic and data layer. In addition, it's not easy to debug Angular components using standard debug tools because
-they are not adapted very well for Angular-specific features.
+Understanding complex and nested component trees can be challenging, especially if you are interested in the DOM view, the logic, and data layer. In addition, it's not easy to debug Angular components using standard debugging tools because they are not adapted very well for Angular-specific features.
 
 # Solution
 
