@@ -2,7 +2,14 @@
 title: use Angular new cache
 ---
 
-**This only applies to Angular v13**
+# Problem
+
+The build process on large Angular applications can take long time for it to complete, and having to rebuild the application frequently will take a toll at the time you spend waiting for it to finish.
+
+# Solution
+###### **This only applies to Angular v13+**
+
+Use the new persistent build cache.
 
 From [Angular v13 is now available](https://blog.angular.io/angular-v13-is-now-available-cce66f7bc296) official Angular Blog post:
 > The valuable feedback from [[RFC] Persistent build cache by default](https://github.com/angular/angular-cli/issues/21545) led to this tooling update that results in up to 68% improvement in build speed and more ergonomic options.
@@ -22,6 +29,7 @@ New projects using Angular CLI v13 have cache already enabled by default but, if
     ...
 }
 ```
+
 
 # Resources
 
