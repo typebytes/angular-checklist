@@ -40,6 +40,6 @@ export class SomeComponent {
 }
 ```
 
-### Gotchas
+### Best Practices
 
-Be careful when the `ChangeDetectionStrategy` is set to `Default`, as it'd cause the functions bound in the template to be called each time the `Change Detection Cycle` runs. You can optimize this by turning on the `OnPush` change detection strategy and leverage the `async` pipe in combination with `Observable`s that return the desired value.
+Be careful when the `ChangeDetectionStrategy` is set to `Default`, as it'd cause the functions bound in the template to be called each time the `Change Detection Cycle` runs. You can optimize this by turning on the `OnPush` change detection strategy and leverage the `async` pipe in combination with `Observables` that return the desired value.
