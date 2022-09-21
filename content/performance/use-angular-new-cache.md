@@ -7,11 +7,12 @@ title: use persistent disk cache
 The build process for large Angular applications can take some time to complete, and having to rebuild the application frequently will increase the time you spend waiting for it to finish.
 
 ## Solution
+
 **This only applies to Angular v13+**
 
-Use the new persistent build cache.
+Use the new persistent build cache. This 
 
-From [Angular v13 is now available](https://blog.angular.io/angular-v13-is-now-available-cce66f7bc296):
+From the offical [v13 release announcement post]():
 
 > The valuable feedback from [[RFC] Persistent build cache by default](https://github.com/angular/angular-cli/issues/21545) led to this tooling update that results in up to 68% improvement in build speed and more ergonomic options.
 
