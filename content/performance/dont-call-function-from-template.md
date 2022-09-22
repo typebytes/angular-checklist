@@ -7,11 +7,11 @@ author:
 
 # Problem
 
-Templates render usually depends on dynamic data generated in component class (async service call, dynamic properties, etc.). Therefore, it's essential to process the data and provide values for the template using component property fields (both regular and Observable) and not use function calls for that purpose. 
+Templates often depend on dynamic data computed in their component classes, e.g. from an async service call, dynamic properties, etc. Therefore, it's essential to process the data and provide values for the template using component properties as opposed to function calls.
 
-Angular can't predict whether value return from the function could change or not, so by default it will perform it once again on every Change Detection check. Potentially in complex components, such functions could be called many times per second, resulting in poor performance.
+Angular can't predict whether the value returned from the function could change or not and by default it will call the function on every change detection cycle. Potentially in complex components, such functions could be called many times per second, resulting in poor performance.
 
-Here is a couple of examples:
+Here are a couple of examples:
 
 ```typescript
 @Component({
@@ -57,13 +57,14 @@ export class MyComponent {
 
 # Solution
 
-We can help Angular with deciding whether value could change or not in a few ways:
+We can address this in a few ways:
 
 - assign values to component properties
-- use OnPush strategy
+- use `OnPush` strategy
 - use custom pipes
 
 ## Assigning values to component properties
+
 Instead of calling a function from the template, we can call it in the component class when needed, and use the value to populate the component property:
 
 ```typescript
@@ -88,7 +89,8 @@ export class MyComponent {
 
 That's why Angular will know the exact value of the property all the time, without any cost of checking that on every Change Detection!
 
-## Using OnPush Change Detection strategy
+## Using OnPush change detection strategy
+
 Change Detection strategy describes how Angular should handle Change Detection and DOM rendering. When using OnPush strategy, the function will be called again only if `@Input` properties changes, or if `@Output` emiters are fired or an `Observable` emits new values.
 
 ```typescript
@@ -108,8 +110,9 @@ export class MyComponent {
 ```
 
 ## Using custom pipes
+
 Pipes by default are pure, which means Angular will execute its `transform` method only on change to the input value.
-Given that example:
+Here's an example:
 
 ```typescript
 @Component({
@@ -121,9 +124,7 @@ export class MyComponent {
   id;
 }
 ```
-
-As long as the `id` property will stay the same, the pipe won't execute its code again and perform a possibly expensive task.
-
+As long as the `id` property doesn't change the pipe won't execute its code again and perform a possibly expensive task.
 
 # Resources
 
