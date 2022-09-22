@@ -65,7 +65,7 @@ We can address this in a few ways:
 
 ## Assigning values to component properties
 
-Instead of calling a function from the template, we can call it in the component class when needed, and use the value to populate the component property:
+Instead of calling a function from the template, we can call it in the component class when needed, and use the value to populate a component property:
 
 ```typescript
 @Component({
@@ -75,6 +75,7 @@ Instead of calling a function from the template, we can call it in the component
 })
 export class MyComponent {
   name;
+
   private id;
 
   ngOnInit() {
@@ -87,11 +88,11 @@ export class MyComponent {
 }
 ```
 
-That's why Angular will know the exact value of the property all the time, without any cost of checking that on every Change Detection!
+This way it's very deterministic when and how data changes without re-running a function with every change detection cycle.
 
 ## Using OnPush change detection strategy
 
-Change Detection strategy describes how Angular should handle Change Detection and DOM rendering. When using OnPush strategy, the function will be called again only if `@Input` properties changes, or if `@Output` emiters are fired or an `Observable` emits new values.
+The change detection strategy describes how Angular should handle change detection. When using the `OnPush` strategy, change detection only runs if an `@Input` property changes, event are emitted e.g. an `@Output`, or an `Observable` emits new values. Furthermore, change detection can be executed manually via the `ChangeDetectorRef`.
 
 ```typescript
 @Component({
