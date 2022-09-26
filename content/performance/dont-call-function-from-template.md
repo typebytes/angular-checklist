@@ -129,5 +129,5 @@ As long as the `id` property doesn't change the pipe won't execute its code agai
 
 # Resources
 
-- ["OnPush strategy"](https://blog.angular-university.io/onpush-change-detection-how-it-works/) - Article about OnPush Change Detection strategys
-- ["Pure pipes"](https://indepth.dev/posts/1061/the-essential-difference-between-pure-and-impure-pipes-in-angular-and-why-that-matters) - Article about pure pipes
+- [Angular OnPush Change Detection and Component Design - Avoid Common Pitfalls](https://blog.angular-university.io/onpush-change-detection-how-it-works/)
+- [The essential difference between pure and impure pipes in Angular and why that matters](https://indepth.dev/posts/1061/the-essential-difference-between-pure-and-impure-pipes-in-angular-and-why-that-matters)
