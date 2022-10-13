@@ -5,9 +5,6 @@
     "ng": "ng",
     "start": "concurrently \"ng serve\" \"yarn build-content:watch\"",
     "build": "ng build",
-    "#build:ssr": "ng build --prod && ng run angular-checklist:server -- --output-hashing=none",
-    "#prerender": "npm run build:ssr && ts-node prerender.ts",
-    "#serve:ssr": "npm run prerender && http-server dist/browser",
     "dev:ssr": "ng run angular-checklist:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build && ng run angular-checklist:server",
@@ -23,7 +20,7 @@
     "format:fix": "npm run format:base -- --write"
   },
   "engines": {
-    "node": "16.13.0"
+    "node": "16.17.0"
   },
   "husky": {
     "hooks": {
@@ -50,10 +47,10 @@
     "@angular/platform-browser-dynamic": "^14.0.4",
     "@angular/platform-server": "^14.0.4",
     "@angular/router": "^14.0.4",
-    "@fortawesome/angular-fontawesome": "^0.10.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-brands-svg-icons": "^5.15.4",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/angular-fontawesome": "^0.11.1",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@ngrx/router-store": "^14.0.1",
     "@ngrx/store": "^14.0.1",
     "@ngrx/store-devtools": "^14.0.1",

@@ -36,17 +36,17 @@ export class BreakpointService {
 
   private setupBreakpoints() {
     const small$ = this.breakPointObserver.observe(['(max-width: 600px)']).pipe(
-      map(x => x.matches),
+      map(breakPoint => breakPoint.matches),
       shareReplay(1)
     );
 
     const medium$ = this.breakPointObserver.observe(['(min-width: 600px) and (max-width: 992px)']).pipe(
-      map(x => x.matches),
+      map(breakPoint => breakPoint.matches),
       shareReplay(1)
     );
 
     const desktop$ = this.breakPointObserver.observe(['(min-width: 992px)']).pipe(
-      map(x => x.matches),
+      map(breakPoint => breakPoint.matches),
       shareReplay(1)
     );
 

@@ -13,7 +13,7 @@ export const INITIAL_STATE: ChecklistState = {
   editMode: false
 };
 
-export const filterReducer = (state: Filter, action: ChecklistActions) => {
+export function filterReducer(state: Filter, action: ChecklistActions) {
   switch (action.type) {
     case ChecklistActionTypes.SET_CATEGORIES_FILTER:
       return {
@@ -28,7 +28,7 @@ export const filterReducer = (state: Filter, action: ChecklistActions) => {
     default:
       return state;
   }
-};
+}
 
 export function checklistReducer(state = INITIAL_STATE, action: ChecklistActions) {
   switch (action.type) {
