@@ -18,3 +18,18 @@ a {
   padding: 0.5em;
   border-radius: 8px;
 }
+
+// To avoid icon flickering
+.svg-inline--fa {
+  vertical-align: -0.125em;
+}
+
+fa-icon svg {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+}
+
+fa-icon .fa-2x{
+  font-size: 2em;
+}
