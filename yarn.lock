@@ -2804,24 +2804,24 @@
     "@material/theme" "15.0.0-canary.bc9ae6c9c.0"
     tslib "^2.1.0"
 
-"@ngrx/router-store@^15.4.0":
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-15.4.0.tgz#7ab92ac545bdde7e70dd992d4bb96a22fe6f9d2e"
-  integrity sha512-uc8gx+SMr2gyly+WSBmGnpHTPsMVhenUG6skH3Qk67hrwdVG3SABjw3qdP4GibbfwwajMQ67sLaLY8PQZ5Sb2g==
+"@ngrx/router-store@^16.3.0":
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-16.3.0.tgz#a17a92bc9f9377e3893a1e8deb378a22bd2af912"
+  integrity sha512-IrAx+9OkGMh9uEmhLrDke0adfXAIHHX6qYwUk02QUNND5dmvd1zg5YtB87XTxa2rWOpt9c9iyFHzemzSoa40uQ==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store-devtools@^15.4.0":
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-15.4.0.tgz#39c1a31f813dc4328ed0fb826843845c83422c2d"
-  integrity sha512-AqWRprSyS3u/vZlpsBOPMW1/0TZS2LE13/KpZedEY+RMCW+mi53esqgrdNGOB3Wr4vrI82Ar9fgaIm4TQO6LPg==
+"@ngrx/store-devtools@^16.3.0":
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-16.3.0.tgz#c5e8971f6ca03d8b6ea22075d248eafd59bfb4f9"
+  integrity sha512-Ou/aXxJmd9UgYliL09hmnlLdk35dJ8S56rJCHgeJlMPb8j0LDR7Olfpsa7Asi63Zvtg2MYZn1p1G0Tsb+0rk/Q==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store@^15.4.0":
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-15.4.0.tgz#185ee18e5c4147c7db60fd3b223cc429f826d514"
-  integrity sha512-OvCuNBHL8mAUnRTS6QSFm+IunspsYNu2cCwDovBNn7EGhxRuGihBeNoX47jCqWPHBFtokj4BlatDfpJ/yCh4xQ==
+"@ngrx/store@^16.3.0":
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-16.3.0.tgz#e1174438f8e05d7ddf8db4c38013515b1ac80796"
+  integrity sha512-aWQY41M7O0sMpTmM+OOPBPwKQWHhmkCStizFB1GdiGud8DU5fz0BdUiy6o2+feZypMzczqbwTnq+AxxxrWYqoA==
   dependencies:
     tslib "^2.0.0"
 
