@@ -41,17 +41,21 @@ function run(): void {
   const port = process.env['PORT'] || 4000;
 
   const server = app();
+
   server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`Server listening on http://localhost:${port}`);
   });
 }
 
-/* webpack will replace 'require' with '__webpack_require__'
- * '__non_webpack_require__' is a proxy to Node 'require'
- * the below code is to ensure that the server is run only when not requiring the bundle */
+/**
+ * webpack will replace 'require' with '__webpack_require__' as a proxy to load the bundle
+ * Ensure the server is not being required as a module by another file.
+ */
 declare const __non_webpack_require__: NodeRequire;
+
 const mainModule = __non_webpack_require__.main;
 const moduleFilename = (mainModule && mainModule.filename) || '';
+
 if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
   run();
 }
