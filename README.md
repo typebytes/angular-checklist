@@ -3,7 +3,7 @@
     Angular Checklist
 </h1>
 
-This repo contains the code for [angular-checklist.io](https://angular-checklist.io).
+This repo contains the code for [angular-checklist.dev](https://angular-checklist.dev).
 
 ---
 
