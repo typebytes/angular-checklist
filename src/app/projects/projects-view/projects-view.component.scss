@@ -93,6 +93,7 @@ main {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card {
   height: 130px;
   border-radius: 5px;
@@ -113,6 +114,7 @@ mat-card {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card-content {
   flex: 1;
 }
@@ -150,6 +152,7 @@ mat-card-content {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card-actions {
   display: flex;
   align-items: center;

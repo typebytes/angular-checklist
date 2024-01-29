@@ -2,12 +2,13 @@
 @import '@angular/material/theming';
 
 :host ::ng-deep {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-infix {
     padding: 7px 0;
     margin: 0;
     border-top: 13px solid transparent;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-suffix {
     transform: translateY(4px);
     margin-left: 7px;
@@ -47,7 +48,7 @@ mat-form-field {
   button {
     align-self: flex-end;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-infix {
     border-top: 0;
   }
