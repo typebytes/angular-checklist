@@ -39,7 +39,6 @@ export function app(): express.Express {
 
 function run(): void {
   const port = process.env['PORT'] || 4000;
-
   const server = app();
 
   server.listen(port, () => {
@@ -48,8 +47,8 @@ function run(): void {
 }
 
 /**
- * webpack will replace 'require' with '__webpack_require__' as a proxy to load the bundle
- * Ensure the server is not being required as a module by another file.
+ * Webpack will replace `require` with `__webpack_require__` as a proxy to load the bundle.
+ * This ensures the server is not being required as a module by another file.
  */
 declare const __non_webpack_require__: NodeRequire;
 
