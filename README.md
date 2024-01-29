@@ -25,6 +25,10 @@ To keep track of your progress, every group has a progress indicator which tells
 
 This project is brought to you with ❤️ by [Dominic Elm](https://twitter.com/elmd_) and [Kwinten Pisman](https://twitter.com/KwintenP).
 
+## Core Maintainers
+
+* [Gerome Grignon](https://github.com/geromegrignon)
+
 # 👷 Want to contribute?
 
 If you want to add a checklist item, file a bug, contribute some code, or improve our documentation, read up on our [contributing guidelines](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md), and check out [open issues](https://github.com/typebytes/angular-checklist/issues) as well as [open pull requests](https://github.com/typebytes/angular-checklist/pulls) to avoid potential conflicts.
