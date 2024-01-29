@@ -25,7 +25,8 @@ import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
     ChecklistModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production
+      logOnly: environment.production,
+      connectInZone: true
     }),
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules

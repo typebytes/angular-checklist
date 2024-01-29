@@ -2768,24 +2768,24 @@
     "@material/theme" "15.0.0-canary.7f224ddd4.0"
     tslib "^2.1.0"
 
-"@ngrx/router-store@^16.3.0":
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-16.3.0.tgz#a17a92bc9f9377e3893a1e8deb378a22bd2af912"
-  integrity sha512-IrAx+9OkGMh9uEmhLrDke0adfXAIHHX6qYwUk02QUNND5dmvd1zg5YtB87XTxa2rWOpt9c9iyFHzemzSoa40uQ==
+"@ngrx/router-store@^17.1.0":
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-17.1.0.tgz#a525be32066fb0697a6a53a9f2d86ad12426c622"
+  integrity sha512-0Rqc7HegTgOggs99y9cyo28gv3CxqE0Aixt+UGFLLKL30bkEACwHociQA8mOzTzfXPJvAuYGm8bMrj0TsyyCMw==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store-devtools@^16.3.0":
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-16.3.0.tgz#c5e8971f6ca03d8b6ea22075d248eafd59bfb4f9"
-  integrity sha512-Ou/aXxJmd9UgYliL09hmnlLdk35dJ8S56rJCHgeJlMPb8j0LDR7Olfpsa7Asi63Zvtg2MYZn1p1G0Tsb+0rk/Q==
+"@ngrx/store-devtools@^17.1.0":
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-17.1.0.tgz#0c2f470b5fb8aa78581d37553456bef0112dee89"
+  integrity sha512-sJxyyrMul6lh555PHjbCwk3uaw7bVOX1RNw7rPDpZSiD+CQwvtnD3xZxzx2Q21v7OPMlqr/ncjzbht9lSiGDRw==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store@^16.3.0":
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-16.3.0.tgz#e1174438f8e05d7ddf8db4c38013515b1ac80796"
-  integrity sha512-aWQY41M7O0sMpTmM+OOPBPwKQWHhmkCStizFB1GdiGud8DU5fz0BdUiy6o2+feZypMzczqbwTnq+AxxxrWYqoA==
+"@ngrx/store@^17.1.0":
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-17.1.0.tgz#aa924ea8aa87c88470ed3b73d0d6583b3be35a5c"
+  integrity sha512-25dGaDRssJ7Yi3TixbSG4j1wzMiKNICGU/owAPn/EBIvTgdI4MO6crh9dt/L7MWSrIpXpQdp6NT5xlMm5YLT5A==
   dependencies:
     tslib "^2.0.0"
 
@@ -8770,10 +8770,10 @@ ngrx-store-freeze@^0.2.4:
   dependencies:
     deep-freeze-strict "^1.1.1"
 
-ngrx-store-localstorage@^15.0.0:
-  version "15.0.0"
-  resolved "https://registry.yarnpkg.com/ngrx-store-localstorage/-/ngrx-store-localstorage-15.0.0.tgz#76050be74115f82b8f2701560fdfdb2fd8929bf1"
-  integrity sha512-DyALGeQV2N1fuNsETii5iLyFUGZZS6FYxltnF1D8pNK188KEp5ntwQ4kJ2Jc4lV1EcYqxalY3WuJWMH+QX+3qg==
+ngrx-store-localstorage@^16.1.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/ngrx-store-localstorage/-/ngrx-store-localstorage-16.1.0.tgz#448ca4367c276ee677a9e0d2b09aff09ce9f85c9"
+  integrity sha512-7dQIHf38Zaj/iuN6M5NAxXVnFmwZqNDN5WYPwVdhB9Y72TwBjoWH/O/DpXe348c1xa3RIPgW53vVq8adNMZ0CA==
   dependencies:
     deepmerge "^4.2.2"
     tslib "^2.3.0"
