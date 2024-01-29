@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSidenav } from '@angular/material';
+import { MatSidenav, MatDrawerMode } from '@angular/material/sidenav';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, of, zip } from 'rxjs';
@@ -42,9 +43,9 @@ export class ChecklistComponent implements OnInit {
 
   editMode = false;
 
-  sideNavMode = 'side';
+  sideNavMode: MatDrawerMode = 'side';
 
-  @ViewChild(MatSidenav)
+  @ViewChild(MatSidenav, { static: true })
   sideNav: MatSidenav;
 
   constructor(
@@ -65,7 +66,7 @@ export class ChecklistComponent implements OnInit {
 
     this.small$ = small$;
     this.desktop$ = desktop$;
-    this.mediumUp$ = combineLatest(medium$, desktop$).pipe(map(([medium, desktop]) => medium || desktop));
+    this.mediumUp$ = combineLatest([medium$, desktop$]).pipe(map(([medium, desktop]) => medium || desktop));
 
     desktop$.subscribe(matches => {
       if (!matches) {

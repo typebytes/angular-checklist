@@ -22,9 +22,9 @@ export const computeScore = (categoryItems: Array<string>, items: EntityState<bo
   return calculatePercentage(score, categoryItems.length);
 };
 
-export const calculatePercentage = (value: number, max: number) => {
+export function calculatePercentage(value: number, max: number) {
   return (value * 1.0) / max;
-};
+}
 
 export const filterItems = (items: Array<ChecklistItem>, filter: ChecklistFilter) => {
   let filteredItems = items;

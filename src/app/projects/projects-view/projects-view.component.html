@@ -23,7 +23,7 @@
         <mat-card-content>
           <h2 class="project-name">{{ project.name }}</h2>
         </mat-card-content>
-        <mat-card-actions align="right">
+        <mat-card-actions align="end">
           <div class="progress">
             <ac-score-chart class="primary" [score]="project.score"></ac-score-chart>
             <span class="score">{{ project.score | percent: '.0-2' }} completed</span>

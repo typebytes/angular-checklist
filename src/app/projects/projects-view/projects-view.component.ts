@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { asyncScheduler, Observable } from 'rxjs';
@@ -74,6 +74,6 @@ export class ProjectsViewComponent implements OnInit {
         data
       })
       .afterClosed()
-      .pipe<ProjectDialogResult>(filter(Boolean));
+      .pipe<ProjectDialogResult>(filter(dialogResult => !!dialogResult));
   }
 }

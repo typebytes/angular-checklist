@@ -78,7 +78,7 @@ export const projectEntitiesReducer = (state: ProjectsState, action: ProjectsAct
   }
 };
 
-export const projectReducer = (project: Project, action: ProjectsActions): Project => {
+export function projectReducer(project: Project, action: ProjectsActions): Project {
   switch (action.type) {
     case ProjectsActionTypes.TOGGLE_FAVORITE:
     case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
@@ -115,9 +115,9 @@ export const projectReducer = (project: Project, action: ProjectsActions): Proje
     default:
       return project;
   }
-};
+}
 
-export const favoritesReducer = (favoriteEntities: FavoriteEntities, action: ProjectsActions) => {
+export function favoritesReducer(favoriteEntities: FavoriteEntities, action: ProjectsActions) {
   switch (action.type) {
     case ProjectsActionTypes.TOGGLE_ALL_FAVORITES:
       const updatedFavorites = { ...favoriteEntities };
@@ -133,9 +133,9 @@ export const favoritesReducer = (favoriteEntities: FavoriteEntities, action: Pro
     default:
       return favoriteEntities;
   }
-};
+}
 
-export const projectsInitReducer = (stateReducer: ActionReducer<any>) => {
+export function projectsInitReducer(stateReducer: ActionReducer<any>) {
   return (state: ProjectsState, action: Action): ProjectsState => {
     let newState: ProjectsState = state;
 
@@ -150,7 +150,7 @@ export const projectsInitReducer = (stateReducer: ActionReducer<any>) => {
 
     return nextState;
   };
-};
+}
 
 export function projectsReducer(state: ProjectsState, action: ProjectsActions) {
   const rootReducer = projectsInitReducer(projectsStateReducer);

@@ -1,6 +1,6 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
-import { pluck, shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 export enum Breakpoint {
@@ -36,17 +36,17 @@ export class BreakpointService {
 
   private setupBreakpoints() {
     const small$ = this.breakPointObserver.observe(['(max-width: 600px)']).pipe(
-      pluck<BreakpointState, boolean>('matches'),
+      map(breakPoint => breakPoint.matches),
       shareReplay(1)
     );
 
     const medium$ = this.breakPointObserver.observe(['(min-width: 600px) and (max-width: 992px)']).pipe(
-      pluck<BreakpointState, boolean>('matches'),
+      map(breakPoint => breakPoint.matches),
       shareReplay(1)
     );
 
     const desktop$ = this.breakPointObserver.observe(['(min-width: 992px)']).pipe(
-      pluck<BreakpointState, boolean>('matches'),
+      map(breakPoint => breakPoint.matches),
       shareReplay(1)
     );
 

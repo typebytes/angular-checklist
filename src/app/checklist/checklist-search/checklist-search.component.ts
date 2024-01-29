@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
 import * as fuzzysort from 'fuzzysort';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -16,7 +16,7 @@ import { SearchService } from '../search/search.service';
 })
 export class ChecklistSearchComponent implements OnInit {
   results$: Observable<any>;
-  searchField = new FormControl();
+  searchField = new FormControl<string>('');
 
   focus$ = new BehaviorSubject<string>('INIT');
 
@@ -25,7 +25,7 @@ export class ChecklistSearchComponent implements OnInit {
   ngOnInit() {
     const search$ = this.searchField.valueChanges.pipe(debounceTime(150));
 
-    this.results$ = combineLatest(this.focus$, search$).pipe(
+    this.results$ = combineLatest([this.focus$, search$]).pipe(
       map(([, term]) => term),
       switchMap(term => this.searchService.search(term)),
       map(results => results.map(this.mapToSearchResult))

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ErrorStateMatcher, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -39,7 +40,7 @@ class CustomErrorStateMatcher implements ErrorStateMatcher {
 }
 
 const validateProjectId = (whitelist: string[] | string = [], store: Store<ApplicationState>) => {
-  return (control: FormControl) => {
+  return (control: FormControl<string>) => {
     whitelist = typeof whitelist === 'string' ? [whitelist] : whitelist;
 
     return whitelist.includes(control.value)
@@ -52,7 +53,7 @@ const validateProjectId = (whitelist: string[] | string = [], store: Store<Appli
 };
 
 const verifyProjectName = (projectName: string) => {
-  return (control: FormControl) => {
+  return (control: FormControl<string>) => {
     return control.value === projectName ? null : { verifyProjectName: true };
   };
 };

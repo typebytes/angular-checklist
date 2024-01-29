@@ -3,8 +3,8 @@ import { existsSync, mkdirSync, readFileSync, readdir, writeFileSync } from 'fs'
 import { dirname, join, parse } from 'path';
 import { convertHeadingsPlugin, markdown } from './markdown';
 import { FrontMatter } from './models';
-import matter = require('gray-matter');
-import hash = require('shorthash');
+import * as matter from 'gray-matter';
+import { unique } from 'shorthash';
 
 markdown.use(convertHeadingsPlugin);
 
@@ -71,7 +71,7 @@ export const compileFilesForCategory = (files: Array<string>, category: string, 
       throwError(`No metadata defined for ${category}/${file}. You must define at least a title.`);
     }
 
-    const id = hash.unique(file);
+    const id = unique(file);
     const slug = cleanFileName(file);
 
     return {

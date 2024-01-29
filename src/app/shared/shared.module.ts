@@ -2,8 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faBan, faBell, faHandsHelping, faHeart, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { CustomMaterialModule } from '../custom-material.module';
@@ -21,8 +20,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { AuthorsComponent } from './authors/authors.component';
 
-library.add(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo);
-
 const COMPONENTS = [
   FooterComponent,
   ToolbarComponent,
@@ -38,7 +35,10 @@ const COMPONENTS = [
 @NgModule({
   imports: [CommonModule, FontAwesomeModule, CustomMaterialModule, RouterModule, ReactiveFormsModule],
   declarations: [...COMPONENTS],
-  exports: [...COMPONENTS],
-  entryComponents: [AboutDialogComponent]
+  exports: [...COMPONENTS]
 })
-export class SharedModule {}
+export class SharedModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo);
+  }
+}

@@ -1,5 +1,5 @@
-import MarkdownIt = require('markdown-it');
-import { getLanguage, highlight } from 'highlight.js';
+import * as MarkdownIt from 'markdown-it';
+import hljs from 'highlight.js';
 
 export const convertHeadingsPlugin = (md, options) => {
   md.core.ruler.push('convert_headings', convertHeadings);
@@ -10,9 +10,11 @@ export const markdown = new MarkdownIt({
   linkify: true,
   typographer: true,
   highlight: (str, lang) => {
-    if (lang && getLanguage(lang)) {
+    if (lang && hljs.getLanguage(lang)) {
       try {
-        return `<pre class="hljs"><code>${highlight(lang, str, true).value}</code></pre>`;
+        return `<pre class="hljs"><code>${
+          hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
+        }</code></pre>`;
       } catch {}
     }
 
