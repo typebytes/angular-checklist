@@ -22,8 +22,11 @@ import { ChecklistSelectors } from '../state/checklist.selectors';
         }),
         query(
           ':leave',
-          stagger(-100, [
-            animate('300ms cubic-bezier(0.35, 0, 0.25, 1)', style({ transform: 'translateX(-10px)', opacity: 0 }))
+          stagger(0, [
+            animate(
+              '0ms cubic-bezier(0.35, 0, 0.25, 1)',
+              style({ transform: 'translateX(-10px)', opacity: 0, position: 'fixed' })
+            )
           ]),
           { optional: true }
         ),
