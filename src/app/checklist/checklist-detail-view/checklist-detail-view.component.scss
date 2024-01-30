@@ -1,12 +1,11 @@
-@import '../../../scss/variables';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
 
 header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   margin: 10px 0;
-  /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+
   mat-checkbox {
     margin-right: 0.5rem;
     color: #757575;
@@ -38,7 +37,7 @@ main {
     }
 
     a {
-      color: mat-color($primary);
+      color: theme.$primary;
 
       &:hover {
         text-decoration: underline;

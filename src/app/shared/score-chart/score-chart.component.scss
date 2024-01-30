@@ -1,5 +1,5 @@
-@import '../../../scss/variables';
-@import '@angular/material/theming';
+@use '@angular/material' as mat;
+@use '../../../scss/custom-theme' as theme;
 
 $default-filling: #dadada;
 $default-border: #dadada;
@@ -13,9 +13,9 @@ $default-border: #dadada;
   --border-color: #{$default-border};
 
   &.primary {
-    --progress-color: #{mat-color($primary, lighter)};
-    --border-color: #{mat-color($primary)};
-    --done-color: #{mat-color($primary)};
+    --progress-color: #{mat.get-color-from-palette(theme.$app-primary, lighter)};
+    --border-color: #{theme.$primary};
+    --done-color: #{theme.$primary};
   }
 
   &.done {

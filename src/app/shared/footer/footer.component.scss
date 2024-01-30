@@ -1,6 +1,5 @@
-@import '../../../scss//mixins';
-@import '../../../scss//variables';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
+@import '../../../scss/mixins';
 
 mat-toolbar {
   height: 45px;
@@ -32,7 +31,7 @@ mat-toolbar {
   }
 
   &:hover {
-    color: mat-color($primary);
+    color: theme.$primary;
   }
 }
 

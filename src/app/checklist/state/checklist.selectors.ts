@@ -4,8 +4,7 @@ import { extractRouteParams } from '../../shared/router.utils';
 import { calculatePercentage, computeScore, createChecklistItem, filterItems } from '../../state/app-state.utils';
 import { AppSelectors } from '../../state/app.selectors';
 import { BreadcrumbItem, Category, CategoryEntity, ChecklistItem } from '../models/checklist.model';
-
-import * as _groupBy from 'lodash.groupby';
+import { groupBy } from 'lodash';
 
 export namespace ChecklistSelectors {
   export const getFavoritesFilter = createSelector(
@@ -149,7 +148,7 @@ export namespace ChecklistSelectors {
         createChecklistItem(itemId, itemEntities, projectItems, favorites)
       );
 
-      return _groupBy(items, 'category');
+      return groupBy(items, 'category');
     }
   );
 

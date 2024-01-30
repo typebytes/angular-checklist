@@ -1,3 +1,6 @@
+@use '@angular/material' as mat;
+@use './custom-theme' as theme;
+
 @mixin linkHover() {
   --hover-box-translate-x: 120%;
   --hover-box-skew: 0;
@@ -8,7 +11,7 @@
     content: '';
     position: absolute;
     z-index: -1;
-    background: mat-color($primary, lighter, 0.3);
+    background: mat.get-color-from-palette(theme.$app-primary, lighter, 0.3);
     top: 0;
     bottom: 0;
     right: 0;
@@ -23,7 +26,7 @@
   }
 
   &.active {
-    color: mat-color($primary);
+    color: theme.$primary;
     --hover-box-translate-x: 0;
     --hover-box-skew: 0deg;
   }

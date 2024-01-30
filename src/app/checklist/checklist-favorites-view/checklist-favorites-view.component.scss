@@ -1,6 +1,5 @@
+@use '../../../scss/custom-theme' as theme;
 @import '../../../scss/mixins';
-@import '../../../scss/variables';
-@import '@angular/material/theming';
 
 :host {
   display: block;
@@ -8,7 +7,7 @@
 }
 
 header {
-  color: mat-color($accent);
+  color: theme.$accent;
   padding: 10px 5px;
   min-height: 25px;
   font-size: 1.3rem;

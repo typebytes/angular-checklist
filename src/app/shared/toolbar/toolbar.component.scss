@@ -1,5 +1,5 @@
-@import '../../../scss/variables';
-@import '@angular/material/theming';
+@use '@angular/material' as mat;
+@use '../../../scss/custom-theme' as theme;
 
 .black-lives-matter {
   font-weight: 100;
@@ -8,6 +8,6 @@
   color: white;
 
   a {
-    color: mat-color($accent, 1);
+    color: mat.get-color-from-palette(theme.$app-accent, 1);
   }
 }

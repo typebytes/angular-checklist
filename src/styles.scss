@@ -1,6 +1,7 @@
-@import '~normalize.css/normalize.css';
-@import '~highlight.js/styles/atom-one-dark.css';
-@import './scss/theme.scss';
+@use './scss/custom-theme' as theme;
+@import 'normalize.css/normalize.css';
+@import 'highlight.js/styles/atom-one-dark.css';
+@import 'scss/index';
 
 html,
 body {
@@ -10,13 +11,18 @@ body {
 }
 
 a {
-  color: mat-color($primary);
+  color: theme.$primary;
   text-decoration: none;
 }
 
 .hljs {
   padding: 0.5em;
   border-radius: 8px;
+}
+
+.cdk-overlay-pane {
+  top: 14.5px !important;
+  transform: translateX(-16px);
 }
 
 // adding position and dimensions styles to avoid icon flickering with SSR
