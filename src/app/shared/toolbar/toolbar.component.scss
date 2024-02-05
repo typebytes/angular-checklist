@@ -1,13 +1,2 @@
 @use '@angular/material' as mat;
 @use '../../../scss/custom-theme' as theme;
-
-.black-lives-matter {
-  font-weight: 100;
-  background: #25292c;
-  padding: 16px;
-  color: white;
-
-  a {
-    color: mat.get-color-from-palette(theme.$app-accent, 1);
-  }
-}

@@ -37,6 +37,8 @@ mat-toolbar {
 
 .links {
   min-height: 34px;
+  display: flex;
+  align-items: center;
 }
 
 ac-authors {
