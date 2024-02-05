@@ -1,6 +1,5 @@
-@import '../../../scss//variables';
-@import '../../../scss//mixins';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
+@import '../../../scss/mixins';
 
 @mixin wrapper() {
   --wrapper-width: 650px;
@@ -139,7 +138,7 @@ mat-card-content {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: mat-color($primary);
+  color: theme.$primary;
   font-weight: 500;
 
   mat-icon {
@@ -167,7 +166,7 @@ mat-card-actions {
     font-weight: 100;
     font-size: 0.9rem;
     font-weight: 400;
-    color: mat-color($primary);
+    color: theme.$primary;
   }
 
   ac-score-chart {

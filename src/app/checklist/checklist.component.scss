@@ -1,6 +1,5 @@
-@import '../../scss/variables';
+@use '../../scss/custom-theme' as theme;
 @import '../../scss/mixins';
-@import '@angular/material/theming';
 
 :host {
   display: flex;
@@ -118,7 +117,7 @@ ac-toolbar {
 
   &.active {
     mat-icon {
-      color: mat-color($primary);
+      color: theme.$primary;
     }
   }
 }
@@ -165,7 +164,7 @@ section {
     }
 
     &.active {
-      color: mat-color($primary);
+      color: theme.$primary;
     }
   }
 }

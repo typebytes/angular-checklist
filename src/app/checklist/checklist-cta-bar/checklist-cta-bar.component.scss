@@ -1,6 +1,6 @@
-@import '../../../scss/variables';
+@use '@angular/material' as mat;
+@use '../../../scss/custom-theme' as theme;
 @import '../../../scss/utils';
-@import '@angular/material/theming';
 
 .cta-bar {
   display: flex;
@@ -32,18 +32,18 @@
   min-width: 75px;
 
   ::ng-deep {
-    .mat-button-focus-overlay {
-      background-color: mat-color($primary, default, 0.1);
+    .mat-mdc-button-focus-overlay {
+      background-color: mat.get-color-from-palette(theme.$app-primary, default, 0.1);
     }
 
-    .mat-ripple-element {
-      background-color: mat-color($primary, default, 0.1);
+    .mat-mdc-ripple-element {
+      background-color: mat.get-color-from-palette(theme.$app-primary, default, 0.1);
     }
   }
 
   &.active {
-    color: mat-color($primary);
-    background: mat-color($primary, lighter, 0.3);
+    color: theme.$primary;
+    background: mat.get-color-from-palette(theme.$app-primary, lighter, 0.3);
   }
 
   & + & {

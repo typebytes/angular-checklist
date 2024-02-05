@@ -1,6 +1,5 @@
-@import '../../../scss//mixins';
-@import '../../../scss//variables';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
+@import '../../../scss/mixins';
 
 $vertical-margin: 6px;
 
@@ -46,7 +45,7 @@ $vertical-margin: 6px;
   }
 
   &:hover {
-    background: mat-color($primary);
+    background: theme.$primary;
     color: white !important;
   }
 }

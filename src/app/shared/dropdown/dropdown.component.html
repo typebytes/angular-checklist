@@ -2,7 +2,8 @@
   <mat-select
     #matSelect
     [formControl]="select"
-    disableOptionCentering
+    [disableOptionCentering]="true"
+    [panelWidth]="null"
     panelClass="ac-dropdown"
     (selectionChange)="selectionChange.emit($event.value)"
   >

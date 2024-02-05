@@ -1,6 +1,5 @@
-@import '../../../scss/variables';
+@use '../../../scss/custom-theme' as theme;
 @import '../../../scss/utils';
-@import '@angular/material/theming';
 
 :host {
   display: block;
@@ -42,7 +41,7 @@
     }
 
     &.active {
-      color: mat-color($accent);
+      color: theme.$accent;
     }
   }
 }

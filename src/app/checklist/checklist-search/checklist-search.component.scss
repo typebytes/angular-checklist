@@ -1,5 +1,4 @@
-@import '../../../scss/variables';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
 
 :host {
   width: 450px;
@@ -28,12 +27,12 @@ input {
   text-transform: uppercase;
 }
 
-::ng-deep .mat-autocomplete-panel {
+::ng-deep .mat-mdc-autocomplete-panel {
   margin-top: 5px;
   box-shadow: none !important;
   border: 1px solid gainsboro;
 
   b {
-    color: mat-color($primary);
+    color: theme.$primary;
   }
 }

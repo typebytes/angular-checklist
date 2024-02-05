@@ -1,10 +1,9 @@
-@import '../../../scss/variables';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
 
 .favorite-icon {
   color: #d4d4d4;
 
   &.active {
-    color: mat-color($accent);
+    color: theme.$accent;
   }
 }

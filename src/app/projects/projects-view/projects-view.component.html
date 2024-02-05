@@ -14,11 +14,11 @@
   <div class="projects-list-wrapper">
     <h5>Your Projects</h5>
     <div class="projects-grid">
-      <mat-card matRipple (click)="addProject()" class="add-project-card">
+      <mat-card appearance="outlined" matRipple (click)="addProject()" class="add-project-card">
         <mat-icon>add</mat-icon>
         Add Project
       </mat-card>
-      <mat-card (click)="navigateToProject(project.id)" *ngFor="let project of projects$ | async">
+      <mat-card appearance="outlined" (click)="navigateToProject(project.id)" *ngFor="let project of projects$ | async">
         <div class="card-ripple" matRipple></div>
         <mat-card-content>
           <h2 class="project-name">{{ project.name }}</h2>

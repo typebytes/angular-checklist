@@ -1,14 +1,13 @@
-@import '../../../scss//variables';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
 
 :host ::ng-deep {
-  .mat-form-field-infix {
+  .mat-mdc-form-field-infix {
     padding: 7px 0;
     margin: 0;
     border-top: 13px solid transparent;
   }
 
-  .mat-form-field-suffix {
+  .mat-mdc-form-field-suffix {
     transform: translateY(4px);
     margin-left: 7px;
   }
@@ -23,14 +22,14 @@ mat-form-field {
 
   h4 {
     margin: 5px 0;
-    color: mat-color($warn);
+    color: theme.$warn;
     font-weight: 400;
   }
 }
 
 .danger-zone {
   list-style: none;
-  border: 1px solid mat-color($warn);
+  border: 1px solid theme.$warn;
   border-radius: 3px;
   padding: 15px;
   margin: 10px 0;
@@ -48,7 +47,7 @@ mat-form-field {
     align-self: flex-end;
   }
 
-  ::ng-deep .mat-form-field-infix {
+  ::ng-deep .mat-mdc-form-field-infix {
     border-top: 0;
   }
 

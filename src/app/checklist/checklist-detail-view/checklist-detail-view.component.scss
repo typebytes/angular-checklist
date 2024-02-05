@@ -1,5 +1,4 @@
-@import '../../../scss/variables';
-@import '@angular/material/theming';
+@use '../../../scss/custom-theme' as theme;
 
 header {
   display: flex;
@@ -38,7 +37,7 @@ main {
     }
 
     a {
-      color: mat-color($primary);
+      color: theme.$primary;
 
       &:hover {
         text-decoration: underline;
