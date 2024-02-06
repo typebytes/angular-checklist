@@ -20,11 +20,6 @@ a {
   border-radius: 8px;
 }
 
-.cdk-overlay-pane {
-  top: 14.5px !important;
-  transform: translateX(-16px);
-}
-
 // adding position and dimensions styles to avoid icon flickering with SSR
 .svg-inline--fa {
   vertical-align: -0.125em;
