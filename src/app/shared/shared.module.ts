@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faBan, faBell, faHandsHelping, faHeart, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faBell, faHandsHelping, faHeart, faInfo, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { CustomMaterialModule } from '../custom-material.module';
 
 import {
@@ -19,6 +19,8 @@ import { ToolbarLogoComponent } from './toolbar/toolbar-logo/toolbar-logo.compon
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { BannerComponent } from './banner/banner.component';
+import { ChipComponent } from './chip/chip.component';
 
 const COMPONENTS = [
   FooterComponent,
@@ -29,7 +31,9 @@ const COMPONENTS = [
   DropdownStaticOptionsComponent,
   ScoreChartComponent,
   AboutDialogComponent,
-  AuthorsComponent
+  AuthorsComponent,
+  BannerComponent,
+  ChipComponent
 ];
 
 @NgModule({
@@ -39,6 +43,6 @@ const COMPONENTS = [
 })
 export class SharedModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo);
+    library.addIcons(faGithub, faTwitter, faHeart, faHandsHelping, faBell, faBan, faInfo, faCircleInfo);
   }
 }

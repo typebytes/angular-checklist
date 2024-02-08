@@ -10,6 +10,11 @@ body {
   overflow: hidden;
 }
 
+:root {
+  --warn-color: hsl(48 95% 85% / 1);
+  --warn-color-darker: hsl(48 95% 48% / 1)
+}
+
 a {
   color: theme.$primary;
   text-decoration: none;
