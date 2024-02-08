@@ -14,6 +14,7 @@ export interface ChecklistItem {
   favorite: boolean;
   category: string;
   author: Author;
+  rework: boolean;
 }
 
 export type BreadcrumbItem = CategoryEntity | ChecklistItem;

@@ -9,6 +9,11 @@ mat-checkbox {
   margin-right: 8px;
 }
 
+mat-chip {
+  margin-left: 1rem;
+  --mdc-chip-elevated-container-color: lightblue;
+}
+
 ac-checklist-favorite-button {
   margin-left: auto;
 }
