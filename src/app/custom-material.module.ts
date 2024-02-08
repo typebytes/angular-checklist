@@ -15,7 +15,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
-import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   exports: [
@@ -33,8 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatProgressBarModule,
     MatRippleModule,
     MatProgressSpinnerModule,
-    MatSelectModule,
-    MatChipsModule
+    MatSelectModule
   ],
   providers: [
     {

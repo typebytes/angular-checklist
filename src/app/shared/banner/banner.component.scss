@@ -1,11 +1,11 @@
 :host {
   display: block;
-  background: lightblue;
+  background: var(--warn-color);
   border-radius: 8px;
   padding: 0.5rem 1rem;
 }
 
 fa-icon {
-  color: black;
+  color: var(--warn-color-darker);
   margin-inline-end: 0.5rem;
 }

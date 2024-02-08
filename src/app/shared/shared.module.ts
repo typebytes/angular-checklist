@@ -20,6 +20,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { BannerComponent } from './banner/banner.component';
+import { ChipComponent } from './chip/chip.component';
 
 const COMPONENTS = [
   FooterComponent,
@@ -31,7 +32,8 @@ const COMPONENTS = [
   ScoreChartComponent,
   AboutDialogComponent,
   AuthorsComponent,
-  BannerComponent
+  BannerComponent,
+  ChipComponent
 ];
 
 @NgModule({
