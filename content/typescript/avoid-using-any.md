@@ -44,3 +44,8 @@ Set the compiler `–noImplicitAny` flag. With this flag enabled the compiler wi
 When working with 3rd party libraries that are written in vanilla JavaScript, we most likely don't have type information available. Luckily there is an initiative to create type definitions for those libraries. If it exists, you can find it by installing the type package via `yarn add --dev @types/${library-name}`.
 
 If this does not exist yet, you can create one yourself. Contributions are always welcome and appreciated.
+
+# Best Practices
+
+Using types is not just about enhancing your coding experience.  
+Starting a feature by defining the types of the data you are going to work with can help you to better understand it and might even lead to a better design.
