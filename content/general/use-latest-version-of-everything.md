@@ -11,7 +11,7 @@ The Angular team and community are continually improving the ecosystem to make i
 
 Angular uses semantic versioning (semver), which means they use a regular schedule of releases. This includes a major release every six months, 1-3 minor releases for each major release, and a patch release almost every week. It’s important to keep up with major releases, as they contain significant new features. The longer we wait to update our application, the more expensive a future update can be. **Be aware** that major releases may contain breaking changes.
 
-In addition, when APIs are deprecated, they remain present in the next two major releases until they are removed. Again, if we wait too long, it’s likely that the update will require much more work. You can read more about deprecations in the changelog.
+In addition, when APIs are deprecated, they remain present in the next two major releases until they are removed. Again, if we wait too long, it’s likely that an update will require much more work. You can read more about deprecations in the changelog.
 
 **Note:** In the case of significant refactors, the Angular team may create schematics that can help update your app for you. At present, there are [schematics] (https://angular.dev/reference/migrations) that convert to standalone components, the new control flow syntax, and more.
 
