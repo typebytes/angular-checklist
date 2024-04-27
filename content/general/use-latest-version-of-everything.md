@@ -13,7 +13,7 @@ Angular uses semantic versioning (semver), which means they use a regular schedu
 
 In addition, when APIs are deprecated, they remain present in the next two major releases until they are removed. Again, if we wait too long, it’s likely that an update will require much more work. You can read more about deprecations in the changelog.
 
-**Note:** In the case of significant refactors, the Angular team may create schematics that can help update your app for you. At present, there are [schematics] (https://angular.dev/reference/migrations) that convert to standalone components, the new control flow syntax, and more.
+**Note:** In the case of significant refactors, the Angular team may create schematics that can help update your app for you. At present, there are [schematics](https://angular.dev/reference/migrations) that convert to standalone components, the new control flow syntax, and more.
 
 # Solution
 
