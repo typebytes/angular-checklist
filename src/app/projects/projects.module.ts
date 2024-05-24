@@ -17,8 +17,9 @@ import { projectsReducer } from './state/projects.reducer';
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild(PROJECTS_ROUTES),
-    StoreModule.forFeature('projects', projectsReducer)
-  ],
-  declarations: [ProjectsViewComponent, ProjectDialogComponent]
+    StoreModule.forFeature('projects', projectsReducer),
+    ProjectsViewComponent,
+    ProjectDialogComponent
+  ]
 })
 export class ProjectsModule {}

@@ -17,11 +17,36 @@ import {
 
 import { AddProject, DeleteProject, EditProject } from '../state/projects.actions';
 import { ProjectsSelectors } from '../state/projects.selectors';
+import { FooterComponent } from '../../shared/footer/footer.component';
+import { MatIconButton } from '@angular/material/button';
+import { ScoreChartComponent } from '../../shared/score-chart/score-chart.component';
+import { NgFor, AsyncPipe, PercentPipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatRipple } from '@angular/material/core';
+import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
+import { ToolbarLogoComponent } from '../../shared/toolbar/toolbar-logo/toolbar-logo.component';
+import { ToolbarComponent } from '../../shared/toolbar/toolbar.component';
 
 @Component({
+  standalone: true,
   selector: 'ac-projects-view',
   templateUrl: './projects-view.component.html',
-  styleUrls: ['./projects-view.component.scss']
+  styleUrls: ['./projects-view.component.scss'],
+  imports: [
+    ToolbarComponent,
+    ToolbarLogoComponent,
+    MatCard,
+    MatRipple,
+    MatIcon,
+    NgFor,
+    MatCardContent,
+    MatCardActions,
+    ScoreChartComponent,
+    MatIconButton,
+    FooterComponent,
+    AsyncPipe,
+    PercentPipe
+  ]
 })
 export class ProjectsViewComponent implements OnInit {
   projects$: Observable<Array<Project>>;
