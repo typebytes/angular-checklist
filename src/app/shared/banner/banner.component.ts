@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Component, inject } from '@angular/core';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faHeart, faHandsHelping, faBell, faBan, faInfo, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   standalone: true,
@@ -8,4 +10,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './banner.component.scss',
   imports: [FontAwesomeModule]
 })
-export class BannerComponent {}
+export class BannerComponent {
+  library = inject(FaIconLibrary);
+
+  constructor() {
+    this.library.addIcons(faCircleInfo);
+  }
+}

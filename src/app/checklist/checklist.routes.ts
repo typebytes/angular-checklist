@@ -8,7 +8,7 @@ import { ProjectExistsGuard } from './project-exists.guard';
 
 export const CHECKLIST_ROUTES: Routes = [
   {
-    path: ':project/checklist',
+    path: '',
     component: ChecklistComponent,
     canActivate: [ProjectExistsGuard],
     children: [
