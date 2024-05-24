@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
 import * as fuzzysort from 'fuzzysort';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -8,11 +8,15 @@ import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { CategoryEntity, ChecklistItem } from '../models/checklist.model';
 import { IndexEntry, SearchResult } from '../search/search.models';
 import { SearchService } from '../search/search.service';
+import { MatOption } from '@angular/material/core';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'ac-checklist-search',
   templateUrl: './checklist-search.component.html',
-  styleUrls: ['./checklist-search.component.scss']
+  styleUrls: ['./checklist-search.component.scss'],
+  imports: [ReactiveFormsModule, MatAutocompleteTrigger, MatAutocomplete, NgFor, MatOption, NgIf, AsyncPipe]
 })
 export class ChecklistSearchComponent implements OnInit {
   results$: Observable<any>;

@@ -8,11 +8,17 @@ import { ApplicationState } from '../../state/app.state';
 import { CategoryEntity, ChecklistFilter, ChecklistItem } from '../models/checklist.model';
 import { SetCategoriesFilter } from '../state/checklist.actions';
 import { ChecklistSelectors } from '../state/checklist.selectors';
+import { ChecklistListItemComponent } from '../checklist-list/checklist-list-item.component';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { ChecklistListComponent } from '../checklist-list/checklist-list.component';
+import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar.component';
 
 @Component({
+  standalone: true,
   selector: 'ac-list-view',
   templateUrl: './checklist-list-view.component.html',
-  styleUrls: ['./checklist-list-view.component.scss']
+  styleUrls: ['./checklist-list-view.component.scss'],
+  imports: [ChecklistCtaBarComponent, ChecklistListComponent, NgFor, ChecklistListItemComponent, AsyncPipe]
 })
 export class ListViewComponent implements OnInit {
   items$: Observable<any>;

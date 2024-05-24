@@ -28,9 +28,7 @@ import { checklistReducer } from './state/checklist.reducer';
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild(CHECKLIST_ROUTES),
-    StoreModule.forFeature('checklist', checklistReducer)
-  ],
-  declarations: [
+    StoreModule.forFeature('checklist', checklistReducer),
     ChecklistComponent,
     ListViewComponent,
     ChecklistDetailViewComponent,
