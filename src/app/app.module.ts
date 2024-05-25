@@ -12,6 +12,7 @@ import { ChecklistModule } from './checklist/checklist.module';
 import { CustomMaterialModule } from './custom-material.module';
 import { ProjectsModule } from './projects/projects.module';
 import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +33,8 @@ import { USER_PROVIDED_META_REDUCERS, ROOT_REDUCER } from './state/app.state';
       preloadingStrategy: PreloadAllModules
     }),
     StoreRouterConnectingModule.forRoot({}),
-    CustomMaterialModule
+    CustomMaterialModule,
+    MatProgressBar
   ],
   bootstrap: [AppComponent]
 })
