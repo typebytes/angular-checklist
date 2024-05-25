@@ -32,6 +32,7 @@ import { ToolbarLogoComponent } from '../shared/toolbar/toolbar-logo/toolbar-log
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { ToolbarComponent } from '../shared/toolbar/toolbar.component';
+import { SearchService } from './search/search.service';
 
 enum CategoryListMode {
   List,
@@ -66,7 +67,8 @@ enum CategoryListMode {
     RouterOutlet,
     FooterComponent,
     AsyncPipe
-  ]
+  ],
+  providers: [SearchService]
 })
 export class ChecklistComponent implements OnInit {
   private editMode$ = new BehaviorSubject(CategoryListMode.List);

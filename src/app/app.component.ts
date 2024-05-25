@@ -1,13 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { merge, Observable } from 'rxjs';
 import { filter, mapTo } from 'rxjs/operators';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'ac-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterOutlet, AsyncPipe, NgIf, MatProgressBar]
 })
 export class AppComponent implements OnInit {
   loading$: Observable<boolean>;
