@@ -1,6 +1,6 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, zip } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
@@ -9,11 +9,15 @@ import { extractRouteParams, getActivatedChild } from '../../shared/router.utils
 import { ApplicationState } from '../../state/app.state';
 import { Category, ChecklistItem } from '../models/checklist.model';
 import { ChecklistSelectors } from '../state/checklist.selectors';
+import { MatIcon } from '@angular/material/icon';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'ac-checklist-overview',
   templateUrl: './checklist-overview.component.html',
   styleUrls: ['./checklist-overview.component.scss'],
+  imports: [NgIf, NgFor, MatIcon, RouterOutlet, AsyncPipe],
   animations: [
     trigger('breadcrumb', [
       transition('* <=> *', [

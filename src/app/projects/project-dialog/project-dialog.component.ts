@@ -1,7 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -10,6 +17,11 @@ import { convertToProjectId } from '../../shared/utils';
 import { ApplicationState } from '../../state/app.state';
 import { Project } from '../models/projects.model';
 import { ProjectsSelectors } from '../state/projects.selectors';
+import { MatButton } from '@angular/material/button';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgIf } from '@angular/common';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatHint, MatError, MatSuffix } from '@angular/material/form-field';
 
 export enum ProjectDialogMode {
   Create = 'Create',
@@ -59,9 +71,25 @@ const verifyProjectName = (projectName: string) => {
 };
 
 @Component({
+  standalone: true,
   selector: 'ac-project-dialog',
   templateUrl: './project-dialog.component.html',
-  styleUrls: ['./project-dialog.component.scss']
+  styleUrls: ['./project-dialog.component.scss'],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatFormField,
+    MatInput,
+    ReactiveFormsModule,
+    MatHint,
+    NgIf,
+    MatError,
+    MatProgressSpinner,
+    MatSuffix,
+    MatButton,
+    MatDialogActions,
+    MatDialogClose
+  ]
 })
 export class ProjectDialogComponent implements OnInit {
   mode: ProjectDialogMode;

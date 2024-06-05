@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav, MatDrawerMode } from '@angular/material/sidenav';
+import { MatSidenav, MatDrawerMode, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable, of, zip } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
@@ -16,6 +16,23 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { Category, ChecklistItem } from './models/checklist.model';
 import { ToggleEditMode } from './state/checklist.actions';
 import { ChecklistSelectors } from './state/checklist.selectors';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatBadge } from '@angular/material/badge';
+import { ScoreChartComponent } from '../shared/score-chart/score-chart.component';
+import { ChecklistSearchComponent } from './checklist-search/checklist-search.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import {
+  DropdownStaticOptionsComponent,
+  DropdownStaticOptionComponent
+} from '../shared/dropdown/dropdown-static-options.component';
+import { DropdownComponent } from '../shared/dropdown/dropdown.component';
+import { ToolbarLogoComponent } from '../shared/toolbar/toolbar-logo/toolbar-logo.component';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
+import { ToolbarComponent } from '../shared/toolbar/toolbar.component';
+import { SearchService } from './search/search.service';
 
 enum CategoryListMode {
   List,
@@ -23,9 +40,35 @@ enum CategoryListMode {
 }
 
 @Component({
+  standalone: true,
   selector: 'ac-checklist',
   templateUrl: './checklist.component.html',
-  styleUrls: ['./checklist.component.scss']
+  styleUrls: ['./checklist.component.scss'],
+  imports: [
+    ToolbarComponent,
+    MatIconButton,
+    MatIcon,
+    ToolbarLogoComponent,
+    DropdownComponent,
+    DropdownStaticOptionsComponent,
+    DropdownStaticOptionComponent,
+    RouterLink,
+    NgIf,
+    ChecklistSearchComponent,
+    MatSidenavContainer,
+    MatSidenav,
+    ScoreChartComponent,
+    RouterLinkActive,
+    MatBadge,
+    MatSlideToggle,
+    NgFor,
+    MatCheckbox,
+    MatSidenavContent,
+    RouterOutlet,
+    FooterComponent,
+    AsyncPipe
+  ],
+  providers: [SearchService]
 })
 export class ChecklistComponent implements OnInit {
   private editMode$ = new BehaviorSubject(CategoryListMode.List);

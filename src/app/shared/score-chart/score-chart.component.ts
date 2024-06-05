@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ac-score-chart',
   templateUrl: './score-chart.component.html',
   styleUrls: ['./score-chart.component.scss'],

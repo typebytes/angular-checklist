@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ac-dropdown-static-options',
   template: `
     <ng-content></ng-content>
@@ -10,6 +11,7 @@ import { Component } from '@angular/core';
 export class DropdownStaticOptionsComponent {}
 
 @Component({
+  standalone: true,
   selector: 'ac-dropdown-static-option',
   template: `
     <ng-content></ng-content>
