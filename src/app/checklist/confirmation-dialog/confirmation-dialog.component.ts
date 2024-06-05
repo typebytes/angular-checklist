@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, OnInit } from '@angular/core';
+import { Component, HostBinding, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
@@ -15,15 +15,14 @@ import { MatButton } from '@angular/material/button';
   styleUrls: ['./confirmation-dialog.component.scss'],
   imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatButton, MatDialogClose]
 })
-export class ConfirmationDialogComponent implements OnInit {
-  @HostBinding('style.maxWidth')
-  width = '350px';
+export class ConfirmationDialogComponent {
+  public data = inject(MAT_DIALOG_DATA);
+
+  @HostBinding('style.maxWidth') width = '350px';
 
   confirmationButtonColor = 'warn';
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  ngOnInit() {
+  constructor() {
     const { width, confirmationButtonColor } = this.data;
 
     if (width) {
