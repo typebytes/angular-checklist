@@ -140,9 +140,7 @@ export class ChecklistComponent {
       }
     });
 
-    return dialogRef.afterClosed().pipe(
-      tap<boolean>(result => this.processDialogResult(result, favorites))
-    );
+    return dialogRef.afterClosed().pipe(tap<boolean>(result => this.processDialogResult(result, favorites)));
   }
 
   private processDialogResult(result: boolean, favorites: Array<ChecklistItem>) {

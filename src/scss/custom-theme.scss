@@ -31,7 +31,7 @@ $custom-green: (
     A100: black,
     A200: black,
     A400: black,
-    A700: black,
+    A700: black
   )
 );
 
@@ -39,13 +39,15 @@ $app-primary: mat.define-palette(mat.$deep-purple-palette);
 $app-accent: mat.define-palette($custom-green, 600);
 $app-warn: mat.define-palette(mat.$red-palette);
 
-$app-theme: mat.define-light-theme((
-  color: (
-    primary: $app-primary,
-    accent: $app-accent,
-    warn: $app-warn,
+$app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-primary,
+      accent: $app-accent,
+      warn: $app-warn
+    )
   )
-));
+);
 
 $primary: mat.get-theme-color($app-theme, primary);
 $accent: mat.get-theme-color($app-theme, accent);

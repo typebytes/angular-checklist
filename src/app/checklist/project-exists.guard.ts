@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -11,7 +11,8 @@ import { ApplicationState } from '../state/app.state';
   providedIn: 'root'
 })
 export class ProjectExistsGuard {
-  constructor(private store: Store<ApplicationState>, private router: Router) {}
+  private store = inject<Store<ApplicationState>>(Store);
+  private router = inject(Router);
 
   canActivate(snapshot: ActivatedRouteSnapshot) {
     const projectId = snapshot.params.project;
