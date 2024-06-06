@@ -23,18 +23,12 @@ export class ChecklistSearchComponent {
   private router = inject(Router);
   searchField = new FormControl<string>('');
   search = toSignal(this.searchField.valueChanges.pipe(debounceTime(150)));
-  focus = signal(0);
 
   results = computed<any>(() => {
-    const _ = this.focus();
     const search = this.search();
     const results = this.searchService.search(search);
     return results.map(this.mapToSearchResult);
   });
-
-  focused() {
-    this.focus.update(prev => prev + 1);
-  }
 
   getOptionText(value: SearchResult) {
     return value?.document?.title || '';

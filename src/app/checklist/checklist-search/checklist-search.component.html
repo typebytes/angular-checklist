@@ -1,10 +1,4 @@
-<input
-  placeholder="Search"
-  spellcheck="false"
-  (focus)="focused()"
-  [formControl]="searchField"
-  [matAutocomplete]="auto"
-/>
+<input placeholder="Search" spellcheck="false" [formControl]="searchField" [matAutocomplete]="auto" />
 <mat-autocomplete
   #auto="matAutocomplete"
   [displayWith]="getOptionText.bind(this)"
