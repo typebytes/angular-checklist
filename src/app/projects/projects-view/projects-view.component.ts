@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { asyncScheduler, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { asyncScheduler } from 'rxjs';
 import { filter, map, observeOn } from 'rxjs/operators';
 import { ApplicationState } from '../../state/app.state';
 import { Project } from '../models/projects.model';
@@ -18,7 +18,7 @@ import {
 import { AddProject, DeleteProject, EditProject } from '../state/projects.actions';
 import { ProjectsSelectors } from '../state/projects.selectors';
 import { MatIconButton } from '@angular/material/button';
-import { NgFor, AsyncPipe, PercentPipe } from '@angular/common';
+import { NgFor, PercentPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
@@ -40,7 +40,6 @@ import { FooterComponent } from 'src/app/shared/footer/footer.component';
     MatCardContent,
     MatCardActions,
     MatIconButton,
-    AsyncPipe,
     PercentPipe,
     ToolbarComponent,
     ToolbarLogoComponent,
@@ -48,14 +47,11 @@ import { FooterComponent } from 'src/app/shared/footer/footer.component';
     FooterComponent
   ]
 })
-export class ProjectsViewComponent implements OnInit {
-  projects$: Observable<Array<Project>>;
-
-  constructor(private store: Store<ApplicationState>, private router: Router, private dialog: MatDialog) {}
-
-  ngOnInit() {
-    this.projects$ = this.store.pipe(select(ProjectsSelectors.getProjects));
-  }
+export class ProjectsViewComponent {
+  private store = inject<Store<ApplicationState>>(Store);
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
+  projects = this.store.selectSignal(ProjectsSelectors.getProjects);
 
   navigateToProject(projectId: string) {
     this.router.navigate([`/${projectId}/checklist`]);
