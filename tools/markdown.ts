@@ -23,7 +23,7 @@ export const markdown = new MarkdownIt({
 });
 
 const convertHeadings = state => {
-  state.tokens.forEach(function(token, i) {
+  state.tokens.forEach(function (token, i) {
     if (token.type === 'heading_open' || token.type === 'heading_close') {
       const rawToken = token.tag.split('');
       rawToken[1] = parseInt(rawToken[1], 10) + 2;

@@ -47,28 +47,23 @@ export namespace ChecklistSelectors {
     ProjectsSelectors.getDisabledCategories,
     getScores,
     (categories, items, disabledCategories, scores): Array<Category> => {
-      return Object.keys(categories).map(
-        (categoryId): Category => {
-          const category = categories[categoryId];
-          const categoryItems = category.items.map(itemId => items[itemId]);
+      return Object.keys(categories).map((categoryId): Category => {
+        const category = categories[categoryId];
+        const categoryItems = category.items.map(itemId => items[itemId]);
 
-          return {
-            ...category,
-            score: scores[categoryId],
-            enabled: !disabledCategories[category.slug],
-            items: categoryItems
-          };
-        }
-      );
+        return {
+          ...category,
+          score: scores[categoryId],
+          enabled: !disabledCategories[category.slug],
+          items: categoryItems
+        };
+      });
     }
   );
 
-  export const getActiveCategories = createSelector(
-    getAllCategories,
-    (categories): Array<Category> => {
-      return categories.filter(category => category.enabled);
-    }
-  );
+  export const getActiveCategories = createSelector(getAllCategories, (categories): Array<Category> => {
+    return categories.filter(category => category.enabled);
+  });
 
   export const getSelectedCategory = createSelector(
     AppSelectors.getRouterState,

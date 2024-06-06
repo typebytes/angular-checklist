@@ -1,15 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Signal, computed, inject, signal } from '@angular/core';
 import { MatSidenav, MatDrawerMode, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, Observable, of, zip } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { Project } from '../projects/models/projects.model';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ToggleAllFavorites, ToggleCategory } from '../projects/state/projects.actions';
 import { ProjectsSelectors } from '../projects/state/projects.selectors';
 import { BreakpointService } from '../shared/breakpoint.service';
-import { selectOnce } from '../shared/operators';
 import { hasEntities } from '../shared/utils';
 import { ApplicationState } from '../state/app.state';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -22,7 +20,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatBadge } from '@angular/material/badge';
 import { ScoreChartComponent } from '../shared/score-chart/score-chart.component';
 import { ChecklistSearchComponent } from './checklist-search/checklist-search.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import {
   DropdownStaticOptionsComponent,
   DropdownStaticOptionComponent
@@ -65,100 +63,60 @@ enum CategoryListMode {
     MatCheckbox,
     MatSidenavContent,
     RouterOutlet,
-    FooterComponent,
-    AsyncPipe
+    FooterComponent
   ],
   providers: [SearchService]
 })
-export class ChecklistComponent implements OnInit {
-  private editMode$ = new BehaviorSubject(CategoryListMode.List);
+export class ChecklistComponent {
+  private store = inject<Store<ApplicationState>>(Store);
+  private breakpointService = inject(BreakpointService);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
 
-  small$: Observable<boolean>;
-  mediumUp$: Observable<boolean>;
-  desktop$: Observable<boolean>;
+  small = this.breakpointService.small;
+  medium = this.breakpointService.medium;
+  desktop = this.breakpointService.desktop;
+  mediumUp = computed(() => this.medium() || this.desktop());
 
-  categories$: Observable<Array<Category>>;
-  projects$: Observable<Array<Project>>;
-  selectedProjectId$: Observable<string>;
-  favoritesCount$: Observable<number>;
-  favoritesScore$: Observable<number>;
-  overallScore$: Observable<number>;
+  projects = this.store.selectSignal(ProjectsSelectors.getProjects);
+  selectedProjectId = this.store.selectSignal(ProjectsSelectors.getSelectedProjectId);
+  favoritesCount = this.store.selectSignal(ChecklistSelectors.getFavoritesCount);
+  favoritesScore = this.store.selectSignal(ChecklistSelectors.getFavoritesScore);
+  private activeCategories = this.store.selectSignal(ChecklistSelectors.getActiveCategories);
+  private allCategories = this.store.selectSignal(ChecklistSelectors.getAllCategories);
 
-  editMode = false;
+  categories = computed(() => {
+    const mode = this.editMode() ? CategoryListMode.Edit : CategoryListMode.List;
+    const categories = mode ? this.allCategories : this.activeCategories;
+    return categories();
+  });
 
-  sideNavMode: MatDrawerMode = 'side';
+  editMode = signal(false);
 
-  @ViewChild(MatSidenav, { static: true })
-  sideNav: MatSidenav;
+  sideNavMode = computed<MatDrawerMode>(() => (this.mediumUp() ? 'side' : 'over'));
 
-  constructor(
-    private store: Store<ApplicationState>,
-    private breakpointService: BreakpointService,
-    private dialog: MatDialog,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.categories$ = this.editMode$.pipe(switchMap(mode => this.getCategories(mode)));
-    this.projects$ = this.store.pipe(select(ProjectsSelectors.getProjects));
-    this.selectedProjectId$ = this.store.pipe(select(ProjectsSelectors.getSelectedProjectId));
-    this.favoritesCount$ = this.store.pipe(select(ChecklistSelectors.getFavoritesCount));
-    this.favoritesScore$ = this.store.pipe(select(ChecklistSelectors.getFavoritesScore));
-
-    const { small$, medium$, desktop$ } = this.breakpointService.getAllBreakpoints();
-
-    this.small$ = small$;
-    this.desktop$ = desktop$;
-    this.mediumUp$ = combineLatest([medium$, desktop$]).pipe(map(([medium, desktop]) => medium || desktop));
-
-    desktop$.subscribe(matches => {
-      if (!matches) {
-        this.sideNav.close();
-        this.setSidenavMode('over');
-      } else {
-        this.sideNav.open();
-        this.setSidenavMode('side');
-      }
-    });
-  }
-
-  toggleCategory(category: Category) {
-    this.store
-      .pipe(
-        selectOnce(ChecklistSelectors.getFavoriteEntitiesByCategory(category.slug)),
-        switchMap((favorites: Array<ChecklistItem>) => {
-          if (hasEntities(favorites) && category.enabled) {
-            return this.openUserPrompt(favorites);
-          }
-
-          return of(true);
-        }),
-        filter(remove => remove)
-      )
-      .subscribe(() => this.store.dispatch(new ToggleCategory(category.slug)));
+  toggleCategory(category: Category): any {
+    const selector = ChecklistSelectors.getFavoriteEntitiesByCategory(category.slug);
+    const favorites = this.store.selectSignal(selector)() as ChecklistItem[];
+    let observe = of(true);
+    if (hasEntities(favorites) && category.enabled) {
+      observe = this.openUserPrompt(favorites);
+    }
+    observe.subscribe(valid => valid && this.store.dispatch(new ToggleCategory(category.slug)));
   }
 
   toggleEditMode() {
-    this.editMode = !this.editMode;
+    const editMode = !this.editMode();
+    this.editMode.set(editMode);
     this.store.dispatch(new ToggleEditMode());
-    this.editMode$.next(this.editMode ? CategoryListMode.Edit : CategoryListMode.List);
-
-    of(this.editMode)
-      .pipe(
-        filter(editMode => !editMode),
-        switchMap(_ => this.store.pipe(selectOnce(ChecklistSelectors.getSelectedCategory))),
-        filter(category => !!category),
-        filter(category => !category.enabled),
-        switchMap(_ =>
-          zip(
-            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategories)),
-            this.store.pipe(selectOnce(ProjectsSelectors.getSelectedProjectId))
-          )
-        )
-      )
-      .subscribe(([categories, projectId]) => {
+    if (!editMode) {
+      const category = this.store.selectSignal(ChecklistSelectors.getSelectedCategory)();
+      if (category && !category.enabled) {
+        const categories = this.activeCategories();
+        const projectId = this.selectedProjectId();
         this.router.navigate(['/', projectId, 'checklist', categories[0].slug]);
-      });
+      }
+    }
   }
 
   navigateToProject(project: string) {
@@ -182,28 +140,12 @@ export class ChecklistComponent implements OnInit {
       }
     });
 
-    return dialogRef.afterClosed().pipe(switchMap(result => this.processDialogResult(result, favorites)));
+    return dialogRef.afterClosed().pipe(tap<boolean>(result => this.processDialogResult(result, favorites)));
   }
 
   private processDialogResult(result: boolean, favorites: Array<ChecklistItem>) {
     if (result) {
       this.store.dispatch(new ToggleAllFavorites(favorites));
     }
-
-    return of(result);
-  }
-
-  private getCategories(mode: CategoryListMode) {
-    let categories$ = this.store.pipe(select(ChecklistSelectors.getActiveCategories));
-
-    if (mode === CategoryListMode.Edit) {
-      categories$ = this.store.pipe(select(ChecklistSelectors.getAllCategories));
-    }
-
-    return categories$;
-  }
-
-  private setSidenavMode(mode: 'side' | 'over') {
-    this.sideNavMode = mode;
   }
 }

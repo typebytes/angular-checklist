@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ActionsSubject, select, Store } from '@ngrx/store';
 import * as fuzzysort from 'fuzzysort';
 import { merge, of, zip } from 'rxjs';
@@ -13,6 +13,8 @@ import { IndexEntry } from './search.models';
 
 @Injectable()
 export class SearchService {
+  private store = inject<Store<ApplicationState>>(Store);
+  private actions = inject(ActionsSubject);
   private index: Array<IndexEntry<ChecklistItem | CategoryEntity>>;
 
   private options: Fuzzysort.KeyOptions = {
@@ -22,7 +24,7 @@ export class SearchService {
     threshold: -10000
   };
 
-  constructor(private store: Store<ApplicationState>, private actions: ActionsSubject) {
+  constructor() {
     const actions$ = this.actions.pipe(filter(action => action.type === ProjectsActionTypes.TOGGLE_CATEGORY));
 
     merge(actions$, of('INIT INDEX'))
@@ -33,7 +35,7 @@ export class SearchService {
   }
 
   search(term: string) {
-    return of(fuzzysort.go(term, this.index, this.options));
+    return fuzzysort.go(term, this.index, this.options);
   }
 
   createIndex(categoryEntities: CategoryEntities, itemEntities: ItemEntities, projectId: string) {

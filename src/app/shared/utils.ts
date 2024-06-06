@@ -9,8 +9,5 @@ export const hasEntities = (entityState: EntityState<any>) => {
 };
 
 export const convertToProjectId = (projectName: string) => {
-  return projectName
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .trim();
+  return projectName.toLowerCase().replace(/\s+/g, '-').trim();
 };
