@@ -7,8 +7,8 @@ import {
   OnChanges,
   SimpleChanges,
   HostBinding,
-  Inject,
-  PLATFORM_ID
+  PLATFORM_ID,
+  inject
 } from '@angular/core';
 
 @Component({
@@ -19,14 +19,15 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreChartComponent implements OnChanges {
+  private elementRef = inject(ElementRef);
   @Input() score: number;
 
   @HostBinding('class.done') done = false;
 
   isBrowser = true;
 
-  constructor(private elementRef: ElementRef, @Inject(PLATFORM_ID) platformId: string) {
-    this.isBrowser = isPlatformBrowser(platformId);
+  constructor() {
+    this.isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   }
 
   ngOnChanges(changes: SimpleChanges) {

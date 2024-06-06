@@ -15,7 +15,9 @@
     border-radius: 8px;
     margin: 5px 0 0 0;
     max-height: 268px !important;
-    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15) !important;
+    box-shadow:
+      0 1px 2px 0 rgba(60, 64, 67, 0.3),
+      0 2px 6px 2px rgba(60, 64, 67, 0.15) !important;
 
     .mat-mdc-selected:not(.mat-mdc-option-multiple) {
       background: mat.get-color-from-palette(theme.$app-primary, lighter, 0.3) !important;
