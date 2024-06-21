@@ -1,4 +1,4 @@
-import * as MarkdownIt from 'markdown-it';
+import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 
 export const convertHeadingsPlugin = (md, options) => {

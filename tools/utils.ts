@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readFileSync, readdir, writeFileSync } from 'fs'
 import { dirname, join, parse } from 'path';
 import { convertHeadingsPlugin, markdown } from './markdown';
 import { FrontMatter } from './models';
-import * as matter from 'gray-matter';
+import matter from 'gray-matter';
 import { unique } from 'shorthash';
 
 markdown.use(convertHeadingsPlugin);
