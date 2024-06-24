@@ -1,16 +1,10 @@
-<input
-  placeholder="Search"
-  spellcheck="false"
-  (focus)="focus$.next('FOCUS')"
-  [formControl]="searchField"
-  [matAutocomplete]="auto"
-/>
+<input placeholder="Search" spellcheck="false" [formControl]="searchField" [matAutocomplete]="auto" />
 <mat-autocomplete
   #auto="matAutocomplete"
   [displayWith]="getOptionText.bind(this)"
   (optionSelected)="optionSelected($event)"
 >
-  <mat-option *ngFor="let result of results$ | async" [value]="result">
+  <mat-option *ngFor="let result of results()" [value]="result">
     <span *ngIf="result.document.category" class="result-type">{{ result.document.category }}</span>
     <span class="text" [innerHTML]="result.text"></span>
   </mat-option>

@@ -33,7 +33,7 @@ export class SearchService {
   }
 
   search(term: string) {
-    return of(fuzzysort.go(term, this.index, this.options));
+    return fuzzysort.go(term, this.index, this.options);
   }
 
   createIndex(categoryEntities: CategoryEntities, itemEntities: ItemEntities, projectId: string) {
