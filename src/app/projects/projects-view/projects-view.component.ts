@@ -18,7 +18,7 @@ import {
 import { AddProject, DeleteProject, EditProject } from '../state/projects.actions';
 import { ProjectsSelectors } from '../state/projects.selectors';
 import { MatIconButton } from '@angular/material/button';
-import { NgFor, PercentPipe } from '@angular/common';
+import { PercentPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
@@ -36,7 +36,6 @@ import { FooterComponent } from 'src/app/shared/footer/footer.component';
     MatCard,
     MatRipple,
     MatIcon,
-    NgFor,
     MatCardContent,
     MatCardActions,
     MatIconButton,

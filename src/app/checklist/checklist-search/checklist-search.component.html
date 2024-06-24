@@ -4,8 +4,12 @@
   [displayWith]="getOptionText.bind(this)"
   (optionSelected)="optionSelected($event)"
 >
-  <mat-option *ngFor="let result of results()" [value]="result">
-    <span *ngIf="result.document.category" class="result-type">{{ result.document.category }}</span>
+  @for (result of results(); track result) {
+  <mat-option [value]="result">
+    @if (result.document.category) {
+    <span class="result-type">{{ result.document.category }}</span>
+    }
     <span class="text" [innerHTML]="result.text"></span>
   </mat-option>
+  }
 </mat-autocomplete>

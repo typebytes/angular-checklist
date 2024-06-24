@@ -1,4 +1,5 @@
-<mat-form-field *ngIf="items">
+@if (items) {
+<mat-form-field>
   <mat-select
     #matSelect
     [formControl]="select"
@@ -8,6 +9,9 @@
     (selectionChange)="selectionChange.emit($event.value)"
   >
     <ng-content select="ac-dropdown-static-options"></ng-content>
-    <mat-option *ngFor="let item of items" [value]="item[bindValue]"> {{ item[bindLabel] }} </mat-option>
+    @for (item of items; track item[bindValue]) {
+    <mat-option [value]="item[bindValue]"> {{ item[bindLabel] }} </mat-option>
+    }
   </mat-select>
 </mat-form-field>
+}

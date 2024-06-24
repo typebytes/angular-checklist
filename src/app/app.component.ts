@@ -3,7 +3,7 @@ import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/r
 import { merge, Observable } from 'rxjs';
 import { filter, mapTo } from 'rxjs/operators';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -11,7 +11,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterOutlet, AsyncPipe, NgIf, MatProgressBar]
+  imports: [RouterOutlet, AsyncPipe, MatProgressBar]
 })
 export class AppComponent implements OnInit {
   loading$: Observable<boolean>;

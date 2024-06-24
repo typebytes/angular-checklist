@@ -12,7 +12,9 @@
       <ac-dropdown-static-option routerLink="/"> <mat-icon>edit</mat-icon> Manage Projects </ac-dropdown-static-option>
     </ac-dropdown-static-options>
   </ac-dropdown>
-  <ac-checklist-search *ngIf="mediumUp()"></ac-checklist-search>
+  @if (mediumUp()) {
+  <ac-checklist-search></ac-checklist-search>
+  }
 </ac-toolbar>
 <mat-sidenav-container>
   <mat-sidenav [mode]="sideNavMode()" [autoFocus]="false" #sideNav [opened]="mediumUp()">
@@ -37,12 +39,11 @@
           <mat-slide-toggle (change)="toggleEditMode()">Edit</mat-slide-toggle>
         </div>
         <div class="category-list">
-          <nav class="category" *ngFor="let category of categories(); trackBy: trackBySlug">
-            <ac-score-chart
-              *ngIf="!editMode()"
-              [class.primary]="rla.isActive"
-              [score]="category.score"
-            ></ac-score-chart>
+          @for (category of categories(); track category.slug) {
+          <nav class="category">
+            @if (!editMode()) {
+            <ac-score-chart [class.primary]="rla.isActive" [score]="category.score"></ac-score-chart>
+            }
             <a
               class="sidenav-link"
               [class.disabled]="!category.enabled"
@@ -52,20 +53,24 @@
             >
               {{ category.title }}
             </a>
+            @if (editMode()) {
             <mat-checkbox
-              *ngIf="editMode()"
               color="primary"
               (click)="toggleCategory(category)"
               [checked]="category.enabled"
             ></mat-checkbox>
+            }
           </nav>
+          }
         </div>
       </section>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="scroll-container"><router-outlet></router-outlet></div>
-    <div *ngIf="editMode()" class="overlay"><span>🧐 Ups, seems like you're in edit mode!</span></div>
+    @if (editMode()) {
+    <div class="overlay"><span>🧐 Ups, seems like you're in edit mode!</span></div>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>
 <ac-footer></ac-footer>

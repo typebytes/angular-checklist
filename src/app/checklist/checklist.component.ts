@@ -20,7 +20,6 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatBadge } from '@angular/material/badge';
 import { ScoreChartComponent } from '../shared/score-chart/score-chart.component';
 import { ChecklistSearchComponent } from './checklist-search/checklist-search.component';
-import { NgIf, NgFor } from '@angular/common';
 import {
   DropdownStaticOptionsComponent,
   DropdownStaticOptionComponent
@@ -51,7 +50,6 @@ enum CategoryListMode {
     DropdownStaticOptionsComponent,
     DropdownStaticOptionComponent,
     RouterLink,
-    NgIf,
     ChecklistSearchComponent,
     MatSidenavContainer,
     MatSidenav,
@@ -59,7 +57,6 @@ enum CategoryListMode {
     RouterLinkActive,
     MatBadge,
     MatSlideToggle,
-    NgFor,
     MatCheckbox,
     MatSidenavContent,
     RouterOutlet,
@@ -123,14 +120,6 @@ export class ChecklistComponent {
     this.router.navigate([`/${project}/checklist`]);
   }
 
-  trackBySlug(_, category: Category) {
-    return category.slug;
-  }
-
-  trackById(_, item: ChecklistItem) {
-    return item.id;
-  }
-
   private openUserPrompt(favorites: Array<ChecklistItem>) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
@@ -140,7 +129,9 @@ export class ChecklistComponent {
       }
     });
 
-    return dialogRef.afterClosed().pipe(tap<boolean>(result => this.processDialogResult(result, favorites)));
+    return dialogRef.afterClosed().pipe(
+      tap<boolean>(result => this.processDialogResult(result, favorites))
+    );
   }
 
   private processDialogResult(result: boolean, favorites: Array<ChecklistItem>) {

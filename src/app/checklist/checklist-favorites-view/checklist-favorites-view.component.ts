@@ -7,7 +7,6 @@ import { SetFavoritesFilter } from '../state/checklist.actions';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { ChecklistListItemComponent } from '../checklist-list/checklist-list-item.component';
 import { ChecklistListComponent } from '../checklist-list/checklist-list.component';
-import { NgIf, NgFor } from '@angular/common';
 import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar.component';
 
 @Component({
@@ -15,7 +14,7 @@ import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar
   selector: 'ac-checklist-favorites-view',
   templateUrl: './checklist-favorites-view.component.html',
   styleUrls: ['./checklist-favorites-view.component.scss'],
-  imports: [ChecklistCtaBarComponent, NgIf, NgFor, ChecklistListComponent, ChecklistListItemComponent]
+  imports: [ChecklistCtaBarComponent, ChecklistListComponent, ChecklistListItemComponent]
 })
 export class ChecklistFavoritesViewComponent {
   private store = inject<Store<ApplicationState>>(Store);
@@ -32,13 +31,5 @@ export class ChecklistFavoritesViewComponent {
 
   toggleFavorite(item: ChecklistItem) {
     this.store.dispatch(new ToggleFavorite(item));
-  }
-
-  trackByCategoryTitle(_, favorite: Favorite) {
-    return favorite.category.title;
-  }
-
-  trackById(_, item: ChecklistItem) {
-    return item.id;
   }
 }

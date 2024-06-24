@@ -1,2 +1,5 @@
-<a class="info author" [href]="author.link" *ngIf="author">{{ author.name }}</a>
-<a class="info link" [href]="source" *ngIf="source">Source</a>
+@if (author) {
+<a class="info author" [href]="author.link">{{ author.name }}</a>
+} @if (source) {
+<a class="info link" [href]="source">Source</a>
+}

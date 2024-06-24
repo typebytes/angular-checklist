@@ -8,14 +8,13 @@ import { BannerComponent } from '../../shared/banner/banner.component';
 import { ChecklistMetadataComponent } from '../checklist-item-metadata/checklist-metadata.component';
 import { ChecklistFavoriteButtonComponent } from '../checklist-favorite-button/checklist-favorite-button.component';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { NgIf } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'ac-checklist-detail-view',
   templateUrl: './checklist-detail-view.component.html',
   styleUrls: ['./checklist-detail-view.component.scss'],
-  imports: [NgIf, MatCheckbox, ChecklistFavoriteButtonComponent, ChecklistMetadataComponent, BannerComponent]
+  imports: [MatCheckbox, ChecklistFavoriteButtonComponent, ChecklistMetadataComponent, BannerComponent]
 })
 export class ChecklistDetailViewComponent {
   private store = inject<Store<ApplicationState>>(Store);

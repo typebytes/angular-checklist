@@ -1,5 +1,6 @@
 <div class="cta-bar">
-  <div class="filters" *ngIf="filter">
+  @if (filter) {
+  <div class="filters">
     <button class="filter" mat-button (click)="filterChange.emit('ALL')" [class.active]="filter === 'ALL'">
       <mat-icon>assignment</mat-icon>
       ALL
@@ -13,8 +14,10 @@
       TODO
     </button>
   </div>
-  <div class="cta-buttons" *ngIf="showActionButtons">
+  } @if (showActionButtons) {
+  <div class="cta-buttons">
     <button mat-button (click)="checkAll.emit()" matTooltip="Check All"><mat-icon>done_all</mat-icon></button>
     <button mat-button (click)="uncheckAll.emit()" matTooltip="Uncheck All"><mat-icon>filter_none</mat-icon></button>
   </div>
+  }
 </div>

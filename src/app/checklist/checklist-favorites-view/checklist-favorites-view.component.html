@@ -3,25 +3,19 @@
 <ac-checklist-cta-bar [filter]="filter()" [showActionButtons]="false" (filterChange)="setFilter($event)">
 </ac-checklist-cta-bar>
 
-<ng-container *ngIf="favorites() as favorites">
-  <ng-container *ngIf="favorites.length; else noFavorites">
-    <ul class="category" *ngFor="let favorite of favorites; trackBy: trackByCategoryTitle">
-      <h4>{{ favorite.category.title }}</h4>
-      <ac-checklist-list>
-        <ac-checklist-list-item
-          *ngFor="let item of favorite.items; trackBy: trackById"
-          [item]="item"
-          (toggleItem)="toggleItem($event)"
-          (toggleFavorite)="toggleFavorite($event)"
-        >
-        </ac-checklist-list-item>
-      </ac-checklist-list>
-    </ul>
-  </ng-container>
-  <ng-template #noFavorites>
-    <div class="no-favorites">
-      <img src="assets/undraw_no_data.svg" alt="No Data" />
-      <span>You have no favorites yet... but they are only a few clicks away!</span>
-    </div>
-  </ng-template>
-</ng-container>
+@for (favorite of favorites(); track favorite.category.title) {
+<ul class="category">
+  <h4>{{ favorite.category.title }}</h4>
+  <ac-checklist-list>
+    @for (item of favorite.items; track item.id) {
+    <ac-checklist-list-item [item]="item" (toggleItem)="toggleItem($event)" (toggleFavorite)="toggleFavorite($event)">
+    </ac-checklist-list-item>
+    }
+  </ac-checklist-list>
+</ul>
+} @empty {
+<div class="no-favorites">
+  <img src="assets/undraw_no_data.svg" alt="No Data" />
+  <span>You have no favorites yet... but they are only a few clicks away!</span>
+</div>
+}

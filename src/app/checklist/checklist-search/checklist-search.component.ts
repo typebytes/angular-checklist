@@ -8,7 +8,6 @@ import { CategoryEntity, ChecklistItem } from '../models/checklist.model';
 import { IndexEntry, SearchResult } from '../search/search.models';
 import { SearchService } from '../search/search.service';
 import { MatOption } from '@angular/material/core';
-import { NgFor, NgIf } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -16,7 +15,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'ac-checklist-search',
   templateUrl: './checklist-search.component.html',
   styleUrls: ['./checklist-search.component.scss'],
-  imports: [ReactiveFormsModule, MatAutocompleteTrigger, MatAutocomplete, NgFor, MatOption, NgIf]
+  imports: [ReactiveFormsModule, MatAutocompleteTrigger, MatAutocomplete, MatOption]
 })
 export class ChecklistSearchComponent {
   private searchService = inject(SearchService);

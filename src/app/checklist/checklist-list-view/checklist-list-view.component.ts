@@ -7,7 +7,6 @@ import { CategoryEntity, ChecklistFilter, ChecklistItem } from '../models/checkl
 import { SetCategoriesFilter } from '../state/checklist.actions';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { ChecklistListItemComponent } from '../checklist-list/checklist-list-item.component';
-import { NgFor } from '@angular/common';
 import { ChecklistListComponent } from '../checklist-list/checklist-list.component';
 import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar.component';
 
@@ -16,7 +15,7 @@ import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar
   selector: 'ac-list-view',
   templateUrl: './checklist-list-view.component.html',
   styleUrls: ['./checklist-list-view.component.scss'],
-  imports: [ChecklistCtaBarComponent, ChecklistListComponent, NgFor, ChecklistListItemComponent]
+  imports: [ChecklistCtaBarComponent, ChecklistListComponent, ChecklistListItemComponent]
 })
 export class ListViewComponent {
   private store = inject<Store<ApplicationState>>(Store);
@@ -45,10 +44,6 @@ export class ListViewComponent {
 
   toggleFavorite(item: ChecklistItem) {
     this.store.dispatch(new ToggleFavorite(item));
-  }
-
-  trackById(_, item: ChecklistItem) {
-    return item.id;
   }
 
   private get getSelectedCategory(): Signal<CategoryEntity> {

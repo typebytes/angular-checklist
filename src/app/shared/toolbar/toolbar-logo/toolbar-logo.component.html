@@ -1,4 +1,6 @@
 <a class="logo" routerLink="/">
   <img src="assets/angular-checklist.png" alt="Logo" />
-  <h4 *ngIf="showText">Angular Checklist</h4>
+  @if (showText) {
+  <h4>Angular Checklist</h4>
+  }
 </a>

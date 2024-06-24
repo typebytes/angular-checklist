@@ -19,7 +19,6 @@ import { Project } from '../models/projects.model';
 import { ProjectsSelectors } from '../state/projects.selectors';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf } from '@angular/common';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatHint, MatError, MatSuffix } from '@angular/material/form-field';
 
@@ -82,7 +81,6 @@ const verifyProjectName = (projectName: string) => {
     MatInput,
     ReactiveFormsModule,
     MatHint,
-    NgIf,
     MatError,
     MatProgressSpinner,
     MatSuffix,

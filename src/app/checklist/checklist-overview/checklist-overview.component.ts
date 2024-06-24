@@ -7,7 +7,6 @@ import { ApplicationState } from '../../state/app.state';
 import { BreadcrumbItem } from '../models/checklist.model';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { MatIcon } from '@angular/material/icon';
-import { NgIf, NgFor } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -15,7 +14,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'ac-checklist-overview',
   templateUrl: './checklist-overview.component.html',
   styleUrls: ['./checklist-overview.component.scss'],
-  imports: [NgIf, NgFor, MatIcon, RouterOutlet],
+  imports: [MatIcon, RouterOutlet],
   animations: [
     trigger('breadcrumb', [
       transition('* <=> *', [

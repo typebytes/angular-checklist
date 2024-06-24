@@ -1,7 +1,10 @@
-<ul [@breadcrumb]="breadcrumb.length" class="breadcrumb" *ngIf="breadcrumbs() as breadcrumb">
-  <ng-container *ngFor="let item of breadcrumb; let last = last; trackBy: trackByTitle">
-    <li (click)="goBack(last)" [class.active]="last" class="breadcrumb-item">{{ item.title }}</li>
-    <li class="breadcrumb-item-separator" *ngIf="!last"><mat-icon>chevron_right</mat-icon></li>
-  </ng-container>
+@if (breadcrumbs(); as breadcrumb) {
+<ul [@breadcrumb]="breadcrumb.length" class="breadcrumb">
+  @for (item of breadcrumb; track trackByTitle($index, item)) {
+  <li (click)="goBack($last)" [class.active]="$last" class="breadcrumb-item">{{ item.title }}</li>
+  @if (!$last) {
+  <li class="breadcrumb-item-separator"><mat-icon>chevron_right</mat-icon></li>
+  } }
 </ul>
+}
 <router-outlet></router-outlet>

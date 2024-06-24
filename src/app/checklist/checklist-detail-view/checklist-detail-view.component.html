@@ -1,14 +1,13 @@
-<ng-container *ngIf="item() as item">
-  <header>
-    <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked">Done</mat-checkbox>
-    <ac-checklist-favorite-button
-      (toggle)="toggleFavorite(item)"
-      [active]="item.favorite"
-    ></ac-checklist-favorite-button>
-    <ac-checklist-metadata [author]="item.author" [source]="item.source"></ac-checklist-metadata>
-  </header>
-  <ac-banner *ngIf="item.rework">
-    This practice includes outdated content currently under review. Contributions are welcome.
-  </ac-banner>
-  <main class="content" [innerHTML]="item.content"></main>
-</ng-container>
+@if (item(); as item) {
+<header>
+  <mat-checkbox color="primary" (click)="toggleItem(item)" [checked]="item.checked">Done</mat-checkbox>
+  <ac-checklist-favorite-button (toggle)="toggleFavorite(item)" [active]="item.favorite"></ac-checklist-favorite-button>
+  <ac-checklist-metadata [author]="item.author" [source]="item.source"></ac-checklist-metadata>
+</header>
+@if (item.rework) {
+<ac-banner>
+  This practice includes outdated content currently under review. Contributions are welcome.
+</ac-banner>
+}
+<main class="content" [innerHTML]="item.content"></main>
+}

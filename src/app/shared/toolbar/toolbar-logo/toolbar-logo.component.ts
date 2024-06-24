@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,7 +6,7 @@ import { RouterLink } from '@angular/router';
   selector: 'ac-toolbar-logo',
   templateUrl: './toolbar-logo.component.html',
   styleUrls: ['./toolbar-logo.component.scss'],
-  imports: [RouterLink, NgIf]
+  imports: [RouterLink]
 })
 export class ToolbarLogoComponent {
   @Input() showText = true;

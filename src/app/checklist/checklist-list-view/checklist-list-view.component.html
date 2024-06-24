@@ -8,11 +8,8 @@
 </ac-checklist-cta-bar>
 
 <ac-checklist-list class="checklist-items">
-  <ac-checklist-list-item
-    *ngFor="let item of items(); trackBy: trackById"
-    [item]="item"
-    (toggleItem)="toggleItem($event)"
-    (toggleFavorite)="toggleFavorite($event)"
-  >
+  @for (item of items(); track item.id) {
+  <ac-checklist-list-item [item]="item" (toggleItem)="toggleItem($event)" (toggleFavorite)="toggleFavorite($event)">
   </ac-checklist-list-item>
+  }
 </ac-checklist-list>

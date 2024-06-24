@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ChecklistFilter } from '../models/checklist.model';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
-import { NgIf } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
@@ -10,7 +9,7 @@ import { MatTooltip } from '@angular/material/tooltip';
   selector: 'ac-checklist-cta-bar',
   templateUrl: './checklist-cta-bar.component.html',
   styleUrls: ['./checklist-cta-bar.component.scss'],
-  imports: [NgIf, MatButton, MatIcon, MatTooltip]
+  imports: [MatButton, MatIcon, MatTooltip]
 })
 export class ChecklistCtaBarComponent {
   @Input() filter: ChecklistFilter;

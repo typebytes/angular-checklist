@@ -3,14 +3,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { MatFormField } from '@angular/material/form-field';
-import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'ac-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
-  imports: [NgIf, MatFormField, MatSelect, ReactiveFormsModule, NgFor, MatOption]
+  imports: [MatFormField, MatSelect, ReactiveFormsModule, MatOption]
 })
 export class DropdownComponent implements OnChanges {
   @Input() items: Array<any>;
