@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
+import { Component, Signal, computed, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { CheckAll, ToggleFavorite, ToggleItem, UncheckAll } from '../../projects/state/projects.actions';
 import { BreakpointService } from '../../shared/breakpoint.service';
-import { selectOnce } from '../../shared/operators';
 import { ApplicationState } from '../../state/app.state';
 import { CategoryEntity, ChecklistFilter, ChecklistItem } from '../models/checklist.model';
 import { SetCategoriesFilter } from '../state/checklist.actions';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { ChecklistListItemComponent } from '../checklist-list/checklist-list-item.component';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { ChecklistListComponent } from '../checklist-list/checklist-list.component';
 import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar.component';
 
@@ -18,22 +16,14 @@ import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar
   selector: 'ac-list-view',
   templateUrl: './checklist-list-view.component.html',
   styleUrls: ['./checklist-list-view.component.scss'],
-  imports: [ChecklistCtaBarComponent, ChecklistListComponent, NgFor, ChecklistListItemComponent, AsyncPipe]
+  imports: [ChecklistCtaBarComponent, ChecklistListComponent, NgFor, ChecklistListItemComponent]
 })
-export class ListViewComponent implements OnInit {
-  items$: Observable<any>;
-  filter$: Observable<ChecklistFilter>;
-  showActionButtons$: Observable<boolean>;
-
-  constructor(private store: Store<ApplicationState>, private breakpointService: BreakpointService) {}
-
-  ngOnInit() {
-    this.items$ = this.store.pipe(select(ChecklistSelectors.getItemsFromSelectedCategory));
-    this.filter$ = this.store.pipe(select(ChecklistSelectors.getCategoriesFilter));
-
-    const { medium$, desktop$ } = this.breakpointService.getAllBreakpoints();
-    this.showActionButtons$ = combineLatest(medium$, desktop$, (medium, desktop) => medium || desktop);
-  }
+export class ListViewComponent {
+  private store = inject<Store<ApplicationState>>(Store);
+  private breakpointService = inject(BreakpointService);
+  items = this.store.selectSignal(ChecklistSelectors.getItemsFromSelectedCategory);
+  filter = this.store.selectSignal(ChecklistSelectors.getCategoriesFilter);
+  showActionButtons = computed(() => this.breakpointService.medium() || this.breakpointService.desktop());
 
   toggleItem(item: ChecklistItem) {
     this.store.dispatch(new ToggleItem(item));
@@ -44,11 +34,13 @@ export class ListViewComponent implements OnInit {
   }
 
   checkAllItems() {
-    this.getSelectedCategory().subscribe(category => this.store.dispatch(new CheckAll(category)));
+    const categories = this.getSelectedCategory();
+    this.store.dispatch(new CheckAll(categories));
   }
 
   uncheckAllItems() {
-    this.getSelectedCategory().subscribe(category => this.store.dispatch(new UncheckAll(category)));
+    const categories = this.getSelectedCategory();
+    this.store.dispatch(new UncheckAll(categories));
   }
 
   toggleFavorite(item: ChecklistItem) {
@@ -59,7 +51,7 @@ export class ListViewComponent implements OnInit {
     return item.id;
   }
 
-  private getSelectedCategory(): Observable<CategoryEntity> {
-    return this.store.pipe(selectOnce(ChecklistSelectors.getSelectedCategory));
+  private get getSelectedCategory(): Signal<CategoryEntity> {
+    return this.store.selectSignal(ChecklistSelectors.getSelectedCategory);
   }
 }

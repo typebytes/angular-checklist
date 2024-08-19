@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import {
@@ -91,7 +91,10 @@ const verifyProjectName = (projectName: string) => {
     MatDialogClose
   ]
 })
-export class ProjectDialogComponent implements OnInit {
+export class ProjectDialogComponent {
+  public data = inject<ProjectDialogData>(MAT_DIALOG_DATA);
+  private store = inject<Store<ApplicationState>>(Store);
+  public dialogRef = inject<MatDialogRef<ProjectDialogComponent, ProjectDialogResult>>(MatDialogRef);
   mode: ProjectDialogMode;
   title: string;
   project: Partial<Project>;
@@ -104,13 +107,7 @@ export class ProjectDialogComponent implements OnInit {
   verifyProjectName = new FormControl('');
   errorStateMatcher = new CustomErrorStateMatcher();
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ProjectDialogData,
-    private store: Store<ApplicationState>,
-    public dialogRef: MatDialogRef<ProjectDialogComponent, ProjectDialogResult>
-  ) {}
-
-  ngOnInit() {
+  constructor() {
     const { title, project, mode = ProjectDialogMode.Create, submitButtonText } = this.data;
 
     this.project = project ? project : { name: '' };

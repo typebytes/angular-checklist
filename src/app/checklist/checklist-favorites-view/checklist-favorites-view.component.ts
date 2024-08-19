@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ToggleFavorite, ToggleItem } from '../../projects/state/projects.actions';
 import { ApplicationState } from '../../state/app.state';
 import { ChecklistFilter, ChecklistItem, Favorite } from '../models/checklist.model';
@@ -8,7 +7,7 @@ import { SetFavoritesFilter } from '../state/checklist.actions';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { ChecklistListItemComponent } from '../checklist-list/checklist-list-item.component';
 import { ChecklistListComponent } from '../checklist-list/checklist-list.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar.component';
 
 @Component({
@@ -16,18 +15,12 @@ import { ChecklistCtaBarComponent } from '../checklist-cta-bar/checklist-cta-bar
   selector: 'ac-checklist-favorites-view',
   templateUrl: './checklist-favorites-view.component.html',
   styleUrls: ['./checklist-favorites-view.component.scss'],
-  imports: [ChecklistCtaBarComponent, NgIf, NgFor, ChecklistListComponent, ChecklistListItemComponent, AsyncPipe]
+  imports: [ChecklistCtaBarComponent, NgIf, NgFor, ChecklistListComponent, ChecklistListItemComponent]
 })
-export class ChecklistFavoritesViewComponent implements OnInit {
-  favorites$: Observable<Array<Favorite>>;
-  filter$: Observable<ChecklistFilter>;
-
-  constructor(private store: Store<ApplicationState>) {}
-
-  ngOnInit() {
-    this.favorites$ = this.store.pipe(select(ChecklistSelectors.getFilteredFavorites));
-    this.filter$ = this.store.pipe(select(ChecklistSelectors.getFavoritesFilter));
-  }
+export class ChecklistFavoritesViewComponent {
+  private store = inject<Store<ApplicationState>>(Store);
+  favorites = this.store.selectSignal(ChecklistSelectors.getFilteredFavorites);
+  filter = this.store.selectSignal(ChecklistSelectors.getFavoritesFilter);
 
   setFilter(filter: ChecklistFilter) {
     this.store.dispatch(new SetFavoritesFilter(filter));

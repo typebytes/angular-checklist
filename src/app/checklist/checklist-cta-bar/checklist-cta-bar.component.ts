@@ -3,13 +3,14 @@ import { ChecklistFilter } from '../models/checklist.model';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { NgIf } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   standalone: true,
   selector: 'ac-checklist-cta-bar',
   templateUrl: './checklist-cta-bar.component.html',
   styleUrls: ['./checklist-cta-bar.component.scss'],
-  imports: [NgIf, MatButton, MatIcon]
+  imports: [NgIf, MatButton, MatIcon, MatTooltip]
 })
 export class ChecklistCtaBarComponent {
   @Input() filter: ChecklistFilter;

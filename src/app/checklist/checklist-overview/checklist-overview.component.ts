@@ -1,23 +1,21 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, untracked } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { Observable, zip } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
-import { selectOnce } from '../../shared/operators';
+import { Store } from '@ngrx/store';
 import { extractRouteParams, getActivatedChild } from '../../shared/router.utils';
 import { ApplicationState } from '../../state/app.state';
-import { Category, ChecklistItem } from '../models/checklist.model';
+import { BreadcrumbItem } from '../models/checklist.model';
 import { ChecklistSelectors } from '../state/checklist.selectors';
 import { MatIcon } from '@angular/material/icon';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
   selector: 'ac-checklist-overview',
   templateUrl: './checklist-overview.component.html',
   styleUrls: ['./checklist-overview.component.scss'],
-  imports: [NgIf, NgFor, MatIcon, RouterOutlet, AsyncPipe],
+  imports: [NgIf, NgFor, MatIcon, RouterOutlet],
   animations: [
     trigger('breadcrumb', [
       transition('* <=> *', [
@@ -50,36 +48,33 @@ import { NgIf, NgFor, AsyncPipe } from '@angular/common';
     ])
   ]
 })
-export class ChecklistOverviewComponent implements OnInit {
-  breadcrumb$: Observable<any>;
+export class ChecklistOverviewComponent {
+  private store = inject<Store<ApplicationState>>(Store);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  breadcrumbs = this.store.selectSignal(ChecklistSelectors.getBreadcrumb);
 
-  constructor(private store: Store<ApplicationState>, private router: Router, private route: ActivatedRoute) {}
+  constructor() {
+    const params = toSignal(this.route.params);
+    const categories = this.store.selectSignal(ChecklistSelectors.getActiveCategories);
+    const entities = this.store.selectSignal(ChecklistSelectors.getActiveCategoryEntities);
+    const editMode = this.store.selectSignal(ChecklistSelectors.getEditMode);
 
-  ngOnInit() {
-    this.breadcrumb$ = this.store.pipe(select(ChecklistSelectors.getBreadcrumb));
-
-    this.route.params
-      .pipe(
-        switchMap(_ =>
-          zip(
-            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategoryEntities)),
-            this.store.pipe(selectOnce(ChecklistSelectors.getActiveCategories)),
-            this.store.pipe(selectOnce(ChecklistSelectors.getEditMode))
-          )
-        ),
-        filter(([, categories]) => !!categories.length),
-        tap(([entities, categories, editMode]) => {
+    effect(() => {
+      const _ = params();
+      untracked(() => {
+        if (categories().length) {
           const { category } = extractRouteParams(this.route.snapshot, 1);
-          const categoryDisabled = !category || !entities[category];
+          const categoryDisabled = !category || !entities()[category];
 
-          if (categoryDisabled && !editMode) {
-            this.router.navigate([categories[0].slug], {
+          if (categoryDisabled && !editMode()) {
+            this.router.navigate([categories()[0].slug], {
               relativeTo: this.route
             });
           }
-        })
-      )
-      .subscribe();
+        }
+      });
+    });
   }
 
   goBack(last: boolean) {
@@ -89,7 +84,7 @@ export class ChecklistOverviewComponent implements OnInit {
     }
   }
 
-  trackByTitle(_, item: Category | ChecklistItem) {
+  trackByTitle(_, item: BreadcrumbItem) {
     return item.title;
   }
 }

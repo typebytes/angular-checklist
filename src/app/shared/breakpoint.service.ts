@@ -1,57 +1,37 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Injectable } from '@angular/core';
-import { map, shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Injectable, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 export enum Breakpoint {
-  Small = 'small$',
-  Medium = 'medium$',
-  Desktop = 'desktop$'
+  Small = 'small',
+  Medium = 'medium',
+  Desktop = 'desktop'
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreakpointService {
-  private _small$: Observable<boolean>;
-  private _medium$: Observable<boolean>;
-  private _desktop$: Observable<boolean>;
+  private breakPointObserver = inject(BreakpointObserver);
+  readonly small = toSignal(this.breakpoint('(max-width: 600px)'));
+  readonly medium = toSignal(this.breakpoint('(min-width: 600px) and (max-width: 992px)'));
+  readonly desktop = toSignal(this.breakpoint('(min-width: 992px)'));
 
-  constructor(private breakPointObserver: BreakpointObserver) {
-    this.setupBreakpoints();
+  private breakpoint(query: string) {
+    return this.breakPointObserver.observe([query]).pipe(map(breakPoint => breakPoint.matches));
   }
 
   getAllBreakpoints() {
     return {
-      [Breakpoint.Small]: this._small$,
-      [Breakpoint.Medium]: this._medium$,
-      [Breakpoint.Desktop]: this._desktop$
+      [Breakpoint.Small]: this.small,
+      [Breakpoint.Medium]: this.medium,
+      [Breakpoint.Desktop]: this.desktop
     };
   }
 
   getBreakpoint(breakpoint: Breakpoint) {
     const breakpoints = this.getAllBreakpoints();
     return breakpoints[breakpoint];
-  }
-
-  private setupBreakpoints() {
-    const small$ = this.breakPointObserver.observe(['(max-width: 600px)']).pipe(
-      map(breakPoint => breakPoint.matches),
-      shareReplay(1)
-    );
-
-    const medium$ = this.breakPointObserver.observe(['(min-width: 600px) and (max-width: 992px)']).pipe(
-      map(breakPoint => breakPoint.matches),
-      shareReplay(1)
-    );
-
-    const desktop$ = this.breakPointObserver.observe(['(min-width: 992px)']).pipe(
-      map(breakPoint => breakPoint.matches),
-      shareReplay(1)
-    );
-
-    this._small$ = small$;
-    this._medium$ = medium$;
-    this._desktop$ = desktop$;
   }
 }

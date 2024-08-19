@@ -1,10 +1,10 @@
-<ac-toolbar [class.desktop]="(desktop$ | async) === true" [class.small]="(small$ | async) === true">
+<ac-toolbar [class.desktop]="desktop() === true" [class.small]="small() === true">
   <button class="menu-button" mat-icon-button (click)="sideNav.toggle()"><mat-icon>menu</mat-icon></button>
-  <ac-toolbar-logo [showText]="(desktop$ | async) === true"></ac-toolbar-logo>
+  <ac-toolbar-logo [showText]="desktop() === true"></ac-toolbar-logo>
   <ac-dropdown
     (selectionChange)="navigateToProject($event)"
-    [items]="projects$ | async"
-    [selected]="selectedProjectId$ | async"
+    [items]="projects()"
+    [selected]="selectedProjectId()"
     bindLabel="name"
     bindValue="id"
   >
@@ -12,18 +12,18 @@
       <ac-dropdown-static-option routerLink="/"> <mat-icon>edit</mat-icon> Manage Projects </ac-dropdown-static-option>
     </ac-dropdown-static-options>
   </ac-dropdown>
-  <ac-checklist-search *ngIf="mediumUp$ | async"></ac-checklist-search>
+  <ac-checklist-search *ngIf="mediumUp()"></ac-checklist-search>
 </ac-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav [mode]="sideNavMode" [autoFocus]="false" #sideNav>
+  <mat-sidenav [mode]="sideNavMode()" [autoFocus]="false" #sideNav [opened]="mediumUp()">
     <div class="section-container">
       <section>
         <nav class="nav-item">
-          <ac-score-chart [class.primary]="rla.isActive" [score]="favoritesScore$ | async"></ac-score-chart>
+          <ac-score-chart [class.primary]="rla.isActive" [score]="favoritesScore()"></ac-score-chart>
           <a class="sidenav-link" routerLink="favorites" #rla="routerLinkActive" routerLinkActive="active">
             <span
-              [matBadge]="favoritesCount$ | async"
-              [matBadgeHidden]="(favoritesCount$ | async) <= 0"
+              [matBadge]="favoritesCount()"
+              [matBadgeHidden]="favoritesCount() <= 0"
               matBadgeColor="accent"
               matBadgeOverlap="false"
               >Favorites</span
@@ -37,8 +37,12 @@
           <mat-slide-toggle (change)="toggleEditMode()">Edit</mat-slide-toggle>
         </div>
         <div class="category-list">
-          <nav class="category" *ngFor="let category of categories$ | async; trackBy: trackBySlug">
-            <ac-score-chart *ngIf="!editMode" [class.primary]="rla.isActive" [score]="category.score"></ac-score-chart>
+          <nav class="category" *ngFor="let category of categories(); trackBy: trackBySlug">
+            <ac-score-chart
+              *ngIf="!editMode()"
+              [class.primary]="rla.isActive"
+              [score]="category.score"
+            ></ac-score-chart>
             <a
               class="sidenav-link"
               [class.disabled]="!category.enabled"
@@ -49,7 +53,7 @@
               {{ category.title }}
             </a>
             <mat-checkbox
-              *ngIf="editMode"
+              *ngIf="editMode()"
               color="primary"
               (click)="toggleCategory(category)"
               [checked]="category.enabled"
@@ -61,7 +65,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="scroll-container"><router-outlet></router-outlet></div>
-    <div *ngIf="editMode" class="overlay"><span>🧐 Ups, seems like you're in edit mode!</span></div>
+    <div *ngIf="editMode()" class="overlay"><span>🧐 Ups, seems like you're in edit mode!</span></div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <ac-footer></ac-footer>
