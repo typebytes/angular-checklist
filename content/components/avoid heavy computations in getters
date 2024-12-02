@@ -1,0 +1,103 @@
+---
+title: avoid heavy computations in getters
+author:
+  name: Claude Assistant
+  url: https://github.com/claude
+---
+
+# Problem
+Using getters with complex computations or transformations in components can lead to performance issues since getters are executed on every change detection cycle, even if the underlying data hasn't changed. This can cause unnecessary re-calculations and slow down the application.
+
+# Solution
+Instead of using getters for heavy computations, use regular methods or calculate values when the data actually changes (e.g., in ngOnChanges or when triggered by specific actions).
+
+- **Bad practice**
+```ts
+@Component({
+  template: `
+    <div>
+      <h3>Product Statistics</h3>
+      <p>Filtered Products: {{ filteredProducts.length }}</p>
+      <ul>
+        <li *ngFor="let product of filteredProducts">
+          {{ product.name }} - {{ product.price }}
+        </li>
+      </ul>
+    </div>
+  `
+})
+export class ProductsComponent {
+  private _products: Product[] = [];
+  
+  // Getter will run on every change detection
+  get filteredProducts() {
+    return this._products
+      .filter(p => p.isActive)
+      .sort((a, b) => b.price - a.price)
+      .map(p => ({
+        ...p,
+        name: p.name.toUpperCase(),
+        price: this.calculateDiscountedPrice(p)
+      }));
+  }
+
+  private calculateDiscountedPrice(product: Product): number {
+    // Complex price calculation
+    return product.price * (1 - product.discount) * this.seasonalMultiplier;
+  }
+}
+
+Good practice
+
+tsCopy@Component({
+  template: `
+    <div>
+      <h3>Product Statistics</h3>
+      <p>Filtered Products: {{ filteredProducts.length }}</p>
+      <ul>
+        <li *ngFor="let product of filteredProducts">
+          {{ product.name }} - {{ product.price }}
+        </li>
+      </ul>
+    </div>
+  `
+})
+export class ProductsComponent implements OnInit, OnChanges {
+  private _products: Product[] = [];
+  filteredProducts: ProcessedProduct[] = [];
+  
+  @Input() set products(value: Product[]) {
+    this._products = value;
+    this.updateFilteredProducts();
+  }
+
+  ngOnInit() {
+    this.updateFilteredProducts();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['products']) {
+      this.updateFilteredProducts();
+    }
+  }
+
+  private updateFilteredProducts() {
+    this.filteredProducts = this._products
+      .filter(p => p.isActive)
+      .sort((a, b) => b.price - a.price)
+      .map(p => ({
+        ...p,
+        name: p.name.toUpperCase(),
+        price: this.calculateDiscountedPrice(p)
+      }));
+  }
+
+  private calculateDiscountedPrice(product: Product): number {
+    return product.price * (1 - product.discount) * this.seasonalMultiplier;
+  }
+}
+Resources
+
+Angular Performance Best Practices
+Change Detection in Angular
+Using OnPush Change Detection Strategy
